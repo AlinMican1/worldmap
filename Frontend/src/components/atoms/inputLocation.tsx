@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { SuggestLocation } from "../../../helper/SuggestLocation";
+
 const InputLocation = () => {
   const [inputValue] = useState<Array<string>>([]);
   const [location, setLocation] = useState<string>("");
@@ -20,14 +22,21 @@ const InputLocation = () => {
           value={location}
           onChange={(event) => setLocation(event.target.value)}
         />
+        <ul>
+          {SuggestLocation(location).map((place, key) => (
+            // eslint-disable-next-line react/jsx-key
+            <p key={key + 1}>{place}</p>
+          ))}
+        </ul>
+
         <button>Submit</button>
       </form>
 
-      <ul>
-        {inputValue.map((place, key) => (
-          <p key={key + 1}>{place}</p>
-        ))}
-      </ul>
+      {/* <ul>
+         {inputValue.map((place, key) => (
+           <p key={key + 1}>{place}</p>
+         ))}
+       </ul> */}
     </div>
   );
 };
