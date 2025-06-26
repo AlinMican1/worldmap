@@ -1,1 +1,13 @@
-1. All functions should be arrow functions
+1. All component functions should be arrow functions
+2. All functions should start with capital names
+3. all variables should start with lower case
+4. constants should be Capital letters
+5. https://timeapi.io/swagger/index.html
+
+How To start a Venv
+Create the virtual environment
+python -m venv venv
+Activate the virtual environment
+.\venv\Scripts\Activate
+
+to run backend dev python app.py
