@@ -27,7 +27,12 @@ const InputLocation = () => {
             if (!allLocations.includes(place)) {
               return (
                 <li key={key + 1}>
-                  <button onClick={() => setAllLocations((prev) => [...prev, place])}>
+                  <button
+                    onClick={() => {
+                      setAllLocations((prev) => [...prev, place]);
+                      setLocation("");
+                    }}
+                  >
                     {place}
                   </button>
                 </li>
