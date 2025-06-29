@@ -1,25 +1,71 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    /* Colors */
+  --background: #f4f4f4;
+  --foreground: #161616;
+  --color-primary: #1e90ff;
+  --color-secondary: #161616;
+  --color-border: #393939;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* text Sizing */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-md: 1.125rem;   /* 18px */
+  --text-lg: 1.25rem;    /* 20px */
+  --text-xl: 1.5rem;     /* 24px */
+  --text-2xl: 1.875rem;  /* 30px */
+  --text-3xl: 2.25rem;   /* 36px */
+  --text-4xl: 3rem;      /* 48px */
+  --text-5xl: 3.75rem;   /* 60px */
+  --text-6xl: 4.5rem;    /* 72px */
+ 
+  /* font weight */
+  --font-thin: 100;
+  --font-extralight: 200;
+  --font-light: 300;
+  --font-normal: 400;       /* Default body text */
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;         /* Strong emphasis */
+  --font-extrabold: 800;
+  --font-black: 900;
+
+  /* Typography */
+  /* --font-base: 'Inter', sans-serif;
+  --font-heading: 'Poppins', sans-serif; */
+  --font-heading: var(--font-ibm-plex-sans);
+  --font-base: var(--font-ibm-plex-sans);
+  --font-size-base: 16px;
+  --font-size-lg: 20px;
+  --font-size-sm: 14px;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
-html,
+/* html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-}
+  
+} */
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-base);
+  /* font-family: Arial, Helvetica, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -40,3 +86,15 @@ a {
     color-scheme: dark;
   }
 }
+
+h1{
+  font-family: var(--font-heading);
+  color: var(--foreground);
+  
+}
+p{
+  /* font-family: var(--font-base); */
+  color: var(--foreground);
+  font-weight: 400;
+}
+

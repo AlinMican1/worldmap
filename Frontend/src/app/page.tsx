@@ -7,8 +7,7 @@ export default function Home() {
   if (process.env.NODE_ENV === "production") {
     apiURL = process.env.NEXT_PUBLIC_DEV_URL + "api/hello";
   }
-  console.log(Date.now());
-  console.log(apiURL);
+
   const [msg, setMsg] = useState<string>("");
 
   const test = async () => {
