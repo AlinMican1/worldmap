@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useState } from "react";
 import { SuggestLocation } from "../../../helper/SuggestLocation";

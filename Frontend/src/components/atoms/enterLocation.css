@@ -1,0 +1,26 @@
+.dropDownContainer{
+    display: flex;
+    max-height: 300px;
+    height: auto;
+    overflow-y: scroll;
+    position: relative;
+    flex-direction: column;
+    border: 0.5px solid var(--color-border);
+}
+.dropDownButton{
+    background-color: #ffffff;
+    margin-top: var(--space-xxs);
+    padding: var(--space-sm);
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    color: var(--foreground);
+    border: 0px;
+   
+    
+}
+.dropDownButton:hover{
+    background-color: var(--color-hover);
+
+}
