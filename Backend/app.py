@@ -21,14 +21,18 @@ def hello_world():
 def get_time(location):
     ukTime = zoneinfo.ZoneInfo('Europe/London')
     nowUk = datetime.now(ukTime)
-    print(nowUk)
-    offset = COUNTRIES.get(location.upper())
     
-    #Check if country exists in dictionary, needs to implement this
+    offset = COUNTRIES.get(location.upper())
     selectedCountryTime = nowUk + timedelta(hours=offset[0], minutes=offset[1])
+    print(nowUk.dst())
+    if (offset[2] == True):
+        print("hello")
+        selectedCountryTime += nowUk.dst()
+    #Check if country exists in dictionary, needs to implement this
+    
     return jsonify({
         "Country": location,
-        "Time": selectedCountryTime.strftime("%Y-%m-%d %H:%M:%S"),
+        "Time": selectedCountryTime,
     })
 
     # try:
