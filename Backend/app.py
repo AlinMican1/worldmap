@@ -26,7 +26,6 @@ def get_time(location):
     selectedCountryTime = nowUk + timedelta(hours=offset[0], minutes=offset[1])
     print(nowUk.dst())
     if (offset[2] == True):
-        print("hello")
         selectedCountryTime += nowUk.dst()
     #Check if country exists in dictionary, needs to implement this
     
