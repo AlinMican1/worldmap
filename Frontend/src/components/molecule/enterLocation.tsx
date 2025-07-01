@@ -1,30 +1,33 @@
 "use client";
-import { useState } from "react";
 import { SuggestLocation } from "../../../helper/SuggestLocation";
+import { InputField } from "../atoms/inputField";
 import "./enterLocation.css";
 
-const EnterLocation = () => {
-  const [location, setLocation] = useState<string>("");
-  function AddLocation() {
-    console.log("hi");
-  }
+interface EnterLocationProps {
+  location: string;
+  setLocation: (value: string) => void;
+}
 
+const EnterLocation = ({location,setLocation}:EnterLocationProps) => {
   return (
     <div>
-      <input
+      <InputField
         placeholder="Location"
+        type="text"
+        label="Choose Location"
         value={location}
         onChange={(event) => setLocation(event.target.value)}
       />
       <ul className="dropDownContainer">
         {SuggestLocation(location).map((country, key) => {
           // If country is selected dont show again
-
+          
           if (location != country) {
             return (
               <div key={key}>
                 <button className="dropDownButton" onClick={() => setLocation(country)}>
                   {country}
+                  
                 </button>
               </div>
             );
@@ -34,6 +37,8 @@ const EnterLocation = () => {
         })}
       </ul>
     </div>
+    
   );
+  
 };
 export default EnterLocation;
