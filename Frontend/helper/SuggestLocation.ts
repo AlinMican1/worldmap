@@ -221,7 +221,7 @@ export const SuggestLocation = (search: string): Array<string> => {
   return [];
 };
 */
-const COUNTRIES = [
+export const COUNTRIES = [
   "Afghanistan",
   "Albania",
   "Algeria",

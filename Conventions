@@ -8,5 +8,10 @@ Create the virtual environment
 python -m venv venv
 Activate the virtual environment
 .\venv\Scripts\Activate
+ON MAC
+source ./venv/bin/activate
 
+run backend
+uvicorn app:app --reload
+uvicorn app.main:app --reload
 to run backend dev python app.py
