@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.routes import hello, time
+from app.routes import hello, time,form
 from app.db.database import Base, engine
 from app.db.models import user
 
@@ -21,4 +21,5 @@ app.add_middleware(
 
 # Routers
 app.include_router(hello.router)
+app.include_router(form.router)
 # app.include_router(time.router)
