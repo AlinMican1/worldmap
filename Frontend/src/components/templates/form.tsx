@@ -48,16 +48,16 @@ const Form = () => {
         }}
       >
         <EnterLocation location={formData.location} setLocation={(newLocation) =>
-        setFormData((prev) => ({ ...prev, location: newLocation }))} error={error.some(err => err.id === "location" && err.error)} 
-        errorMsg={error.find(err => err.id === "location")?.errorMsg || ""}/>
+        setFormData((prev) => ({ ...prev, location: newLocation }))} error={error.some((err:ErrorMessageProps) => err.id === "location" && err.error)} 
+        errorMsg={error.find((err:ErrorMessageProps) => err.id === "location")?.errorMsg || ""}/>
 
         <InputField autocomplete="off" id="Email" name="Email" type="text" placeholder="Enter Email" label="Email" value={formData.email}
-        onChange={(event) => setFormData({...formData, email:event.target.value})} error={error.some(err => err.id === "email" && err.error)} 
-        errorMsg={error.find(err => err.id === "email")?.errorMsg || ""}/>
+        onChange={(event) => setFormData({...formData, email:event.target.value})} error={error.some((err:ErrorMessageProps) => err.id === "email" && err.error)} 
+        errorMsg={error.find((err:ErrorMessageProps) => err.id === "email")?.errorMsg || ""}/>
 
         <InputField autocomplete="off" id="name" name="name" type="text" placeholder="Enter Name" label="Name" value={formData.name}  
-        onChange={(event) => setFormData({...formData, name:event.target.value})} error={error.some(err => err.id === "name" && err.error)} 
-        errorMsg={error.find(err => err.id === "name")?.errorMsg || ""}/>
+        onChange={(event) => setFormData({...formData, name:event.target.value})} error={error.some((err:ErrorMessageProps) => err.id === "name" && err.error)} 
+        errorMsg={error.find((err:ErrorMessageProps) => err.id === "name")?.errorMsg || ""}/>
 
         <button>Submit</button>
          <>
