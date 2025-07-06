@@ -17,7 +17,6 @@ interface ErrorMessageProps{
 }
 
 const Form = () => {
-  // const [location, setLocation] = useState<string>("");
   const [formData,setFormData] = useState<FormDataProps>({
     name:"",
     email:"",
@@ -26,11 +25,6 @@ const Form = () => {
   useState<Array<string>>([])
   const [error,setError] = useState<Array<ErrorMessageProps>>([])
   
-  // function SubmitForm(e: React.FormEvent<HTMLFormElement>) {
-  //   e.preventDefault()
-  //   console.log(location)
-  // }
-
   return (
     <main>
       <h1>Choose A timeslot</h1>
