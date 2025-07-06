@@ -1,0 +1,11 @@
+.box-wrapper{
+    background-color: white;
+    padding: var(--space-md);
+    width: auto;
+    height: auto;
+    margin: var(--space-xxs);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

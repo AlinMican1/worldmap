@@ -14,6 +14,7 @@ interface inputFieldParams {
   autocomplete?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   icon?: React.ReactNode;
+  width?: string | number;
 }
 
 export const InputField = ({
@@ -29,6 +30,7 @@ export const InputField = ({
   autocomplete,
   onChange,
   icon,
+  width = "25vw"
 }: inputFieldParams) => {
   return (
     <div className="input-wrapper">
@@ -48,6 +50,7 @@ export const InputField = ({
           onChange={onChange}
           disabled={disabled}
           className={`${error ? "input-error" : ""}`}
+          style={{ width: width ?? undefined }}
         />
       </div>
       {error && <p className={`${"error"}`}>{errorMsg}</p>}
