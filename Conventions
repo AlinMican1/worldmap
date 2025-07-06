@@ -15,3 +15,10 @@ run backend
 uvicorn app:app --reload
 uvicorn app.main:app --reload
 to run backend dev python app.py
+
+pull remote branch to local machine
+git fetch origin <branch-name>
+git fetch origin
+
+merge random branch with main
+git merge origin/main

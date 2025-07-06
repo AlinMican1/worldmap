@@ -34,7 +34,6 @@ export const SubmitLocationForm = async (e: React.FormEvent<HTMLFormElement>,{lo
         email,
         name
       });
-
       return {success: true, message: res.data.message, errors: [] };
     } catch (error) {
       return {success: false, message: "Server Error", error: error, errors: [] };

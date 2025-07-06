@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.routes import hello, time,form
+from app.routes import hello, time, form
 from app.db.database import Base, engine
-from app.db.models import user
+from app.db.models import formModel, userModel
 
 app = FastAPI()
 
