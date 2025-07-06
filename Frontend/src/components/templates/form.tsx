@@ -2,18 +2,12 @@
 import { useState } from "react";
 import EnterLocation from "../molecule/enterLocation";
 import { InputField } from "../atoms/inputField";
-import { SubmitLocationForm } from "@/REST/POST";
+import { SubmitLocationForm , ErrorMessageProps} from "@/REST/POST";
 
 interface FormDataProps{
   name:string,
   email:string,
   location:string
-}
-
-interface ErrorMessageProps{
-  id: string,
-  errorMsg: string,
-  error: boolean,
 }
 
 const Form = () => {
@@ -22,9 +16,17 @@ const Form = () => {
     email:"",
     location:"",
   })
-  useState<Array<string>>([])
+  
   const [error,setError] = useState<Array<ErrorMessageProps>>([])
   
+  const SubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    const getErrors = await SubmitLocationForm(e,true,formData);
+    if (getErrors && getErrors.errors) {
+            const filteredErrors = getErrors.errors.filter((err: ErrorMessageProps) => err.error === true);
+            setError(filteredErrors);
+          }
+  }
+
   return (
     <main>
       <h1>Choose A timeslot</h1>
@@ -32,15 +34,7 @@ const Form = () => {
         Please complete the following below to allow us to choose the best possible time for your
         meeting
       </p>
-      <form
-        onSubmit={async (e) => {
-          const getErrors = await SubmitLocationForm(e, formData);
-          if (getErrors && getErrors.errors) {
-            const filteredErrors = getErrors.errors.filter((err: ErrorMessageProps) => err.error === true);
-            setError(filteredErrors);
-          }
-        }}
-      >
+      <form onSubmit={SubmitForm}>
         <EnterLocation location={formData.location} setLocation={(newLocation) =>
         setFormData((prev) => ({ ...prev, location: newLocation }))} error={error.some((err:ErrorMessageProps) => err.id === "location" && err.error)} 
         errorMsg={error.find((err:ErrorMessageProps) => err.id === "location")?.errorMsg || ""}/>

@@ -21,7 +21,7 @@ label {
 /* Input field */
 input {
   font-size: var(--text-base);
-  width: 80vw;
+  width: 25vw;
   height: 40px;
   color: var(--foreground);
   background: var(--color-third);
