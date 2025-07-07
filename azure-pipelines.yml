@@ -3,17 +3,17 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+# This section defines the trigger(s) for the pipeline.
+# 'main' specifies that the pipeline will run whenever changes are pushed to the 'main' branch.
 trigger:
-- main
+  - main # automatically triggers this pipeline when changes are made to the 'main' branch.
 
+# This defines the pool where the pipeline will run.
+# 'ubuntu-latest' specifies the virtual machine image for executing tasks.
 pool:
-  vmImage: ubuntu-latest
+  vmImage: "ubuntu-latest" # This uses the latest Ubuntu image provided by Azure DevOps.
 
+# Steps contain the individual tasks or actions that the pipeline will execute.
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - script: echo Hello, world! # A script task to run shell commands. This one prints "Hello, world!".
+    displayName: "Run my first pipeline script" # A friendly name for this step, making it easier to identify in the pipeline logs.
