@@ -1,0 +1,17 @@
+"use client";
+import AddClientInfo from "../organism/addClientInfo";
+import ClientList from "../organism/clientList";
+import "../../app/globals.css";
+import { ClientInfoProps } from "@/types/forms";
+import { useState } from "react";
+
+const ClientSchedule = () => {
+  const [clients, setClients] = useState<ClientInfoProps[]>([]);
+  return (
+    <div className="positional-center">
+      <AddClientInfo clients={clients} setClients={setClients} />
+      <ClientList clients={clients} />
+    </div>
+  );
+};
+export default ClientSchedule;

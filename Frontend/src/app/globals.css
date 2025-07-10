@@ -101,6 +101,11 @@ h1{
   font-weight: 100;
   
 }
+h2{
+  font-family: var(--font-heading);
+  color: var(--foreground);
+  font-weight: 400;
+}
 p{
   /* font-family: var(--font-base); */
   color: var(--foreground);
@@ -123,13 +128,20 @@ button:hover{
 .positional-center{
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh; /* full screen height */
+  align-items: flex-start;
+  height: 100vh; 
+  padding-top: 25vh;
+  
 }
 
+
 .elements-row{
-    display: flex;
-    flex-direction: row;
-    
-    gap: var(--space-sm);
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-sm);
+}
+.elements-column{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }

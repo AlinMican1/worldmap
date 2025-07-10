@@ -1,0 +1,25 @@
+.user-pfp{
+    height: 5vw;
+    width: 5vw;
+    border-radius: 50%;
+    background-color: black;
+}
+.client-name{
+    width: 10vw;
+    background-color: violet;
+    font-family: var(--font-heading);
+    color: var(--foreground);
+    font-weight: 100;
+
+
+}
+.wrapper{
+
+    height: 30vw;
+    width: auto;
+    overflow: hidden;
+}
+.wrapper:hover{
+    overflow-y: scroll;
+    
+}
