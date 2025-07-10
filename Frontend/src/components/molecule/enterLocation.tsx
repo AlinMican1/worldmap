@@ -8,12 +8,14 @@ interface EnterLocationProps {
   setLocation: (value: string) => void;
   error: boolean;
   errorMsg: string;
+  width?: string;
 }
 
-const EnterLocation = ({location,setLocation,error,errorMsg}:EnterLocationProps) => {
+const EnterLocation = ({ location, setLocation, error, errorMsg, width }: EnterLocationProps) => {
   return (
     <div>
       <InputField
+        width={width}
         placeholder="Location"
         type="text"
         label="Choose Location"
@@ -25,13 +27,12 @@ const EnterLocation = ({location,setLocation,error,errorMsg}:EnterLocationProps)
       <ul className="dropDownContainer">
         {SuggestLocation(location).map((country, key) => {
           // If country is selected dont show again
-          
+
           if (location != country) {
             return (
               <div key={key}>
                 <button className="dropDownButton" onClick={() => setLocation(country)}>
                   {country}
-                  
                 </button>
               </div>
             );
@@ -41,8 +42,6 @@ const EnterLocation = ({location,setLocation,error,errorMsg}:EnterLocationProps)
         })}
       </ul>
     </div>
-    
   );
-  
 };
 export default EnterLocation;

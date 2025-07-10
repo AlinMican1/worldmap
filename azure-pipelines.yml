@@ -17,3 +17,5 @@ pool:
 steps:
   - script: echo Hello, world! # A script task to run shell commands. This one prints "Hello, world!".
     displayName: "Run my first pipeline script" # A friendly name for this step, making it easier to identify in the pipeline logs.
+
+#https://www.datacamp.com/tutorial/azure-pipelines?dc_referrer=https%3A%2F%2Fwww.google.com%2F
