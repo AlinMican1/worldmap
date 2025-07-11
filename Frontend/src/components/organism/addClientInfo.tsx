@@ -24,7 +24,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
 
   const SubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(clients.length);
+
     const getErrors = await SubmitClientSchedule(clients);
     if (getErrors && getErrors.error) {
       const filteredErrors = getErrors.errors.filter(
