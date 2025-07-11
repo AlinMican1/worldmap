@@ -4,9 +4,10 @@ import "../../app/globals.css";
 import { InputField } from "../atoms/inputField";
 import { useState } from "react";
 import { ErrorMessageProps, ClientInfoProps } from "@/types/forms";
-import { SubmitLocationForm } from "@/REST/POST";
+import { SubmitClientSchedule, SubmitLocationForm } from "@/REST/POST";
 import EnterLocation from "../molecule/enterLocation";
 import { GetFormErrors } from "../../../helper/GetErrors";
+import useErrors from "@/hooks/useErrors";
 
 interface AddClientInfoProps {
   clients: ClientInfoProps[];
@@ -19,17 +20,25 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     location: "",
   });
 
-  const [error, setError] = useState<Array<ErrorMessageProps>>([]);
+  const errorsHook = useErrors();
 
   const SubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const getErrors = await SubmitLocationForm(true, formData);
-    console.log(getErrors);
-    if (getErrors && getErrors.errors) {
+
+    const getErrors = await SubmitClientSchedule(clients);
+    if (getErrors && getErrors.error) {
       const filteredErrors = getErrors.errors.filter(
         (err: ErrorMessageProps) => err.error === true
       );
-      setError(filteredErrors);
+      errorsHook.setErrors(filteredErrors);
+    } else if (clients.length !== 0) {
+      errorsHook.clearErrors();
+      setClients([]);
+      setFormData({
+        name: "",
+        email: "",
+        location: "",
+      });
     }
   };
 
@@ -38,14 +47,14 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     const getErrors = await GetFormErrors(true, formData);
     const filteredErrors = getErrors.filter((err: ErrorMessageProps) => err.error === true);
     if (filteredErrors.length > 0) {
-      setError(filteredErrors);
+      errorsHook.setErrors(filteredErrors);
     } else {
       setFormData({
         name: "",
         email: "",
         location: "",
       });
-      setError([]);
+      errorsHook.clearErrors();
       setClients((oldArray) => [...oldArray, formData]);
     }
   };
@@ -64,8 +73,8 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
               id="name"
               onChange={(event) => setFormData({ ...formData, name: event.target.value })}
               placeholder="Enter Client Name"
-              error={error.some((err: ErrorMessageProps) => err.id === "name" && err.error)}
-              errorMsg={error.find((err: ErrorMessageProps) => err.id === "name")?.errorMsg || ""}
+              error={errorsHook.getErrorBoolean("name")}
+              errorMsg={errorsHook.getErrorMsg("name")}
             />
 
             <InputField
@@ -76,8 +85,8 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
               id="email"
               onChange={(event) => setFormData({ ...formData, email: event.target.value })}
               placeholder="Enter Client Email"
-              error={error.some((err: ErrorMessageProps) => err.id === "email" && err.error)}
-              errorMsg={error.find((err: ErrorMessageProps) => err.id === "email")?.errorMsg || ""}
+              error={errorsHook.getErrorBoolean("email")}
+              errorMsg={errorsHook.getErrorMsg("email")}
             />
           </div>
 
@@ -86,8 +95,8 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             setLocation={(newLocation) =>
               setFormData((prev) => ({ ...prev, location: newLocation }))
             }
-            errorMsg={error.find((err: ErrorMessageProps) => err.id === "location")?.errorMsg || ""}
-            error={error.some((err: ErrorMessageProps) => err.id === "location")}
+            errorMsg={errorsHook.getErrorMsg("location")}
+            error={errorsHook.getErrorBoolean("location")}
           />
           <button type="button" onClick={AddClients}>
             Add Client
