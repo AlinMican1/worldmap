@@ -1,12 +1,11 @@
 .dropDownContainer{
     display: flex;
-    max-height: 300px;
+    max-height: 100px;
     height: auto;
     overflow: hidden;
     position: relative;
     flex-direction: column;
     padding: 0;
-    
     /* border: 0.5px solid var(--color-border); */
     scrollbar-color: var(--color-border) #ffffff00;
     scrollbar-width: thin
@@ -17,12 +16,12 @@
     
 }
 .dropDownButton{
-    
     background-color: #ffffff;
     margin-top: var(--space-xxs);
     padding: var(--space-sm);
     justify-content: center;
-    width: 100%;
+    width: 20px;
+    /* width: 100%; */
     align-items: center;
     display: flex;
     color: var(--foreground);
