@@ -65,8 +65,8 @@
 
 // // }
 import axios from "axios";
-import { GetFormErrors } from "../../helper/GetErrors";
-import { ClientListProps, SubmitLocationFormProps } from "@/types/forms";
+import { GetFormErrors, NoClientsError } from "../../helper/GetErrors";
+import { ClientInfoProps, ClientListProps, SubmitLocationFormProps } from "@/types/forms";
 
 // const preventDeefault = e: React.FormEvent<HTMLFormElement>,
 export const SubmitLocationForm = async (
@@ -92,23 +92,29 @@ export const SubmitLocationForm = async (
   }
 };
 
-export const SubmitClientSchedule = async ({ clients }: ClientListProps) => {
-  if (clients.length === 0) {
-    return { success: false, message: "No clients added to the list" };
+export const SubmitClientSchedule = async (clients?: ClientInfoProps[]) => {
+  // const errorArray = NoClientsError(clients);
+  if (!clients || clients.length === 0) {
+    return { success: false, errors: [{ id: "noClient", errorMsg: "No clients", error: true }] };
   }
-
+  console.log("mmm");
   const apiURL = process.env.NEXT_PUBLIC_DEV_URL + "form";
+
   try {
-    clients.map(async (client) => {
-      const res = await axios.post(apiURL, {
-        name: client.name,
-        email: client.email,
-        location: client.location,
-      });
-      return { success: true, message: res.data.message, errors: [] };
-    });
+    await Promise.all(
+      clients.map(async (client) => {
+        const res = await axios.post(apiURL, {
+          name: client.name,
+          email: client.email,
+          location: client.location,
+        });
+
+        return res.data;
+      })
+    );
+
+    return { success: true, message: "All clients submitted successfully", errors: [] };
   } catch (error) {
-    return { success: false, message: "Server Error", error: error, errors: [] };
+    return { success: false, message: "Server Error", error, errors: [] };
   }
-  return [];
 };

@@ -1,4 +1,9 @@
-import { SubmitLocationFormProps, ErrorMessageProps, ClientListProps } from "@/types/forms";
+import {
+  SubmitLocationFormProps,
+  ErrorMessageProps,
+  ClientListProps,
+  ClientInfoProps,
+} from "@/types/forms";
 import { COUNTRIES } from "./SuggestLocation";
 
 export const GetFormErrors = (
@@ -23,9 +28,9 @@ export const GetFormErrors = (
   return formErrors;
 };
 
-export const NoClientsError = ({ clients }: ClientListProps): ErrorMessageProps[] => {
-  if (clients.length === 0 || clients === undefined) {
+export const NoClientsError = (clients?: ClientInfoProps[]): ErrorMessageProps[] => {
+  if (!clients || clients.length === 0 || clients === undefined) {
     return [{ id: "noClient", errorMsg: "No clients", error: true }];
   }
-  return [{ id: "noClient", errorMsg: "No clients", error: false }];
+  return [];
 };
