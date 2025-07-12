@@ -1,0 +1,7 @@
+.button-wrapper-1{
+    background-color: var(--background);
+    border: 0.5px solid var(--color-hover);
+    padding: var(--space-xs);
+    width: 50px;
+    margin: 0px;
+}
