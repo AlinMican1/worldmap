@@ -9,6 +9,7 @@ import EnterLocation from "../molecule/enterLocation";
 import { GetFormErrors } from "../../../helper/GetErrors";
 import useErrors from "@/hooks/useErrors";
 import useClientForm from "@/hooks/useClientForm";
+import CalendarBox from "../molecule/calendarBox";
 
 interface AddClientInfoProps {
   clients: ClientInfoProps[];
@@ -41,6 +42,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
 
   const AddClients = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
     const getErrors = await GetFormErrors(true, form.formData);
     const filteredErrors = getErrors.filter((err: ErrorMessageProps) => err.error === true);
     if (filteredErrors.length > 0) {
@@ -56,6 +58,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     <div>
       <BoxDesign>
         <h1>Add Schedule</h1>
+        <CalendarBox />
         <form id="client-form" onSubmit={SubmitForm}>
           <div className="elements-row">
             <InputField
