@@ -5,3 +5,7 @@
     width: 50px;
     margin: 0px;
 }
+
+.button-wrapper-1 > :nth-child(6) {
+    background-color: aqua;
+  }
