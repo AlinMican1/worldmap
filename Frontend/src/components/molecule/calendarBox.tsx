@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import BoxDesign from "../atoms/boxDesign";
+import useArray from "@/hooks/useArray";
 import SelectBox from "../atoms/selectBox";
 import "./calendarBox.css";
 import "../../app/globals.css";
 import { GenerateCalendar } from "../../../helper/GenerateCalendar";
+import { formatDate } from "../../../helper/Formatter";
 
 const CalendarBox = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -13,6 +15,23 @@ const CalendarBox = () => {
   const calendar = GenerateCalendar(currentMonth, currentYear);
 
   const firstWeekday = (new Date(currentYear, currentMonth, calendar.startDay).getDay() + 6) % 7;
+  const [addDate, setAddDate] = useState<Date[]>([]);
+  const dateArray = useArray<String>([]);
+
+  const addDateToArray = (date: String) => {
+    if (dateArray.array.includes(date)) {
+      for (let i = 0; i < dateArray.array.length; i++) {
+        if (dateArray.array[i] === date) {
+          dateArray.remove(i);
+          break;
+        }
+      }
+    } else {
+      dateArray.push(date);
+    }
+
+    console.log(dateArray.array);
+  };
 
   // Handlers for month navigation
   const goToNextMonth = () => {
@@ -72,9 +91,35 @@ const CalendarBox = () => {
             const isSunday = new Date(currentYear, currentMonth, date).getDay() === 0;
             const isSaturday = new Date(currentYear, currentMonth, date).getDay() === 6;
             if (isSaturday || isSunday) {
-              return <SelectBox key={i} name={date.toString()} classname="turnDownOpacity" />;
+              return (
+                <SelectBox
+                  onClick={() =>
+                    addDateToArray(formatDate(new Date(currentYear, currentMonth, date)))
+                  }
+                  key={i}
+                  name={date.toString()}
+                  classname={
+                    dateArray.array.includes(formatDate(new Date(currentYear, currentMonth, date)))
+                      ? "selected"
+                      : "turnDownOpacity"
+                  }
+                />
+              );
             }
-            return <SelectBox key={i} name={date.toString()} />;
+            return (
+              <SelectBox
+                onClick={() =>
+                  addDateToArray(formatDate(new Date(currentYear, currentMonth, date)))
+                }
+                key={i}
+                name={date.toString()}
+                classname={
+                  dateArray.array.includes(formatDate(new Date(currentYear, currentMonth, date)))
+                    ? "selected"
+                    : ""
+                }
+              />
+            );
           })}
         </div>
       </BoxDesign>
