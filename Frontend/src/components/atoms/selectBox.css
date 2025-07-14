@@ -2,7 +2,8 @@
     background-color: var(--background);
     border: 0.5px solid var(--color-hover);
     padding: var(--space-xs);
-    width: 50px;
+    min-width: 50px;
+    max-width: 7vw;
     margin: 0px;
 }
 
