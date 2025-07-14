@@ -8,9 +8,7 @@
 .item-string{
     justify-self: end;
 }
-.calendar-grid > :nth-child(8) {
-    background-color: aqua;
-  }
+
 /* .calendar-days-strings{
    padding-left: 20px;
    display: grid;

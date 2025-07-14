@@ -64,9 +64,14 @@ const CalendarBox = () => {
           ))}
 
           {/* Render days */}
-          {calendar.daysArray.map(({ date }, i) => (
-            <SelectBox key={i} name={date.toString()} />
-          ))}
+          {calendar.daysArray.map(({ date }, i) => {
+            const isSunday = new Date(currentYear, currentMonth, date).getDay() === 0;
+            const isSaturday = new Date(currentYear, currentMonth, date).getDay() === 6;
+            if (isSaturday || isSunday) {
+              return <SelectBox key={i} name={date.toString()} classname="turnDownOpacity" />;
+            }
+            return <SelectBox key={i} name={date.toString()} />;
+          })}
         </div>
       </BoxDesign>
     </div>
