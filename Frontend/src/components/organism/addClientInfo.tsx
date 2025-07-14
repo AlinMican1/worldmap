@@ -2,19 +2,21 @@
 import BoxDesign from "../atoms/boxDesign";
 import "../../app/globals.css";
 import { InputField } from "../atoms/inputField";
-import { useState } from "react";
+
 import { ErrorMessageProps, ClientInfoProps } from "@/types/forms";
-import { SubmitClientSchedule, SubmitLocationForm } from "@/REST/POST";
+import { SubmitClientSchedule } from "@/REST/POST";
 import EnterLocation from "../molecule/enterLocation";
 import { GetFormErrors } from "../../../helper/GetErrors";
 import useErrors from "@/hooks/useErrors";
+import useClientForm from "@/hooks/useClientForm";
+import CalendarBox from "../molecule/calendarBox";
 
 interface AddClientInfoProps {
   clients: ClientInfoProps[];
   setClients: React.Dispatch<React.SetStateAction<ClientInfoProps[]>>;
 }
 const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
-  const [formData, setFormData] = useState<ClientInfoProps>({
+  const form = useClientForm({
     name: "",
     email: "",
     location: "",
@@ -34,28 +36,21 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     } else if (clients.length !== 0) {
       errorsHook.clearErrors();
       setClients([]);
-      setFormData({
-        name: "",
-        email: "",
-        location: "",
-      });
+      form.resetFormData();
     }
   };
 
   const AddClients = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const getErrors = await GetFormErrors(true, formData);
+
+    const getErrors = await GetFormErrors(true, form.formData);
     const filteredErrors = getErrors.filter((err: ErrorMessageProps) => err.error === true);
     if (filteredErrors.length > 0) {
       errorsHook.setErrors(filteredErrors);
     } else {
-      setFormData({
-        name: "",
-        email: "",
-        location: "",
-      });
+      form.resetFormData();
       errorsHook.clearErrors();
-      setClients((oldArray) => [...oldArray, formData]);
+      setClients((oldArray) => [...oldArray, form.formData]);
     }
   };
 
@@ -63,15 +58,17 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     <div>
       <BoxDesign>
         <h1>Add Schedule</h1>
+        <CalendarBox />
         <form id="client-form" onSubmit={SubmitForm}>
           <div className="elements-row">
             <InputField
               autocomplete="off"
               type="text"
+              name="name"
               label="Person's Name"
-              value={formData.name}
+              value={form.formData.name}
               id="name"
-              onChange={(event) => setFormData({ ...formData, name: event.target.value })}
+              onChange={form.handleChange}
               placeholder="Enter Client Name"
               error={errorsHook.getErrorBoolean("name")}
               errorMsg={errorsHook.getErrorMsg("name")}
@@ -80,10 +77,11 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             <InputField
               autocomplete="off"
               type="text"
+              name="email"
               label="Person's Email"
-              value={formData.email}
+              value={form.formData.email}
               id="email"
-              onChange={(event) => setFormData({ ...formData, email: event.target.value })}
+              onChange={form.handleChange}
               placeholder="Enter Client Email"
               error={errorsHook.getErrorBoolean("email")}
               errorMsg={errorsHook.getErrorMsg("email")}
@@ -91,9 +89,9 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
           </div>
 
           <EnterLocation
-            location={formData.location}
+            location={form.formData.location}
             setLocation={(newLocation) =>
-              setFormData((prev) => ({ ...prev, location: newLocation }))
+              form.setFormData((prev) => ({ ...prev, location: newLocation }))
             }
             errorMsg={errorsHook.getErrorMsg("location")}
             error={errorsHook.getErrorBoolean("location")}
