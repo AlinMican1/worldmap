@@ -42,12 +42,16 @@ const CalendarBox = () => {
     <div>
       <BoxDesign>
         {/* Header with navigation */}
-        <div className="calendar-header">
-          <button onClick={goToPreviousMonth}>⬅️</button>
-          <span>
-            {currentYear} - {(currentMonth + 1).toString().padStart(2, "0")}
+        <div className="calendar-header-wrapper">
+          <button className="calendar-button calendar-button-left" onClick={goToPreviousMonth}>
+            {"<"}
+          </button>
+          <span className="calendar-heading">
+            {calendar.months.get((currentMonth + 1).toString().padStart(2, "0"))} - {currentYear}
           </span>
-          <button onClick={goToNextMonth}>➡️</button>
+          <button className="calendar-button calendar-button-right" onClick={goToNextMonth}>
+            {">"}
+          </button>
         </div>
 
         <div className="calendar-grid">

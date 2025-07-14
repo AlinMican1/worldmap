@@ -1,9 +1,43 @@
+.calendar-header-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 200px 1fr;
+    justify-content: space-between;
+    color: var(--foreground);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-md)
+    
+}
+
+.calendar-heading {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    white-space: nowrap; /* prevents line wrap */
+  }
+
+.calendar-button {
+    background: none;
+    border: none;
+    
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.25rem 0.5rem;
+  }
+/* .calendar-button-left{
+    left:400px;
+}
+.calendar-button-right{
+    right:0;
+} */
 .calendar-grid{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     justify-content: end;
     align-items: end;
     gap: 0px;
+    
 }
 .item-string{
     justify-self: end;
