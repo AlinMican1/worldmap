@@ -5,6 +5,7 @@
     min-width: 50px;
     max-width: 7vw;
     margin: 0px;
+    
 }
 
 .button-wrapper-1:hover{
@@ -14,3 +15,11 @@
 .turnDownOpacity {
     opacity: 0.5;
   }
+
+.button-wrapper-1.selected{
+    background-color: var(--color-primary-lighter);
+}
+
+.button-wrapper-1.selected:hover {
+    background-color: var(--color-primary);
+}

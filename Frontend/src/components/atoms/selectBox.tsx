@@ -3,11 +3,14 @@ import "./selectBox.css";
 interface SelectBoxProps {
   name: string;
   classname?: string;
+  onClick?: () => void;
 }
-const SelectBox = ({ name, classname }: SelectBoxProps) => {
+const SelectBox = ({ name, classname, onClick }: SelectBoxProps) => {
   return (
     <div>
-      <button className={`button-wrapper-1 ${classname}`}>{name}</button>
+      <button onClick={onClick} className={`button-wrapper-1 ${classname}`}>
+        {name}
+      </button>
     </div>
   );
 };
