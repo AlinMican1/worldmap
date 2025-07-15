@@ -3,7 +3,7 @@ import {
   ErrorMessageProps,
   ClientListProps,
   ClientInfoProps,
-} from "@/types/forms";
+} from "@/types/interfaces";
 import { COUNTRIES } from "./SuggestLocation";
 
 export const GetFormErrors = (

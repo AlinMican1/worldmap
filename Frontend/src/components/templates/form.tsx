@@ -3,7 +3,7 @@ import { useState } from "react";
 import EnterLocation from "../molecule/enterLocation";
 import { InputField } from "../atoms/inputField";
 import { SubmitLocationForm } from "@/REST/POST";
-import { ErrorMessageProps } from "@/types/forms";
+import { ErrorMessageProps } from "@/types/interfaces";
 
 interface FormDataProps {
   name: string;

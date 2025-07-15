@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GetFormErrors } from "../../helper/GetErrors";
-import { ClientInfoProps, SubmitLocationFormProps } from "@/types/forms";
+import { ClientInfoProps, SubmitLocationFormProps } from "@/types/interfaces";
 
 export const SubmitLocationForm = async (
   emailRequired: boolean,
