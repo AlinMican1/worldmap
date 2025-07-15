@@ -2,7 +2,7 @@
 import BoxDesign from "../atoms/boxDesign";
 import "./clientList.css";
 import "../../app/globals.css";
-import { ClientListProps } from "@/types/forms";
+import { ClientListProps } from "@/types/interfaces";
 
 const ClientList = ({ clients }: ClientListProps) => {
   return (

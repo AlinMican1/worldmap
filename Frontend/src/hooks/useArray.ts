@@ -1,8 +1,9 @@
+import { UseArrayProps } from "@/types/interfaces";
 import { useState } from "react";
 /*
 This custom hook is to always add to an array.
 */
-const useArray = <T>(initialArray: T[] = []) => {
+const useArray = <T>(initialArray: T[] = []): UseArrayProps<T> => {
   const [array, setArray] = useState<T[]>(initialArray);
 
   const push = (item: T) => {

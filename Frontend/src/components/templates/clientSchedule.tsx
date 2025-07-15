@@ -2,7 +2,7 @@
 import AddClientInfo from "../organism/addClientInfo";
 import ClientList from "../organism/clientList";
 import "../../app/globals.css";
-import { ClientInfoProps } from "@/types/forms";
+import { ClientInfoProps } from "@/types/interfaces";
 import { useState } from "react";
 
 const ClientSchedule = () => {
