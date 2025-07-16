@@ -1,8 +1,4 @@
-import {
-  SubmitLocationFormProps,
-  ErrorMessageProps,
-  ClientInfoProps,
-} from "@/types/interfaces";
+import { SubmitLocationFormProps, ErrorMessageProps, ClientInfoProps } from "@/types/interfaces";
 import { COUNTRIES } from "./SuggestLocation";
 
 export const GetFormErrors = (
@@ -17,6 +13,7 @@ export const GetFormErrors = (
     { id: "location", errorMsg: "No location", error: false },
     { id: "location", errorMsg: "Location does not exist", error: false },
   ];
+
   if (name.trim() === "") formErrors[0].error = true;
   if (name.length > 50) formErrors[1].error = true;
   if (email.trim() === "" && emailRequired) formErrors[2].error = true;

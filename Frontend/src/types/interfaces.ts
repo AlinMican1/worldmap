@@ -27,3 +27,6 @@ export interface UseArrayProps<T> {
   remove: (index: number) => void;
   clear: () => void;
 }
+export interface ChooseTimeProps {
+  dateArray: UseArrayProps<string>;
+}

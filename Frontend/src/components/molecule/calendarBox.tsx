@@ -9,11 +9,11 @@ import { GenerateCalendar, isWeekend } from "../../../helper/GenerateCalendar";
 import { MONTHMAP, WEEKDAYS } from "../../../helper/Constants";
 import { formatDate } from "../../../helper/Formatter";
 import { UseArrayProps } from "@/types/interfaces";
-
+import { ChooseTimeProps } from "@/types/interfaces";
 interface CalendarBoxProps {
   dateArray: UseArrayProps<string>;
 }
-const CalendarBox = ({ dateArray }: CalendarBoxProps) => {
+const CalendarBox = ({ dateArray }: ChooseTimeProps) => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth()); // 0-based month
   const calendar = GenerateCalendar(currentMonth, currentYear);
@@ -83,37 +83,32 @@ const CalendarBox = ({ dateArray }: CalendarBoxProps) => {
 
           {/* Empty slots for offset */}
           {[...Array(firstWeekday)].map((_, i) => (
-            <div key={`empty-${i}`}>
-            </div>
+            <div key={`empty-${i}`}></div>
           ))}
 
           {/* Render days */}
           {calendar.daysArray.map(({ date }, i) => {
-            if(calendar.monthStartDay > date){
-              return(
-              <SelectBox
-                key={i}
-                name={date.toString()}
-                classname={"unselectable"}
-              />
-              )
-            }else{
+            if (calendar.monthStartDay > date) {
+              return <SelectBox key={i} name={date.toString()} classname={"unselectable"} />;
+            } else {
               if (isWeekend(currentYear, currentMonth, date)) {
-              return (
-                <SelectBox
-                  onClick={() =>
-                    addDateToArray(formatDate(new Date(currentYear, currentMonth, date)))
-                  }
-                  key={i}
-                  name={date.toString() }
-                  classname={
-                    dateArray.array.includes(formatDate(new Date(currentYear, currentMonth, date)))
-                      ? "selected"
-                      : "turnDownOpacity"
-                  }
-                />
-              );
-            }
+                return (
+                  <SelectBox
+                    onClick={() =>
+                      addDateToArray(formatDate(new Date(currentYear, currentMonth, date)))
+                    }
+                    key={i}
+                    name={date.toString()}
+                    classname={
+                      dateArray.array.includes(
+                        formatDate(new Date(currentYear, currentMonth, date))
+                      )
+                        ? "selected"
+                        : "turnDownOpacity"
+                    }
+                  />
+                );
+              }
             }
             // if (isWeekend(currentYear, currentMonth, date)) {
             //   return (

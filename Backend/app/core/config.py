@@ -1,7 +1,6 @@
 from pydantic_settings import BaseSettings
 from typing import List
 
-
 class Settings(BaseSettings):
     # Environment
     ENV: str = "development"
