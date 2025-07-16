@@ -1,4 +1,4 @@
-const MONTHMAP = new Map<string, string>([
+export const MONTHMAP = new Map<string, string>([
   ["01", "January"],
   ["02", "February"],
   ["03", "March"],
@@ -13,7 +13,7 @@ const MONTHMAP = new Map<string, string>([
   ["12", "December"],
 ]);
 
-const WEEKDAYS: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+export const WEEKDAYS: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 export const GenerateCalendar = (
   currentMonth: number,
   currentYear: number
@@ -42,4 +42,10 @@ export const GenerateCalendar = (
     startDay: startDay,
     daysArray: daysToRender,
   };
+};
+export const isWeeknd = (currentYear: number, currentMonth: number, currentDay: number) => {
+  return (
+    new Date(currentYear, currentMonth, currentDay).getDay() === 0 ||
+    new Date(currentYear, currentMonth, currentDay).getDay() === 6
+  );
 };

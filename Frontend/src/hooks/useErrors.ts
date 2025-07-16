@@ -1,4 +1,4 @@
-import { ErrorMessageProps } from "@/types/forms";
+import { ErrorMessageProps } from "@/types/interfaces";
 import { useState } from "react";
 
 /* 
