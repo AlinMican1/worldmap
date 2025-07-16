@@ -3,13 +3,15 @@ import BoxDesign from "../atoms/boxDesign";
 import "../../app/globals.css";
 import { InputField } from "../atoms/inputField";
 
-import { ErrorMessageProps, ClientInfoProps } from "@/types/forms";
+import { ErrorMessageProps, ClientInfoProps } from "@/types/interfaces";
 import { SubmitClientSchedule } from "@/REST/POST";
 import EnterLocation from "../molecule/enterLocation";
 import { GetFormErrors } from "../../../helper/GetErrors";
 import useErrors from "@/hooks/useErrors";
 import useClientForm from "@/hooks/useClientForm";
 import CalendarBox from "../molecule/calendarBox";
+import ChooseTime from "../molecule/chooseTime";
+import useArray from "@/hooks/useArray";
 
 interface AddClientInfoProps {
   clients: ClientInfoProps[];
@@ -24,7 +26,9 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
 
   const errorsHook = useErrors();
 
-  const SubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+  const dateArray = useArray<String>([]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const getErrors = await SubmitClientSchedule(clients);
@@ -40,7 +44,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     }
   };
 
-  const AddClients = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddClients = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const getErrors = await GetFormErrors(true, form.formData);
@@ -58,8 +62,8 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     <div>
       <BoxDesign>
         <h1>Add Schedule</h1>
-        <CalendarBox />
-        <form id="client-form" onSubmit={SubmitForm}>
+
+        <form id="client-form" onSubmit={handleSubmit}>
           <div className="elements-row">
             <InputField
               autocomplete="off"
@@ -96,7 +100,12 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             errorMsg={errorsHook.getErrorMsg("location")}
             error={errorsHook.getErrorBoolean("location")}
           />
-          <button type="button" onClick={AddClients}>
+          <div className="elements-row">
+            <CalendarBox dateArray={dateArray} />
+            <ChooseTime dates={dateArray} />
+          </div>
+
+          <button type="button" onClick={handleAddClients}>
             Add Client
           </button>
         </form>

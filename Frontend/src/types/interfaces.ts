@@ -19,3 +19,11 @@ export interface ClientInfoProps {
 export interface ClientListProps {
   clients: ClientInfoProps[];
 }
+
+export interface UseArrayProps<T> {
+  array: T[];
+  setArray: React.Dispatch<React.SetStateAction<T[]>>;
+  push: (item: T) => void;
+  remove: (index: number) => void;
+  clear: () => void;
+}

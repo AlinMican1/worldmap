@@ -2,21 +2,22 @@
 
 import { useState } from "react";
 import BoxDesign from "../atoms/boxDesign";
-import useArray from "@/hooks/useArray";
 import SelectBox from "../atoms/selectBox";
 import "./calendarBox.css";
 import "../../app/globals.css";
-import { GenerateCalendar } from "../../../helper/GenerateCalendar";
+import { GenerateCalendar, MONTHMAP, WEEKDAYS, isWeeknd } from "../../../helper/GenerateCalendar";
 import { formatDate } from "../../../helper/Formatter";
+import { UseArrayProps } from "@/types/interfaces";
 
-const CalendarBox = () => {
+interface CalendarBoxProps {
+  dateArray: UseArrayProps<String>;
+}
+const CalendarBox = ({ dateArray }: CalendarBoxProps) => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth()); // 0-based month
   const calendar = GenerateCalendar(currentMonth, currentYear);
 
   const firstWeekday = (new Date(currentYear, currentMonth, calendar.startDay).getDay() + 6) % 7;
-  const [addDate, setAddDate] = useState<Date[]>([]);
-  const dateArray = useArray<String>([]);
 
   const addDateToArray = (date: String) => {
     if (dateArray.array.includes(date)) {
@@ -29,8 +30,6 @@ const CalendarBox = () => {
     } else {
       dateArray.push(date);
     }
-
-    console.log(dateArray.array);
   };
 
   // Handlers for month navigation
@@ -66,7 +65,7 @@ const CalendarBox = () => {
             {"<"}
           </button>
           <span className="calendar-heading">
-            {calendar.months.get((currentMonth + 1).toString().padStart(2, "0"))} - {currentYear}
+            {MONTHMAP.get((currentMonth + 1).toString().padStart(2, "0"))} - {currentYear}
           </span>
           <button className="calendar-button calendar-button-right" onClick={goToNextMonth}>
             {">"}
@@ -75,7 +74,7 @@ const CalendarBox = () => {
 
         <div className="calendar-grid">
           {/* Weekday headers */}
-          {calendar.weekdayNames.map((dayName) => (
+          {WEEKDAYS.map((dayName) => (
             <p key={dayName} className="item-string">
               {dayName}
             </p>
@@ -88,9 +87,7 @@ const CalendarBox = () => {
 
           {/* Render days */}
           {calendar.daysArray.map(({ date }, i) => {
-            const isSunday = new Date(currentYear, currentMonth, date).getDay() === 0;
-            const isSaturday = new Date(currentYear, currentMonth, date).getDay() === 6;
-            if (isSaturday || isSunday) {
+            if (isWeeknd(currentYear, currentMonth, date)) {
               return (
                 <SelectBox
                   onClick={() =>

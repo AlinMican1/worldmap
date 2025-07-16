@@ -4,3 +4,11 @@ export const formatDate = (date: Date): string => {
   const yyyy = date.getFullYear();
   return `${dd}-${mm}-${yyyy}`;
 };
+export const getDayMonthYear = (date: String) => {
+  const [day, month, year] = date.split("-");
+  return {
+    day,
+    month,
+    year,
+  };
+};
