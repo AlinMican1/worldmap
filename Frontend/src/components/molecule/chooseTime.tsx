@@ -14,11 +14,13 @@ const ChooseTime = ({ dates }: ChooseTimeProps) => {
         dates.array.map((date, i) => {
           const { day, month, year } = getDayMonthYear(date);
           return (
-            <div key={i}>
-              <p className="dates">
-                {day} - {MONTHMAP.get(month)}
-              </p>
-              <SelectBox name="9:30am" />
+            <div>
+              <div key={i}>
+                <p className="dates">
+                  {day} - {MONTHMAP.get(month)}
+                </p>
+              </div>
+              <SelectBox name="9:30" />
             </div>
           );
         })
