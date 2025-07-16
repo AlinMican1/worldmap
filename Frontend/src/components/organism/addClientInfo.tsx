@@ -10,7 +10,7 @@ import { GetFormErrors } from "../../../helper/GetErrors";
 import useErrors from "@/hooks/useErrors";
 import useClientForm from "@/hooks/useClientForm";
 import CalendarBox from "../molecule/calendarBox";
-import ChooseTime from "../molecule/chooseTime";
+import ChooseDate from "../molecule/chooseDate";
 import useArray from "@/hooks/useArray";
 
 interface AddClientInfoProps {
@@ -26,7 +26,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
 
   const errorsHook = useErrors();
 
-  const dateArray = useArray<String>([]);
+  const dateArray = useArray<string>([]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -101,8 +101,9 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             error={errorsHook.getErrorBoolean("location")}
           />
           <div className="elements-row">
+            <ChooseDate dates={dateArray} />
             <CalendarBox dateArray={dateArray} />
-            <ChooseTime dates={dateArray} />
+            
           </div>
 
           <button type="button" onClick={handleAddClients}>

@@ -23,3 +23,18 @@
 .button-wrapper-1.selected:hover {
     background-color: var(--color-primary);
 }
+
+.button-wrapper-1.unselectable{
+    opacity: 0.5;
+}
+.button-wrapper-1.unselectable:hover{
+    cursor:not-allowed
+}
+
+.choose-time-slot{
+    background-color: aqua;
+    border: 0px;
+}
+.choose-time-slot:hover{
+    background-color: black;
+}

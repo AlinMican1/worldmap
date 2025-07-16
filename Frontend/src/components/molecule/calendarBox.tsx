@@ -5,12 +5,13 @@ import BoxDesign from "../atoms/boxDesign";
 import SelectBox from "../atoms/selectBox";
 import "./calendarBox.css";
 import "../../app/globals.css";
-import { GenerateCalendar, MONTHMAP, WEEKDAYS, isWeeknd } from "../../../helper/GenerateCalendar";
+import { GenerateCalendar, isWeekend } from "../../../helper/GenerateCalendar";
+import { MONTHMAP, WEEKDAYS } from "../../../helper/Constants";
 import { formatDate } from "../../../helper/Formatter";
 import { UseArrayProps } from "@/types/interfaces";
 
 interface CalendarBoxProps {
-  dateArray: UseArrayProps<String>;
+  dateArray: UseArrayProps<string>;
 }
 const CalendarBox = ({ dateArray }: CalendarBoxProps) => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -19,7 +20,7 @@ const CalendarBox = ({ dateArray }: CalendarBoxProps) => {
 
   const firstWeekday = (new Date(currentYear, currentMonth, calendar.startDay).getDay() + 6) % 7;
 
-  const addDateToArray = (date: String) => {
+  const addDateToArray = (date: string) => {
     if (dateArray.array.includes(date)) {
       for (let i = 0; i < dateArray.array.length; i++) {
         if (dateArray.array[i] === date) {
@@ -82,19 +83,29 @@ const CalendarBox = ({ dateArray }: CalendarBoxProps) => {
 
           {/* Empty slots for offset */}
           {[...Array(firstWeekday)].map((_, i) => (
-            <div key={`empty-${i}`}></div>
+            <div key={`empty-${i}`}>
+            </div>
           ))}
 
           {/* Render days */}
           {calendar.daysArray.map(({ date }, i) => {
-            if (isWeeknd(currentYear, currentMonth, date)) {
+            if(calendar.monthStartDay > date){
+              return(
+              <SelectBox
+                key={i}
+                name={date.toString()}
+                classname={"unselectable"}
+              />
+              )
+            }else{
+              if (isWeekend(currentYear, currentMonth, date)) {
               return (
                 <SelectBox
                   onClick={() =>
                     addDateToArray(formatDate(new Date(currentYear, currentMonth, date)))
                   }
                   key={i}
-                  name={date.toString()}
+                  name={date.toString() }
                   classname={
                     dateArray.array.includes(formatDate(new Date(currentYear, currentMonth, date)))
                       ? "selected"
@@ -103,6 +114,23 @@ const CalendarBox = ({ dateArray }: CalendarBoxProps) => {
                 />
               );
             }
+            }
+            // if (isWeekend(currentYear, currentMonth, date)) {
+            //   return (
+            //     <SelectBox
+            //       onClick={() =>
+            //         addDateToArray(formatDate(new Date(currentYear, currentMonth, date)))
+            //       }
+            //       key={i}
+            //       name={date.toString() }
+            //       classname={
+            //         dateArray.array.includes(formatDate(new Date(currentYear, currentMonth, date)))
+            //           ? "selected"
+            //           : "turnDownOpacity"
+            //       }
+            //     />
+            //   );
+            // }
             return (
               <SelectBox
                 onClick={() =>

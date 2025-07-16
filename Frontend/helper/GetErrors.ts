@@ -1,7 +1,6 @@
 import {
   SubmitLocationFormProps,
   ErrorMessageProps,
-  ClientListProps,
   ClientInfoProps,
 } from "@/types/interfaces";
 import { COUNTRIES } from "./SuggestLocation";
