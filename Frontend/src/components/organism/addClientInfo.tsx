@@ -12,6 +12,7 @@ import useClientForm from "@/hooks/useClientForm";
 import CalendarBox from "../molecule/calendarBox";
 import ChooseDate from "../molecule/chooseDate";
 import useArray from "@/hooks/useArray";
+import ChooseTime from "../molecule/chooseTime";
 
 interface AddClientInfoProps {
   clients: ClientInfoProps[];
@@ -101,9 +102,9 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             error={errorsHook.getErrorBoolean("location")}
           />
           <div className="elements-row">
-            <ChooseDate dates={dateArray} />
+            <ChooseDate dateArray={dateArray} />
             <CalendarBox dateArray={dateArray} />
-            
+            <ChooseTime dateArray={dateArray} />
           </div>
 
           <button type="button" onClick={handleAddClients}>

@@ -28,7 +28,7 @@
     opacity: 0.5;
 }
 .button-wrapper-1.unselectable:hover{
-    cursor:not-allowed
+    cursor:not-allowed;
 }
 
 .choose-time-slot{
