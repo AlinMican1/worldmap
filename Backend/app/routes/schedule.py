@@ -11,9 +11,9 @@ class ScheduleStructure(BaseModel):
     email:str
     location:str
 
-@router.post("/shedule")
-async def PostSchedule(schedule: ScheduleStructure, db: Session = Depends(get_db)):
-    try:
+# @router.post("/shedule")
+# async def PostSchedule(schedule: ScheduleStructure, db: Session = Depends(get_db)):
+#     try:
 
 
 

@@ -8,6 +8,7 @@ export interface SubmitLocationFormProps {
   email: string;
   location: string;
   name: string;
+  dates: UseArrayProps<string>;
 }
 
 export interface ClientInfoProps {
@@ -27,6 +28,15 @@ export interface UseArrayProps<T> {
   remove: (index: number) => void;
   clear: () => void;
 }
-export interface ChooseTimeProps {
+// export interface ChooseDateProps {
+//   dateArray: UseArrayProps<string>;
+// }
+// export interface ChooseTimeProps {
+//   time: string;
+// }
+
+export interface ChooseDateAndTimeProps {
   dateArray: UseArrayProps<string>;
+  time: string;
+  setTime: (time: string) => void;
 }

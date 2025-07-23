@@ -3,7 +3,7 @@ import { COUNTRIES } from "./SuggestLocation";
 
 export const GetFormErrors = (
   emailRequired: boolean,
-  { location, email, name }: SubmitLocationFormProps
+  { location, email, name, dates }: SubmitLocationFormProps
 ): ErrorMessageProps[] => {
   const formErrors: ErrorMessageProps[] = [
     { id: "name", errorMsg: "No name", error: false },
@@ -12,6 +12,8 @@ export const GetFormErrors = (
     { id: "email", errorMsg: "Email does not exist", error: false },
     { id: "location", errorMsg: "No location", error: false },
     { id: "location", errorMsg: "Location does not exist", error: false },
+    { id: "time", errorMsg: "No time slot selected", error: false },
+    { id: "date", errorMsg: "No date selected", error: false },
   ];
 
   if (name.trim() === "") formErrors[0].error = true;
@@ -19,6 +21,7 @@ export const GetFormErrors = (
   if (email.trim() === "" && emailRequired) formErrors[2].error = true;
   if (location.trim() === "") formErrors[4].error = true;
   if (!COUNTRIES.includes(location)) formErrors[5].error = true;
+  if (dates.array.length === 0) formErrors[7].error = true;
 
   //formErrors.map((err: ErrorMessageProps) => err.error === true);
   return formErrors;

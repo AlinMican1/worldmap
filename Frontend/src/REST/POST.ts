@@ -4,9 +4,9 @@ import { ClientInfoProps, SubmitLocationFormProps } from "@/types/interfaces";
 
 export const SubmitLocationForm = async (
   emailRequired: boolean,
-  { location, email, name }: SubmitLocationFormProps
+  { location, email, name, dates }: SubmitLocationFormProps
 ) => {
-  const errorArray = GetFormErrors(emailRequired, { location, name, email });
+  const errorArray = GetFormErrors(emailRequired, { location, name, email, dates });
   if (errorArray) {
     return { success: false, errors: errorArray };
   }

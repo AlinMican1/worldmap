@@ -1,4 +1,5 @@
 "use client";
+import { memo } from "react";
 import { SuggestLocation } from "../../../helper/SuggestLocation";
 import { InputField } from "../atoms/inputField";
 import "./enterLocation.css";
@@ -44,4 +45,4 @@ const EnterLocation = ({ location, setLocation, error, errorMsg, width }: EnterL
     </div>
   );
 };
-export default EnterLocation;
+export default memo(EnterLocation);

@@ -30,16 +30,13 @@ export const InputField = ({
   autocomplete,
   onChange,
   icon,
-  width = "25vw"
+  width = "25vw",
 }: inputFieldParams) => {
   return (
     <div className="input-wrapper">
-      <label htmlFor={label}>
-        {label}
-      </label>
+      <label htmlFor={label}>{label}</label>
       <div className="input-with-icon">
-        {icon && <span className="input-icon">{icon}</span>}{" "}
-        {/* Render the icon if provided */}
+        {icon && <span className="input-icon">{icon}</span>} {/* Render the icon if provided */}
         <input
           type={type}
           id={id}
