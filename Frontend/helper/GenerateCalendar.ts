@@ -32,3 +32,7 @@ export const isWeekend = (currentYear: number, currentMonth: number, currentDay:
     new Date(currentYear, currentMonth, currentDay).getDay() === 6
   );
 };
+
+export const OrderDateASC = (dates: string[]): string[] => {
+  return [""];
+};

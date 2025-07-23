@@ -1,14 +1,17 @@
-import { ChooseTimeProps } from "@/types/interfaces";
+import { ChooseDateAndTimeProps } from "@/types/interfaces";
 import BoxDesign from "../atoms/boxDesign";
 import { MONTHMAP } from "../../../helper/Constants";
 import { getDayMonthYear } from "../../../helper/Formatter";
 import "../../app/globals.css";
-import { useState } from "react";
+import { useContext } from "react";
+import { useDateAndTimeContext } from "@/contexts";
 
-const ChooseDate = ({ dateArray }: ChooseTimeProps) => {
+const ChooseDate = () => {
+  const { dateArray } = useDateAndTimeContext();
   return (
     <div>
       <BoxDesign>
+        {dateArray.array.length > 0 ? <span>Dates To Set Meet</span> : null}
         {dateArray.array && dateArray.array.length > 0 ? (
           dateArray.array.map((date, i) => {
             const { day, month, year } = getDayMonthYear(date);

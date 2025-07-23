@@ -1,6 +1,6 @@
 "use client";
 import AddClientInfo from "../organism/addClientInfo";
-import ClientList from "../organism/clientList";
+import ClientList from "../molecule/clientList";
 import "../../app/globals.css";
 import { ClientInfoProps } from "@/types/interfaces";
 import { useState } from "react";
