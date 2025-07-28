@@ -23,9 +23,10 @@ const SelectBox = ({
     if (selected && !disabled) base += " selected";
     return `${base} ${className}`.trim();
   };
+
   return (
     <div>
-      <button onClick={onClick} className={produceButtonClass()}>
+      <button type="button" onClick={onClick} className={produceButtonClass()}>
         {name}
       </button>
     </div>

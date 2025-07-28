@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey, JSON
 from sqlalchemy.orm import relationship
 from app.db.database import Base 
 from sqlalchemy.dialects.postgresql import UUID
@@ -11,5 +11,7 @@ class Form(Base):
     name = Column(String, nullable=False)
     email= Column(String, unique=True, nullable=False)
     location = Column(String, nullable=False)   
+    dates = Column(JSON, nullable= False)
+
     userId = Column(ForeignKey("users.id"))
     user = relationship("User", back_populates="forms")

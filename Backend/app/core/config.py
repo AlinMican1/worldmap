@@ -9,13 +9,6 @@ class Settings(BaseSettings):
     # Public (frontend) settings
     NEXT_PUBLIC_TIME_API: str
     NEXT_PUBLIC_DEV_URL: str
-
-    # Database connection pieces
-    # DB_USER: str
-    # DB_PASS: str
-    # DB_HOST: str
-    # DB_NAME: str
-    # DB_PORT: str
     DB_URL: str
 
     # Assembled full database URL
@@ -33,9 +26,10 @@ class Settings(BaseSettings):
         if self.ENV == "production":
             return [self.NEXT_PUBLIC_DEV_URL]
         return [
-            "http://localhost:3000",
-            "http://127.0.0.1:8080",
-            "http://127.0.0.1:8000",
+            "http://localhost:3000",  # Next.js default
+            "http://127.0.0.1:3000",  # Next.js alternative
+            "http://localhost:8000",   # FastAPI (for API-to-API calls)
+            self.NEXT_PUBLIC_DEV_URL,  # Your configured URL
         ]
 
     class Config:

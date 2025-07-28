@@ -26,19 +26,23 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     name: "",
     email: "",
     location: "",
-    dates: new Map<string, string>(),
+    dates: new Map<string, string[]>(),
   });
   const errorsHook = useErrors();
   const dateArray = useArray<string>([]);
   const [time, setTime] = useState<string>("");
+  const [dateAndTimeMap, setDateAndTimeMap] = useState<Map<string, string[]>>(new Map());
 
+  // Use for context
   const dateAndTime = useMemo(
     () => ({
       dateArray,
       time,
       setTime,
+      dateAndTimeMap,
+      setDateAndTimeMap,
     }),
-    [dateArray, time]
+    [dateArray, time, dateAndTimeMap]
   );
 
   //Memoization
@@ -50,8 +54,10 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const getErrors = await SubmitClientSchedule(clients);
-    if (getErrors && getErrors.error) {
+
+    if (getErrors.errors && getErrors.success === false) {
       const filteredErrors = getErrors.errors.filter(
         (err: ErrorMessageProps) => err.error === true
       );
@@ -60,15 +66,17 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       errorsHook.clearErrors();
       setClients([]);
       form.resetFormData();
+      dateAndTimeMap.clear();
     }
   };
 
   const handleAddClients = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
     // Add the dates into the clientForm so that we can get errors.
     const readyFormData = {
       ...form.formData,
-      dates: dateArray,
+      dates: new Map(dateAndTimeMap),
     };
     const getErrors = await GetFormErrors(true, readyFormData);
     const filteredErrors = getErrors.filter((err: ErrorMessageProps) => err.error === true);
@@ -78,6 +86,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       form.resetFormData();
       errorsHook.clearErrors();
       setClients((oldArray) => [...oldArray, readyFormData]);
+      dateAndTimeMap.clear();
     }
   };
 
@@ -128,7 +137,11 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             </div>
             <DateAndTimeDisplay />
           </DateAndTimeContext.Provider>
-          {errorsHook.getErrorBoolean("date") ? errorsHook.getErrorMsg("date") : ""}
+          {dateAndTimeMap.size === 0
+            ? errorsHook.getErrorBoolean("date")
+              ? errorsHook.getErrorMsg("date")
+              : ""
+            : ""}
           <button type="button" onClick={handleAddClients}>
             Add Client
           </button>
@@ -137,6 +150,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       <button type="submit" form="client-form">
         Submit
       </button>
+      {errorsHook.getErrorBoolean("noClient") ? errorsHook.getErrorMsg("noClient") : ""}
     </div>
   );
 };
