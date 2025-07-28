@@ -1,19 +1,41 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import BoxDesign from "../atoms/boxDesign";
 import { CLOCKMAP } from "../../../helper/Constants";
 import "../../app/globals.css";
 import SelectBox from "../atoms/selectBox";
 import { useDateAndTimeContext } from "@/contexts";
 import Modal from "../atoms/modal";
+import { getISODate } from "../../../helper/Formatter";
 
 const ChooseTime = () => {
-  const { dateArray, setTime, time } = useDateAndTimeContext();
+  const { dateArray, setTime, time, setDateAndTimeMap } = useDateAndTimeContext();
+
   const [changeClockto24HR, setChangeClockto24HR] = useState<boolean>(false);
 
-  const handleSelectTime = (time: string) => {
-    setTime(time);
-  };
+  const addDateToArrays = useCallback((dates: string[]): string[] => {
+    return dates.sort((a, b) => getISODate(a).getTime() - getISODate(b).getTime());
+  }, []);
 
+  const AddDateAndTimeToMap = () => {
+    setDateAndTimeMap((prevMap) => {
+      const updatedMap = new Map(prevMap);
+      if (time) {
+        if (updatedMap.has(time)) {
+          //Check if there are duplicates
+          const existingDates = updatedMap.get(time) || [];
+          const newDates = dateArray.array.filter((date) => !existingDates.includes(date));
+          const concatArray = existingDates.concat(newDates);
+          updatedMap.set(time, addDateToArrays(concatArray || []));
+          // updatedMap.get(time)?.push(...newDates);
+        } else {
+          updatedMap.set(time, dateArray.array);
+          //updatedMap.set(time, dateArray.array);
+        }
+      }
+
+      return updatedMap;
+    });
+  };
   return (
     <BoxDesign>
       {dateArray.array && dateArray.array.length > 0 ? (
@@ -34,7 +56,7 @@ const ChooseTime = () => {
                         name={timeValue}
                         className="choose-time-slot"
                         onClick={() => {
-                          (handleSelectTime(timeValue), open());
+                          (setTime(timeValue), open());
                         }}
                       />
                     </div>
@@ -53,7 +75,13 @@ const ChooseTime = () => {
                 <p>{time}</p>
                 <div className="elements-row">
                   <button onClick={() => close()}>CLOSE</button>
-                  <button onClick={() => console.log("CONFIRMED")}>Confirm</button>
+                  <button
+                    onClick={() => {
+                      (AddDateAndTimeToMap(), close(), dateArray.clear());
+                    }}
+                  >
+                    Confirm
+                  </button>
                 </div>
               </BoxDesign>
             )}

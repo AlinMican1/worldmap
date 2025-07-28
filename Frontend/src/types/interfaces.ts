@@ -4,17 +4,17 @@ export interface ErrorMessageProps {
   error: boolean;
 }
 
-export interface SubmitLocationFormProps {
-  email: string;
-  location: string;
-  name: string;
-  dates: UseArrayProps<string>;
-}
+// export interface SubmitLocationFormProps {
+//   email: string;
+//   location: string;
+//   name: string;
+// }
 
 export interface ClientInfoProps {
   name: string;
   location: string;
   email: string;
+  dates: Map<string, string[]>;
 }
 
 export interface ClientListProps {
@@ -39,4 +39,6 @@ export interface ChooseDateAndTimeProps {
   dateArray: UseArrayProps<string>;
   time: string;
   setTime: (time: string) => void;
+  dateAndTimeMap: Map<string, string[]>;
+  setDateAndTimeMap: (updater: (prevMap: Map<string, string[]>) => Map<string, string[]>) => void;
 }
