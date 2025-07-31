@@ -1,23 +1,58 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
+import "./modal.css";
 
 interface ModalProps {
-  openBtnName?: string;
-  closeBtnName?: string;
-  children: ReactNode;
+  children: (close: () => void) => ReactNode;
+  trigger: (open: () => void) => ReactNode;
 }
 
-const Modal = ({ children, openBtnName = "open", closeBtnName = "close" }: ModalProps) => {
-  const [openModal, setOpenModal] = useState<Boolean>(false);
+const Modal = ({ children, trigger }: ModalProps) => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const open = () => setOpenModal(true);
+  const close = () => setOpenModal(false);
+
+  useEffect(() => {
+    const modalElement = modalRef.current;
+
+    if (openModal === true) {
+      document.body.style.overflow = "hidden";
+
+      // Disable selection for all elements except the modal
+      document.querySelectorAll("body *").forEach((el) => {
+        if (el !== modalElement && !modalElement?.contains(el)) {
+          (el as HTMLElement).style.userSelect = "none";
+        }
+      });
+
+      if (modalElement) {
+        modalElement.style.userSelect = "auto";
+      }
+    } else {
+      document.body.style.overflow = "unset";
+
+      document.querySelectorAll("body *").forEach((el) => {
+        (el as HTMLElement).style.userSelect = "";
+      });
+    }
+    //Clean up function
+    return () => {
+      document.body.style.overflow = "unset";
+
+      document.querySelectorAll("body *").forEach((el) => {
+        (el as HTMLElement).style.userSelect = "";
+      });
+    };
+  }, [openModal]);
 
   return (
     <div>
-      {openModal ? (
-        <div>
-          {children}
-          <button onClick={() => setOpenModal(!openModal)}>{closeBtnName}</button>
+      {trigger(open)}
+      {openModal && (
+        <div className="modal-overlay" ref={modalRef}>
+          <div className="modal">{children(close)}</div>
         </div>
-      ) : (
-        <button onClick={() => setOpenModal(!openModal)}>{openBtnName}</button>
       )}
     </div>
   );

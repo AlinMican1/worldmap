@@ -15,8 +15,8 @@ export const MONTHMAP = new Map<string, string>([
 
 export const WEEKDAYS: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-export const CLOCKMAP = new Map<string,string>([
-    ["8:00 AM - 4:00 PM", "08:00 - 16:00"],
+export const CLOCKMAP = new Map<string, string>([
+  ["8:00 AM - 4:00 PM", "08:00 - 16:00"],
   ["8:30 AM - 4:30 PM", "08:30 - 16:30"],
   ["9:00 AM - 5:00 PM", "09:00 - 17:00"],
   ["9:30 AM - 5:30 PM", "09:30 - 17:30"],
@@ -31,6 +31,4 @@ export const CLOCKMAP = new Map<string,string>([
   ["5:00 PM - 1:00 AM", "17:00 - 01:00"],
   ["5:30 PM - 1:30 AM", "17:30 - 01:30"],
   ["6:00 PM - 2:00 AM", "18:00 - 02:00"],
-
-])
-    
+]);
