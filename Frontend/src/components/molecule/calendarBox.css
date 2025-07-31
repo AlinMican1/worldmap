@@ -1,3 +1,8 @@
+.calendar-container{
+    margin-top: var(--space-sm);
+    
+}
+
 .calendar-header-wrapper{
     display: grid;
     grid-template-columns: 1fr 200px 1fr;

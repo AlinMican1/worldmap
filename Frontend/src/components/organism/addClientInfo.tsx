@@ -130,11 +130,11 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             error={errorsHook.getErrorBoolean("location")}
           />
           <DateAndTimeContext.Provider value={dateAndTime}>
-            <div className="elements-row">
-              <ChooseDate />
+            {/* <ChooseDate /> */}
+            {/* <div className="elements-row">
               {CalendarBoxMemo}
               <ChooseTime />
-            </div>
+            </div> */}
             <DateAndTimeDisplay />
           </DateAndTimeContext.Provider>
           {dateAndTimeMap.size === 0

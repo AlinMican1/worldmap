@@ -4,6 +4,7 @@ import { CLOCKMAP } from "../../../helper/Constants";
 import "../../app/globals.css";
 import SelectBox from "../atoms/selectBox";
 import { useDateAndTimeContext } from "@/contexts";
+import "./chooseTime.css";
 import Modal from "../atoms/modal";
 import { getISODate } from "../../../helper/Formatter";
 
@@ -36,59 +37,68 @@ const ChooseTime = () => {
       return updatedMap;
     });
   };
+
   return (
-    <BoxDesign>
-      {dateArray.array && dateArray.array.length > 0 ? (
-        <div>
-          <button onClick={() => setChangeClockto24HR(!changeClockto24HR)}>
-            Change to {changeClockto24HR ? "12Hr" : "24Hr"} clock
-          </button>
-          <Modal
-            trigger={(open) => (
-              <div>
-                {Array.from(CLOCKMAP.entries()).map(([key, value]) => {
-                  // Calculate the time format here, before the return
-                  const timeValue = changeClockto24HR ? value : key;
+    <main className="time-container">
+      {dateArray.array.length ? (
+        <Modal
+          trigger={(open) => (
+            <div>
+              <p className="chooseTime-header">Popular Times</p>
+              <button onClick={() => setChangeClockto24HR(!changeClockto24HR)}>
+                Change to {changeClockto24HR ? "12Hr" : "24Hr"} clock
+              </button>
+              <div className="time-dropdown">
+                <div>
+                  {Array.from(CLOCKMAP.entries()).map(([key, value]) => {
+                    // Calculate the time format here, before the return
+                    const timeValue = changeClockto24HR ? value : key;
 
-                  return (
-                    <div key={key}>
-                      <SelectBox
-                        name={timeValue}
-                        className="choose-time-slot"
-                        onClick={() => {
-                          (setTime(timeValue), open());
-                        }}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          >
-            {(close) => (
-              <BoxDesign>
-                <h1>Confirm your choice</h1>
-                {dateArray.array.map((date, index) => (
-                  <p key={index}>{date}</p>
-                ))}
-
-                <p>{time}</p>
-                <div className="elements-row">
-                  <button onClick={() => close()}>CLOSE</button>
-                  <button
-                    onClick={() => {
-                      (AddDateAndTimeToMap(), close(), dateArray.clear());
-                    }}
-                  >
-                    Confirm
-                  </button>
+                    return (
+                      <div key={key}>
+                        <SelectBox
+                          name={timeValue}
+                          className="choose-time-slot"
+                          onClick={() => {
+                            (setTime(timeValue), open());
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
-              </BoxDesign>
-            )}
-          </Modal>
-        </div>
-      ) : null}
-    </BoxDesign>
+              </div>
+            </div>
+          )}
+        >
+          {(close) => (
+            <BoxDesign>
+              <h1>Confirm your choice</h1>
+              {dateArray.array.map((date, index) => (
+                <p key={index}>{date}</p>
+              ))}
+
+              <p>{time}</p>
+              <div className="elements-row">
+                <button onClick={() => close()}>CLOSE</button>
+                <button
+                  onClick={() => {
+                    (AddDateAndTimeToMap(), close(), dateArray.clear());
+                  }}
+                >
+                  Confirm
+                </button>
+              </div>
+            </BoxDesign>
+          )}
+        </Modal>
+      ) : (
+        <p className="paragraph-xs">
+          Specify the <span>dates and times </span> <br />
+          you would like your meetings to begin.
+        </p>
+      )}
+    </main>
   );
 };
 export default ChooseTime;

@@ -25,23 +25,25 @@ const EnterLocation = ({ location, setLocation, error, errorMsg, width }: EnterL
         error={error}
         errorMsg={errorMsg}
       />
-      <ul className="dropDownContainer">
-        {SuggestLocation(location).map((country, key) => {
-          // If country is selected dont show again
+      {location.trim() !== "" && (
+        <ul className={`dropDownContainer`}>
+          {SuggestLocation(location).map((country, key) => {
+            // If country is selected dont show again
 
-          if (location != country) {
-            return (
-              <div key={key}>
-                <button className="dropDownButton" onClick={() => setLocation(country)}>
-                  {country}
-                </button>
-              </div>
-            );
-          } else {
-            return null;
-          }
-        })}
-      </ul>
+            if (location != country) {
+              return (
+                <div key={key}>
+                  <button className="dropDownButton" onClick={() => setLocation(country)}>
+                    {country}
+                  </button>
+                </div>
+              );
+            } else {
+              return null;
+            }
+          })}
+        </ul>
+      )}
     </div>
   );
 };
