@@ -57,56 +57,55 @@ const CalendarBox = () => {
   };
 
   return (
-    <div>
-      <BoxDesign>
-        {/* Header with navigation */}
-        <div className="calendar-header-wrapper">
-          <button className="calendar-button calendar-button-left" onClick={goToPreviousMonth}>
-            {"<"}
-          </button>
-          <span className="calendar-heading">
-            {MONTHMAP.get((currentMonth + 1).toString().padStart(2, "0"))} - {currentYear}
-          </span>
-          <button className="calendar-button calendar-button-right" onClick={goToNextMonth}>
-            {">"}
-          </button>
-        </div>
+    <div className="calendar-container">
+      {/* Header with navigation */}
+      <div className="calendar-header-wrapper">
+        <button className="calendar-button calendar-button-left" onClick={goToPreviousMonth}>
+          {"<"}
+        </button>
+        <span className="calendar-heading">
+          {MONTHMAP.get((currentMonth + 1).toString().padStart(2, "0"))} - {currentYear}
+        </span>
+        <button className="calendar-button calendar-button-right" onClick={goToNextMonth}>
+          {">"}
+        </button>
+      </div>
 
-        <div className="calendar-grid">
-          {/* Weekday headers */}
-          {WEEKDAYS.map((dayName) => (
-            <p key={dayName} className="item-string">
-              {dayName}
-            </p>
-          ))}
+      <div className="calendar-grid">
+        {/* Weekday headers */}
+        {WEEKDAYS.map((dayName) => (
+          <p key={dayName} className="item-string">
+            {dayName}
+          </p>
+        ))}
 
-          {/* Empty slots for offset */}
-          {[...Array(firstWeekday)].map((_, i) => (
-            <div key={`empty-${i}`}></div>
-          ))}
+        {/* Empty slots for offset */}
+        {[...Array(firstWeekday)].map((_, i) => (
+          <div key={`empty-${i}`}></div>
+        ))}
 
-          {/* Render days */}
+        {/* Render days */}
 
-          {calendar.daysArray.map(({ date }, i) => {
-            return (
-              <SelectBox
-                key={i}
-                name={date.toString()}
-                disabled={calendar.monthStartDay > date}
-                dimmed={isWeekend(currentYear, currentMonth, date)}
-                onClick={() => {
-                  if (calendar.monthStartDay <= date) {
-                    addDateToArray(formatDate(new Date(currentYear, currentMonth, date)));
-                  }
-                }}
-                selected={dateArray.array.includes(
-                  formatDate(new Date(currentYear, currentMonth, date))
-                )}
-              />
-            );
-          })}
-        </div>
-      </BoxDesign>
+        {calendar.daysArray.map(({ date }, i) => {
+          return (
+            <SelectBox
+              key={i}
+              name={date.toString()}
+              disabled={calendar.monthStartDay > date}
+              dimmed={isWeekend(currentYear, currentMonth, date)}
+              onClick={() => {
+                if (calendar.monthStartDay <= date) {
+                  addDateToArray(formatDate(new Date(currentYear, currentMonth, date)));
+                }
+              }}
+              selected={dateArray.array.includes(
+                formatDate(new Date(currentYear, currentMonth, date))
+              )}
+              className="calendar-box"
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

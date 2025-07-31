@@ -1,12 +1,12 @@
 .box-wrapper{
     background-color: white;
     padding: var(--space-md);
-    width: auto;
+    width: auto;         
     height: auto;
     margin: var(--space-xxs);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px solid black;
+    
 }

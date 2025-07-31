@@ -1,16 +1,25 @@
 .dropDownContainer{
     display: flex;
-    max-height: 100px;
+    max-height: 200px;
     height: auto;
     overflow: hidden;
     position: relative;
     flex-direction: column;
     padding: 0;
+    
+    width: 25vw;
+    position: absolute;
+    background-color: var(--background);
+    min-width: 300px;
+    z-index: 999;
     /* border: 0.5px solid var(--color-border); */
     scrollbar-color: var(--color-border) #ffffff00;
     scrollbar-width: thin
     
 }
+.dropDownContainer.visible {
+    border: 0.5px solid var(--color-border);
+  }
 .dropDownContainer:hover{
     overflow-y: scroll;
     
@@ -21,7 +30,7 @@
     padding: var(--space-sm);
     justify-content: center;
     width: 20px;
-    /* width: 100%; */
+    width: 100%;
     align-items: center;
     display: flex;
     color: var(--foreground);

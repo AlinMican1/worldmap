@@ -74,6 +74,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0;
+ 
   
 
 }
@@ -134,7 +135,7 @@ span{
   justify-content: center;
   align-items: flex-start;
   height: 100vh; 
-  padding-top: 25vh;
+  padding-top: 10vh;
   
 }
 
@@ -142,8 +143,12 @@ span{
 .elements-row{
   display: flex;
   flex-direction: row;
+  background-color: red;
+  min-width: 600px;
   gap: var(--space-sm);
 }
+
+
 .elements-column{
   display: flex;
   flex-direction: column;
