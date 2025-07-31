@@ -7,6 +7,11 @@
     margin: 0px;
     
 }
+.calendar-box{
+    padding: var(--space-md);
+    min-width: 50px;
+    max-width: none;
+}
 
 .button-wrapper-1:hover{
     background-color: var(--color-hover);
@@ -18,6 +23,8 @@
 
 .button-wrapper-1.selected{
     background-color: var(--color-primary-lighter);
+    border: 0.5px solid var(--color-primary-lighter);
+    
 }
 
 .button-wrapper-1.selected:hover {
@@ -28,13 +35,22 @@
     opacity: 0.5;
 }
 .button-wrapper-1.unselectable:hover{
-    cursor:not-allowed
+    cursor:not-allowed;
 }
 
 .choose-time-slot{
-    background-color: aqua;
+    background-color: var(--background);
     border: 0px;
+    min-width: 0px;
+    width:130px;
+    max-width: 500px;
+    justify-content: center;
+    padding: var(--space-sm);
+    margin: var(--space-xxs);
+    border: 0.5px solid var(--color-border)
+    
+    
 }
 .choose-time-slot:hover{
-    background-color: black;
+    background-color: var(--color-hover);
 }

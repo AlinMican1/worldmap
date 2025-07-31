@@ -1,12 +1,12 @@
 import axios from "axios";
 import { GetFormErrors } from "../../helper/GetErrors";
-import { ClientInfoProps, SubmitLocationFormProps } from "@/types/interfaces";
+import { ClientInfoProps } from "@/types/interfaces";
 
 export const SubmitLocationForm = async (
   emailRequired: boolean,
-  { location, email, name }: SubmitLocationFormProps
+  { location, email, name, dates }: ClientInfoProps
 ) => {
-  const errorArray = GetFormErrors(emailRequired, { location, name, email });
+  const errorArray = GetFormErrors(emailRequired, { location, name, email, dates });
   if (errorArray) {
     return { success: false, errors: errorArray };
   }
@@ -29,8 +29,8 @@ export const SubmitClientSchedule = async (clients?: ClientInfoProps[]) => {
   if (!clients || clients.length === 0) {
     return { success: false, errors: [{ id: "noClient", errorMsg: "No clients", error: true }] };
   }
-  const apiURL = process.env.NEXT_PUBLIC_DEV_URL + "form";
-
+  const apiURL = process.env.NEXT_PUBLIC_DEV_URL + "schedule";
+  console.log("SS");
   try {
     await Promise.all(
       clients.map(async (client) => {
@@ -38,6 +38,8 @@ export const SubmitClientSchedule = async (clients?: ClientInfoProps[]) => {
           name: client.name,
           email: client.email,
           location: client.location,
+          dates: Object.fromEntries(client.dates),
+          userId: "ef329fd2-3043-43ce-ae2f-d6d4ae865077",
         });
 
         return res.data;

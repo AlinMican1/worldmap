@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.routes import hello, time, form
+from app.routes import hello, time, form, schedule
 from app.db.database import Base, engine
-from app.db.models import formModel, userModel
+from app.db.models.formModel import Form
+from app.db.models.userModel import User
+
 
 app = FastAPI()
-
-
 Base.metadata.create_all(bind=engine)
 
 # CORS
@@ -22,4 +22,5 @@ app.add_middleware(
 # Routers
 app.include_router(hello.router)
 app.include_router(form.router)
+app.include_router(schedule.router)
 # app.include_router(time.router)

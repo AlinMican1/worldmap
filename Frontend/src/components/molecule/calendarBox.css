@@ -1,3 +1,8 @@
+.calendar-container{
+    margin-top: var(--space-sm);
+    
+}
+
 .calendar-header-wrapper{
     display: grid;
     grid-template-columns: 1fr 200px 1fr;
@@ -13,7 +18,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
     white-space: nowrap; /* prevents line wrap */
   }
 
@@ -23,7 +27,7 @@
     
     cursor: pointer;
     font-size: 1.5rem;
-    padding: 0.25rem 0.5rem;
+    
   }
 /* .calendar-button-left{
     left:400px;
