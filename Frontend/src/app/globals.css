@@ -2,12 +2,13 @@
     /* Colors */
   --background: #f4f4f4;
   --foreground: #161616;
-  --color-primary: #0f62fe;
-  --color-primary-lighter: #538dfa;
+  --color-primary: rgb(0, 66, 200);
+  --color-primary-lighter: #0f62fe;
   --color-secondary: #161616;
   --color-third: #dcdcdc;
   --color-border: #646464;
   --color-hover: #cdcdcd;
+  --color-error: red;
   
   
   /* Spacing */
@@ -123,6 +124,8 @@ main{
   
 }
 
+
+
 button:hover{
   cursor: pointer;
 }
@@ -143,8 +146,6 @@ span{
 .elements-row{
   display: flex;
   flex-direction: row;
-  background-color: red;
-  min-width: 600px;
   gap: var(--space-sm);
 }
 

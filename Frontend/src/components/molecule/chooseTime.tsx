@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import BoxDesign from "../atoms/boxDesign";
 import { CLOCKMAP } from "../../../helper/Constants";
 import "../../app/globals.css";
@@ -10,12 +10,19 @@ import { getISODate } from "../../../helper/Formatter";
 
 const ChooseTime = () => {
   const { dateArray, setTime, time, setDateAndTimeMap } = useDateAndTimeContext();
-
   const [changeClockto24HR, setChangeClockto24HR] = useState<boolean>(false);
+  const scrollTop = useRef<HTMLDivElement | null>(null);
 
   const addDateToArrays = useCallback((dates: string[]): string[] => {
     return dates.sort((a, b) => getISODate(a).getTime() - getISODate(b).getTime());
   }, []);
+
+  useEffect(() => {
+    if (scrollTop.current) {
+      console.log("RAN");
+      scrollTop.current.scrollTo(0, 0);
+    }
+  }, [changeClockto24HR]);
 
   const AddDateAndTimeToMap = () => {
     setDateAndTimeMap((prevMap) => {
@@ -44,10 +51,34 @@ const ChooseTime = () => {
         <Modal
           trigger={(open) => (
             <div>
-              <p className="chooseTime-header">Popular Times</p>
-              <button onClick={() => setChangeClockto24HR(!changeClockto24HR)}>
-                Change to {changeClockto24HR ? "12Hr" : "24Hr"} clock
-              </button>
+              <h3 className="chooseTime-header">Popular Times</h3>
+              <div className="buttons-row">
+                <SelectBox
+                  name="12hrs"
+                  onClick={() => setChangeClockto24HR(false)}
+                  className={`button-clock ${changeClockto24HR === false ? "active" : ""}`}
+                />
+                <SelectBox
+                  name="24hrs"
+                  onClick={() => setChangeClockto24HR(true)}
+                  className={`button-clock ${changeClockto24HR === true ? "active" : ""}`}
+                />
+                {/* <button
+                  className="button-clock"
+                  onClick={() => setChangeClockto24HR(!changeClockto24HR)}
+                >
+                  24Hrs
+                 
+                </button>
+                <button
+                  className="button-clock"
+                  onClick={() => setChangeClockto24HR(!changeClockto24HR)}
+                >
+                  12Hrs
+                  
+                </button> */}
+              </div>
+              {/* Change to {changeClockto24HR ? "12Hr" : "24Hr"} clock */}
               <div className="time-dropdown">
                 <div>
                   {Array.from(CLOCKMAP.entries()).map(([key, value]) => {

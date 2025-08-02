@@ -131,10 +131,10 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
           />
           <DateAndTimeContext.Provider value={dateAndTime}>
             {/* <ChooseDate /> */}
-            {/* <div className="elements-row">
+            <div className="elements-row">
               {CalendarBoxMemo}
               <ChooseTime />
-            </div> */}
+            </div>
             <DateAndTimeDisplay />
           </DateAndTimeContext.Provider>
           {dateAndTimeMap.size === 0
