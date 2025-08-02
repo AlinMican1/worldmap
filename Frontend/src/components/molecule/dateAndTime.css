@@ -1,0 +1,87 @@
+.dateTime-container {
+    border: 1px solid black;
+    margin-top: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    
+}
+
+.timeAndDate-header {
+    color: var(--foreground);
+    font-weight: var(--font-normal);
+    margin-bottom: var(--space-sm);
+    text-align: center;
+    width: 100%;
+}
+
+
+.openTime-button {
+    border: 1px solid var(--color-primary-lighter);
+    width: 100%;
+    padding: var(--space-sm);
+    background-color: white;
+    
+}
+
+.openTime-button:hover {
+    background-color: var(--color-primary-lighter);
+    color: white;
+}
+
+.displayDates-container {
+    position: absolute;
+    padding: var(--space-sm);
+    min-width: 300px;
+    background-color: var(--background);
+    
+    
+}
+.grid-display{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+
+}
+
+.dateUI-container{
+    position: relative; 
+    padding: var(--space-sm);
+    border: 0.5px solid var(--color-border);
+    margin: var(--space-xxs);
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    
+    
+}
+.dateUI-container:hover{
+    background-color: var(--color-primary-lighter);
+    .day-month-text{
+        color: white;
+    }
+    .day-name-text{
+        color: white;
+    }
+    .remove-box{
+        color: white;
+    }
+    transform: scale(1.03);
+}
+.remove-box {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background: transparent;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    color: black
+  }
+
+.day-name-text{
+    font-size: small;
+    font-weight: var(--font-thin);
+}
+.day-month-text{
+    font-size: medium;
+    font-weight: var(--font-semibold);
+}
+

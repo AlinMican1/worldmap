@@ -1,5 +1,5 @@
 .time-container{
-    background-color: white;
+  
     padding: var(--space-md);
     min-width: 200px;
     max-width: 200px;
@@ -13,17 +13,39 @@
 .time-dropdown{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     overflow-y: scroll;
-    height: 250px;
+    height: 220px;
     width: auto;
     
 }
 .chooseTime-header{
     color: var(--foreground);
-    font-weight: var(--font-bold);
-    margin-bottom: var(--space-md);
-    
+    font-weight: var(--font-normal);
+    margin-bottom: var(--space-sm);
+    text-align: center;
+    width: 100%;
+}
+
+
+
+
+
+.buttons-row{
+    display: flex;
+    flex-direction: row;
+   justify-content: center;
+   width: 100%;
+   margin-bottom: var(--space-md);
 
 }
+.buttons-row > :nth-child(1) {
+  border-left: 1px solid var(--color-primary-lighter);
+  border-top: 1px solid var(--color-primary-lighter);
+  border-bottom: 1px solid var(--color-primary-lighter);
+}
+.buttons-row > :nth-child(2){
+    border-right: 1px solid var(--color-primary-lighter);
+  border-top: 1px solid var(--color-primary-lighter);
+  border-bottom: 1px solid var(--color-primary-lighter);
+  }
