@@ -1,5 +1,5 @@
 .dateTime-container {
-    border: 1px solid black;
+    
     margin-top: var(--space-sm);
     display: flex;
     flex-direction: column;
@@ -23,20 +23,39 @@
     background-color: white;
     
 }
+/* USED TO MAKE THIS RELATIVE TO ALIGN THE DISPLAYDATES-CONTAINER ON THE RIGHT -> REMOVE THIS WRAPPER
+AND LEFT AND BOTTOM FROM DISPLAYDATES-CONTAINER, IF U WANT TO PLACE IT UNDER. */
+.time-button-wrapper{
+    position: relative;
+}
 
 .openTime-button:hover {
     background-color: var(--color-primary-lighter);
     color: white;
 }
+.displayDates-arrow{
+    position: absolute;
+    bottom: -1;
+    left: -10px;
+    width:10px;
+    height: 20px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 6px solid black;
+}
+
 
 .displayDates-container {
     position: absolute;
     padding: var(--space-sm);
     min-width: 300px;
-    background-color: var(--background);
-    
-    
+    border: 1px solid var(--color-border);
+    background-color: white;
+    left: 100%; /* Positions it to the right of the button */
+    bottom: 0;
+    margin-left: var(--space-sm);
 }
+
 .grid-display{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
@@ -63,9 +82,14 @@
     .remove-box{
         color: white;
     }
-    transform: scale(1.03);
+    .hover-trash{
+        color: white;
+    }
+    
+    
+    /* transform: scale(1.03); */
 }
-.remove-box {
+.remove-date {
     position: absolute;
     bottom: 4px;
     right: 4px;
