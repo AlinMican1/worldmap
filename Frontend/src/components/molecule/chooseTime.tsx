@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import BoxDesign from "../atoms/boxDesign";
 import { CLOCKMAP } from "../../../helper/Constants";
 import "../../app/globals.css";
 import SelectBox from "../atoms/selectBox";
 import { useDateAndTimeContext } from "@/contexts";
 import "./chooseTime.css";
 import Modal from "../atoms/modal";
-import { getISODate } from "../../../helper/Formatter";
+import { getDayMonthYear, getISODate } from "../../../helper/Formatter";
+import Button from "../atoms/button";
 
 const ChooseTime = () => {
   const { dateArray, setTime, time, setDateAndTimeMap } = useDateAndTimeContext();
@@ -103,24 +103,41 @@ const ChooseTime = () => {
           )}
         >
           {(close) => (
-            <BoxDesign>
-              <h1>Confirm your choice</h1>
-              {dateArray.array.map((date, index) => (
-                <p key={index}>{date}</p>
-              ))}
-
-              <p>{time}</p>
+            <div className="modalTime-container">
+              <h1 className="modalTime-heading">Confirm your choice</h1>
               <div className="elements-row">
-                <button onClick={() => close()}>CLOSE</button>
-                <button
+                <div className="modalDates-container">
+                  {dateArray.array.map((date, index) => {
+                    const month = getISODate(date).toLocaleString("default", { month: "short" });
+                    const { day, year } = getDayMonthYear(date);
+                    return (
+                      <div className="modalDate-box">
+                        <p className="modalDate-text" key={index}>
+                          {day} - {month} - {year}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="modalTime-box">
+                  <p>{time}</p>
+                </div>
+              </div>
+              <div className="elements-row">
+                <Button variant="outline" onClick={() => close()}>
+                  Close
+                </Button>
+
+                <Button
+                  variant="outline"
                   onClick={() => {
                     (AddDateAndTimeToMap(), close(), dateArray.clear());
                   }}
                 >
                   Confirm
-                </button>
+                </Button>
               </div>
-            </BoxDesign>
+            </div>
           )}
         </Modal>
       ) : (

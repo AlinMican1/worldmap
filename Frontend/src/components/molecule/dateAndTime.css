@@ -21,6 +21,7 @@
     width: 100%;
     padding: var(--space-sm);
     background-color: white;
+    z-index: 0;
     
 }
 /* USED TO MAKE THIS RELATIVE TO ALIGN THE DISPLAYDATES-CONTAINER ON THE RIGHT -> REMOVE THIS WRAPPER
