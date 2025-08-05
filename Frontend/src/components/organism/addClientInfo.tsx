@@ -15,6 +15,7 @@ import ChooseTime from "../molecule/chooseTime";
 import { useCallback, useMemo, useState } from "react";
 import { DateAndTimeContext } from "@/contexts";
 import DateAndTimeDisplay from "../molecule/dateAndTimeDisplay";
+import Button from "../atoms/button";
 
 interface AddClientInfoProps {
   clients: ClientInfoProps[];
@@ -142,9 +143,10 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
               ? errorsHook.getErrorMsg("date")
               : ""
             : ""}
-          <button type="button" onClick={handleAddClients}>
+
+          {/* <button type="button" onClick={handleAddClients}>
             Add Client
-          </button>
+          </button> */}
         </form>
       </BoxDesign>
       <button type="submit" form="client-form">
