@@ -7,6 +7,9 @@ import "./chooseTime.css";
 import Modal from "../atoms/modal";
 import { getDayMonthYear, getISODate } from "../../../helper/Formatter";
 import Button from "../atoms/button";
+import BoxDesign from "../atoms/boxDesign";
+import ExitIcon from "../icons/exit";
+import ClockIcon from "../icons/clock";
 
 const ChooseTime = () => {
   const { dateArray, setTime, time, setDateAndTimeMap } = useDateAndTimeContext();
@@ -17,12 +20,11 @@ const ChooseTime = () => {
     return dates.sort((a, b) => getISODate(a).getTime() - getISODate(b).getTime());
   }, []);
 
-  useEffect(() => {
-    if (scrollTop.current) {
-      console.log("RAN");
-      scrollTop.current.scrollTo(0, 0);
-    }
-  }, [changeClockto24HR]);
+  // useEffect(() => {
+  //   if (scrollTop.current) {
+  //     scrollTop.current.scrollTo(0, 0);
+  //   }
+  // }, [changeClockto24HR]);
 
   const AddDateAndTimeToMap = () => {
     setDateAndTimeMap((prevMap) => {
@@ -50,7 +52,7 @@ const ChooseTime = () => {
       {dateArray.array.length ? (
         <Modal
           trigger={(open) => (
-            <div>
+            <BoxDesign variant="secondary-DesignBox" padding="none">
               <h3 className="chooseTime-header">Popular Times</h3>
               <div className="buttons-row">
                 <SelectBox
@@ -63,22 +65,8 @@ const ChooseTime = () => {
                   onClick={() => setChangeClockto24HR(true)}
                   className={`button-clock ${changeClockto24HR === true ? "active" : ""}`}
                 />
-                {/* <button
-                  className="button-clock"
-                  onClick={() => setChangeClockto24HR(!changeClockto24HR)}
-                >
-                  24Hrs
-                 
-                </button>
-                <button
-                  className="button-clock"
-                  onClick={() => setChangeClockto24HR(!changeClockto24HR)}
-                >
-                  12Hrs
-                  
-                </button> */}
               </div>
-              {/* Change to {changeClockto24HR ? "12Hr" : "24Hr"} clock */}
+
               <div className="time-dropdown">
                 <div>
                   {Array.from(CLOCKMAP.entries()).map(([key, value]) => {
@@ -87,57 +75,83 @@ const ChooseTime = () => {
 
                     return (
                       <div key={key}>
-                        <SelectBox
-                          name={timeValue}
-                          className="choose-time-slot"
+                        <Button
+                          variant="primary-btn"
                           onClick={() => {
                             (setTime(timeValue), open());
                           }}
-                        />
+                        >
+                          {timeValue}
+                        </Button>
+                        {/* <SelectBox
+                          name={timeValue}
+                          className="choose-time-slot"
+                         
+                        /> */}
                       </div>
                     );
                   })}
                 </div>
               </div>
-            </div>
+            </BoxDesign>
           )}
         >
           {(close) => (
-            <div className="modalTime-container">
+            <BoxDesign
+              padding="medium"
+              orientation="column"
+              centered="left"
+              variant="third-DesignBox"
+            >
               <h1 className="modalTime-heading">Confirm your choice</h1>
-              <div className="elements-row">
-                <div className="modalDates-container">
+
+              <BoxDesign padding="none">
+                <span className="modalTime-Text">
+                  {time}
+                  <ClockIcon className="" />
+                </span>
+              </BoxDesign>
+
+              <BoxDesign padding="none" orientation="row">
+                <div className="grid-display-time">
                   {dateArray.array.map((date, index) => {
                     const month = getISODate(date).toLocaleString("default", { month: "short" });
+                    const dayName = getISODate(date).toLocaleString("default", {
+                      weekday: "short",
+                    });
                     const { day, year } = getDayMonthYear(date);
                     return (
-                      <div className="modalDate-box">
-                        <p className="modalDate-text" key={index}>
-                          {day} - {month} - {year}
-                        </p>
-                      </div>
+                      <BoxDesign
+                        orientation="column"
+                        centered="left"
+                        variant="primary-DesignBox"
+                        padding="small"
+                        key={index}
+                      >
+                        <span>{dayName}</span>
+                        <div className="elements-row">
+                          {day} {month}
+                        </div>
+                      </BoxDesign>
                     );
                   })}
                 </div>
-                <div className="modalTime-box">
-                  <p>{time}</p>
-                </div>
-              </div>
-              <div className="elements-row">
-                <Button variant="outline" onClick={() => close()}>
-                  Close
-                </Button>
+              </BoxDesign>
 
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    (AddDateAndTimeToMap(), close(), dateArray.clear());
-                  }}
-                >
-                  Confirm
-                </Button>
+              <div className="close-btn-pos">
+                <button className="close-btn" onClick={() => close()}>
+                  <ExitIcon className={"exit-icon"} />
+                </button>
               </div>
-            </div>
+              <Button
+                variant="secondary-btn"
+                onClick={() => {
+                  (AddDateAndTimeToMap(), close(), dateArray.clear());
+                }}
+              >
+                Confirm
+              </Button>
+            </BoxDesign>
           )}
         </Modal>
       ) : (

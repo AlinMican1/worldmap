@@ -13,7 +13,11 @@ export const GetFormErrors = (
     { id: "location", errorMsg: "No location", error: false },
     { id: "location", errorMsg: "Location does not exist", error: false },
     { id: "time", errorMsg: "No time slot selected", error: false },
-    { id: "date", errorMsg: "No date selected", error: false },
+    {
+      id: "date",
+      errorMsg: "Your time schedule is currently empty. Please add at least one time slot.",
+      error: false,
+    },
   ];
 
   if (name.trim() === "") formErrors[0].error = true;
@@ -30,7 +34,13 @@ export const GetFormErrors = (
 
 export const NoClientsError = (clients?: ClientInfoProps[]): ErrorMessageProps[] => {
   if (!clients || clients.length === 0 || clients === undefined) {
-    return [{ id: "noClient", errorMsg: "No clients", error: true }];
+    return [
+      {
+        id: "noClient",
+        errorMsg: "No clients have been added. Please complete the form above to add a client.",
+        error: true,
+      },
+    ];
   }
   return [];
 };

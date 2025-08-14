@@ -16,21 +16,38 @@
     
 }
 
-.primary{
-    border: 0px;
+.primary-btn{
+    border: 0px solid;
     background-color: var(--color-primary-lighter);
     color: white;
+    padding: var(--space-sm);
+    width: 150px;
+    
 }
-.primary:hover{
+.primary-btn:hover{
     background-color: var(--color-primary);
+    color: white;
+    
 }
 
 
-.secondary{
-    background-color: red;
+.secondary-btn{
+    border: 1px solid var(--color-primary-lighter);
+    color: black;
+    margin: 0;
 }
 
-.outline{
+.secondary-btn:hover{
+    border: 1px solid var(--color-primary-lighter);
+    color: white;
+    background-color: var(--color-primary-lighter);
+}
+
+.third-btn{
+    border: 1px solid var(--color-border);
+
+}
+.outline-btn{
     border: 1px solid var(--color-primary-lighter);
     transition: background-color 0.3s ease, color 0.3s ease;
 

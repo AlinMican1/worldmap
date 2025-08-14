@@ -3,9 +3,26 @@ import "./boxDesign.css";
 
 interface BoxDesignProps {
   children: ReactNode | ReactNode[];
+  variant?:
+    | "primary-DesignBox"
+    | "secondary-DesignBox"
+    | "third-DesignBox"
+    | "fourth-DesignBox"
+    | "fifth-DesignBox";
+  padding?: "none" | "extra-small" | "small" | "medium" | "large";
+  centered?: "left" | "right";
+  orientation?: "row" | "column";
 }
 
-const BoxDesign = ({ children }: BoxDesignProps) => {
-  return <div className="box-wrapper">{children}</div>;
+const BoxDesign = ({
+  children,
+  variant,
+  centered,
+  padding = "small",
+  orientation = "column",
+}: BoxDesignProps) => {
+  return (
+    <div className={`box-wrapper ${variant} ${padding} ${orientation} ${centered}`}>{children}</div>
+  );
 };
 export default BoxDesign;

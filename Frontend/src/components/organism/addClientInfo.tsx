@@ -9,7 +9,6 @@ import { GetFormErrors } from "../../../helper/GetErrors";
 import useErrors from "@/hooks/useErrors";
 import useClientForm from "@/hooks/useClientForm";
 import CalendarBox from "../molecule/calendarBox";
-import ChooseDate from "../molecule/chooseDate";
 import useArray from "@/hooks/useArray";
 import ChooseTime from "../molecule/chooseTime";
 import { useCallback, useMemo, useState } from "react";
@@ -138,21 +137,28 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             </div>
             <DateAndTimeDisplay />
           </DateAndTimeContext.Provider>
-          {dateAndTimeMap.size === 0
-            ? errorsHook.getErrorBoolean("date")
-              ? errorsHook.getErrorMsg("date")
-              : ""
-            : ""}
-
-          {/* <button type="button" onClick={handleAddClients}>
-            Add Client
-          </button> */}
+          <BoxDesign padding="none" centered="left">
+            <Button type="button" onClick={handleAddClients} variant="secondary-btn">
+              Add Client
+            </Button>
+            {dateAndTimeMap.size === 0 && errorsHook.getErrorBoolean("date") ? (
+              <p className="error-msg">{errorsHook.getErrorMsg("date")}</p>
+            ) : (
+              ""
+            )}
+          </BoxDesign>
         </form>
       </BoxDesign>
-      <button type="submit" form="client-form">
-        Submit
-      </button>
-      {errorsHook.getErrorBoolean("noClient") ? errorsHook.getErrorMsg("noClient") : ""}
+      <BoxDesign padding="none" centered="left" variant="fifth-DesignBox">
+        <Button type="submit" form="client-form" variant="secondary-btn">
+          Submit All Clients
+        </Button>
+        {errorsHook.getErrorBoolean("noClient") ? (
+          <p className="error-msg">{errorsHook.getErrorMsg("noClient")}</p>
+        ) : (
+          ""
+        )}
+      </BoxDesign>
     </div>
   );
 };

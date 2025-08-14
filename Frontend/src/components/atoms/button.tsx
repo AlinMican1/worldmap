@@ -1,18 +1,14 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, forwardRef } from "react";
 import "./button.css";
-interface ButtonProps {
-  variant?: "primary" | "secondary" | "outline";
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary-btn" | "secondary-btn" | "third-btn" | "outline-btn";
   size?: "sm" | "md" | "lg";
-  onClick?: () => void;
-  children?: ReactNode;
 }
 
-const Button = ({ variant, size = "sm", onClick, children }: ButtonProps) => {
-  return (
-    <button type="button" className={`button-base ${variant} ${size}`} onClick={onClick}>
-      {children}
-    </button>
-  );
-};
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant, size = "sm", ...props }, ref) => {
+    return <button {...props} ref={ref} className={`button-base ${variant} ${size}`} />;
+  }
+);
 
 export default Button;
