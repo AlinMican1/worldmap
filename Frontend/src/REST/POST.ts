@@ -27,7 +27,16 @@ export const SubmitLocationForm = async (
 
 export const SubmitClientSchedule = async (clients?: ClientInfoProps[]) => {
   if (!clients || clients.length === 0) {
-    return { success: false, errors: [{ id: "noClient", errorMsg: "No clients", error: true }] };
+    return {
+      success: false,
+      errors: [
+        {
+          id: "noClient",
+          errorMsg: "No clients have been added. Please complete the form above to add a client.",
+          error: true,
+        },
+      ],
+    };
   }
   const apiURL = process.env.NEXT_PUBLIC_DEV_URL + "schedule";
   console.log("SS");

@@ -2,13 +2,15 @@
     /* Colors */
   --background: #f4f4f4;
   --foreground: #161616;
+  --color-dark: #262626;
   --color-primary: rgb(0, 66, 200);
   --color-primary-lighter: #0f62fe;
   --color-secondary: #161616;
   --color-third: #dcdcdc;
   --color-border: #646464;
   --color-hover: #cdcdcd;
-  --color-error: red;
+  --color-error: #db4437;
+  
   
   
   /* Spacing */
@@ -18,6 +20,7 @@
   --space-md: 16px;
   --space-lg: 24px;
   --space-xl: 32px;
+  --space-xxl: 64px;
 
   /* text Sizing */
   --text-xs: 0.75rem;    /* 12px */
@@ -158,4 +161,9 @@ span{
 
 .paragraph-xs{
   font-size: var(--text-xs);
+}
+
+.error-msg{
+  color: #db4437;
+  margin-top: var(--space-sm);
 }

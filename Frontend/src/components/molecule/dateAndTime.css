@@ -8,17 +8,33 @@
 }
 
 .timeAndDate-header {
-    color: var(--foreground);
     font-weight: var(--font-normal);
     margin-bottom: var(--space-sm);
-    text-align: center;
-    width: 100%;
+    
+}
+.arrowRight{
+    color: white;
+    font-size: var(--text-xs);
+    position: absolute;
+    right: 10px;
 }
 
+.button-content{
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm); 
+    font-size: var(--text-xxs);
+    font-weight: var(--font-normal);
+   
+}
+/* FOR ARROW HIGHLIGHT BLACK*/
+.primary-btn:hover .arrowRight {
+    color: white;
+  } 
 
 .openTime-button {
     border: 1px solid var(--color-primary-lighter);
-    width: 100%;
+    
     padding: var(--space-sm);
     background-color: white;
     z-index: 0;
@@ -50,16 +66,20 @@ AND LEFT AND BOTTOM FROM DISPLAYDATES-CONTAINER, IF U WANT TO PLACE IT UNDER. */
     position: absolute;
     padding: var(--space-sm);
     min-width: 300px;
+    
     border: 1px solid var(--color-border);
     background-color: white;
     left: 100%; /* Positions it to the right of the button */
     bottom: 0;
-    margin-left: var(--space-sm);
+    margin-left: 50px;
 }
 
 .grid-display{
+    max-height: 300px;
+    overflow: scroll;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    margin-bottom: var(--space-xs);
 
 }
 

@@ -1,13 +1,15 @@
 .time-container{
   
-    padding: var(--space-md);
-    min-width: 200px;
-    max-width: 200px;
+    /* padding: var(--space-md); */
+    width: 100%;
+    max-width: 600px;
     margin: var(--space-xxs);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+    
 }
 
 .time-dropdown{
@@ -15,14 +17,16 @@
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
-    height: 220px;
+    height: 222px;
     width: auto;
     
 }
+
 .chooseTime-header{
     color: var(--foreground);
     font-weight: var(--font-normal);
-    margin-bottom: var(--space-sm);
+    margin-top: 23px;
+    margin-bottom: var(--space-md);
     text-align: center;
     width: 100%;
 }
@@ -35,7 +39,7 @@
     flex-direction: row;
    justify-content: center;
    width: 100%;
-   margin-bottom: var(--space-md);
+   margin-bottom: var(--space-sm);
 
 }
 .buttons-row > :nth-child(1) {
@@ -50,42 +54,69 @@
   }
 
 
-.modalTime-container{
-    padding: var(--space-lg);
-    background-color: white;
-    padding: var(--space-lg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--color-border);
-}
+
 
 .modalTime-heading{
-    font-size: var(--text-xl);
+    font-size: var(--text-md);
+    margin-right: var(--space-xl);
 }
 
-.modalDates-container{
-    border: 1px solid var(--color-border);
-    padding: var(--space-xs);
-    max-height: 200px;
-    overflow-y: scroll;
-    margin: var(--space-md);
+
+
+    
+.modalTime-Text{
+    display: flex;
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    gap: var(--space-sm);
+}
+
+.close-btn-pos{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: var(--space-sm);
+    padding: 0px;
+}
+
+.close-btn{
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+
+.exit-icon {
+    width: clamp(18px, 2vw, 22px);
+    height: clamp(18px, 2vw, 22px);
+   
+  }
+
+
+.exit-icon:hover{
+    color: red;
     
 }
 
-.modalDate-box{
-    background-color: var(--color-primary-lighter);
-    
-    margin: var(--space-xxs);
-    padding: var(--space-xs);
 
+.grid-display-time{
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xs); /* spacing between items */
+   
+   max-height: 300px;
+   overflow: scroll;
+margin-bottom: var(--space-sm);
+margin-left: 0px;
+   
 }
-.modalDate-text{
-    color: white;
-    font-weight: var(--font-thin);
-    font-size: var(--text-sm);
-}
+.grid-display-time > * {
+    margin: 0;
+    box-sizing: border-box;
+  }
+
 
 .modalTime-box{
     display: flex;
@@ -96,4 +127,10 @@
     max-height: 200px;
     margin: var(--space-md);
     border: 1px solid var(--color-border);
+    background-color: var(--color-primary-lighter);
+    
+}
+.modalTime-box-time{
+    color:white
+
 }

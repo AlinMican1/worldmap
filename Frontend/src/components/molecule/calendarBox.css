@@ -1,5 +1,5 @@
 .calendar-container{
-    margin-top: var(--space-sm);
+    margin-top: var(--space-lg);
     
 }
 
@@ -8,8 +8,7 @@
     grid-template-columns: 1fr 200px 1fr;
     justify-content: space-between;
     color: var(--foreground);
-    
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
     
     
 }
