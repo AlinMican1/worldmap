@@ -1,8 +1,6 @@
-interface ExitIconProps {
-  className: string;
-}
+import { IconProps } from "@/types/interfaces";
 
-const ClockIcon = ({ className }: ExitIconProps) => {
+const ClockIcon = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

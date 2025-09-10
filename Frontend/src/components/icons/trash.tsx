@@ -1,8 +1,6 @@
-interface TrashIconProps {
-  className: string;
-}
+import { IconProps } from "@/types/interfaces";
 
-const TrashIcon = ({ className }: TrashIconProps) => {
+const TrashIcon = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

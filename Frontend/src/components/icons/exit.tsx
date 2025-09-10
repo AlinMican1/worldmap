@@ -1,8 +1,6 @@
-interface ExitIconProps {
-  className: string;
-}
+import { IconProps } from "@/types/interfaces";
 
-const ExitIcon = ({ className }: ExitIconProps) => {
+const ExitIcon = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

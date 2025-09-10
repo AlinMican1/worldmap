@@ -1,5 +1,6 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import "./modal.css";
+import ExitIcon from "../icons/exit";
 
 interface ModalProps {
   children: (close: () => void) => ReactNode;

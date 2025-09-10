@@ -9,16 +9,24 @@ export interface ErrorMessageProps {
 //   location: string;
 //   name: string;
 // }
-
+export interface IconProps {
+  className: string;
+}
 export interface ClientInfoProps {
-  name: string;
+  first_name: string;
   location: string;
   email: string;
-  dates: Map<string, string[]>;
+  surname: string;
+  // dates: Map<string, string[]>;
 }
 
 export interface ClientListProps {
   clients: ClientInfoProps[];
+}
+
+export interface AddClientInfoProps {
+  clients: ClientInfoProps[];
+  setClients: React.Dispatch<React.SetStateAction<ClientInfoProps[]>>;
 }
 
 export interface UseArrayProps<T> {

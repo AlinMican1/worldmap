@@ -14,8 +14,4 @@ def get_db():
         yield DataBase
     finally:
         DataBase.close()
-# try:
-#     with engine.connect() as connection:
-#         print("Database connection successful!")
-# except Exception as e:
-#     print("Database connection failed:", e)
+

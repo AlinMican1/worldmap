@@ -10,7 +10,7 @@ const ClientSchedule = () => {
   return (
     <div className="positional-center">
       <AddClientInfo clients={clients} setClients={setClients} />
-      <ClientList clients={clients} />
+      {/* <ClientList clients={clients} /> */}
     </div>
   );
 };

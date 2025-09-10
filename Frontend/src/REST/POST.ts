@@ -1,29 +1,29 @@
 import axios from "axios";
 import { GetFormErrors } from "../../helper/GetErrors";
-import { ClientInfoProps } from "@/types/interfaces";
+import { ClientInfoProps, ErrorMessageProps } from "@/types/interfaces";
 
-export const SubmitLocationForm = async (
-  emailRequired: boolean,
-  { location, email, name, dates }: ClientInfoProps
-) => {
-  const errorArray = GetFormErrors(emailRequired, { location, name, email, dates });
-  if (errorArray) {
-    return { success: false, errors: errorArray };
-  }
+// export const SubmitLocationForm = async (
+//   emailRequired: boolean,
+//   { location, email, name, dates }: ClientInfoProps
+// ) => {
+//   const errorArray = GetFormErrors(emailRequired, { location, name, email, dates });
+//   if (errorArray) {
+//     return { success: false, errors: errorArray };
+//   }
 
-  const apiURL = process.env.NEXT_PUBLIC_DEV_URL + "form";
+//   const apiURL = process.env.NEXT_PUBLIC_DEV_URL + "form";
 
-  try {
-    const res = await axios.post(apiURL, {
-      location,
-      email,
-      name,
-    });
-    return { success: true, message: res.data.message, errors: [] };
-  } catch (error) {
-    return { success: false, message: "Server Error", error: error, errors: [] };
-  }
-};
+//   try {
+//     const res = await axios.post(apiURL, {
+//       location,
+//       email,
+//       name,
+//     });
+//     return { success: true, message: res.data.message, errors: [] };
+//   } catch (error) {
+//     return { success: false, message: "Server Error", error: error, errors: [] };
+//   }
+// };
 
 export const SubmitClientSchedule = async (clients?: ClientInfoProps[]) => {
   if (!clients || clients.length === 0) {
@@ -59,4 +59,30 @@ export const SubmitClientSchedule = async (clients?: ClientInfoProps[]) => {
   } catch (error) {
     return { success: false, message: "Server Error", error, errors: [] };
   }
+};
+
+export const SubmitAddParticipant = async (client: ClientInfoProps) => {
+  console.log("SS2");
+  const { first_name, email, location, surname } = client;
+  const getAllErrors = await GetFormErrors(true, { first_name, email, location, surname });
+  const filteredErrors = getAllErrors.filter((err: ErrorMessageProps) => err.error === true);
+
+  if (filteredErrors.length > 0) {
+    return { success: false, errors: filteredErrors };
+  }
+  const apiURL = process.env.NEXT_PUBLIC_DEV_URL + "participant";
+
+  try {
+    const res = await axios.post(apiURL, {
+      location,
+      email,
+      first_name,
+      surname,
+      userId: "6efe07f7-cbf5-4481-8045-347ec1cf26b4",
+    });
+    return { success: true, message: res.data.message, errors: [] };
+  } catch (error) {
+    return { success: false, message: "Server Error", error: error, errors: [] };
+  }
+  //Check for errors first when submit
 };

@@ -1,7 +1,7 @@
 .box-wrapper{
     background-color: white;
     padding: var(--space-md);
-    width: fit-content;   
+    width: auto;   
     height: auto;
     margin: var(--space-xxs);
     display: flex;
@@ -10,9 +10,9 @@
     align-items: center;
     position: relative;
     color: black;
+    /* min-width: 50vw; */
     
 }
-
 
 .left{
     justify-content: flex-start;
@@ -76,4 +76,20 @@
 
 .fifth-DesignBox{
     background-color: transparent;
+}
+
+.sixth-DesignBox{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    
+}
+
+.seventh-DesignBox{
+    border: 0.5px solid var(--color-border-lighter);
+    border-radius: 5px;
+    width: auto;
+    position: relative;
+    
+}
+.seventh-DesignBox:hover{
+    background-color: aliceblue;
 }

@@ -11,4 +11,5 @@ class User(Base):
     name = Column(String, nullable=False)
     email= Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
-    forms = relationship("Form", back_populates="user")
+    # forms = relationship("Form", back_populates="user")
+    participants = relationship("Participant", back_populates="user")

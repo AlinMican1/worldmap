@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.routes import hello, time, form, schedule
+from app.routes import hello, time, form, schedule, participant
 from app.db.database import Base, engine
 from app.db.models.formModel import Form
 from app.db.models.userModel import User
+from app.db.models.participantModel import Participant
+
 
 
 app = FastAPI()
@@ -19,8 +21,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+
 # Routers
 app.include_router(hello.router)
 app.include_router(form.router)
 app.include_router(schedule.router)
+app.include_router(participant.router)
 # app.include_router(time.router)
