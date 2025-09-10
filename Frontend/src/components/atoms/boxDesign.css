@@ -1,12 +1,95 @@
 .box-wrapper{
     background-color: white;
     padding: var(--space-md);
-    width: auto;         
+    width: auto;   
     height: auto;
     margin: var(--space-xxs);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    color: black;
+    /* min-width: 50vw; */
     
+}
+
+.left{
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.right{
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.extra-small{
+    padding: var(--space-xxs);
+}
+
+.small{
+    padding: var(--space-sm);
+}
+.medium{
+    padding: var(--space-md);
+}
+.large{
+    padding: var(--space-lg);
+}
+
+.none{
+    padding: 0px;
+}
+.row{
+    flex-direction: row;
+}
+.column{
+    flex-direction: column;
+}
+
+.primary-DesignBox{
+    border: 0.5px solid var(--color-border);
+    
+ }
+ .primary-DesignBox:hover{
+     background-color: var(--color-primary-lighter);
+     color: white;
+ }
+
+.secondary-DesignBox{
+    background-color: var(--color-primary-dark);
+    color:white;
+    
+}
+.third-DesignBox{
+    border-top-right-radius: 10px;
+}
+
+
+.fourth-DesignBox{
+    margin-top: var(--space-sm);
+    min-width: 300px;
+    margin: 0px;
+    margin-top: var(--space-md);
+    margin-bottom   : var(--space-lg)
+}
+
+.fifth-DesignBox{
+    background-color: transparent;
+}
+
+.sixth-DesignBox{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    
+}
+
+.seventh-DesignBox{
+    border: 0.5px solid var(--color-border-lighter);
+    border-radius: 5px;
+    width: auto;
+    position: relative;
+    
+}
+.seventh-DesignBox:hover{
+    background-color: aliceblue;
 }

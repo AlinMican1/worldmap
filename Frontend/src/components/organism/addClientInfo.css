@@ -1,0 +1,9 @@
+.title-icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle; /* or text-bottom, sub, etc. */
+    position: relative;
+    top: 2px; /* Adjust this value to move it up/down */
+  }
+
+  

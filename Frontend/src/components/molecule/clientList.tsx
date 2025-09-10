@@ -2,22 +2,44 @@
 import BoxDesign from "../atoms/boxDesign";
 import "./clientList.css";
 import "../../app/globals.css";
-import { ClientListProps } from "@/types/interfaces";
+import { AddClientInfoProps, ClientInfoProps, ClientListProps } from "@/types/interfaces";
+import UserPfp from "../atoms/userPfp";
+import Button from "../atoms/button";
+import SelectedParticipants from "./selectedParticipants";
+import useArray from "@/hooks/useArray";
 
-const ClientList = ({ clients }: ClientListProps) => {
+const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
+  const selectedParticipants = useArray<ClientInfoProps>([]);
+  const handleSelectedParticipants = (participant: ClientInfoProps) => {
+    selectedParticipants.push(participant);
+    setClients(clients.filter((client) => client !== participant));
+    console.log(selectedParticipants.array);
+  };
+
   return (
     <div className="wrapper">
+      <SelectedParticipants participants={selectedParticipants.array} />
       {clients.map((client, key) => (
-        <BoxDesign key={key + 1}>
-          <div className="elements-row">
-            <div className="user-pfp"></div>
-            <div className="elements-columns">
-              <h3 className="client-name">{client.name}</h3>
-              <p>{client.email}</p>
+        <div key={key + 1}>
+          <BoxDesign variant="seventh-DesignBox" centered="left">
+            <div className="elements-row">
+              <UserPfp name={client.first_name} />
+              <div className="elements-column-no-gap">
+                <div className="elements-row">
+                  <h3 className="client-name">{client.first_name.slice(0, 15)} </h3>
+                  <p className="email-title"> • {client.email}</p>
+                </div>
+
+                <p className="location-title">{client.location}</p>
+              </div>
+              <div className="button-position">
+                <Button variant="fourth-btn" onClick={() => handleSelectedParticipants(client)}>
+                  ADD
+                </Button>
+              </div>
             </div>
-          </div>
-          <p>time</p>
-        </BoxDesign>
+          </BoxDesign>
+        </div>
       ))}
     </div>
   );

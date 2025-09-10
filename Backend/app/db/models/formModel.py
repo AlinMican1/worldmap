@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from app.db.database import Base 
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
+from app.db.models.userModel import User
 
 class Form(Base):
     __tablename__ = 'forms'
@@ -13,5 +14,5 @@ class Form(Base):
     location = Column(String, nullable=False)   
     dates = Column(JSON, nullable= False)
 
-    userId = Column(ForeignKey("users.id"))
-    user = relationship("User", back_populates="forms")
+    # userId = Column(ForeignKey("users.id"))
+    # user = relationship("User", back_populates="forms")

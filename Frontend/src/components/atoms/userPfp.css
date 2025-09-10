@@ -1,0 +1,15 @@
+.pfp-wrapper{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #2265ec 0%, #6a9af2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+.pfp-title {
+    color: white;
+    font-weight: var(--font-bold);
+}
