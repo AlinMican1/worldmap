@@ -15,6 +15,7 @@
 
 .button-wrapper-1:hover{
     background-color: var(--color-hover);
+    
 }
 
 .turnDownOpacity {
@@ -24,6 +25,7 @@
 .button-wrapper-1.selected{
     background-color: var(--color-primary-lighter);
     border: 0.5px solid var(--color-primary-lighter);
+    color: white
     
 }
 
@@ -39,7 +41,7 @@
 }
 
 .choose-time-slot{
-    background-color: var(--background);
+    background-color: white;
     border: 0px;
     min-width: 0px;
     width:130px;
@@ -47,10 +49,31 @@
     justify-content: center;
     padding: var(--space-sm);
     margin: var(--space-xxs);
-    border: 0.5px solid var(--color-border)
+    border: 1px solid var(--color-primary-lighter);
+    
     
     
 }
 .choose-time-slot:hover{
-    background-color: var(--color-hover);
+    background-color: var(--color-primary-lighter);
+    color: white
+    
 }
+
+.button-clock{
+    border: 0px;
+    width: 100%;
+    padding: var(--space-sm);
+    background-color: white;
+}
+
+.button-clock:hover{
+    background-color: var(--color-hover);
+    
+}
+
+.button-clock.active {
+    background-color: var(--color-primary-lighter);
+    color: white;
+   
+  }

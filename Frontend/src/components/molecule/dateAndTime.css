@@ -1,0 +1,132 @@
+.dateTime-container {
+    
+    margin-top: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    
+}
+
+.timeAndDate-header {
+    font-weight: var(--font-normal);
+    margin-bottom: var(--space-sm);
+    
+}
+.arrowRight{
+    color: white;
+    font-size: var(--text-xs);
+    position: absolute;
+    right: 10px;
+}
+
+.button-content{
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm); 
+    font-size: var(--text-xxs);
+    font-weight: var(--font-normal);
+   
+}
+/* FOR ARROW HIGHLIGHT BLACK*/
+.primary-btn:hover .arrowRight {
+    color: white;
+  } 
+
+.openTime-button {
+    border: 1px solid var(--color-primary-lighter);
+    
+    padding: var(--space-sm);
+    background-color: white;
+    z-index: 0;
+    
+}
+/* USED TO MAKE THIS RELATIVE TO ALIGN THE DISPLAYDATES-CONTAINER ON THE RIGHT -> REMOVE THIS WRAPPER
+AND LEFT AND BOTTOM FROM DISPLAYDATES-CONTAINER, IF U WANT TO PLACE IT UNDER. */
+.time-button-wrapper{
+    position: relative;
+}
+
+.openTime-button:hover {
+    background-color: var(--color-primary-lighter);
+    color: white;
+}
+.displayDates-arrow{
+    position: absolute;
+    bottom: -1;
+    left: -10px;
+    width:10px;
+    height: 20px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 6px solid black;
+}
+
+
+.displayDates-container {
+    position: absolute;
+    padding: var(--space-sm);
+    min-width: 300px;
+    
+    border: 1px solid var(--color-border);
+    background-color: white;
+    left: 100%; /* Positions it to the right of the button */
+    bottom: 0;
+    margin-left: 50px;
+}
+
+.grid-display{
+    max-height: 300px;
+    overflow: scroll;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    margin-bottom: var(--space-xs);
+
+}
+
+.dateUI-container{
+    position: relative; 
+    padding: var(--space-sm);
+    border: 0.5px solid var(--color-border);
+    margin: var(--space-xxs);
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    
+    
+}
+.dateUI-container:hover{
+    background-color: var(--color-primary-lighter);
+    .day-month-text{
+        color: white;
+    }
+    .day-name-text{
+        color: white;
+    }
+    .remove-box{
+        color: white;
+    }
+    .hover-trash{
+        color: white;
+    }
+    
+    
+    /* transform: scale(1.03); */
+}
+.remove-date {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background: transparent;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    color: black
+  }
+
+.day-name-text{
+    font-size: small;
+    font-weight: var(--font-thin);
+}
+.day-month-text{
+    font-size: medium;
+    font-weight: var(--font-semibold);
+}
+

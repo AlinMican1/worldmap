@@ -3,25 +3,33 @@ import { COUNTRIES } from "./SuggestLocation";
 
 export const GetFormErrors = (
   emailRequired: boolean,
-  { location, email, name, dates }: ClientInfoProps
+  { location, email, first_name, surname /*dates*/ }: ClientInfoProps
 ): ErrorMessageProps[] => {
   const formErrors: ErrorMessageProps[] = [
     { id: "name", errorMsg: "No name", error: false },
     { id: "name", errorMsg: "Name too long", error: false },
+    { id: "surname", errorMsg: "No surname", error: false },
+    { id: "surname", errorMsg: "Surname too long", error: false },
     { id: "email", errorMsg: "No email", error: false },
     { id: "email", errorMsg: "Email does not exist", error: false },
     { id: "location", errorMsg: "No location", error: false },
     { id: "location", errorMsg: "Location does not exist", error: false },
     { id: "time", errorMsg: "No time slot selected", error: false },
-    { id: "date", errorMsg: "No date selected", error: false },
+    {
+      id: "date",
+      errorMsg: "Your time schedule is currently empty. Please add at least one time slot.",
+      error: false,
+    },
   ];
 
-  if (name.trim() === "") formErrors[0].error = true;
-  if (name.length > 50) formErrors[1].error = true;
-  if (email.trim() === "" && emailRequired) formErrors[2].error = true;
-  if (location.trim() === "") formErrors[4].error = true;
-  if (!COUNTRIES.includes(location)) formErrors[5].error = true;
-  if (dates.size === 0) formErrors[7].error = true;
+  if (first_name.trim() === "") formErrors[0].error = true;
+  if (first_name.length > 50) formErrors[1].error = true;
+  if (surname.trim() === "") formErrors[2].error = true;
+  if (surname.length > 50) formErrors[3].error = true;
+  if (email.trim() === "" && emailRequired) formErrors[4].error = true;
+  if (location.trim() === "") formErrors[6].error = true;
+  if (!COUNTRIES.includes(location)) formErrors[7].error = true;
+  // if (dates.size === 0) formErrors[7].error = true;
   // if (dates.array.length === 0) formErrors[7].error = true;
 
   //formErrors.map((err: ErrorMessageProps) => err.error === true);
@@ -30,7 +38,13 @@ export const GetFormErrors = (
 
 export const NoClientsError = (clients?: ClientInfoProps[]): ErrorMessageProps[] => {
   if (!clients || clients.length === 0 || clients === undefined) {
-    return [{ id: "noClient", errorMsg: "No clients", error: true }];
+    return [
+      {
+        id: "noClient",
+        errorMsg: "No clients have been added. Please complete the form above to add a client.",
+        error: true,
+      },
+    ];
   }
   return [];
 };
