@@ -1,8 +1,5 @@
-interface ExitIconProps {
-  className: string;
-}
-
-const ArrowRightIcon = ({ className }: ExitIconProps) => {
+import { IconProps } from "@/types/interfaces";
+const ArrowRightIcon = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

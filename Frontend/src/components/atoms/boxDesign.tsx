@@ -8,7 +8,9 @@ interface BoxDesignProps {
     | "secondary-DesignBox"
     | "third-DesignBox"
     | "fourth-DesignBox"
-    | "fifth-DesignBox";
+    | "fifth-DesignBox"
+    | "sixth-DesignBox"
+    | "seventh-DesignBox";
   padding?: "none" | "extra-small" | "small" | "medium" | "large";
   centered?: "left" | "right";
   orientation?: "row" | "column";

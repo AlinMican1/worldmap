@@ -3,11 +3,12 @@
   --background: #f4f4f4;
   --foreground: #161616;
   --color-dark: #262626;
-  --color-primary: rgb(0, 66, 200);
+  --color-primary: #0042c8;
   --color-primary-lighter: #0f62fe;
   --color-secondary: #161616;
   --color-third: #dcdcdc;
   --color-border: #646464;
+  --color-border-lighter: #999999;
   --color-hover: #cdcdcd;
   --color-error: #db4437;
   
@@ -158,6 +159,12 @@ span{
   flex-direction: column;
   gap: var(--space-sm);
 }
+
+.elements-column-no-gap{
+    
+  flex-direction: column;
+  display: flex;
+  }
 
 .paragraph-xs{
   font-size: var(--text-xs);

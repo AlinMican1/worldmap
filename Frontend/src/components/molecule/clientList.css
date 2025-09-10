@@ -4,22 +4,52 @@
     border-radius: 50%;
     background-color: black;
 }
+.wrapper{
+    height: 30vw;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs)
+}
+
+
+
 .client-name{
-    width: 10vw;
-    background-color: violet;
+    width: auto;
     font-family: var(--font-heading);
     color: var(--foreground);
-    font-weight: 100;
+    font-weight: var(--font-medium);
 
 
 }
-.wrapper{
-
-    height: 30vw;
-    width: auto;
-    overflow: hidden;
+.button-position{
+    position: absolute;
+    right: 10px;
+    display: flex;
+    
+    height: 43px;
+    
+    justify-content: center;
+    align-items: center;
 }
+
+
 .wrapper:hover{
     overflow-y: scroll;
     
+}
+
+.location-title{
+    color: rgb(74, 74, 74);
+    font-size: var(--text-sm);
+    font-weight: var(--font-light);
+}
+.email-title{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    color: rgb(0, 0, 0);
+    font-size: var(--text-sm);
+    font-weight: var(--font-normal);
 }
