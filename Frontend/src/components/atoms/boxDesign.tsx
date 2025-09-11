@@ -10,7 +10,8 @@ interface BoxDesignProps {
     | "fourth-DesignBox"
     | "fifth-DesignBox"
     | "sixth-DesignBox"
-    | "seventh-DesignBox";
+    | "seventh-DesignBox"
+    | "eight-DesignBox";
   padding?: "none" | "extra-small" | "small" | "medium" | "large";
   centered?: "left" | "right";
   orientation?: "row" | "column";

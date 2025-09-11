@@ -2,26 +2,32 @@ import { ClientInfoProps } from "@/types/interfaces";
 import "../../app/globals.css";
 import "./selectedParticipant.css";
 import Button from "../atoms/button";
+import UserPfp from "../atoms/userPfp";
+import BoxDesign from "../atoms/boxDesign";
 interface SelectedParticipantsProps {
   participants: ClientInfoProps[];
 }
 
 const SelectedParticipants = ({ participants }: SelectedParticipantsProps) => {
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <h3>Selected ({participants.length})</h3>
-      <div className="participants-box">
+
+      <BoxDesign variant="eight-DesignBox" centered="left">
+        {/* <div className="participants-box"> */}
         {participants.map((participant: ClientInfoProps, index: number) => (
           <div key={index} className="participant-wrapper">
             <div className="elements-row">
-              <p className="elements-row">
-                {participant.first_name} {participant.surname}
-              </p>
-              <Button variant="primary-btn">X</Button>
+              <UserPfp name={participant.first_name} />
+              <p>{participant.first_name}</p>
+              <p>{participant.surname}</p>
+
+              <Button variant="secondary-btn">X</Button>
             </div>
           </div>
         ))}
-      </div>
+        {/* </div> */}
+      </BoxDesign>
     </div>
   );
 };

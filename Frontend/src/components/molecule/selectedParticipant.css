@@ -1,12 +1,21 @@
-.participant-wrapper{
+.participant-wrapper {
     border-radius: 5px;
-    padding: var(--space-xxs);
+    padding: var(--space-xs);
     border: 1px solid var(--color-primary-lighter);
+    flex-shrink: 0; /* Prevent shrinking */
+    max-width: 100%; /* Don't exceed container width */
+    box-sizing: border-box;
+  }
 
-}
 .participants-box{
+    margin-top: var(--space-md);
     display: flex;
     flex-direction: row;
-    width: 400px;
-    overflow-x: scroll;
+    flex-wrap: wrap;        /* ⬅️ allows children to wrap to next line */
+    width: 100%;
+    
+    height: auto;
+    gap: var(--space-xs);
+    border: 1px solid black;
 }
+
