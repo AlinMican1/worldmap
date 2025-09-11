@@ -40,18 +40,23 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
 
   useEffect(() => {
     const loadData = async () => {
-      const response = await GetParticipants("6efe07f7-cbf5-4481-8045-347ec1cf26b4");
-      response.forEach((person: ClientInfoProps) => {
-        setClients((oldArray) => [
-          ...oldArray,
-          {
-            first_name: person.first_name,
-            email: person.email,
-            location: person.location,
-            surname: person.surname,
-          },
-        ]);
-      });
+      try {
+        const response = await GetParticipants("6efe07f7-cbf5-4481-8045-347ec1cf26b4");
+        if (!response) {
+          return;
+        }
+        response.forEach((person: ClientInfoProps) => {
+          setClients((oldArray) => [
+            ...oldArray,
+            {
+              first_name: person.first_name,
+              email: person.email,
+              location: person.location,
+              surname: person.surname,
+            },
+          ]);
+        });
+      } catch (error) {}
     };
     loadData();
   }, []);
