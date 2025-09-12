@@ -54,6 +54,12 @@
     border: 0.5px solid var(--color-primary-lighter);
 }
 
+.fifth-btn{
+    border: 0px solid;
+    padding: 0px;
+    
+}
+
 .fourth-btn:hover{
     background-color: var(--color-primary-lighter);
     color: white;

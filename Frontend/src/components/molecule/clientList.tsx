@@ -7,6 +7,7 @@ import UserPfp from "../atoms/userPfp";
 import Button from "../atoms/button";
 import SelectedParticipants from "./selectedParticipants";
 import useArray from "@/hooks/useArray";
+import PlusIcon from "../icons/plus";
 
 const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
   const selectedParticipants = useArray<ClientInfoProps>([]);
@@ -23,10 +24,12 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
         <div key={key + 1}>
           <BoxDesign variant="seventh-DesignBox" centered="left">
             <div className="elements-row">
-              <UserPfp name={client.first_name} />
+              <UserPfp name={client.first_name} size="userPfp-big" />
               <div className="elements-column-no-gap">
                 <div className="elements-row">
-                  <h3 className="client-name">{client.first_name.slice(0, 15)} </h3>
+                  <h3 className="client-name">
+                    {client.first_name.slice(0, 15)} {client.surname}{" "}
+                  </h3>
                   <p className="email-title"> • {client.email}</p>
                 </div>
 
@@ -34,7 +37,7 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
               </div>
               <div className="button-position">
                 <Button variant="fourth-btn" onClick={() => handleSelectedParticipants(client)}>
-                  ADD
+                  <PlusIcon className="" />
                 </Button>
               </div>
             </div>
