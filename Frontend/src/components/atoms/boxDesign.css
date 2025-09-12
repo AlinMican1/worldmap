@@ -101,6 +101,7 @@
     width: 100%;
     box-sizing: border-box;
     flex-direction: row;
-    max-width: 100%; /* Prevent expansion beyond parent */
+    border: 1px solid black;
     overflow: hidden; /* Contain children */
   }
+

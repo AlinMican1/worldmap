@@ -4,13 +4,14 @@ import "./selectedParticipant.css";
 import Button from "../atoms/button";
 import UserPfp from "../atoms/userPfp";
 import BoxDesign from "../atoms/boxDesign";
+import RemoveIcon from "../icons/remove";
 interface SelectedParticipantsProps {
   participants: ClientInfoProps[];
 }
 
 const SelectedParticipants = ({ participants }: SelectedParticipantsProps) => {
   return (
-    <div style={{ width: "100%" }}>
+    <div>
       <h3>Selected ({participants.length})</h3>
 
       <BoxDesign variant="eight-DesignBox" centered="left">
@@ -18,11 +19,15 @@ const SelectedParticipants = ({ participants }: SelectedParticipantsProps) => {
         {participants.map((participant: ClientInfoProps, index: number) => (
           <div key={index} className="participant-wrapper">
             <div className="elements-row">
-              <UserPfp name={participant.first_name} />
+              <UserPfp name={participant.first_name} size="userPfp-small" />
               <p>{participant.first_name}</p>
               <p>{participant.surname}</p>
-
-              <Button variant="secondary-btn">X</Button>
+              <div className="remove-btn-pos">
+                <Button variant="fifth-btn">
+                  {" "}
+                  <RemoveIcon className={"exit-icon"} />
+                </Button>
+              </div>
             </div>
           </div>
         ))}
