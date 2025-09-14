@@ -1,25 +1,22 @@
 .participant-wrapper {
     border-radius: 15px;
     padding: var(--space-xs);
-    border: 1px solid var(--color-primary-lighter);
+    /* border: 1px solid var(--color-primary-lighter); */
     background: linear-gradient(to right, #71b3f4 0%,   #99badd 100%);;
     position: relative;
     width: auto;
-    
-    
-  }
-
-.participants-box{
-    margin-top: var(--space-md);
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;        /* ⬅️ allows children to wrap to next line */
-    width: 100%;
-    height: auto;
-    gap: var(--space-xs);
-    border: 1px solid black;
-}
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 5px;
+  }
+
 
 .remove-btn-pos{
+
   display: flex;
+  margin-top: var(--space-xs);
 }
+

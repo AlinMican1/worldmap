@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
+import { HTMLAttributes, ReactNode, forwardRef } from "react";
 import "./boxDesign.css";
 
-interface BoxDesignProps {
+interface BoxDesignProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode | ReactNode[];
   variant?:
     | "primary-DesignBox"
@@ -17,15 +17,18 @@ interface BoxDesignProps {
   orientation?: "row" | "column";
 }
 
-const BoxDesign = ({
-  children,
-  variant,
-  centered,
-  padding = "small",
-  orientation = "column",
-}: BoxDesignProps) => {
-  return (
-    <div className={`box-wrapper ${variant} ${padding} ${orientation} ${centered}`}>{children}</div>
-  );
-};
+const BoxDesign = forwardRef<HTMLDivElement, BoxDesignProps>(
+  ({ children, variant, centered, padding = "small", orientation = "column", ...props }, ref) => {
+    return (
+      <div
+        ref={ref} // ✅ attach the ref here
+        className={`box-wrapper ${variant} ${padding} ${orientation} ${centered}`}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
 export default BoxDesign;
