@@ -11,7 +11,7 @@ import useClientForm from "@/hooks/useClientForm";
 import CalendarBox from "../molecule/calendarBox";
 import useArray from "@/hooks/useArray";
 import ChooseTime from "../molecule/chooseTime";
-import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { DateAndTimeContext } from "@/contexts";
 import DateAndTimeDisplay from "../molecule/dateAndTimeDisplay";
 import Button from "../atoms/button";
@@ -23,6 +23,7 @@ import ArrowRightIcon from "../icons/arrowRight";
 import ExitIcon from "../icons/exit";
 import ClientList from "../molecule/clientList";
 import { GetParticipants } from "@/REST/GET";
+import SelectedParticipants from "../molecule/selectedParticipants";
 
 const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   //Custom hooks
@@ -37,6 +38,15 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   const dateArray = useArray<string>([]);
   const [time, setTime] = useState<string>("");
   const [dateAndTimeMap, setDateAndTimeMap] = useState<Map<string, string[]>>(new Map());
+
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [parentWidth, setParentWidth] = useState(0);
+  //Get current width box for SelectedParticipants box.
+  useEffect(() => {
+    if (boxRef.current) {
+      setParentWidth(boxRef.current.clientWidth);
+    }
+  }, []);
 
   useEffect(() => {
     const loadData = async () => {
@@ -97,18 +107,6 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     }
   };
 
-  // useEffect(() => {
-  //   setClients((oldArray) => [
-  //     ...oldArray,
-  //     {
-  //       first_name: "zz",
-  //       email: "mmm@mm.com",
-  //       location: "United Kingdom",
-  //       surname: "VV",
-  //     },
-  //   ]);
-  // }, []);
-
   const handleAddClients = async (e: React.MouseEvent<HTMLButtonElement>, close: () => void) => {
     e.preventDefault();
 
@@ -127,24 +125,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       form.resetFormData();
       errorsHook.clearErrors();
       close();
-      console.log(response);
     }
-    // Add the dates into the clientForm so that we can get errors.
-    // const readyFormData = {
-    //   ...form.formData,
-    //   // dates: new Map(dateAndTimeMap),
-    // };
-    // const getErrors = await GetFormErrors(true, readyFormData);
-    // const filteredErrors = getErrors.filter((err: ErrorMessageProps) => err.error === true);
-    // if (filteredErrors.length > 0) {
-    //   errorsHook.setErrors(filteredErrors);
-    // } else {
-    //   form.resetFormData();
-    //   errorsHook.clearErrors();
-    //   setClients((oldArray) => [...oldArray, readyFormData]);
-    //   dateAndTimeMap.clear();
-    //   close();
-    // }
   };
 
   return (
@@ -169,13 +150,20 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
           </DateAndTimeContext.Provider>
         </BoxDesign>
 
-        <BoxDesign centered="left" variant="sixth-DesignBox">
+        <BoxDesign centered="left" variant="sixth-DesignBox" ref={boxRef}>
           <Title
             title="Select Participants"
             variant="secondary"
             icon={<UsersIcon className="title-icon" />}
           />
+
+          <SelectedParticipants
+            clients={clients}
+            setClients={setClients}
+            parentWidth={parentWidth}
+          />
           <ClientList clients={clients} setClients={setClients} />
+
           <Modal
             trigger={(open) => (
               <Button onClick={open}>
@@ -246,39 +234,6 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
               </BoxDesign>
             )}
           </Modal>
-
-          {/* <div className="elements-row">
-            <InputField
-              autocomplete="off"
-              type="text"
-              name="name"
-              label="Person's Name"
-              value={form.formData.name}
-              id="name"
-              onChange={form.handleChange}
-              placeholder="Enter Client Name"
-              error={errorsHook.getErrorBoolean("name")}
-              errorMsg={errorsHook.getErrorMsg("name")}
-            />
-            <InputField
-              autocomplete="off"
-              type="text"
-              name="email"
-              label="Person's Email"
-              value={form.formData.email}
-              id="email"
-              onChange={form.handleChange}
-              placeholder="Enter Client Email"
-              error={errorsHook.getErrorBoolean("email")}
-              errorMsg={errorsHook.getErrorMsg("email")}
-            />
-          </div>
-          <EnterLocation
-            location={form.formData.location}
-            setLocation={setLocation}
-            errorMsg={errorsHook.getErrorMsg("location")}
-            error={errorsHook.getErrorBoolean("location")}
-          /> */}
         </BoxDesign>
       </form>
       {/* <BoxDesign>

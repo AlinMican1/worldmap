@@ -1,5 +1,4 @@
 .pfp-wrapper{
-   
     border-radius: 50%;
     background: linear-gradient(to right, #2265ec 0%, #6a9af2 100%);
     display: flex;
@@ -11,6 +10,10 @@
 .pfp-title {
     color: white;
     font-weight: var(--font-bold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 .userPfp-big{
     width: 40px;
