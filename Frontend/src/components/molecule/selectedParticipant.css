@@ -1,12 +1,21 @@
-.participant-wrapper{
-    border-radius: 5px;
-    padding: var(--space-xxs);
-    border: 1px solid var(--color-primary-lighter);
-
-}
-.participants-box{
+.participant-wrapper {
+    border-radius: 15px;
+    padding: var(--space-xs);
+    /* border: 1px solid var(--color-primary-lighter); */
+    background: linear-gradient(to right, #71b3f4 0%,   #99badd 100%);;
+    position: relative;
+    width: auto;
     display: flex;
     flex-direction: row;
-    width: 400px;
-    overflow-x: scroll;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+
+.remove-btn-pos{
+  display: flex;
+  margin-top: var(--space-xs);
 }
+

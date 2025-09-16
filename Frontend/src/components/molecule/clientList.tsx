@@ -2,46 +2,43 @@
 import BoxDesign from "../atoms/boxDesign";
 import "./clientList.css";
 import "../../app/globals.css";
-import { AddClientInfoProps, ClientInfoProps, ClientListProps } from "@/types/interfaces";
+import { AddClientInfoProps, ClientInfoProps } from "@/types/interfaces";
 import UserPfp from "../atoms/userPfp";
 import Button from "../atoms/button";
-import SelectedParticipants from "./selectedParticipants";
-import useArray from "@/hooks/useArray";
-
+import PlusIcon from "../icons/plus";
+import { memo } from "react";
 const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
-  const selectedParticipants = useArray<ClientInfoProps>([]);
+  console.log("CLIENTS LIST RENDERED");
   const handleSelectedParticipants = (participant: ClientInfoProps) => {
-    selectedParticipants.push(participant);
-    setClients(clients.filter((client) => client !== participant));
-    console.log(selectedParticipants.array);
+    setClients((old) => old.map((c) => (c === participant ? { ...c, selected: !c.selected } : c)));
   };
 
   return (
     <div className="wrapper">
-      <SelectedParticipants participants={selectedParticipants.array} />
-      {clients.map((client, key) => (
-        <div key={key + 1}>
-          <BoxDesign variant="seventh-DesignBox" centered="left">
+      {clients
+        .filter((c) => !c.selected)
+        .map((client, key) => (
+          <BoxDesign key={key} variant="seventh-DesignBox" centered="left">
             <div className="elements-row">
-              <UserPfp name={client.first_name} />
+              <UserPfp name={client.first_name} size="userPfp-big" />
               <div className="elements-column-no-gap">
                 <div className="elements-row">
-                  <h3 className="client-name">{client.first_name.slice(0, 15)} </h3>
+                  <h3 className="client-name">
+                    {client.first_name} {client.surname}
+                  </h3>
                   <p className="email-title"> • {client.email}</p>
                 </div>
-
                 <p className="location-title">{client.location}</p>
               </div>
               <div className="button-position">
                 <Button variant="fourth-btn" onClick={() => handleSelectedParticipants(client)}>
-                  ADD
+                  <PlusIcon />
                 </Button>
               </div>
             </div>
           </BoxDesign>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };
-export default ClientList;
+export default memo(ClientList);

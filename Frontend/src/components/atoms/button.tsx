@@ -1,7 +1,14 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import "./button.css";
+import { memo } from "react";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary-btn" | "secondary-btn" | "third-btn" | "fourth-btn" | "outline-btn";
+  variant?:
+    | "primary-btn"
+    | "secondary-btn"
+    | "third-btn"
+    | "fourth-btn"
+    | "fifth-btn"
+    | "outline-btn";
   size?: "sm" | "md" | "lg";
 }
 
@@ -11,4 +18,4 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-export default Button;
+export default memo(Button);

@@ -93,3 +93,16 @@
 .seventh-DesignBox:hover{
     background-color: aliceblue;
 }
+
+.eight-DesignBox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    width: 100%;
+    box-sizing: border-box;
+    flex-direction: row;
+    overflow: hidden; /* Contain children */
+   
+
+  }
+
