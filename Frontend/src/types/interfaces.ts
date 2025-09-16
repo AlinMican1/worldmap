@@ -10,13 +10,14 @@ export interface ErrorMessageProps {
 //   name: string;
 // }
 export interface IconProps {
-  className: string;
+  className?: string;
 }
 export interface ClientInfoProps {
   first_name: string;
   location: string;
   email: string;
   surname: string;
+  selected?: boolean;
   // dates: Map<string, string[]>;
 }
 

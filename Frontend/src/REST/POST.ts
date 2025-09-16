@@ -62,7 +62,6 @@ export const SubmitClientSchedule = async (clients?: ClientInfoProps[]) => {
 };
 
 export const SubmitAddParticipant = async (client: ClientInfoProps) => {
-  console.log("SS2");
   const { first_name, email, location, surname } = client;
   const getAllErrors = await GetFormErrors(true, { first_name, email, location, surname });
   const filteredErrors = getAllErrors.filter((err: ErrorMessageProps) => err.error === true);
