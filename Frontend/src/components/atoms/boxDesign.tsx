@@ -21,7 +21,7 @@ const BoxDesign = forwardRef<HTMLDivElement, BoxDesignProps>(
   ({ children, variant, centered, padding = "small", orientation = "column", ...props }, ref) => {
     return (
       <div
-        ref={ref} // ✅ attach the ref here
+        ref={ref}
         className={`box-wrapper ${variant} ${padding} ${orientation} ${centered}`}
         {...props}
       >

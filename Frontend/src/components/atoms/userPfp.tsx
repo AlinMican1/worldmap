@@ -1,4 +1,5 @@
 import "./userPfp.css";
+import { memo } from "react";
 interface UserPfpProps {
   name: string;
   size: "userPfp-small" | "userPfp-big";
@@ -12,4 +13,4 @@ const UserPfp = ({ name, size }: UserPfpProps) => {
   );
 };
 
-export default UserPfp;
+export default memo(UserPfp);

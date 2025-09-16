@@ -5,18 +5,12 @@ import Button from "../atoms/button";
 import UserPfp from "../atoms/userPfp";
 import BoxDesign from "../atoms/boxDesign";
 import RemoveIcon from "../icons/remove";
-import { useEffect } from "react";
-
+import { memo } from "react";
 interface SelectedParticipantsProps extends AddClientInfoProps {
   parentWidth: number;
 }
 
 const SelectedParticipants = ({ clients, setClients, parentWidth }: SelectedParticipantsProps) => {
-  // const getParentWidth = document.getElementById("test");
-  // useEffect(() => {
-  //   console.log(getParentWidth?.clientWidth);
-  // }, []);
-
   const handleRemoveParticipant = (participant: ClientInfoProps) => {
     setClients((old) => old.map((c) => (c === participant ? { ...c, selected: false } : c)));
   };
@@ -54,4 +48,4 @@ const SelectedParticipants = ({ clients, setClients, parentWidth }: SelectedPart
     </div>
   );
 };
-export default SelectedParticipants;
+export default memo(SelectedParticipants);

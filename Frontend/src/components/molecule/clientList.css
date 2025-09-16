@@ -10,11 +10,13 @@
 
 
 .client-name{
-    width: auto;
+    max-width: 12rem; 
     font-family: var(--font-heading);
     color: var(--foreground);
     font-weight: var(--font-medium);
-
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 }
 .button-position{
@@ -39,11 +41,17 @@
     font-size: var(--text-sm);
     font-weight: var(--font-light);
 }
-.email-title{
-    display: flex;
-    justify-content:center;
-    align-items:center;
+.email-title {
+    max-width: 15rem;
+    display: inline-block;
     color: rgb(0, 0, 0);
     font-size: var(--text-sm);
     font-weight: var(--font-normal);
-}
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  
+    position: relative;
+    top:3.5px
+    
+  }

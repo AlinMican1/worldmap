@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import "./button.css";
+import { memo } from "react";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?:
     | "primary-btn"
@@ -17,4 +18,4 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-export default Button;
+export default memo(Button);
