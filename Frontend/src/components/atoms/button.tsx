@@ -8,7 +8,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | "third-btn"
     | "fourth-btn"
     | "fifth-btn"
-    | "outline-btn";
+    | "outline-btn"
+    | "nav-btn";
   size?: "sm" | "md" | "lg";
 }
 

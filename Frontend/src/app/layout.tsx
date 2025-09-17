@@ -62,8 +62,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${ibmPlexSans.className} ${ibmPlexSans.variable}`}>
       <body>
-        {children}
         <Navbar></Navbar>
+        {children}
       </body>
     </html>
   );
