@@ -4,6 +4,8 @@ import "./navbar.css";
 import BoxDesign from "../atoms/boxDesign";
 import Button from "../atoms/button";
 import { useEffect, useState } from "react";
+import CalendarIcon from "../icons/calendar";
+import DashboardIcon from "../icons/dashboard";
 import Link from "next/link";
 const Navbar = () => {
   const pathname = usePathname();
@@ -18,13 +20,19 @@ const Navbar = () => {
         <BoxDesign variant="secondary-DesignBox" centered="left" orientation="column">
           <p>NAVIGATION</p>
           <Link href="/" passHref>
-            <button className={pathname === "/" ? "active" : ""}>Home</button>
+            <Button variant="nav-btn" className={pathname === "/" ? "active" : ""}>
+              <div className="btn-items">
+                <DashboardIcon />
+                Dashboard
+              </div>
+            </Button>
           </Link>
 
           <Link href="/schedule" passHref>
-            <Button variant={pathname === "/schedule" ? "nav-btn" : "nav-btn"}>
-              <div className="elements-column">
-                Schedule Meeting <p>Create a schedule</p>
+            <Button variant="nav-btn" className={pathname === "/schedule" ? "active" : ""}>
+              <div className="btn-items">
+                <CalendarIcon />
+                Schedule Meeting
               </div>
             </Button>
           </Link>
