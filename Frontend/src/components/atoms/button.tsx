@@ -10,7 +10,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | "fifth-btn"
     | "outline-btn"
     | "nav-btn"
-    | "nav-btn.active";
+    | "nav-btn.active"
+    | "log-out-btn";
   size?: "sm" | "md" | "lg";
   className?: string;
 }

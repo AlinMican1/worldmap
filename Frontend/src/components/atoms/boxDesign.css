@@ -10,6 +10,7 @@
     align-items: center;
     position: relative;
     color: black;
+    
     /* min-width: 50vw; */
     
 }
@@ -106,6 +107,3 @@
 
   }
 
-.active{
-    background-color: red;
-}

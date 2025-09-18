@@ -7,6 +7,16 @@
     position: fixed;
     z-index: 1000; 
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+}
+.bottom-buttons{
+    display: flex;
+    flex-direction: row;
+    margin-top: 60vh;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    
 }
 
 .btn-items{
@@ -17,4 +27,14 @@
     gap: 5px;
     justify-content: flex-start;
     
+}
+
+.navbar-subTitle{
+    color: grey;
+    font-size: var(--text-xs);
+    padding: var(--space-sm);
+}
+
+.logout-symbol{
+    color:white;
 }
