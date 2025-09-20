@@ -29,7 +29,11 @@ const SelectedParticipants = ({ clients, setClients, parentWidth }: SelectedPart
               .filter((p) => p.selected)
               .map((participant, key) => (
                 <div key={key} className="participant-wrapper">
-                  <UserPfp name={participant.first_name} size="userPfp-small" />
+                  <UserPfp
+                    surname={participant.surname}
+                    name={participant.first_name}
+                    size="userPfp-small"
+                  />
                   <p>{participant.first_name}</p>
                   <p>{participant.surname}</p>
                   <div className="remove-btn-pos">

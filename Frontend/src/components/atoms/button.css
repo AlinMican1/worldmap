@@ -79,8 +79,14 @@
     padding: var(--space-sm);
     border: 0px;
     width: 15vw;
-    min-width: 15vw;
+    min-width: 200px;
     transition: transform 0.1s ease;
+    font-size: var(--text-sm);
+    color: black;
+    align-items: center;
+    gap: var(--space-sm);
+    display: flex;
+    
 }
 .nav-btn:hover{
     transform: scale(1.05);

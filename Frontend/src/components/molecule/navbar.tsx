@@ -9,6 +9,7 @@ import DashboardIcon from "../icons/dashboard";
 import Link from "next/link";
 import LogoutIcon from "../icons/logout";
 import SettingsIcon from "../icons/settings";
+import CurrentTime from "../atoms/currentTime";
 const Navbar = () => {
   const pathname = usePathname();
 
@@ -21,7 +22,7 @@ const Navbar = () => {
         <h1>GLOBAL MEET</h1>
         <BoxDesign variant="secondary-DesignBox" centered="left" orientation="column">
           <p className="navbar-subTitle">NAVIGATION</p>
-          <Link href="/" passHref>
+          {/* <Link href="/" passHref>
             <Button variant="nav-btn" className={pathname === "/" ? "active" : ""}>
               <div className="btn-items">
                 <DashboardIcon />
@@ -37,8 +38,21 @@ const Navbar = () => {
                 Schedule Meeting
               </div>
             </Button>
+          </Link> */}
+          <Link href="/" className={`button-base nav-btn ${pathname === "/" ? "active" : ""}`}>
+            <DashboardIcon />
+            Dashboard
+          </Link>
+          <Link
+            href="/schedule"
+            className={`button-base nav-btn ${pathname === "/schedule" ? "active" : ""}`}
+          >
+            <CalendarIcon />
+            Schedule Meeting
           </Link>
 
+          <p className="navbar-subTitle">QUICK STATS</p>
+          <CurrentTime />
           <div className="bottom-buttons">
             <Link href="/" passHref>
               <Button variant="log-out-btn" className={pathname === "/" ? "active" : ""}>
