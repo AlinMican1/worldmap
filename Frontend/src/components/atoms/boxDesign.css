@@ -107,3 +107,8 @@
 
   }
 
+.showTime-DesignBox{
+    border-radius: 5px;
+    border: 1px solid var(--color-primary-lighter);
+    background: linear-gradient(to right, #2265ec 0%, #6a9af2 100%);
+}

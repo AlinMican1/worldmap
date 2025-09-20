@@ -12,7 +12,7 @@
 .bottom-buttons{
     display: flex;
     flex-direction: row;
-    margin-top: 60vh;
+    margin-top: 50vh;
     justify-content: space-between;
     align-items: center;
     width: 90%;
