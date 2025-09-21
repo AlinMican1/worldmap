@@ -12,7 +12,8 @@
 .button-base{
     border: 1px solid var(--color-border);
     background-color: transparent;
-    margin: var(--space-xxs)
+    margin: var(--space-xxs);
+    border-radius: 5px;
     
 }
 
@@ -72,4 +73,36 @@
 .outline:hover{
     background-color: var(--color-primary-lighter);
     color: white;
+}
+
+.nav-btn{
+    padding: var(--space-sm);
+    border: 0px;
+    width: 15vw;
+    min-width: 200px;
+    transition: transform 0.1s ease;
+    font-size: var(--text-sm);
+    color: black;
+    align-items: center;
+    gap: var(--space-sm);
+    display: flex;
+    
+}
+.nav-btn:hover{
+    transform: scale(1.05);
+   
+}
+.nav-btn.active{
+    background-color: rgb(255, 245, 245);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+}
+
+.log-out-btn{
+    background-color: red;
+    color: white;
+    width: 10vw;
+    justify-content: space-between;
+    display: flex;
+   
 }

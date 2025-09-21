@@ -9,6 +9,7 @@ import PlusIcon from "../icons/plus";
 import { memo } from "react";
 const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
   console.log("CLIENTS LIST RENDERED");
+
   const handleSelectedParticipants = (participant: ClientInfoProps) => {
     setClients((old) => old.map((c) => (c === participant ? { ...c, selected: !c.selected } : c)));
   };
@@ -20,7 +21,7 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
         .map((client, key) => (
           <BoxDesign key={key} variant="seventh-DesignBox" centered="left">
             <div className="elements-row">
-              <UserPfp name={client.first_name} size="userPfp-big" />
+              <UserPfp name={client.first_name} surname={client.surname} size="userPfp-big" />
               <div className="elements-column-no-gap">
                 <div className="elements-row">
                   <h3 className="client-name">
