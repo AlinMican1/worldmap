@@ -1,6 +1,6 @@
 import { IconProps } from "@/types/interfaces";
 
-const ClockIcon = ({ className }: IconProps) => {
+const LogoutIcon = ({ className }: IconProps) => {
   return (
     <svg
       className={className}
@@ -11,7 +11,7 @@ const ClockIcon = ({ className }: IconProps) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M12 7V12H15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+        d="M14 20H6C4.89543 20 4 19.1046 4 18L4 6C4 4.89543 4.89543 4 6 4H14M10 12H21M21 12L18 15M21 12L18 9"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
@@ -20,4 +20,4 @@ const ClockIcon = ({ className }: IconProps) => {
     </svg>
   );
 };
-export default ClockIcon;
+export default LogoutIcon;

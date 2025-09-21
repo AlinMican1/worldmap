@@ -11,7 +11,8 @@ interface BoxDesignProps extends HTMLAttributes<HTMLDivElement> {
     | "fifth-DesignBox"
     | "sixth-DesignBox"
     | "seventh-DesignBox"
-    | "eight-DesignBox";
+    | "eight-DesignBox"
+    | "showTime-DesignBox";
   padding?: "none" | "extra-small" | "small" | "medium" | "large";
   centered?: "left" | "right";
   orientation?: "row" | "column";

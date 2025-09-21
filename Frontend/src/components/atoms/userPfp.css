@@ -6,10 +6,12 @@
     align-items: center;
     text-align: center;
     color: white;
+    border: 1px solid var(--color-primary-lighter);
 }
 .pfp-title {
     color: white;
     font-weight: var(--font-bold);
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,10 +20,11 @@
 .userPfp-big{
     width: 40px;
     height: 40px;
+    font-size: var(--text-lg);
     
 }
 .userPfp-small{
     width: 25px;
     height: 25px;
-    font-size: var(--text-md);
+    font-size: var(--text-xs);
 }
