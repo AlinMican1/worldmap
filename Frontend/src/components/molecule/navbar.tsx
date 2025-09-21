@@ -17,12 +17,12 @@ const Navbar = () => {
 
   return (
     <>
-      {/* {pathname !== "/something" && ( */}
-      <div className="navbar-container">
-        <h1>GLOBAL MEET</h1>
-        <BoxDesign variant="secondary-DesignBox" centered="left" orientation="column">
-          <p className="navbar-subTitle">NAVIGATION</p>
-          {/* <Link href="/" passHref>
+      {pathname !== "/login" && (
+        <div className="navbar-container">
+          <h1>GLOBAL MEET</h1>
+          <BoxDesign variant="secondary-DesignBox" centered="left" orientation="column">
+            <p className="navbar-subTitle">NAVIGATION</p>
+            {/* <Link href="/" passHref>
             <Button variant="nav-btn" className={pathname === "/" ? "active" : ""}>
               <div className="btn-items">
                 <DashboardIcon />
@@ -39,40 +39,40 @@ const Navbar = () => {
               </div>
             </Button>
           </Link> */}
-          <Link href="/" className={`button-base nav-btn ${pathname === "/" ? "active" : ""}`}>
-            <DashboardIcon />
-            Dashboard
-          </Link>
-          <Link
-            href="/schedule"
-            className={`button-base nav-btn ${pathname === "/schedule" ? "active" : ""}`}
-          >
-            <CalendarIcon />
-            Schedule Meeting
-          </Link>
+            <Link href="/" className={`button-base nav-btn ${pathname === "/" ? "active" : ""}`}>
+              <DashboardIcon />
+              Dashboard
+            </Link>
+            <Link
+              href="/schedule"
+              className={`button-base nav-btn ${pathname === "/schedule" ? "active" : ""}`}
+            >
+              <CalendarIcon />
+              Schedule Meeting
+            </Link>
 
-          <p className="navbar-subTitle">QUICK STATS</p>
-          <CurrentTime />
-          <div className="bottom-buttons">
-            <Link href="/" passHref>
-              <Button variant="log-out-btn" className={pathname === "/" ? "active" : ""}>
-                <div className="btn-items">
-                  <LogoutIcon className="logout-symbol" />
-                  Sign Out
-                </div>
-              </Button>
-            </Link>
-            <Link href="/" passHref>
-              <Button variant="fifth-btn" className={pathname === "/" ? "active" : ""}>
-                <div className="btn-items">
-                  <SettingsIcon />
-                </div>
-              </Button>
-            </Link>
-          </div>
-        </BoxDesign>
-      </div>
-      {/* )} */}
+            <p className="navbar-subTitle">QUICK STATS</p>
+            <CurrentTime />
+            <div className="bottom-buttons">
+              <Link href="/" passHref>
+                <Button variant="log-out-btn" className={pathname === "/" ? "active" : ""}>
+                  <div className="btn-items">
+                    <LogoutIcon className="logout-symbol" />
+                    Sign Out
+                  </div>
+                </Button>
+              </Link>
+              <Link href="/" passHref>
+                <Button variant="fifth-btn" className={pathname === "/" ? "active" : ""}>
+                  <div className="btn-items">
+                    <SettingsIcon />
+                  </div>
+                </Button>
+              </Link>
+            </div>
+          </BoxDesign>
+        </div>
+      )}
     </>
   );
 };

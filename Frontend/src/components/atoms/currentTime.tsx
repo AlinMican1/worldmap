@@ -33,6 +33,5 @@ const CurrentTime = () => {
     </BoxDesign>
   );
 };
-// THERES A BUG WITH THE PARTICIPANTS< WHEN changing page through navbar and go back it loads it twice
-// ANOTHER BUG WITH USERPFP, it changes username on it
+
 export default CurrentTime;

@@ -106,3 +106,18 @@
     display: flex;
    
 }
+
+.sign-in-btn{
+    border: 0px solid;
+    background-color: var(--color-primary-lighter);
+    color: white;
+    padding: var(--space-sm);
+    width: 100%;
+    font-size: var(--text-sm);
+    font-weight: var(--font-md);
+}
+
+.sign-in-btn:hover{
+    background-color: var(--color-primary);
+   
+}

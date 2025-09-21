@@ -1,0 +1,61 @@
+.test{
+    background-color: red;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+}
+.forgot-Password{
+    color: var(--color-primary-lighter);
+    font-size: var(--text-sm);
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+.forgot-Password:hover{
+    text-decoration: underline;
+    color: blue;
+    
+}
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* space between checkbox and text */
+    cursor: pointer;
+  }
+  
+  
+  .checkbox {
+    cursor: pointer;
+    width: 4px;
+    min-width: 0px;
+    align-items: center;
+    display: flex;
+    
+  }
+
+.signIn-Title{
+    font-weight: var(--font-bold);
+
+}
+.signIn-subTitle{
+    font-weight: var(--font-thin);
+    color: rgb(128, 127, 127);
+}
+
+
+
+.register-account{
+    margin-top: var(--space-lg);
+    font-weight: var(--font-thin);
+    font-size: var(--text-sm);
+}
+.register-link{
+    color: var(--color-primary-lighter);
+    
+}
+.register-link:hover{
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
