@@ -20,7 +20,12 @@ const Navbar = () => {
       {pathname !== "/login" && (
         <div className="navbar-container">
           <h1>GLOBAL MEET</h1>
-          <BoxDesign variant="secondary-DesignBox" centered="left" orientation="column">
+          <BoxDesign
+            variant="secondary-DesignBox"
+            centeredX="leftX"
+            centeredY="leftY"
+            orientation="column"
+          >
             <p className="navbar-subTitle">NAVIGATION</p>
             {/* <Link href="/" passHref>
             <Button variant="nav-btn" className={pathname === "/" ? "active" : ""}>

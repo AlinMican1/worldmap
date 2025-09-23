@@ -7,6 +7,7 @@ import { useState } from "react";
 import BoxDesign from "../atoms/boxDesign";
 import "./loginForm.css";
 import Link from "next/link";
+import GlobeUI from "../atoms/globe";
 const LoginForm = () => {
   const loginCredentials = useClientForm({
     email: "",
@@ -18,9 +19,10 @@ const LoginForm = () => {
   function handleLoginSubmit() {}
   return (
     <div className="test">
-      <BoxDesign variant="sixth-DesignBox" padding="medium">
+      <BoxDesign centeredX="leftX" variant="sixth-DesignBox" padding="medium">
         <h1 className="signIn-Title">Sign in </h1>
         <p className="signIn-subTitle">Enter your credentials to continue</p>
+
         <form onSubmit={handleLoginSubmit}>
           <InputField
             autocomplete="off"
@@ -47,10 +49,12 @@ const LoginForm = () => {
             errorMsg={errorsHook.getErrorMsg("name")}
           />
         </form>
-        <BoxDesign orientation="row" padding="small">
-          <div className="remember-me">
+        <BoxDesign className="remember-forgot-wrapper">
+          <div className="remember-me-wrapper">
             <input type="checkbox" id="remember" className="checkbox" />
-            <label htmlFor="remember">Remember me</label>
+            <label htmlFor="remember" className="remember-label">
+              Remember me
+            </label>
           </div>
           <Link href="/" className="forgot-Password">
             Forgot Password?
@@ -59,13 +63,31 @@ const LoginForm = () => {
         <Button type="submit" variant="sign-in-btn">
           Sign In
         </Button>
-        <p className="register-account">
-          Don't have an account?{" "}
-          <Link className="register-link" href="/register">
-            Register
-          </Link>
-        </p>
+        <div className="line-with-text">
+          <span className="span-SignUp">OR Sign Up</span>
+        </div>
+        <BoxDesign
+          orientation="row"
+          padding="small"
+          variant="fullwidth-DesignBox"
+          centeredX="middleX"
+        >
+          <Button>Google</Button>
+          <Button>Facebook</Button>
+        </BoxDesign>
+        <BoxDesign padding="none" variant="fullwidth-DesignBox" centeredX="middleX">
+          <p className="register-account">
+            Don't have an account?{" "}
+            <Link className="register-link" href="/register">
+              Register
+            </Link>
+          </p>
+        </BoxDesign>
       </BoxDesign>
+      <div className="globe-wrapper">
+        {/* <h1>SyncMeet</h1> */}
+        <GlobeUI />
+      </div>
     </div>
   );
 };

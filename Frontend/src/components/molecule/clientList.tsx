@@ -19,7 +19,7 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
       {clients
         .filter((c) => !c.selected)
         .map((client, key) => (
-          <BoxDesign key={key} variant="seventh-DesignBox" centered="left">
+          <BoxDesign key={key} variant="seventh-DesignBox" centeredX="leftX" centeredY="leftY">
             <div className="elements-row">
               <UserPfp name={client.first_name} surname={client.surname} size="userPfp-big" />
               <div className="elements-column-no-gap">

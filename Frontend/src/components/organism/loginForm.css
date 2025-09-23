@@ -1,10 +1,13 @@
 .test{
-    background-color: red;
+    /* background-color: var(--foreground); */
+
     width: 100vw;
     height: 100vh;
     display: flex;
     margin: 0px;
     padding: 0px;
+    display: flex;
+    flex-direction: row;
 }
 .forgot-Password{
     color: var(--color-primary-lighter);
@@ -17,33 +20,32 @@
     color: blue;
     
 }
-.remember-me {
+.remember-label{
+    font-size: var(--text-sm);
+}
+.remember-me-wrapper{
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 8px; /* space between checkbox and text */
-    cursor: pointer;
-  }
-  
-  
-  .checkbox {
-    cursor: pointer;
-    width: 4px;
+   
+}
+.checkbox{
     min-width: 0px;
-    align-items: center;
-    display: flex;
-    
-  }
+    width: var(--space-lg);
+    cursor: pointer;
+
+}
+
 
 .signIn-Title{
     font-weight: var(--font-bold);
-
+    
 }
 .signIn-subTitle{
     font-weight: var(--font-thin);
     color: rgb(128, 127, 127);
+    margin-top: var(--space-xs);
 }
-
-
 
 .register-account{
     margin-top: var(--space-lg);
@@ -59,3 +61,41 @@
     text-decoration: underline;
 }
 
+.line-with-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000; /* text color */
+    margin: 10px 0;
+    width: 100%;
+  }
+  
+  .line-with-text::before,
+  .line-with-text::after {
+    content: "";
+    
+    border-bottom: 1px solid #000000; /* line color */
+    flex: 1;
+  }
+.span-SignUp{
+    font-weight: var(--font-normal);
+    font-size: var(--text-sm);
+}
+.remember-forgot-wrapper{
+    
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-xs);
+    
+}
+.mm{
+    align-content: flex-start;
+}
+
+.globe-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
