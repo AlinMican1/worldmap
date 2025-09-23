@@ -52,39 +52,43 @@
 // export default GlobeUI;
 
 import createGlobe from "cobe";
-import { useEffect, useRef, useState } from "react";
+import { HTMLAttributes, ReactNode, forwardRef, useEffect, useRef, useState } from "react";
 
-const GlobeUI = () => {
+interface GlobeUIProps extends HTMLAttributes<HTMLDivElement> {
+  width: number;
+  height: number;
+}
+
+const GlobeUI = ({ width, height }: GlobeUIProps) => {
+  console.log(width, height);
   const canvasRef = useRef<any>("");
-  const [size, setSize] = useState({ width: 0, height: 0 });
+  const [dimension, setDimension] = useState({
+    widthX: width,
+    heightY: height,
+  });
   useEffect(() => {
-    // Run only on client
-    setSize({ width: window.innerWidth, height: window.innerHeight });
-
-    const handleResize = () => {
-      setSize({ width: window.innerWidth, height: window.innerHeight });
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    setDimension({
+      widthX: width,
+      heightY: height,
+    });
+  }, [width, height]);
   useEffect(() => {
     let phi = 0;
 
     const globe = createGlobe(canvasRef.current, {
       devicePixelRatio: 2,
-      width: 600 * 2,
-      height: 600 * 2,
+      width: 900 * 2,
+      height: 900 * 2,
       phi: 0,
       theta: 0,
-      dark: 1,
+      dark: 0,
       diffuse: 1.2,
       mapSamples: 68000,
       mapBrightness: 6,
-      baseColor: [0.3, 0.3, 0.3],
+      baseColor: [0.1, 0.2, 0.7],
       markerColor: [0.1, 0.8, 1],
       glowColor: [1, 1, 1],
-      offset: [0, 0],
+      offset: [dimension.widthX * 1.3, dimension.heightY * 1.3],
       markers: [
         // longitude latitude
         { location: [37.7595, -122.4367], size: 0.03 },
@@ -103,17 +107,15 @@ const GlobeUI = () => {
     };
   }, []);
   return (
-    <div>
-      <canvas
-        ref={canvasRef}
-        style={{
-          width: size.width - 500,
-          height: size.height,
-          maxWidth: "100%",
-          aspectRatio: 1,
-        }}
-      />
-    </div>
+    <canvas
+      ref={canvasRef}
+      style={{
+        width: "100vw",
+        height: "100vh",
+        maxWidth: "100%",
+        aspectRatio: 1,
+      }}
+    />
   );
 };
 export default GlobeUI;

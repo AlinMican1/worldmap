@@ -3,7 +3,7 @@ import useClientForm from "@/hooks/useClientForm";
 import Button from "../atoms/button";
 import { InputField } from "../atoms/inputField";
 import useErrors from "@/hooks/useErrors";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BoxDesign from "../atoms/boxDesign";
 import "./loginForm.css";
 import Link from "next/link";
@@ -15,7 +15,16 @@ const LoginForm = () => {
   });
 
   const errorsHook = useErrors();
+  const dimensionRef = useRef<HTMLDivElement>(null);
 
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (dimensionRef.current) {
+      const { width, height } = dimensionRef.current.getBoundingClientRect();
+      setSize({ width, height });
+    }
+  }, []);
   function handleLoginSubmit() {}
   return (
     <div className="test">
@@ -84,9 +93,9 @@ const LoginForm = () => {
           </p>
         </BoxDesign>
       </BoxDesign>
-      <div className="globe-wrapper">
-        {/* <h1>SyncMeet</h1> */}
-        <GlobeUI />
+      <div ref={dimensionRef} className="globe-wrapper">
+        <h1>SyncMeet</h1>
+        {size.width > 0 && size.height > 0 && <GlobeUI width={size.width} height={size.height} />}
       </div>
     </div>
   );
