@@ -52,9 +52,9 @@
 // export default GlobeUI;
 
 import createGlobe from "cobe";
-import { HTMLAttributes, ReactNode, forwardRef, useEffect, useRef, useState } from "react";
+import { HTMLAttributes, useEffect, useRef, useState } from "react";
 import { GetGeoLocation } from "../../../helper/GetLocation";
-
+import { GetGeoInfo } from "../../../helper/GetLocation";
 interface GlobeUIProps extends HTMLAttributes<HTMLDivElement> {
   width: number;
   height: number;
@@ -113,7 +113,7 @@ const GlobeUI = ({ width, height }: GlobeUIProps) => {
         // Called on every animation frame.
         // `state` will be an empty object, return updated params.
         state.phi = phi;
-        phi += 0.01 * 0.5;
+        phi += 0.01 * 0.2;
       },
     });
 

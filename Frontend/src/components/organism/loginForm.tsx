@@ -14,6 +14,17 @@ import { GetGeoInfo } from "../../../helper/GetLocation";
 
 const LoginForm = () => {
   console.log(GetGeoInfo(true));
+  const [geoData, setGeoData] = useState({
+    country_name: "",
+    timezone: "",
+  });
+  useEffect(() => {
+    (async () => {
+      const data = await GetGeoInfo(true);
+      setGeoData({ country_name: data.countryName, timezone: data.timeZone });
+    })();
+  }, []);
+
   const loginCredentials = useClientForm({
     email: "",
     password: "",
@@ -107,6 +118,10 @@ const LoginForm = () => {
           <p className="globe-subTitle">
             Arrange a meeting anywhere in the world with the click of a few buttons
           </p>
+          <div>
+            <h1>{geoData.country_name}</h1>
+            <h1>{geoData.timezone}</h1>
+          </div>
           <CurrentTime />
         </div>
         <div>

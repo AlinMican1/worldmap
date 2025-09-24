@@ -29,21 +29,37 @@ export const GetGeoLocation = async (allow: boolean): Promise<[number, number]> 
   });
 };
 
-export const GetGeoInfo = async (allow: boolean) => {
+interface GeoInfoProps {
+  countryName: string;
+  timeZone: string;
+  latitude: number;
+  longitude: number;
+}
+
+export const GetGeoInfo = async (allow: boolean): Promise<GeoInfoProps> => {
   if (!allow) {
-    return "";
+    return {
+      countryName: "Austrlia",
+      timeZone: "12",
+      latitude: 37.7595,
+      longitude: -122.4367,
+    };
   }
 
   try {
-    const response = await axios.get("https://ipapi.co/json/");
+    const response = await axios.get(process.env.NEXT_PUBLIC_GEO_INFO_API as string);
     return {
-      "Country name": response.data.country_name,
-      TimeZone: response.data.timezone,
+      countryName: response.data.country_name,
+      timeZone: response.data.timezone,
+      latitude: response.data.latitude,
+      longitude: response.data.longitude,
     };
   } catch (error) {
     return {
-      "Country name": "Austrlia",
-      TimeZone: "12",
+      countryName: "Austrlia",
+      timeZone: "12",
+      latitude: 37.7595,
+      longitude: -122.4367,
     };
   }
 };
