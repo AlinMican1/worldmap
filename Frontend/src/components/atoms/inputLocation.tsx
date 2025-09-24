@@ -2,7 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import { SuggestLocation } from "../../../helper/SuggestLocation";
-import { GetLocationTime } from "../../../helper/GetLocationTime";
+import { GetLocationTime } from "../../../helper/GetLocation";
 
 const InputLocation = () => {
   const [allLocations, setAllLocations] = useState<Array<string>>([]);

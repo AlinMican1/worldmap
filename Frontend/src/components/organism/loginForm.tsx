@@ -8,7 +8,12 @@ import BoxDesign from "../atoms/boxDesign";
 import "./loginForm.css";
 import Link from "next/link";
 import GlobeUI from "../atoms/globe";
+import Title from "../atoms/title";
+import CurrentTime from "../atoms/currentTime";
+import { GetGeoInfo } from "../../../helper/GetLocation";
+
 const LoginForm = () => {
+  console.log(GetGeoInfo(true));
   const loginCredentials = useClientForm({
     email: "",
     password: "",
@@ -25,6 +30,7 @@ const LoginForm = () => {
       setSize({ width, height });
     }
   }, []);
+
   function handleLoginSubmit() {}
   return (
     <div className="test">
@@ -93,9 +99,19 @@ const LoginForm = () => {
           </p>
         </BoxDesign>
       </BoxDesign>
-      <div ref={dimensionRef} className="globe-wrapper">
-        <h1>SyncMeet</h1>
-        {size.width > 0 && size.height > 0 && <GlobeUI width={size.width} height={size.height} />}
+      <div className="globe-wrapper" ref={dimensionRef}>
+        <div className="tester">
+          <div className="globe-Title">
+            <Title title="SyncMeet" variant="main-Title"></Title>
+          </div>
+          <p className="globe-subTitle">
+            Arrange a meeting anywhere in the world with the click of a few buttons
+          </p>
+          <CurrentTime />
+        </div>
+        <div>
+          {size.width > 0 && size.height > 0 && <GlobeUI width={size.width} height={size.height} />}
+        </div>
       </div>
     </div>
   );

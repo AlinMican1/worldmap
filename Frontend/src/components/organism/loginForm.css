@@ -96,6 +96,30 @@
 
 .globe-wrapper{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
+   overflow-y: hidden;
+    
+}
+.globe-Title{
+    width: 100%;
+    padding-left: 10vw;
+
+    
+}
+.globe-subTitle{
+    padding-left: 3vw;
+    padding-top: var(--space-lg);
+}
+.tester{
+    width: 70vw;
+    margin: 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 50vh;
+    justify-content: center;
+    align-items: center;
+    
 }

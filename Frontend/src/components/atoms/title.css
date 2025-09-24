@@ -4,6 +4,16 @@
    
 }
 
+
+.main-Title{
+    font-size: var(--text-5xl);
+    font-weight: var(--font-bold);
+    background: #0042C8;
+    background: linear-gradient(to right, #0042C8 0%, #0F62FE 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .primary{
     background: #0042C8;
     background: linear-gradient(to right, #0042C8 0%, #0F62FE 100%);
@@ -15,4 +25,9 @@
 .secondary{
     font-size: var(--text-xl);
     font-weight: var(--font-semibold);
+    /* background: #0042C8;
+    background: linear-gradient(to right, #0042C8 0%, #0F62FE 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    
 }
