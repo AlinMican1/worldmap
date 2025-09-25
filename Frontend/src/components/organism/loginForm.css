@@ -1,11 +1,11 @@
-.test{
+.login-wrapper{
     /* background-color: var(--foreground); */
 
     width: 100vw;
     height: 100vh;
     display: flex;
     margin: 0px;
-    padding: 0px;
+    
     display: flex;
     flex-direction: row;
 }
@@ -99,27 +99,62 @@
     flex-direction: row;
     width: 100%;
    overflow-y: hidden;
-    
+   margin: var(--space-md);
+   background-color: aliceblue;
+   border-radius: 5px;
+   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 .globe-Title{
     width: 100%;
-    padding-left: 10vw;
-
+    padding-left: 5vw;
+    
     
 }
 .globe-subTitle{
-    padding-left: 3vw;
-    padding-top: var(--space-lg);
+    padding-left: 7vw;
+    font-weight: var(--font-bold);
+    margin-bottom: 20px;
+    text-decoration: underline;
+    font-size: var(--text-md);
+   
 }
-.tester{
+    .globe-list{
+        /* padding-left: 3vw; */
+        padding-top: var(--space-lg);
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        
+    }
+    .globe-list p {
+        display: flex;
+        align-items: center; /* centers tick + text vertically */
+        gap: 0.5rem;         /* space between tick and text */
+        margin: 0.3rem 0;    /* optional spacing between rows */
+      }
+.globe-data-wrapper{
     width: 70vw;
     margin: 0;
     height: auto;
     display: flex;
     flex-direction: column;
     text-align: center;
-    padding-bottom: 50vh;
+    /* padding-bottom: 50vh; */
     justify-content: center;
     align-items: center;
     
+    
+}
+
+.tester{
+    width: auto;
+    background-color: red;
+    margin-top: 10vh;
+}
+
+.login-Tick{
+    
+    color: var(--color-primary);
 }

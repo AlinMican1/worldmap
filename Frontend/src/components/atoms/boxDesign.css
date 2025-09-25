@@ -139,6 +139,7 @@
   }
 .fullwidth-DesignBox{
     width: 100%;
+    background-color: transparent;
 }
 
 .showTime-DesignBox{

@@ -126,7 +126,7 @@ const GlobeUI = ({ width, height }: GlobeUIProps) => {
       ref={canvasRef}
       style={{
         width: "100vw",
-        height: dimension.heightY,
+        height: "100vh",
         maxWidth: "100%",
         aspectRatio: 1,
       }}

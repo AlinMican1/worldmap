@@ -11,6 +11,7 @@ import GlobeUI from "../atoms/globe";
 import Title from "../atoms/title";
 import CurrentTime from "../atoms/currentTime";
 import { GetGeoInfo } from "../../../helper/GetLocation";
+import TickIcon from "../icons/tick";
 
 const LoginForm = () => {
   console.log(GetGeoInfo(true));
@@ -44,8 +45,8 @@ const LoginForm = () => {
 
   function handleLoginSubmit() {}
   return (
-    <div className="test">
-      <BoxDesign centeredX="leftX" variant="sixth-DesignBox" padding="medium">
+    <div className="login-wrapper">
+      <BoxDesign centeredX="leftX" variant="fifth-DesignBox" padding="medium">
         <h1 className="signIn-Title">Sign in </h1>
         <p className="signIn-subTitle">Enter your credentials to continue</p>
 
@@ -67,7 +68,7 @@ const LoginForm = () => {
             type="password"
             name="password"
             label="Password"
-            value={loginCredentials.formData.email}
+            value={loginCredentials.formData.password}
             id="password"
             onChange={loginCredentials.handleChange}
             placeholder="password"
@@ -111,18 +112,30 @@ const LoginForm = () => {
         </BoxDesign>
       </BoxDesign>
       <div className="globe-wrapper" ref={dimensionRef}>
-        <div className="tester">
+        <div className="globe-data-wrapper">
           <div className="globe-Title">
             <Title title="SyncMeet" variant="main-Title"></Title>
           </div>
-          <p className="globe-subTitle">
-            Arrange a meeting anywhere in the world with the click of a few buttons
-          </p>
-          <div>
+          <div className="globe-subTitle"> - Your team, Your time, Anywhere.</div>
+          <ul className="globe-list">
+            <p>
+              <TickIcon className="login-Tick" /> Arrage meeting anywhere.
+            </p>
+            <p>
+              <TickIcon className="login-Tick" /> Smart availability checks.
+            </p>
+            <p>
+              <TickIcon className="login-Tick" /> Collaborate globally.
+            </p>
+            <p>
+              <TickIcon className="login-Tick" /> Real-time updates.
+            </p>
+          </ul>
+          {/* <div className="tester">
             <h1>{geoData.country_name}</h1>
             <h1>{geoData.timezone}</h1>
           </div>
-          <CurrentTime />
+          <CurrentTime /> */}
         </div>
         <div>
           {size.width > 0 && size.height > 0 && <GlobeUI width={size.width} height={size.height} />}
