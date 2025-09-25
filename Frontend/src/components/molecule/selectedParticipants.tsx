@@ -22,7 +22,8 @@ const SelectedParticipants = ({ clients, setClients, parentWidth }: SelectedPart
           <h3>Selected ({clients.filter((p) => p.selected).length})</h3>
           <BoxDesign
             variant="eight-DesignBox"
-            centered="left"
+            centeredX="leftX"
+            centeredY="leftY"
             style={{ width: `${parentWidth}px` }}
           >
             {clients

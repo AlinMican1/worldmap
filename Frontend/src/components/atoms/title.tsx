@@ -4,7 +4,7 @@ interface TitleProps {
   icon?: React.ReactNode;
   title?: string;
   subheading?: string;
-  variant?: "primary" | "secondary";
+  variant?: "main-Title" | "primary" | "secondary";
 }
 
 const Title = ({ subheading, title, icon, variant = "primary" }: TitleProps) => {

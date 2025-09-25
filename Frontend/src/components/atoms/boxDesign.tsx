@@ -12,18 +12,33 @@ interface BoxDesignProps extends HTMLAttributes<HTMLDivElement> {
     | "sixth-DesignBox"
     | "seventh-DesignBox"
     | "eight-DesignBox"
-    | "showTime-DesignBox";
+    | "showTime-DesignBox"
+    | "fullwidth-DesignBox";
   padding?: "none" | "extra-small" | "small" | "medium" | "large";
-  centered?: "left" | "right";
+  centeredY?: "leftY" | "rightY" | "middleY";
+  centeredX?: "leftX" | "rightX" | "middleX";
   orientation?: "row" | "column";
+  gap?: "gap-none" | "gap-extra-small" | "gap-small" | "gap-medium" | "gap-large" | "gap-xxl";
 }
 
 const BoxDesign = forwardRef<HTMLDivElement, BoxDesignProps>(
-  ({ children, variant, centered, padding = "small", orientation = "column", ...props }, ref) => {
+  (
+    {
+      children,
+      variant,
+      centeredY,
+      centeredX,
+      padding = "small",
+      orientation = "column",
+      gap,
+      ...props
+    },
+    ref
+  ) => {
     return (
       <div
         ref={ref}
-        className={`box-wrapper ${variant} ${padding} ${orientation} ${centered}`}
+        className={`box-wrapper ${variant} ${padding} ${orientation} ${centeredX} ${centeredY} ${gap}`}
         {...props}
       >
         {children}

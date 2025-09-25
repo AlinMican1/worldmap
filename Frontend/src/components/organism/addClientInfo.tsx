@@ -135,7 +135,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
         subheading="Create a meeting that works for everyone worldwide"
       />
       <form id="client-form" onSubmit={handleSubmit}>
-        <BoxDesign centered="left" variant="sixth-DesignBox">
+        <BoxDesign centeredY="leftY" centeredX="leftX" variant="sixth-DesignBox">
           <Title
             variant="secondary"
             title="Meeting Details"
@@ -150,7 +150,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
           </DateAndTimeContext.Provider>
         </BoxDesign>
 
-        <BoxDesign centered="left" variant="sixth-DesignBox" ref={boxRef}>
+        <BoxDesign centeredY="leftY" centeredX="leftX" variant="sixth-DesignBox" ref={boxRef}>
           <Title
             title="Select Participants"
             variant="secondary"
@@ -173,7 +173,12 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             )}
           >
             {(close) => (
-              <BoxDesign variant="third-DesignBox" centered="left" padding="large">
+              <BoxDesign
+                variant="third-DesignBox"
+                centeredX="leftX"
+                centeredY="leftY"
+                padding="large"
+              >
                 <Title variant="primary" title="Add New Participant" />
                 <div className="elements-row">
                   <InputField
@@ -294,7 +299,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
         </form>
       </BoxDesign> */}
 
-      <BoxDesign padding="none" centered="left" variant="fifth-DesignBox">
+      <BoxDesign padding="none" centeredX="leftX" centeredY="leftY" variant="fifth-DesignBox">
         <Button type="submit" form="client-form" variant="secondary-btn">
           Submit All Clients
         </Button>
