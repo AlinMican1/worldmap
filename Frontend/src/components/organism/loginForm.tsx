@@ -133,7 +133,7 @@ const LoginForm = () => {
           </ul>
           {/* <div className="tester">
             <h1>{geoData.country_name}</h1>
-            <h1>{geoData.timezone}</h1>
+            <h1>{geoData.timezone} </h1>
           </div>
           <CurrentTime /> */}
         </div>
