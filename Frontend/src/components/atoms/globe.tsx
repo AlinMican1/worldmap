@@ -54,7 +54,7 @@
 import createGlobe from "cobe";
 import { HTMLAttributes, useEffect, useRef, useState } from "react";
 import { GetGeoLocation } from "../../../helper/GetLocation";
-import { GetGeoInfo } from "../../../helper/GetLocation";
+
 interface GlobeUIProps extends HTMLAttributes<HTMLDivElement> {
   width: number;
   height: number;
