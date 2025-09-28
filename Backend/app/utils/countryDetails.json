@@ -1,0 +1,9 @@
+{
+    "United Kingdom": ["Europe/London"],
+    "United States of America": ["America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles"],
+    "India": ["Asia/Kolkata"],
+    "Australia": ["Australia/Sydney", "Australia/Perth", "Australia/Darwin"],
+    "Brazil": ["America/Sao_Paulo", "America/Manaus", "America/Fortaleza"],
+    "Russia": ["Europe/Moscow", "Asia/Yekaterinburg", "Asia/Irkutsk", "Asia/Vladivostok"]
+    
+  }

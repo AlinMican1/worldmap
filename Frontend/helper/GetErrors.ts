@@ -28,7 +28,7 @@ export const GetFormErrors = (
   if (surname.length > 50) formErrors[3].error = true;
   if (email.trim() === "" && emailRequired) formErrors[4].error = true;
   if (location.trim() === "") formErrors[6].error = true;
-  if (!COUNTRIES.includes(location)) formErrors[7].error = true;
+  if (!Object.keys(COUNTRIES).includes(location)) formErrors[7].error = true;
   // if (dates.size === 0) formErrors[7].error = true;
   // if (dates.array.length === 0) formErrors[7].error = true;
 

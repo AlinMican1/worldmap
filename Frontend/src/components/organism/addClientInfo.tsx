@@ -24,7 +24,10 @@ import ExitIcon from "../icons/exit";
 import ClientList from "../molecule/clientList";
 import { GetParticipants } from "@/REST/GET";
 import SelectedParticipants from "../molecule/selectedParticipants";
-
+import PariticipantsPreview from "../molecule/participantsPreview";
+import EarthIcon from "../icons/earth";
+import { getTimezones } from "../../../helper/SuggestLocation";
+import { COUNTRIES } from "../../../helper/SuggestLocation";
 const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   //Custom hooks
   const form = useClientForm({
@@ -32,13 +35,14 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     surname: "",
     email: "",
     location: "",
+    timezone: "",
     // dates: new Map<string, string[]>(),
   });
   const errorsHook = useErrors();
   const dateArray = useArray<string>([]);
   const [time, setTime] = useState<string>("");
   const [dateAndTimeMap, setDateAndTimeMap] = useState<Map<string, string[]>>(new Map());
-
+  const [selectedTimezone, setSelectedTimezone] = useState("");
   const boxRef = useRef<HTMLDivElement>(null);
   const [parentWidth, setParentWidth] = useState(0);
   //Get current width box for SelectedParticipants box.
@@ -47,6 +51,13 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       setParentWidth(boxRef.current.clientWidth);
     }
   }, []);
+
+  const timezonesArr = useArray<string>([]);
+  useEffect(() => {
+    if (COUNTRIES[form.formData.location]) {
+      timezonesArr.setArray(getTimezones(form.formData.location));
+    } else [timezonesArr.clear()];
+  }, [form.formData.location]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -63,6 +74,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
               email: person.email,
               location: person.location,
               surname: person.surname,
+              timezone: person.timezone,
             },
           ]);
         });
@@ -115,6 +127,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       location: form.formData.location,
       email: form.formData.email,
       surname: form.formData.surname,
+      timezone: form.formData.timezone || timezonesArr.array[0],
     };
 
     const response = await SubmitAddParticipant(client);
@@ -126,6 +139,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       errorsHook.clearErrors();
       close();
     }
+    console.log(form.formData);
   };
 
   return (
@@ -139,7 +153,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
           <Title
             variant="secondary"
             title="Meeting Details"
-            icon={<NotesIcon className="title-icon" />}
+            icon={<NotesIcon className="title-icon" size="24" />}
           />
           <DateAndTimeContext.Provider value={dateAndTime}>
             <div className="elements-row">
@@ -154,7 +168,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
           <Title
             title="Select Participants"
             variant="secondary"
-            icon={<UsersIcon className="title-icon" />}
+            icon={<UsersIcon className="title-icon" size="28" />}
           />
 
           <SelectedParticipants
@@ -218,12 +232,36 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                     errorMsg={errorsHook.getErrorMsg("surname")}
                   />
                 </div>
-                <EnterLocation
-                  location={form.formData.location}
-                  setLocation={setLocation}
-                  errorMsg={errorsHook.getErrorMsg("location")}
-                  error={errorsHook.getErrorBoolean("location")}
-                />
+                <div className="elements-row">
+                  <EnterLocation
+                    location={form.formData.location}
+                    setLocation={setLocation}
+                    errorMsg={errorsHook.getErrorMsg("location")}
+                    error={errorsHook.getErrorBoolean("location")}
+                  />
+                  <div>
+                    {timezonesArr.array.length > 0 && (
+                      <div>
+                        <label htmlFor="timezone">Choose a timezone:</label>
+                        <select
+                          name="timezone"
+                          id="timezone"
+                          value={form.formData.timezone || timezonesArr.array[0]}
+                          onChange={(e) =>
+                            form.setFormData((prev) => ({ ...prev, timezone: e.target.value }))
+                          }
+                        >
+                          {timezonesArr.array.map((timezone, idx) => (
+                            <option key={idx} value={timezone}>
+                              {timezone}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 <div className="close-btn-pos">
                   <button className="close-btn" onClick={() => (close(), form.resetFormData())}>
                     <ExitIcon className={"exit-icon"} />
@@ -241,6 +279,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
           </Modal>
         </BoxDesign>
       </form>
+
       {/* <BoxDesign>
         <form id="client-form" onSubmit={handleSubmit}>
           
@@ -298,6 +337,14 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
           </BoxDesign>
         </form>
       </BoxDesign> */}
+      <BoxDesign variant="sixth-DesignBox" centeredX="leftX" centeredY="leftY">
+        <Title
+          title="TimeZone Preview"
+          variant="secondary"
+          icon={<EarthIcon className="title-icon" size="28" />}
+        />
+        <PariticipantsPreview clients={clients} setClients={setClients} parentWidth={parentWidth} />
+      </BoxDesign>
 
       <BoxDesign padding="none" centeredX="leftX" centeredY="leftY" variant="fifth-DesignBox">
         <Button type="submit" form="client-form" variant="secondary-btn">

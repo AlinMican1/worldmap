@@ -62,8 +62,14 @@ export const SubmitClientSchedule = async (clients?: ClientInfoProps[]) => {
 };
 
 export const SubmitAddParticipant = async (client: ClientInfoProps) => {
-  const { first_name, email, location, surname } = client;
-  const getAllErrors = await GetFormErrors(true, { first_name, email, location, surname });
+  const { first_name, email, location, surname, timezone } = client;
+  const getAllErrors = await GetFormErrors(true, {
+    first_name,
+    email,
+    location,
+    surname,
+    timezone,
+  });
   const filteredErrors = getAllErrors.filter((err: ErrorMessageProps) => err.error === true);
 
   if (filteredErrors.length > 0) {
@@ -77,6 +83,7 @@ export const SubmitAddParticipant = async (client: ClientInfoProps) => {
       email,
       first_name,
       surname,
+      timezone,
       userId: "6efe07f7-cbf5-4481-8045-347ec1cf26b4",
     });
     return { success: true, message: res.data.message, errors: [] };

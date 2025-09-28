@@ -13,6 +13,7 @@ class Participant(Base):
     surname = Column(String, nullable=False)
     email = Column(String, nullable=False, unique=True)
     location = Column(String, nullable=False)   
+    timezone = Column(String, nullable=False)
 
     userId = Column(ForeignKey("users.id"))
     user = relationship("User", back_populates="participants")

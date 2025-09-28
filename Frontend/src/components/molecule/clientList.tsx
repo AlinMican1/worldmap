@@ -29,7 +29,9 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
                   </h3>
                   <p className="email-title"> • {client.email}</p>
                 </div>
-                <p className="location-title">{client.location}</p>
+                <p className="location-title">
+                  {client.location} {client.timezone}
+                </p>
               </div>
               <div className="button-position">
                 <Button variant="fourth-btn" onClick={() => handleSelectedParticipants(client)}>
