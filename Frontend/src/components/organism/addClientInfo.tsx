@@ -28,6 +28,7 @@ import PariticipantsPreview from "../molecule/participantsPreview";
 import EarthIcon from "../icons/earth";
 import { getTimezones } from "../../../helper/SuggestLocation";
 import { COUNTRIES } from "../../../helper/SuggestLocation";
+
 const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   //Custom hooks
   const form = useClientForm({
@@ -139,7 +140,6 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       errorsHook.clearErrors();
       close();
     }
-    console.log(form.formData);
   };
 
   return (
@@ -279,64 +279,6 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
           </Modal>
         </BoxDesign>
       </form>
-
-      {/* <BoxDesign>
-        <form id="client-form" onSubmit={handleSubmit}>
-          
-          <div className="elements-row">
-            <InputField
-              autocomplete="off"
-              type="text"
-              name="name"
-              label="Person's Name"
-              value={form.formData.name}
-              id="name"
-              onChange={form.handleChange}
-              placeholder="Enter Client Name"
-              error={errorsHook.getErrorBoolean("name")}
-              errorMsg={errorsHook.getErrorMsg("name")}
-            />
-
-            <InputField
-              autocomplete="off"
-              type="text"
-              name="email"
-              label="Person's Email"
-              value={form.formData.email}
-              id="email"
-              onChange={form.handleChange}
-              placeholder="Enter Client Email"
-              error={errorsHook.getErrorBoolean("email")}
-              errorMsg={errorsHook.getErrorMsg("email")}
-            />
-          </div>
-
-          <EnterLocation
-            location={form.formData.location}
-            setLocation={setLocation}
-            errorMsg={errorsHook.getErrorMsg("location")}
-            error={errorsHook.getErrorBoolean("location")}
-          />
-          <DateAndTimeContext.Provider value={dateAndTime}>
-           
-            <div className="elements-row">
-              {CalendarBoxMemo}
-              <ChooseTime />
-            </div>
-            <DateAndTimeDisplay />
-          </DateAndTimeContext.Provider>
-          <BoxDesign padding="none" centered="left">
-            <Button type="button" onClick={handleAddClients} variant="secondary-btn">
-              Add Client
-            </Button>
-            {dateAndTimeMap.size === 0 && errorsHook.getErrorBoolean("date") ? (
-              <p className="error-msg">{errorsHook.getErrorMsg("date")}</p>
-            ) : (
-              ""
-            )}
-          </BoxDesign>
-        </form>
-      </BoxDesign> */}
       <BoxDesign variant="sixth-DesignBox" centeredX="leftX" centeredY="leftY">
         <Title
           title="TimeZone Preview"
