@@ -1,0 +1,29 @@
+.canMeet-wrapper{
+    position: absolute;
+    padding: var(--space-sm);
+    margin: var(--space-xs);
+    top: 0;
+    right: 0;
+    border-radius: 5px;
+}
+
+.canMeet-wrapper.active{
+    background-color: lime;
+    border: 1px solid green;
+    color: green;
+
+}
+
+.canMeet-wrapper.not-active{
+    background-color: rgb(243, 119, 119);
+    border: 1px solid rgb(255, 0, 0);
+    color: red;
+}
+
+.canMeet-text.active{
+    color: green
+}
+
+.canMeet-text.not-active{
+    color: red;
+}
