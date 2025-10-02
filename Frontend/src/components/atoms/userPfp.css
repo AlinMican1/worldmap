@@ -1,6 +1,6 @@
 .pfp-wrapper{
     border-radius: 50%;
-    background: linear-gradient(to right, #2265ec 0%, #6a9af2 100%);
+    background: var(--background-gradient-blue);
     display: flex;
     justify-content: center;
     align-items: center;

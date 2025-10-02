@@ -1,3 +1,14 @@
+.participant-name{
+    font-weight: var(--font-semibold);
+}
+
+.participant-actualtime{
+    font-family:'Courier New', Courier, monospace;
+    font-weight: var(--font-bold);
+    color: rgb(73, 73, 73);
+    margin-top: var(--space-sm);
+}
+
 .canMeet-wrapper{
     position: absolute;
     padding: var(--space-sm);

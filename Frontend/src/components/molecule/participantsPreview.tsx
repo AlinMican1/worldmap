@@ -4,32 +4,44 @@ import { GetTimeFromDifferentCountry } from "@/REST/GET";
 import { useEffect, useState } from "react";
 import useArray from "@/hooks/useArray";
 import "./participantsPreview.css";
+import { getDayMonthYear, getMonthName } from "../../../helper/Formatter";
 
 interface ParticipantPreviewProps extends ClientInfoProps {
   localTime: string;
+  actualTime: string;
   canMeet: boolean;
 }
 
 const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInfoProps) => {
   const participants = useArray<ParticipantPreviewProps>();
-  const checkTimeZone = async (client: ClientInfoProps): Promise<boolean> => {
-    const now = new Date();
-    const timeMeeting = new Date("22:10:23");
+  const checkTimeZone = async (client: ClientInfoProps) => {
+    const now = new Date(); // user’s current local time
     const clientTime = await GetTimeFromDifferentCountry(client.timezone, client.location);
-    const [clientHr, clientMin] = clientTime.time.split(":");
-    const [userHr, userMin] = now.toLocaleTimeString().split(":");
-    const [hourDiff, minDiff] = [
-      Number(clientHr) - Number(userHr),
-      Number(clientMin) - Number(userMin),
-    ];
 
-    console.log(hourDiff, minDiff);
-    // console.log(typeof clientTime.time);
-    // console.log(Number(userHr), Number(userMin));
-    // console.log(typeof now.toLocaleTimeString());
-    // const getTimeDifference = clientTime.time - now.toLocaleTimeString()
+    const [clientHr, clientMin] = clientTime.time.split(":").map(Number);
 
-    return true;
+    const meetingDate = new Date(now);
+    meetingDate.setHours(clientHr, clientMin, 0, 0);
+
+    if (meetingDate < now) {
+      meetingDate.setDate(meetingDate.getDate() + 1);
+    }
+
+    const actualTime = meetingDate.toLocaleString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+
+    const canMeet = clientHr >= 8 && clientHr <= 17;
+
+    return {
+      actualTime,
+      canMeet,
+    };
   };
 
   useEffect(() => {
@@ -47,7 +59,7 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
             {
               ...client,
               localTime: response.time,
-              canMeet,
+              ...canMeet,
             },
           ]);
         } catch (error) {
@@ -69,16 +81,25 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
           centeredY="leftY"
           style={{ width: `${parentWidth}px` }}
         >
-          {/* {(await checkTimeZone(client)) ? <p>TIME WORKS</p> : <p>EEEEHHHHH BAD BAD</p>} */}
-          <h1>
+          <h3 className="participant-name">
             {participant.first_name} {participant.surname}
-          </h1>
+          </h3>
           <div className={`canMeet-wrapper ${participant.canMeet ? "active" : "not-active"}`}>
             <p className={`canMeet-text ${participant.canMeet ? "active" : "not-active"}`}>
               {participant.canMeet ? "TIME WORKS" : "BAD BAD"}
             </p>
           </div>
-          <p>timezone</p>
+          <div>
+            <p className="participant-actualtime">
+              Meeting Start: {participant.actualTime.split(",")[0].split("/")[0]}{" "}
+              {getMonthName(participant.actualTime.split(",")[0])} at{" "}
+              {participant.actualTime.split(",")[1]}
+            </p>
+          </div>
+          <div className="elements-row">
+            <p>{participant.location}</p>
+            <p>{participant.timezone}</p>
+          </div>
         </BoxDesign>
       ))}
     </div>

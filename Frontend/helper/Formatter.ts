@@ -17,3 +17,11 @@ export const getISODate = (date: string): Date => {
   const [day, month, year] = date.split("-").map(Number);
   return new Date(year, month - 1, day);
 };
+
+export const getMonthName = (date: string): string => {
+  const [day, month, year] = date.split("/").map(Number);
+
+  const dateStr = new Date(year, month - 1, day);
+
+  return dateStr.toLocaleString("en-US", { month: "short" });
+};

@@ -11,7 +11,7 @@
   --color-border-lighter: #999999;
   --color-hover: #cdcdcd;
   --color-error: #db4437;
-  
+  --background-gradient-blue: linear-gradient(to right, #2265ec 0%, #6a9af2 100%);
   
   
   /* Spacing */
@@ -55,6 +55,10 @@
   --font-size-base: 16px;
   --font-size-lg: 20px;
   --font-size-sm: 14px;
+
+
+
+  
 }
 
 /* @media (prefers-color-scheme: dark) {
