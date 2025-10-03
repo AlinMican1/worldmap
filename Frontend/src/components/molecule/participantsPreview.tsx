@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import useArray from "@/hooks/useArray";
 import "./participantsPreview.css";
 import { getDayMonthYear, getMonthName } from "../../../helper/Formatter";
+import ErrorIcon from "../icons/errorIcon";
 
 interface ParticipantPreviewProps extends ClientInfoProps {
   localTime: string;
@@ -73,10 +74,25 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
 
   return (
     <div className="wrapper">
+      {participants.array.some((participant) => participant.canMeet === false) && (
+        <BoxDesign
+          variant="errorPreview-DesignBox"
+          centeredX="leftX"
+          centeredY="leftY"
+          style={{ width: `${parentWidth}px` }}
+        >
+          <h3 className="preview-TitleError">
+            {" "}
+            <ErrorIcon size="24" className="error-icon" />
+            Consider adjusting time
+          </h3>
+          <p className="preview-subTitleError">Some participants will join very late or early.</p>
+        </BoxDesign>
+      )}
       {participants.array.map((participant, key) => (
         <BoxDesign
           key={key}
-          variant="seventh-DesignBox"
+          variant="previewTime-DesignBox"
           centeredX="leftX"
           centeredY="leftY"
           style={{ width: `${parentWidth}px` }}
@@ -86,7 +102,7 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
           </h3>
           <div className={`canMeet-wrapper ${participant.canMeet ? "active" : "not-active"}`}>
             <p className={`canMeet-text ${participant.canMeet ? "active" : "not-active"}`}>
-              {participant.canMeet ? "TIME WORKS" : "BAD BAD"}
+              {participant.canMeet ? "Good Time" : "Very late/early"}
             </p>
           </div>
           <div>

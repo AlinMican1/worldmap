@@ -149,21 +149,22 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
         subheading="Create a meeting that works for everyone worldwide"
       />
       <form id="client-form" onSubmit={handleSubmit}>
-        <BoxDesign centeredY="leftY" centeredX="leftX" variant="sixth-DesignBox">
-          <Title
-            variant="secondary"
-            title="Meeting Details"
-            icon={<NotesIcon className="title-icon" size="24" />}
-          />
-          <DateAndTimeContext.Provider value={dateAndTime}>
-            <div className="elements-row">
-              {CalendarBoxMemo}
-              <ChooseTime />
-            </div>
-            <DateAndTimeDisplay />
-          </DateAndTimeContext.Provider>
-        </BoxDesign>
-
+        <div className="elements-row">
+          <BoxDesign centeredY="leftY" centeredX="leftX" variant="sixth-DesignBox">
+            <Title
+              variant="secondary"
+              title="Meeting Details"
+              icon={<NotesIcon className="title-icon" size="24" />}
+            />
+            <DateAndTimeContext.Provider value={dateAndTime}>
+              <div className="elements-row">
+                {CalendarBoxMemo}
+                <ChooseTime />
+              </div>
+              <DateAndTimeDisplay />
+            </DateAndTimeContext.Provider>
+          </BoxDesign>
+        </div>
         <BoxDesign centeredY="leftY" centeredX="leftX" variant="sixth-DesignBox" ref={boxRef}>
           <Title
             title="Select Participants"
@@ -278,15 +279,19 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             )}
           </Modal>
         </BoxDesign>
+        <BoxDesign variant="sixth-DesignBox" centeredX="leftX" centeredY="leftY">
+          <Title
+            title="TimeZone Preview"
+            variant="secondary"
+            icon={<EarthIcon className="title-icon" size="28" />}
+          />
+          <PariticipantsPreview
+            clients={clients}
+            setClients={setClients}
+            parentWidth={parentWidth}
+          />
+        </BoxDesign>
       </form>
-      <BoxDesign variant="sixth-DesignBox" centeredX="leftX" centeredY="leftY">
-        <Title
-          title="TimeZone Preview"
-          variant="secondary"
-          icon={<EarthIcon className="title-icon" size="28" />}
-        />
-        <PariticipantsPreview clients={clients} setClients={setClients} parentWidth={parentWidth} />
-      </BoxDesign>
 
       <BoxDesign padding="none" centeredX="leftX" centeredY="leftY" variant="fifth-DesignBox">
         <Button type="submit" form="client-form" variant="secondary-btn">
@@ -298,7 +303,6 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
           ""
         )}
       </BoxDesign>
-      <p></p>
     </div>
   );
 };

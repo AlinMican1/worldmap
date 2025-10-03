@@ -1,11 +1,13 @@
 .participant-name{
     font-weight: var(--font-semibold);
+    
 }
 
 .participant-actualtime{
     font-family:'Courier New', Courier, monospace;
     font-weight: var(--font-bold);
-    color: rgb(73, 73, 73);
+    /* color: rgb(73, 73, 73); */
+    
     margin-top: var(--space-sm);
 }
 
@@ -15,20 +17,20 @@
     margin: var(--space-xs);
     top: 0;
     right: 0;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .canMeet-wrapper.active{
-    background-color: lime;
-    border: 1px solid green;
-    color: green;
+    background-color: rgb(209 250 229);
+    border: 0.5px solid green;
+  
 
 }
 
 .canMeet-wrapper.not-active{
-    background-color: rgb(243, 119, 119);
-    border: 1px solid rgb(255, 0, 0);
-    color: red;
+    background: #fed4e1;
+    border: 0.5px solid var(--color-error);
+        
 }
 
 .canMeet-text.active{
@@ -36,5 +38,18 @@
 }
 
 .canMeet-text.not-active{
+    color: var(--color-error);
+}
+.error-icon{
+    color: var(--color-error);
+}
+.preview-TitleError{
+    color: var(--color-error);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.preview-subTitleError{
+    margin-top: var(--space-sm);
     color: red;
 }

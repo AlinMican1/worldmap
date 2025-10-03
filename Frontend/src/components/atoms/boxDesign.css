@@ -147,9 +147,19 @@
     background-color: transparent;
 }
 
-
 .showTime-DesignBox{
     border-radius: 5px;
     border: 1px solid var(--color-primary-lighter);
     background: var(--background-gradient-blue);
+}
+
+.previewTime-DesignBox{
+    background: var(--background-gradient-grey);
+    border: 0px;
+    border-radius: 10px;
+}
+.errorPreview-DesignBox{
+    background-color: #fed4e1;
+    border: 0.5px solid var(--color-error);
+    border-radius: 10px;
 }
