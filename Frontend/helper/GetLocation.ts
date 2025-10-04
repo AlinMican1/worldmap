@@ -16,8 +16,8 @@ export const GetLocationTime = (locations: Array<string>): String => {
 };
 
 //The allow is for the cookies
-export const GetGeoLocation = async (allow: boolean): Promise<[number, number]> => {
-  if (!allow || !navigator.geolocation) {
+export const GetGeoLocation = async (cookies: boolean): Promise<[number, number]> => {
+  if (!cookies || !navigator.geolocation) {
     return [37.7595, -122.4367]; // fallback
   }
 
@@ -36,8 +36,8 @@ interface GeoInfoProps {
   longitude: number;
 }
 
-export const GetGeoInfo = async (allow: boolean): Promise<GeoInfoProps> => {
-  if (!allow) {
+export const GetGeoInfo = async (cookies: boolean): Promise<GeoInfoProps> => {
+  if (!cookies) {
     return {
       countryName: "Austrlia",
       timeZone: "12",

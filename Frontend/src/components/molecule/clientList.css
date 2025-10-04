@@ -1,5 +1,6 @@
 .wrapper{
-    height: 30vw;
+    height: 50vh;
+    min-height: 300px;
     width: 100%;
     overflow: hidden;
     display: flex;

@@ -1,10 +1,10 @@
 import { IconProps } from "@/types/interfaces";
-const NotesIcon = ({ className }: IconProps) => {
+const NotesIcon = ({ className, size }: IconProps) => {
   return (
     <svg
       className={className}
-      width="16"
-      height="16"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -11,13 +11,17 @@ export interface ErrorMessageProps {
 // }
 export interface IconProps {
   className?: string;
+  size?: string;
 }
+
 export interface ClientInfoProps {
   first_name: string;
   location: string;
   email: string;
   surname: string;
+  timezone: string;
   selected?: boolean;
+
   // dates: Map<string, string[]>;
 }
 
@@ -28,8 +32,12 @@ export interface ClientListProps {
 export interface AddClientInfoProps {
   clients: ClientInfoProps[];
   setClients: React.Dispatch<React.SetStateAction<ClientInfoProps[]>>;
+  parentWidth?: number;
 }
-
+export interface AddClientInfowParentWidth {
+  clients: ClientInfoProps[];
+  setClients: React.Dispatch<React.SetStateAction<ClientInfoProps[]>>;
+}
 export interface UseArrayProps<T> {
   array: T[];
   setArray: React.Dispatch<React.SetStateAction<T[]>>;

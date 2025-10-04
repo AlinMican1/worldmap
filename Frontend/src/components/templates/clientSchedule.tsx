@@ -7,8 +7,9 @@ import { useState } from "react";
 
 const ClientSchedule = () => {
   const [clients, setClients] = useState<ClientInfoProps[]>([]);
+
   return (
-    <div className="positional-center">
+    <div>
       <AddClientInfo clients={clients} setClients={setClients} />
       {/* <ClientList clients={clients} /> */}
     </div>

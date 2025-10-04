@@ -6,11 +6,8 @@ import UserPfp from "../atoms/userPfp";
 import BoxDesign from "../atoms/boxDesign";
 import RemoveIcon from "../icons/remove";
 import { memo } from "react";
-interface SelectedParticipantsProps extends AddClientInfoProps {
-  parentWidth: number;
-}
 
-const SelectedParticipants = ({ clients, setClients, parentWidth }: SelectedParticipantsProps) => {
+const SelectedParticipants = ({ clients, setClients, parentWidth }: AddClientInfoProps) => {
   const handleRemoveParticipant = (participant: ClientInfoProps) => {
     setClients((old) => old.map((c) => (c === participant ? { ...c, selected: false } : c)));
   };
@@ -37,6 +34,7 @@ const SelectedParticipants = ({ clients, setClients, parentWidth }: SelectedPart
                   />
                   <p>{participant.first_name}</p>
                   <p>{participant.surname}</p>
+
                   <div className="remove-btn-pos">
                     <Button
                       variant="fifth-btn"

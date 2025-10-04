@@ -13,7 +13,9 @@ interface BoxDesignProps extends HTMLAttributes<HTMLDivElement> {
     | "seventh-DesignBox"
     | "eight-DesignBox"
     | "showTime-DesignBox"
-    | "fullwidth-DesignBox";
+    | "fullwidth-DesignBox"
+    | "previewTime-DesignBox"
+    | "errorPreview-DesignBox";
   padding?: "none" | "extra-small" | "small" | "medium" | "large";
   centeredY?: "leftY" | "rightY" | "middleY";
   centeredX?: "leftX" | "rightX" | "middleX";

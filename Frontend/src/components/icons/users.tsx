@@ -1,10 +1,10 @@
 import { IconProps } from "@/types/interfaces";
-const UsersIcon = ({ className }: IconProps) => {
+const UsersIcon = ({ className, size }: IconProps) => {
   return (
     <svg
       className={className}
-      width="1em"
-      height="1em"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

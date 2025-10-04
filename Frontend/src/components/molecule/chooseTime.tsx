@@ -100,7 +100,8 @@ const ChooseTime = () => {
             <BoxDesign
               padding="medium"
               orientation="column"
-              centered="left"
+              centeredX="leftX"
+              centeredY="leftY"
               variant="third-DesignBox"
             >
               <h1 className="modalTime-heading">Confirm your choice</h1>
@@ -123,7 +124,8 @@ const ChooseTime = () => {
                     return (
                       <BoxDesign
                         orientation="column"
-                        centered="left"
+                        centeredX="leftX"
+                        centeredY="leftY"
                         variant="primary-DesignBox"
                         padding="small"
                         key={index}
