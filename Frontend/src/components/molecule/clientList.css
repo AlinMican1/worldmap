@@ -1,13 +1,17 @@
-.wrapper{
-    height: 50vh;
-    min-height: 300px;
+.clientList-wrapper{
+    height: 30vh;
+    min-height: 100px;
     width: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs)
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+    padding: var(--space-xs);
 }
-
+.clientList-wrapper:hover{
+    overflow-y: scroll;
+}
 
 
 .client-name{
@@ -23,19 +27,12 @@
 .button-position{
     position: absolute;
     right: 10px;
-    display: flex;
-    
+    display: flex; 
     height: 43px;
-    
     justify-content: center;
     align-items: center;
 }
 
-
-.wrapper:hover{
-    overflow-y: scroll;
-    
-}
 
 .location-title{
     color: rgb(74, 74, 74);

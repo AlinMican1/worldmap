@@ -45,14 +45,14 @@ const Navbar = () => {
             </Button>
           </Link> */}
             <Link href="/" className={`button-base nav-btn ${pathname === "/" ? "active" : ""}`}>
-              <DashboardIcon />
+              <DashboardIcon className={`nav-symbol ${pathname === "/" ? "active" : ""}`} />
               Dashboard
             </Link>
             <Link
               href="/schedule"
               className={`button-base nav-btn ${pathname === "/schedule" ? "active" : ""}`}
             >
-              <CalendarIcon />
+              <CalendarIcon className={`nav-symbol ${pathname === "/schedule" ? "active" : ""}`} />
               Schedule Meeting
             </Link>
 

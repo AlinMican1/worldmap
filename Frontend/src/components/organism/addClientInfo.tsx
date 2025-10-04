@@ -164,6 +164,18 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
               <DateAndTimeDisplay />
             </DateAndTimeContext.Provider>
           </BoxDesign>
+          {/* <BoxDesign variant="sixth-DesignBox" centeredX="leftX" centeredY="leftY">
+            <Title
+              title="TimeZone Preview"
+              variant="secondary"
+              icon={<EarthIcon className="title-icon" size="28" />}
+            />
+            <PariticipantsPreview
+              clients={clients}
+              setClients={setClients}
+              parentWidth={parentWidth}
+            />
+          </BoxDesign> */}
         </div>
         <BoxDesign centeredY="leftY" centeredX="leftX" variant="sixth-DesignBox" ref={boxRef}>
           <Title
@@ -278,18 +290,6 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
               </BoxDesign>
             )}
           </Modal>
-        </BoxDesign>
-        <BoxDesign variant="sixth-DesignBox" centeredX="leftX" centeredY="leftY">
-          <Title
-            title="TimeZone Preview"
-            variant="secondary"
-            icon={<EarthIcon className="title-icon" size="28" />}
-          />
-          <PariticipantsPreview
-            clients={clients}
-            setClients={setClients}
-            parentWidth={parentWidth}
-          />
         </BoxDesign>
       </form>
 

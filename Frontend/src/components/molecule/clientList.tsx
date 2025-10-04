@@ -1,4 +1,3 @@
-"use client";
 import BoxDesign from "../atoms/boxDesign";
 import "./clientList.css";
 import "../../app/globals.css";
@@ -15,7 +14,8 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
   };
 
   return (
-    <div className="wrapper">
+    <div className="clientList-wrapper">
+      {clients.filter((c) => !c.selected).length === 0 && <p>No participants found</p>}
       {clients
         .filter((c) => !c.selected)
         .map((client, key) => (

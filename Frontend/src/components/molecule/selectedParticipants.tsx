@@ -21,7 +21,7 @@ const SelectedParticipants = ({ clients, setClients, parentWidth }: AddClientInf
             variant="eight-DesignBox"
             centeredX="leftX"
             centeredY="leftY"
-            style={{ width: `${parentWidth}px` }}
+            style={{ width: `${Number(parentWidth) - 20}px` }}
           >
             {clients
               .filter((p) => p.selected)

@@ -15,7 +15,7 @@
     align-self: flex-start;
     padding: var(--space-sm);
     height: 100vh;
-    background-color: white;
+    background-color: var(--bg);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   }
 .bottom-buttons{
@@ -37,13 +37,18 @@
     justify-content: flex-start;
     
 }
-
+.nav-symbol{
+    color: var(--text-muted);
+}
+.nav-symbol.active{
+    color: var(--text);
+}
 .navbar-subTitle{
-    color: grey;
+    color: var(--text);
     font-size: var(--text-xs);
     padding: var(--space-sm);
 }
 
 .logout-symbol{
-    color:white;
+    color: var(--bg-light);
 }

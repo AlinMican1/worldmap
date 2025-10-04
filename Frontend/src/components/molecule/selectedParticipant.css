@@ -2,7 +2,7 @@
     border-radius: 15px;
     padding: var(--space-xs);
     /* border: 1px solid var(--color-primary-lighter); */
-    background: linear-gradient(to right, #71b3f4 0%,   #99badd 100%);;
+    background: linear-gradient(to right, #71b3f4 0%,   #99badd 100%);
     position: relative;
     width: auto;
     display: flex;
@@ -11,7 +11,13 @@
     text-align: center;
     align-items: center;
     gap: 5px;
+    box-shadow: var(--shadow);
+    transition: transform 0.1s ease;
   }
+
+.participant-wrapper:hover{
+  background: linear-gradient(to right, #67aef5 0%,   #8bb2dc 100%);
+}
 
 
 .remove-btn-pos{
