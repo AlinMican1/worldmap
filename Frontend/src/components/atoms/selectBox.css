@@ -8,7 +8,7 @@
     
 }
 .calendar-box{
-    padding: var(--space-md);
+    /* padding: var(--space-md); */
     min-width: 50px;
     max-width: none;
 }

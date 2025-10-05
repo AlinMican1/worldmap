@@ -7,4 +7,42 @@
     
   }
 
+  .scheduler-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Left side wider than right */
+    gap:  var(--space-xs);
+    align-items: stretch;
+  }
+  
+  /* Left side: stack calendar + participants */
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .timezone-preview {
+    
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    
+  
+  }
+ 
+  
+  
+  /* Make sure everything looks good on smaller screens */
+  @media (max-width: 1412px) {
+    .scheduler-layout {
+      grid-template-columns: 1fr;
+    }
+  
+    .timezone-preview {
+      order: 3;
+    }
+  
+    .left-column {
+      order: 1;
+    }
+  }
   
