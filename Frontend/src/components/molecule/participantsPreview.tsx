@@ -73,21 +73,30 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
   }, [clients]);
 
   return (
-    <div className="wrapper">
+    <div>
       {participants.array.some((participant) => participant.canMeet === false) && (
-        <BoxDesign
-          variant="errorPreview-DesignBox"
-          centeredX="leftX"
-          centeredY="leftY"
-          style={{ width: `${parentWidth}px` }}
-        >
+        // <BoxDesign
+        //   variant="errorPreview-DesignBox"
+        //   centeredX="leftX"
+        //   centeredY="leftY"
+
+        //   // style={{ width: `${500}px` }}
+        // >
+        //   <h3 className="preview-TitleError">
+        //     {" "}
+        //     <ErrorIcon size="24" className="error-icon" />
+        //     Consider adjusting time
+        //   </h3>
+        //   <p className="preview-subTitleError">Some participants will join very late or early.</p>
+        // </BoxDesign>
+        <div className="preview-error-wrapper">
           <h3 className="preview-TitleError">
             {" "}
             <ErrorIcon size="24" className="error-icon" />
             Consider adjusting time
           </h3>
           <p className="preview-subTitleError">Some participants will join very late or early.</p>
-        </BoxDesign>
+        </div>
       )}
       {participants.array.map((participant, key) => (
         <BoxDesign
@@ -95,7 +104,8 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
           variant="previewTime-DesignBox"
           centeredX="leftX"
           centeredY="leftY"
-          style={{ width: `${parentWidth}px` }}
+
+          // style={{ width: `${500}px` }}
         >
           <h3 className="participant-name">
             {participant.first_name} {participant.surname}
@@ -112,10 +122,12 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
               {participant.actualTime.split(",")[1]}
             </p>
           </div>
-          <div className="elements-row">
-            <p>{participant.location}</p>
-            <p>{participant.timezone}</p>
-          </div>
+          {/* <div className="elements-row"> */}
+          <p className="participant-location">
+            {participant.location} • {participant.timezone}
+          </p>
+          {/* <p>{participant.timezone}</p> */}
+          {/* </div> */}
         </BoxDesign>
       ))}
     </div>

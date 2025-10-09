@@ -16,7 +16,7 @@ const SelectedParticipants = ({ clients, setClients, parentWidth }: AddClientInf
     <div>
       {clients.some((p) => p.selected) && (
         <div>
-          <h3>Selected ({clients.filter((p) => p.selected).length})</h3>
+          <h3 className="selected-header">Selected ({clients.filter((p) => p.selected).length})</h3>
           <BoxDesign
             variant="eight-DesignBox"
             centeredX="leftX"

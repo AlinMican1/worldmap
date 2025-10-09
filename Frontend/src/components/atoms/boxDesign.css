@@ -164,9 +164,12 @@
 }
 
 .previewTime-DesignBox{
-    background: var(--background-gradient-grey);
-    border: 0px;
+    background: var(--bg-light);
+    border: 0.5px solid var(--border);
     border-radius: 10px;
+    
+    
+    
 }
 .errorPreview-DesignBox{
     background-color: #fed4e1;

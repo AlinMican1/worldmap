@@ -293,7 +293,10 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             </div>
           </div>
           <div className="timezone-preview">
-            <BoxDesign variant="sixth-DesignBox" centeredX="leftX" centeredY="leftY">
+            <BoxDesign
+              variant="sixth-DesignBox"
+              style={{ alignItems: "stretch", width: parentWidth - 200 }}
+            >
               <Title
                 title="TimeZone Preview"
                 variant="secondary"
