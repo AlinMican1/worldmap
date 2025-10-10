@@ -53,3 +53,8 @@
     top:3.5px
     
   }
+
+.search-client-wrapper{
+    padding: var(--space-xs);
+    width: 100%;
+}

@@ -10,6 +10,7 @@
   .scheduler-layout {
     display: grid;
     grid-template-columns: 2fr 1fr; /* Left side wider than right */
+    
     gap:  var(--space-xs);
     align-items: stretch;
   }

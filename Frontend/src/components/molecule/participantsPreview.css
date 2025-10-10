@@ -7,6 +7,12 @@
     margin-bottom: var(--space-sm);
     
 }
+
+.previewTimezone-wrapper{
+    gap: var(--space-xxs);
+    display: flex;
+    flex-direction: column;
+}
 .participant-actualtime{
     font-family:'Courier New', Courier, monospace;
     font-weight: var(--font-bold);

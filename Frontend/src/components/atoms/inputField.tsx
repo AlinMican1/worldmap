@@ -15,6 +15,7 @@ interface inputFieldParams {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   icon?: React.ReactNode;
   width?: string | number;
+  borderRound?: string;
 }
 
 export const InputField = ({
@@ -31,6 +32,7 @@ export const InputField = ({
   onChange,
   icon,
   width = "25vw",
+  borderRound = "0px",
 }: inputFieldParams) => {
   return (
     <div className="input-wrapper">
@@ -47,7 +49,7 @@ export const InputField = ({
           onChange={onChange}
           disabled={disabled}
           className={`${error ? "input-error" : ""}`}
-          style={{ width: width ?? undefined }}
+          style={{ width: width ?? undefined, borderRadius: borderRound ?? undefined }}
         />
       </div>
       {error && <p className={`${"error"}`}>{errorMsg}</p>}

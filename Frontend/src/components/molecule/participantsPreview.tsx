@@ -73,7 +73,7 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
   }, [clients]);
 
   return (
-    <div>
+    <div className="previewTimezone-wrapper">
       {participants.array.some((participant) => participant.canMeet === false) && (
         // <BoxDesign
         //   variant="errorPreview-DesignBox"
