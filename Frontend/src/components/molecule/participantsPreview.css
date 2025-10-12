@@ -12,6 +12,10 @@
     gap: var(--space-xxs);
     display: flex;
     flex-direction: column;
+    background-color: none;
+    min-height: auto;
+    max-height: 500px;
+    overflow: scroll;
 }
 .participant-actualtime{
     font-family:'Courier New', Courier, monospace;

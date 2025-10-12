@@ -19,7 +19,7 @@ const EnterLocation = ({ location, setLocation, error, errorMsg, width }: EnterL
         width={width}
         placeholder="Location"
         type="text"
-        label="Choose Location"
+        label="Participant Location"
         value={location}
         onChange={(event) => setLocation(event.target.value)}
         error={error}

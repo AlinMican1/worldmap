@@ -57,4 +57,11 @@
 .search-client-wrapper{
     padding: var(--space-xs);
     width: 100%;
+    margin-bottom: var(--space-sm);
+}
+.search-icon{
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    
 }

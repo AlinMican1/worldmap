@@ -200,3 +200,11 @@ span{
   
 
 }
+
+.row-input-elem{
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  display: flex;
+  width: 100%;
+  flex-direction: row; 
+}

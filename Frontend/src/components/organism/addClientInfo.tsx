@@ -29,6 +29,8 @@ import PariticipantsPreview from "../molecule/participantsPreview";
 import EarthIcon from "../icons/earth";
 import { getTimezones } from "../../../helper/SuggestLocation";
 import { COUNTRIES } from "../../../helper/SuggestLocation";
+import MeetingDetails from "../molecule/meetingDetails";
+import SelectField from "../atoms/selectField";
 
 const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   //Custom hooks
@@ -58,7 +60,9 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   useEffect(() => {
     if (COUNTRIES[form.formData.location]) {
       timezonesArr.setArray(getTimezones(form.formData.location));
-    } else [timezonesArr.clear()];
+    } else {
+      timezonesArr.clear();
+    }
   }, [form.formData.location]);
 
   useEffect(() => {
@@ -85,16 +89,16 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     loadData();
   }, []);
   // Use for context
-  const dateAndTime = useMemo(
-    () => ({
-      dateArray,
-      time,
-      setTime,
-      dateAndTimeMap,
-      setDateAndTimeMap,
-    }),
-    [dateArray, time, dateAndTimeMap]
-  );
+  // const dateAndTime = useMemo(
+  //   () => ({
+  //     dateArray,
+  //     time,
+  //     setTime,
+  //     dateAndTimeMap,
+  //     setDateAndTimeMap,
+  //   }),
+  //   [dateArray, time, dateAndTimeMap]
+  // );
 
   //Memoization
   const setLocation = useCallback(
@@ -153,19 +157,25 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
         <div className="scheduler-layout">
           <div className="left-column">
             <div className="calendar-box">
-              <BoxDesign centeredY="leftY" centeredX="leftX" variant="sixth-DesignBox">
+              <BoxDesign
+                centeredY="leftY"
+                centeredX="leftX"
+                variant="sixth-DesignBox"
+                padding="medium"
+              >
                 <Title
                   variant="secondary"
                   title="Meeting Details"
                   icon={<NotesIcon className="title-icon" size="24" />}
                 />
-                <DateAndTimeContext.Provider value={dateAndTime}>
+                <MeetingDetails />
+                {/* <DateAndTimeContext.Provider value={dateAndTime}>
                   <div className="elements-row">
                     {CalendarBoxMemo}
                     <ChooseTime />
                   </div>
                   <DateAndTimeDisplay />
-                </DateAndTimeContext.Provider>
+                </DateAndTimeContext.Provider> */}
               </BoxDesign>
             </div>
 
@@ -200,30 +210,18 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                       padding="large"
                     >
                       <Title variant="primary" title="Add New Participant" />
-                      <div className="elements-row">
+                      <div className="row-input-elem">
                         <InputField
                           autocomplete="off"
                           type="text"
                           name="first_name"
-                          label="Person's Name"
+                          label="Participant Name"
                           value={form.formData.first_name}
                           id="first_name"
                           onChange={form.handleChange}
-                          placeholder="Enter Client Name"
+                          placeholder="name"
                           error={errorsHook.getErrorBoolean("name")}
                           errorMsg={errorsHook.getErrorMsg("name")}
-                        />
-                        <InputField
-                          autocomplete="off"
-                          type="text"
-                          name="email"
-                          label="Person's Email"
-                          value={form.formData.email}
-                          id="email"
-                          onChange={form.handleChange}
-                          placeholder="Enter Client Email"
-                          error={errorsHook.getErrorBoolean("email")}
-                          errorMsg={errorsHook.getErrorMsg("email")}
                         />
                         <InputField
                           autocomplete="off"
@@ -233,12 +231,26 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                           value={form.formData.surname}
                           id="participant"
                           onChange={form.handleChange}
-                          placeholder="Enter Pariticipant Surname"
+                          placeholder="surname"
                           error={errorsHook.getErrorBoolean("surname")}
                           errorMsg={errorsHook.getErrorMsg("surname")}
                         />
                       </div>
-                      <div className="elements-row">
+                      <div className="email-space">
+                        <InputField
+                          autocomplete="off"
+                          type="text"
+                          name="email"
+                          label="Participant Email"
+                          value={form.formData.email}
+                          id="email"
+                          onChange={form.handleChange}
+                          placeholder="example@email.com"
+                          error={errorsHook.getErrorBoolean("email")}
+                          errorMsg={errorsHook.getErrorMsg("email")}
+                        />
+                      </div>
+                      <div className="row-input-elem">
                         <EnterLocation
                           location={form.formData.location}
                           setLocation={setLocation}
@@ -246,28 +258,42 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                           error={errorsHook.getErrorBoolean("location")}
                         />
                         <div>
-                          {timezonesArr.array.length > 0 && (
-                            <div>
-                              <label htmlFor="timezone">Choose a timezone:</label>
-                              <select
-                                name="timezone"
-                                id="timezone"
-                                value={form.formData.timezone || timezonesArr.array[0]}
-                                onChange={(e) =>
-                                  form.setFormData((prev) => ({
-                                    ...prev,
-                                    timezone: e.target.value,
-                                  }))
-                                }
-                              >
-                                {timezonesArr.array.map((timezone, idx) => (
-                                  <option key={idx} value={timezone}>
-                                    {timezone}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                          )}
+                          {/* {timezonesArr.array.length > 0 && ( */}
+                          <div>
+                            {/* <label htmlFor="timezone">Choose a timezone:</label>
+                            <select
+                              className="select-timezone-bar"
+                              name="timezone"
+                              id="timezone"
+                              value={form.formData.timezone || timezonesArr.array[0] || ""}
+                              onChange={(e) =>
+                                form.setFormData((prev) => ({
+                                  ...prev,
+                                  timezone: e.target.value,
+                                }))
+                              }
+                            >
+                              <option value="" disabled hidden>
+                                Select a timezone
+                              </option>
+                              {timezonesArr.array.map((timezone, idx) => (
+                                <option key={idx} value={timezone}>
+                                  {timezone}
+                                </option>
+                              ))}
+                            </select> */}
+                            <SelectField
+                              label="Choose a timezone:"
+                              values={timezonesArr.array}
+                              onChange={(e) =>
+                                form.setFormData((prev) => ({
+                                  ...prev,
+                                  timezone: e.target.value,
+                                }))
+                              }
+                            />
+                          </div>
+                          {/* )} */}
                         </div>
                       </div>
 
@@ -293,10 +319,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
             </div>
           </div>
           <div className="timezone-preview">
-            <BoxDesign
-              variant="sixth-DesignBox"
-              style={{ alignItems: "stretch", width: parentWidth - 200 }}
-            >
+            <BoxDesign variant="sixth-DesignBox" style={{ alignItems: "stretch" }}>
               <Title
                 title="TimeZone Preview"
                 variant="secondary"

@@ -25,6 +25,15 @@ export interface ClientInfoProps {
   // dates: Map<string, string[]>;
 }
 
+export interface MeetingDetails {
+  meeting_link: string;
+  meeting_date: string;
+  meeting_time: string;
+  meeting_desc?: string;
+  meeting_duration: string;
+  meeting_title: string;
+}
+
 export interface ClientListProps {
   clients: ClientInfoProps[];
 }

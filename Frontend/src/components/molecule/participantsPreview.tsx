@@ -73,7 +73,8 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
   }, [clients]);
 
   return (
-    <div className="previewTimezone-wrapper">
+    <div>
+      {participants.array.length === 0 && <p>No current participants</p>}
       {participants.array.some((participant) => participant.canMeet === false) && (
         // <BoxDesign
         //   variant="errorPreview-DesignBox"
@@ -98,38 +99,40 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
           <p className="preview-subTitleError">Some participants will join very late or early.</p>
         </div>
       )}
-      {participants.array.map((participant, key) => (
-        <BoxDesign
-          key={key}
-          variant="previewTime-DesignBox"
-          centeredX="leftX"
-          centeredY="leftY"
+      <div className="previewTimezone-wrapper">
+        {participants.array.map((participant, key) => (
+          <BoxDesign
+            key={key}
+            variant="previewTime-DesignBox"
+            centeredX="leftX"
+            centeredY="leftY"
 
-          // style={{ width: `${500}px` }}
-        >
-          <h3 className="participant-name">
-            {participant.first_name} {participant.surname}
-          </h3>
-          <div className={`canMeet-wrapper ${participant.canMeet ? "active" : "not-active"}`}>
-            <p className={`canMeet-text ${participant.canMeet ? "active" : "not-active"}`}>
-              {participant.canMeet ? "Good Time" : "Very late/early"}
+            // style={{ width: `${500}px` }}
+          >
+            <h3 className="participant-name">
+              {participant.first_name} {participant.surname}
+            </h3>
+            <div className={`canMeet-wrapper ${participant.canMeet ? "active" : "not-active"}`}>
+              <p className={`canMeet-text ${participant.canMeet ? "active" : "not-active"}`}>
+                {participant.canMeet ? "Good Time" : "Very late/early"}
+              </p>
+            </div>
+            <div>
+              <p className="participant-actualtime">
+                Meeting Start: {participant.actualTime.split(",")[0].split("/")[0]}{" "}
+                {getMonthName(participant.actualTime.split(",")[0])} at{" "}
+                {participant.actualTime.split(",")[1]}
+              </p>
+            </div>
+            {/* <div className="elements-row"> */}
+            <p className="participant-location">
+              {participant.location} • {participant.timezone}
             </p>
-          </div>
-          <div>
-            <p className="participant-actualtime">
-              Meeting Start: {participant.actualTime.split(",")[0].split("/")[0]}{" "}
-              {getMonthName(participant.actualTime.split(",")[0])} at{" "}
-              {participant.actualTime.split(",")[1]}
-            </p>
-          </div>
-          {/* <div className="elements-row"> */}
-          <p className="participant-location">
-            {participant.location} • {participant.timezone}
-          </p>
-          {/* <p>{participant.timezone}</p> */}
-          {/* </div> */}
-        </BoxDesign>
-      ))}
+            {/* <p>{participant.timezone}</p> */}
+            {/* </div> */}
+          </BoxDesign>
+        ))}
+      </div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import Button from "../atoms/button";
 import PlusIcon from "../icons/plus";
 import { memo, useState } from "react";
 import { InputField } from "../atoms/inputField";
+import SearchIcon from "../icons/search";
 const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
   console.log("CLIENTS LIST RENDERED");
   const [search, setSearch] = useState<string>("");
@@ -21,13 +22,13 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
         <InputField
           autocomplete="off"
           type="text"
-          label="Participant First name"
           value={search}
           id="first_name"
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Enter Participant First Name"
+          placeholder="Search Participants..."
           width={"100%"}
           borderRound="10px"
+          icon={<SearchIcon size="1rem" className="search-icon" />}
         />
       </div>
       <div className="clientList-wrapper">
