@@ -1,63 +1,96 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import "./selectField.css";
 
 interface SelectFieldParams {
-  label?: string;
-  name?: string;
-  id?: string;
-  values: string[];
-  value?: string;
+  label: string;
+  name: string;
+  id: string;
+  options: string[];
+  value: string | string[]; // single or multiple
+  // onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   default_value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  multiple?: boolean; // <— this controls single vs multiple
+  setSelectedValue: React.Dispatch<React.SetStateAction<string | number>>;
+  selectedValue: string | number;
 }
 
-const SelectField = ({ label, name, id, values, onChange, default_value }: SelectFieldParams) => {
-  console.log("HHHH", values);
+const SelectField = ({
+  label,
+  name,
+  id,
+  options,
+  value,
+  setSelectedValue,
+  selectedValue,
+  // onChange,
+  default_value = "SELECT A VALUE",
+  multiple = false,
+}: SelectFieldParams) => {
+  const [dropDown, setDropDown] = useState<boolean>(false);
 
+  const handleSelect = (option: string) => {
+    setDropDown(false);
+    setSelectedValue(option);
+  };
+
+  const handleDropDown = () => {
+    if (options.length > 0) {
+      setDropDown(!dropDown);
+    }
+  };
+
+  useEffect(() => {
+    if (options.length === 0) {
+      setDropDown(false);
+      setSelectedValue("");
+    } else {
+      setSelectedValue(options[0]);
+    }
+  }, [options]);
   return (
-    <div>
-      <label htmlFor={label}>{label}</label>
-      <div>
-        <select id={id} value={values} name={name} onChange={onChange} />
-        {values.length === 0 && (
-          <option value="" disabled hidden>
-            {default_value} || SELECT A VALUE
-          </option>
-        )}
+    // <div>
+    //   <label htmlFor={id}>{label}</label>
+    //   <div className="select-wrapper">
+    //     <select
+    //       className="select-timezone-bar"
+    //       id={id}
+    //       name={name}
+    //       value={value}
+    //       multiple={multiple}
+    //       onChange={onChange}
+    //     >
+    //       <option value="" disabled hidden>
+    //         {default_value}
+    //       </option>
 
-        {values.map((value, idx) => (
-          <option key={idx} value={value}>
-            {value}
-          </option>
-        ))}
+    //       {options.map((option, idx) => (
+    //         <option key={idx} value={option}>
+    //           {option}
+    //         </option>
+    //       ))}
+    //     </select>
+    //   </div>
+    // </div>
+    <div>
+      <label htmlFor={id}>{label}</label>
+
+      <div className="select-wrapper">
+        <button className="button-dropdown-wrapper" onClick={handleDropDown}>
+          {!selectedValue ? default_value : selectedValue}
+        </button>
+
+        {dropDown ? (
+          <div className="select-option-wrapper">
+            {options.map((option, idx) => (
+              <button onClick={() => handleSelect(option)} className="option-button" key={idx}>
+                {option}
+              </button>
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   );
 };
 
 export default SelectField;
-{
-  /* <div>
-  <label htmlFor="timezone">Choose a timezone:</label>
-  <select
-    className="select-timezone-bar"
-    name="timezone"
-    id="timezone"
-    value={form.formData.timezone || timezonesArr.array[0] || ""}
-    onChange={(e) =>
-      form.setFormData((prev) => ({
-        ...prev,
-        timezone: e.target.value,
-      }))
-    }
-  >
-    <option value="" disabled hidden>
-      Select a timezone
-    </option>
-    {timezonesArr.array.map((timezone, idx) => (
-      <option key={idx} value={timezone}>
-        {timezone}
-      </option>
-    ))}
-  </select>
-</div>; */
-}

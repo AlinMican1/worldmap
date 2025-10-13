@@ -58,12 +58,33 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
 
   const timezonesArr = useArray<string>([]);
   useEffect(() => {
-    if (COUNTRIES[form.formData.location]) {
-      timezonesArr.setArray(getTimezones(form.formData.location));
+    const location = form.formData.location;
+
+    if (COUNTRIES[location]) {
+      const zones = getTimezones(location);
+      timezonesArr.setArray(zones);
+
+      // Only auto-select first timezone if none selected yet
+      if (zones.length > 0 && !form.formData.timezone) {
+        form.setFormData((prev) => ({
+          ...prev,
+          timezone: zones[0],
+        }));
+      }
+      if (zones.length > 0) {
+        form.setFormData((prev) => ({
+          ...prev,
+          timezone: zones[0],
+        }));
+      }
     } else {
       timezonesArr.clear();
+      form.setFormData((prev) => ({
+        ...prev,
+        timezone: "",
+      }));
     }
-  }, [form.formData.location]);
+  }, [form.formData.location, form.setFormData]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -105,7 +126,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     (newLocation: string) => form.setFormData((prev) => ({ ...prev, location: newLocation })),
     [form.setFormData]
   );
-  const CalendarBoxMemo = useMemo(() => <CalendarBox />, [dateArray.array]);
+  // const CalendarBoxMemo = useMemo(() => <CalendarBox />, [dateArray.array]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -259,8 +280,8 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                         />
                         <div>
                           {/* {timezonesArr.array.length > 0 && ( */}
-                          <div>
-                            {/* <label htmlFor="timezone">Choose a timezone:</label>
+
+                          {/* <label htmlFor="timezone">Choose a timezone:</label>
                             <select
                               className="select-timezone-bar"
                               name="timezone"
@@ -282,19 +303,24 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                                 </option>
                               ))}
                             </select> */}
-                            <SelectField
-                              label="Choose a timezone:"
-                              values={timezonesArr.array}
-                              onChange={(e) =>
-                                form.setFormData((prev) => ({
-                                  ...prev,
-                                  timezone: e.target.value,
-                                }))
-                              }
-                            />
-                          </div>
-                          {/* )} */}
+                          <SelectField
+                            label="Choose a timezone"
+                            name="timezone"
+                            id="timezone"
+                            options={timezonesArr.array}
+                            default_value="Choose A Location"
+                            value={form.formData.timezone}
+                            selectedValue={form.formData.timezone}
+                            setSelectedValue={(value) =>
+                              form.setFormData((prev) => ({
+                                ...prev,
+                                timezone: value.toString(),
+                              }))
+                            }
+                          />
+                          {form.formData.timezone}
                         </div>
+                        {/* )} */}
                       </div>
 
                       <div className="close-btn-pos">
