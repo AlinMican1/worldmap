@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./selectField.css";
 
 interface SelectFieldParams {
-  label: string;
-  name: string;
-  id: string;
+  label?: string;
+  name?: string;
+  id?: string;
   options: string[];
-  value: string | string[]; // single or multiple
-  // onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   default_value?: string;
-  multiple?: boolean; // <— this controls single vs multiple
+  multiple?: boolean;
   setSelectedValue: React.Dispatch<React.SetStateAction<string | number>>;
   selectedValue: string | number;
+  width?: string;
 }
 
 const SelectField = ({
@@ -19,75 +18,72 @@ const SelectField = ({
   name,
   id,
   options,
-  value,
+  width = "25vw",
   setSelectedValue,
   selectedValue,
-  // onChange,
   default_value = "SELECT A VALUE",
-  multiple = false,
 }: SelectFieldParams) => {
   const [dropDown, setDropDown] = useState<boolean>(false);
-
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const handleSelect = (option: string) => {
     setDropDown(false);
     setSelectedValue(option);
   };
 
   const handleDropDown = () => {
-    if (options.length > 0) {
-      setDropDown(!dropDown);
-    }
+    if (options.length > 0) setDropDown(!dropDown);
   };
 
   useEffect(() => {
-    if (options.length === 0) {
-      setDropDown(false);
-      setSelectedValue("");
+    const handleClickOutside = (event: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+        setDropDown(false);
+      }
+    };
+
+    if (dropDown) {
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      setSelectedValue(options[0]);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
-  }, [options]);
+
+    // cleanup when unmounting or when dropDown changes
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropDown]);
+
   return (
-    // <div>
-    //   <label htmlFor={id}>{label}</label>
-    //   <div className="select-wrapper">
-    //     <select
-    //       className="select-timezone-bar"
-    //       id={id}
-    //       name={name}
-    //       value={value}
-    //       multiple={multiple}
-    //       onChange={onChange}
-    //     >
-    //       <option value="" disabled hidden>
-    //         {default_value}
-    //       </option>
-
-    //       {options.map((option, idx) => (
-    //         <option key={idx} value={option}>
-    //           {option}
-    //         </option>
-    //       ))}
-    //     </select>
-    //   </div>
-    // </div>
     <div>
-      <label htmlFor={id}>{label}</label>
+      {label && <label htmlFor={id}>{label}</label>}
 
-      <div className="select-wrapper">
-        <button className="button-dropdown-wrapper" onClick={handleDropDown}>
-          {!selectedValue ? default_value : selectedValue}
+      <div className="select-wrapper" ref={wrapperRef}>
+        <button
+          className="button-dropdown-wrapper"
+          style={{
+            width,
+            border: dropDown ? "1px solid var(--color-primary-lighter)" : "0px solid transparent",
+          }}
+          type="button"
+          onClick={handleDropDown}
+        >
+          {selectedValue || default_value}
         </button>
 
-        {dropDown ? (
-          <div className="select-option-wrapper">
+        {dropDown && (
+          <div className="select-option-wrapper" style={{ width }}>
             {options.map((option, idx) => (
-              <button onClick={() => handleSelect(option)} className="option-button" key={idx}>
+              <button
+                key={idx}
+                onClick={() => handleSelect(option)}
+                className="option-button"
+                type="button"
+              >
                 {option}
               </button>
             ))}
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );

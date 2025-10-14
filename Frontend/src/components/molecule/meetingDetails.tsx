@@ -3,16 +3,28 @@ import { InputField } from "../atoms/inputField";
 import "../../app/globals.css";
 import { MeetingDetails } from "@/types/interfaces";
 import TextAreaInput from "../atoms/textAreaInput";
+import SelectField from "../atoms/selectField";
 
 const MeetingDetails = () => {
   const meetingForm = useClientForm<MeetingDetails>({
     meeting_date: "",
     meeting_link: "",
     meeting_time: "",
-    meeting_duration: "",
+    meeting_duration: "1 hour",
     meeting_desc: "",
     meeting_title: "",
   });
+  const meeting_durations = [
+    "15 minutes",
+    "30 minutes",
+    "45 minutes",
+    "1 hour",
+    "1.5 hours",
+    "2 hours",
+    "3 hours",
+    "4 hours",
+    "5 hours",
+  ];
 
   return (
     <div>
@@ -68,6 +80,19 @@ const MeetingDetails = () => {
           borderRound="5px"
           //   error={errorsHook.getErrorBoolean("surname")}
           //   errorMsg={errorsHook.getErrorMsg("surname")}
+        />
+        <SelectField
+          label="Duration"
+          options={meeting_durations}
+          default_value="2 hours"
+          setSelectedValue={(value) =>
+            meetingForm.setFormData((prev) => ({
+              ...prev,
+              meeting_duration: value.toString(),
+            }))
+          }
+          selectedValue={meetingForm.formData.meeting_duration}
+          width="150px"
         />
       </div>
     </div>

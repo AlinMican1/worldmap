@@ -34,10 +34,9 @@ const TextAreaInput = ({
   borderRound = "0px",
 }: textAreaFieldParams) => {
   return (
-    <div className="input-wrapper">
+    <div className="textarea-wrapper">
       <label htmlFor={label}>{label}</label>
-      <div className="input-with-icon">
-        {icon && <span className="input-icon">{icon}</span>} {/* Render the icon if provided */}
+      <div>
         <textarea
           // type={type}
           id={id}

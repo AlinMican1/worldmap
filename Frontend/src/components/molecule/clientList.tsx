@@ -28,7 +28,7 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
           placeholder="Search Participants..."
           width={"100%"}
           borderRound="10px"
-          icon={<SearchIcon size="1rem" className="search-icon" />}
+          icon={<SearchIcon size="18" className="search-icon" />}
         />
       </div>
       <div className="clientList-wrapper">

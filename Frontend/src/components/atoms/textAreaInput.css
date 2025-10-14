@@ -1,13 +1,7 @@
-.input-wrapper {
+.textarea-wrapper {
     /* margin-top: var(--space-md); */
     flex-direction: column;
     display: flex;
-  }
-  
-  .input-with-icon {
-    position: relative;
-    display: flex;
-    align-items: center;
   }
 
   label {
@@ -32,6 +26,7 @@
     padding: var(--space-xs);
     font-weight: var(--font-thin);
     resize:none;
+    margin-bottom: var(--space-xs);
   }
   
   textarea.input-error {

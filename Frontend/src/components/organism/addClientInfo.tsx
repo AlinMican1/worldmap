@@ -309,7 +309,6 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                             id="timezone"
                             options={timezonesArr.array}
                             default_value="Choose A Location"
-                            value={form.formData.timezone}
                             selectedValue={form.formData.timezone}
                             setSelectedValue={(value) =>
                               form.setFormData((prev) => ({
@@ -318,7 +317,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                               }))
                             }
                           />
-                          {form.formData.timezone}
+                          {/* {form.formData.timezone} */}
                         </div>
                         {/* )} */}
                       </div>
