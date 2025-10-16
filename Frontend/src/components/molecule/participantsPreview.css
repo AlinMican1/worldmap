@@ -7,7 +7,15 @@
     margin-bottom: var(--space-sm);
     
 }
+.no-participant-ClockIcon{
+    color: var(--text-muted);
+    opacity: 50%;
+}
 
+.no-participants-header{
+    color: var(--text-muted);
+    font-size: var(--text-md);
+}
 .previewTimezone-wrapper{
     gap: var(--space-xxs);
     display: flex;

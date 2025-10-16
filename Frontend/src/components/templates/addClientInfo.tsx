@@ -29,7 +29,7 @@ import PariticipantsPreview from "../molecule/participantsPreview";
 import EarthIcon from "../icons/earth";
 import { getTimezones } from "../../../helper/SuggestLocation";
 import { COUNTRIES } from "../../../helper/SuggestLocation";
-import MeetingDetails from "../molecule/meetingDetails";
+import MeetingDetails from "../organism/meetingDetails";
 import SelectField from "../atoms/selectField";
 
 const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {

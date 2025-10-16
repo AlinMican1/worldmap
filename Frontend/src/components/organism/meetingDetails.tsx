@@ -4,6 +4,7 @@ import "../../app/globals.css";
 import { MeetingDetails } from "@/types/interfaces";
 import TextAreaInput from "../atoms/textAreaInput";
 import SelectField from "../atoms/selectField";
+import SelectDate from "../molecule/selectDate";
 
 const MeetingDetails = () => {
   const meetingForm = useClientForm<MeetingDetails>({
@@ -67,7 +68,7 @@ const MeetingDetails = () => {
         />
       </div>
       <div className="row-input-elem">
-        <InputField
+        {/* <InputField
           autocomplete="off"
           type="text"
           name="meeting_date"
@@ -80,7 +81,19 @@ const MeetingDetails = () => {
           borderRound="5px"
           //   error={errorsHook.getErrorBoolean("surname")}
           //   errorMsg={errorsHook.getErrorMsg("surname")}
+        /> */}
+        <SelectDate
+          label="Meeting Date"
+          width="20vw"
+          selectedDate={meetingForm.formData.meeting_date}
+          setSelectedDate={(value) =>
+            meetingForm.setFormData((prev) => ({
+              ...prev,
+              meeting_date: value.toString(),
+            }))
+          }
         />
+        <p>{meetingForm.formData.meeting_date}</p>
         <SelectField
           label="Duration"
           options={meeting_durations}

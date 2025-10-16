@@ -25,3 +25,17 @@ export const getMonthName = (date: string): string => {
 
   return dateStr.toLocaleString("en-US", { month: "short" });
 };
+
+export function getTodayDate(longForm: boolean): string {
+  const today = new Date();
+  const [day, month, year] = formatDate(today).split("-");
+
+  const fullDate = `${day}/${month}/${year}`;
+
+  if (longForm === true) {
+    return `${day}-${getMonthName(fullDate)}-${year}`;
+  }
+
+  // join back into "dd/mm/yyyy"
+  return formatDate(today);
+}

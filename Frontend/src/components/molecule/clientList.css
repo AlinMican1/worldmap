@@ -53,6 +53,10 @@
     top:3.5px
     
   }
+.error-Icon{
+    color: var(--text-muted);
+    opacity: 50%;
+}
 
 .search-client-wrapper{
     padding: var(--space-xs);

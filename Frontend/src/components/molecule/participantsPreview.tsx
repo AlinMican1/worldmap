@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import useArray from "@/hooks/useArray";
 import "./participantsPreview.css";
 import { getDayMonthYear, getMonthName } from "../../../helper/Formatter";
+import "../../app/globals.css";
 import ErrorIcon from "../icons/errorIcon";
+import ClockIcon from "../icons/clock";
 
 interface ParticipantPreviewProps extends ClientInfoProps {
   localTime: string;
@@ -74,7 +76,13 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
 
   return (
     <div>
-      {participants.array.length === 0 && <p>No current participants</p>}
+      {participants.array.length === 0 && (
+        <div className="no-participants-wrapper">
+          <ClockIcon className="no-participant-ClockIcon" size="64" />
+          <h3 className="no-participants-header">Select date/time and participants</h3>
+          <p>to see time zone preview</p>
+        </div>
+      )}
       {participants.array.some((participant) => participant.canMeet === false) && (
         // <BoxDesign
         //   variant="errorPreview-DesignBox"

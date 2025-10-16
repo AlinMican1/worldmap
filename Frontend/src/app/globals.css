@@ -217,3 +217,10 @@ span{
   flex-direction: row; 
   align-items: end;
 }
+.no-participants-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--space-lg);
+}

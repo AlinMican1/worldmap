@@ -96,10 +96,8 @@
 .option-button{
     width: 100%;
     border: 0px;
-    
     color: var(--text);
     padding: var(--space-sm);
-    
     border-radius: var(--border-sm);
     font-size: var(--text-sm);
     font-weight: var(--font-thin);
@@ -107,6 +105,15 @@
     display: flex;
     justify-content: start;
     transition: background-color 0.15s ease;
+}
+.arrow-down{
+  position: absolute;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 8px solid var(--text);
+  
+  right: var(--space-md);
+  
 }
 
 .option-button:hover{

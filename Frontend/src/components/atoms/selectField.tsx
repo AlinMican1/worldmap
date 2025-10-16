@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useDropdown } from "@/hooks/useDropdown";
 import "./selectField.css";
 
 interface SelectFieldParams {
@@ -23,55 +23,41 @@ const SelectField = ({
   selectedValue,
   default_value = "SELECT A VALUE",
 }: SelectFieldParams) => {
-  const [dropDown, setDropDown] = useState<boolean>(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const { open, toggle, close, ref } = useDropdown();
+
   const handleSelect = (option: string) => {
-    setDropDown(false);
     setSelectedValue(option);
+    close();
   };
 
   const handleDropDown = () => {
-    if (options.length > 0) setDropDown(!dropDown);
+    if (options.length > 0) toggle();
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
-        setDropDown(false);
-      }
-    };
-
-    if (dropDown) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    // cleanup when unmounting or when dropDown changes
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [dropDown]);
 
   return (
     <div>
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && (
+        <label htmlFor={id} className="select-label">
+          {label}
+        </label>
+      )}
 
-      <div className="select-wrapper" ref={wrapperRef}>
+      <div className="select-wrapper" ref={ref}>
         <button
           className="button-dropdown-wrapper"
           style={{
             width,
-            border: dropDown ? "1px solid var(--color-primary-lighter)" : "0px solid transparent",
+            border: open ? "1px solid var(--color-primary-lighter)" : "0px solid transparent",
           }}
           type="button"
           onClick={handleDropDown}
         >
+          <div className="arrow-down"></div>
           {selectedValue || default_value}
         </button>
 
-        {dropDown && (
-          <div className="select-option-wrapper" style={{ width }}>
+        {open && (
+          <div className="select-option-wrapper">
             {options.map((option, idx) => (
               <button
                 key={idx}

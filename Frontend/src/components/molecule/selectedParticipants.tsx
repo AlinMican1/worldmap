@@ -11,7 +11,7 @@ const SelectedParticipants = ({ clients, setClients, parentWidth }: AddClientInf
   const handleRemoveParticipant = (participant: ClientInfoProps) => {
     setClients((old) => old.map((c) => (c === participant ? { ...c, selected: false } : c)));
   };
-  console.log(parentWidth);
+
   return (
     <div>
       {clients.some((p) => p.selected) && (

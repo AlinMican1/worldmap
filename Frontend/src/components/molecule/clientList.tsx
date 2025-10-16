@@ -9,13 +9,15 @@ import PlusIcon from "../icons/plus";
 import { memo, useState } from "react";
 import { InputField } from "../atoms/inputField";
 import SearchIcon from "../icons/search";
+import ErrorIcon from "../icons/errorIcon";
+
 const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
   console.log("CLIENTS LIST RENDERED");
   const [search, setSearch] = useState<string>("");
   const handleSelectedParticipants = (participant: ClientInfoProps) => {
     setClients((old) => old.map((c) => (c === participant ? { ...c, selected: !c.selected } : c)));
   };
-  console.log(search);
+
   return (
     <>
       <div className="search-client-wrapper">
@@ -32,7 +34,12 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
         />
       </div>
       <div className="clientList-wrapper">
-        {clients.filter((c) => !c.selected).length === 0 && <p>No participants found</p>}
+        {clients.filter((c) => !c.selected).length === 0 && (
+          <div className="no-participants-wrapper">
+            <ErrorIcon size="48" className="error-Icon" />
+            <p>No participants found.</p>
+          </div>
+        )}
         {clients
           .filter((c) => !c.selected)
           .map(
