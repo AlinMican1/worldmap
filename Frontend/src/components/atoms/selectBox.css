@@ -1,21 +1,30 @@
 .button-wrapper-1{
     background-color: var(--background);
     border: 0.5px solid var(--color-hover);
-    padding: var(--space-xs);
-    min-width: 50px;
-    max-width: 7vw;
+    padding: var(--space-xxs);
+    /* min-width: 50px;
+    max-width: 7vw; */
+    
     margin: 0px;
     
 }
+
+.date-number-wrapper{
+    display: flex;
+    justify-content: center;
+}
 .calendar-box{
     /* padding: var(--space-md); */
-    min-width: 50px;
-    max-width: none;
+    width: 3vw;
+    background-color: transparent;
+    border: 0px;
+    color: var(--text)
+    /* max-width: none; */
 }
 
 .button-wrapper-1:hover{
-    background-color: var(--color-hover);
-    
+    background-color: var(--bg-light);
+    border-radius: var(--border-xs);
 }
 
 .turnDownOpacity {

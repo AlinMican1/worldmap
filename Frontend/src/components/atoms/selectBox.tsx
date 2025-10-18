@@ -25,7 +25,7 @@ const SelectBox = ({
   };
 
   return (
-    <div>
+    <div className="date-number-wrapper">
       <button type="button" onClick={onClick} className={produceButtonClass()}>
         {name}
       </button>

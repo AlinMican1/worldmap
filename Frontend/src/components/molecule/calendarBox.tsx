@@ -31,6 +31,10 @@ const CalendarBox = () => {
     },
     [dateArray.array]
   );
+  const [meetingDate, setMeetingDate] = useState<string>("");
+  const handleMeetingDate = (date: string) => {
+    setMeetingDate(date);
+  };
 
   // Handlers for month navigation
   const goToNextMonth = () => {
@@ -88,21 +92,27 @@ const CalendarBox = () => {
 
         {calendar.daysArray.map(({ date }, i) => {
           return (
-            <SelectBox
-              key={i}
-              name={date.toString()}
-              disabled={calendar.monthStartDay > date}
-              dimmed={isWeekend(currentYear, currentMonth, date)}
-              onClick={() => {
-                if (calendar.monthStartDay <= date) {
-                  addDateToArray(formatDate(new Date(currentYear, currentMonth, date)));
+            <div>
+              <SelectBox
+                key={i}
+                name={date.toString()}
+                disabled={calendar.monthStartDay > date}
+                dimmed={isWeekend(currentYear, currentMonth, date)}
+                // onClick={() => {
+                //   if (calendar.monthStartDay <= date) {
+                //     addDateToArray(formatDate(new Date(currentYear, currentMonth, date)));
+                //   }
+                // }}
+                onClick={() =>
+                  handleMeetingDate(formatDate(new Date(currentYear, currentMonth, date)))
                 }
-              }}
-              selected={dateArray.array.includes(
-                formatDate(new Date(currentYear, currentMonth, date))
-              )}
-              className="calendar-box"
-            />
+                selected={dateArray.array.includes(
+                  formatDate(new Date(currentYear, currentMonth, date))
+                )}
+                className="calendar-box"
+              />
+              <p>{meetingDate}</p>
+            </div>
           );
         })}
       </div>
