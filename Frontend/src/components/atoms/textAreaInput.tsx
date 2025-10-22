@@ -12,7 +12,7 @@ interface textAreaFieldParams {
   errorMsg?: string;
   disabled?: boolean;
   autocomplete?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   icon?: React.ReactNode;
   width?: string | number;
   borderRound?: string;
@@ -44,7 +44,7 @@ const TextAreaInput = ({
           name={name}
           autoComplete={autocomplete}
           placeholder={placeholder}
-          // onChange={onChange}
+          onChange={onChange}
           disabled={disabled}
           className={`${error ? "input-error" : ""}`}
           style={{ width: width ?? undefined, borderRadius: borderRound ?? undefined }}

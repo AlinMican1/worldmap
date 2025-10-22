@@ -1,0 +1,51 @@
+.hourMinute-wrapper{
+    max-width: 8vw;
+    /* max-width: 100px; */
+    min-width: 80px;
+    height: 40px;
+    background: var(--bg-dark);
+    border: 1px solid transparent;
+    border-radius: var(--border-sm);
+    padding: var(--space-sm);
+    display: flex;
+    align-items: center;
+   
+    
+}
+
+.inputBox{
+    all: unset;
+    font-weight: var(--font-thin);
+    width: 20px;
+    color: var(--text);
+    font-size: var(--text-base);
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    font-weight: 100;
+    align-items: center;
+    
+}
+.inputBox:focus{
+     /* padding: var(--space-xs); */
+    all: unset;
+    font-weight: var(--font-thin);
+    justify-content: center;
+    background-color: var(--bg);
+    width: 20px;
+    border-radius: var(--border-xs);
+   
+    padding: var(--space-xs);
+    border: 1px solid var(--color-primary-lighter)
+}
+
+.inputBox::placeholder{
+    all: unset;
+    color: var(--text-muted);
+    font-weight: var(--font-thin);
+
+}
+
+.semicolon-font{
+    font-weight: var(--font-thin);
+    color: var(--text-muted);
+}

@@ -6,34 +6,38 @@ import "./calendarBox.css";
 import "../../app/globals.css";
 import { GenerateCalendar, isWeekend } from "../../../helper/GenerateCalendar";
 import { MONTHMAP, WEEKDAYS } from "../../../helper/Constants";
-import { formatDate, getISODate } from "../../../helper/Formatter";
-import { useDateAndTimeContext } from "@/contexts";
+import { formatDate, getISODate, getTodayDate } from "../../../helper/Formatter";
+import { useDateAndTimeContext, useMeetingDateContext } from "@/contexts";
 
-const CalendarBox = () => {
-  const { dateArray } = useDateAndTimeContext();
+interface CalendarBoxProps {
+  onDateSelect?: (date: string) => void;
+}
+const CalendarBox = ({ onDateSelect }: CalendarBoxProps) => {
+  // const { dateArray } = useDateAndTimeContext();
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth()); // 0-based month
-
+  // console.log("BBBB", dateArray.array);
   const calendar = GenerateCalendar(currentMonth, currentYear);
   const firstWeekday = (new Date(currentYear, currentMonth, calendar.startDay).getDay() + 6) % 7;
 
-  const addDateToArray = useCallback(
-    (date: string) => {
-      const dateIndex = dateArray.array.indexOf(date);
-      if (dateIndex > -1) {
-        dateArray.remove(dateIndex);
-      } else {
-        dateArray.push(date);
-        dateArray.setArray((prev) =>
-          [...prev].sort((a, b) => getISODate(a).getTime() - getISODate(b).getTime())
-        );
-      }
-    },
-    [dateArray.array]
-  );
-  const [meetingDate, setMeetingDate] = useState<string>("");
+  // const addDateToArray = useCallback(
+  //   (date: string) => {
+  //     const dateIndex = dateArray.array.indexOf(date);
+  //     if (dateIndex > -1) {
+  //       dateArray.remove(dateIndex);
+  //     } else {
+  //       dateArray.push(date);
+  //       dateArray.setArray((prev) =>
+  //         [...prev].sort((a, b) => getISODate(a).getTime() - getISODate(b).getTime())
+  //       );
+  //     }
+  //   },
+  //   [dateArray.array]
+  // );
+  const { meetingDate, setMeetingDate } = useMeetingDateContext();
   const handleMeetingDate = (date: string) => {
     setMeetingDate(date);
+    if (onDateSelect) onDateSelect(date);
   };
 
   // Handlers for month navigation
@@ -92,9 +96,8 @@ const CalendarBox = () => {
 
         {calendar.daysArray.map(({ date }, i) => {
           return (
-            <div>
+            <div key={i}>
               <SelectBox
-                key={i}
                 name={date.toString()}
                 disabled={calendar.monthStartDay > date}
                 dimmed={isWeekend(currentYear, currentMonth, date)}
@@ -106,12 +109,14 @@ const CalendarBox = () => {
                 onClick={() =>
                   handleMeetingDate(formatDate(new Date(currentYear, currentMonth, date)))
                 }
-                selected={dateArray.array.includes(
+                // selected={dateArray.array.includes(
+                //   formatDate(new Date(currentYear, currentMonth, date))
+                // )}
+                selected={meetingDate.includes(
                   formatDate(new Date(currentYear, currentMonth, date))
                 )}
                 className="calendar-box"
               />
-              <p>{meetingDate}</p>
             </div>
           );
         })}

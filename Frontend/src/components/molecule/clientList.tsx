@@ -68,6 +68,7 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
                       <Button
                         variant="fourth-btn"
                         onClick={() => handleSelectedParticipants(client)}
+                        type="button"
                       >
                         <PlusIcon />
                       </Button>

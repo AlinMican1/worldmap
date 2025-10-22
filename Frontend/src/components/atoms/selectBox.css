@@ -4,7 +4,7 @@
     padding: var(--space-xxs);
     /* min-width: 50px;
     max-width: 7vw; */
-    
+    border-radius: var(--border-xs);
     margin: 0px;
     
 }
@@ -23,7 +23,7 @@
 }
 
 .button-wrapper-1:hover{
-    background-color: var(--bg-light);
+    background-color: var(--bg-dark);
     border-radius: var(--border-xs);
 }
 

@@ -5,7 +5,7 @@
 .selectDate-dropDown-wrapper{
     margin-top: var(--space-sm);
     background: var(--bg-light);
-    width: 100%;
+    width: auto;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -21,6 +21,7 @@
     transform-origin: top center;
     animation: dropdownFade 0.18s ease-out forwards;
     opacity: 0;
+    padding: var(--space-md);
 }
 
 @keyframes dropdownFade {

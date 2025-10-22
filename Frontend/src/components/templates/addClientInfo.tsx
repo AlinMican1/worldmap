@@ -3,8 +3,13 @@ import BoxDesign from "../atoms/boxDesign";
 import "../../app/globals.css";
 import "./addClientInfo.css";
 import { InputField } from "../atoms/inputField";
-import { ErrorMessageProps, ClientInfoProps, AddClientInfoProps } from "@/types/interfaces";
-import { SubmitClientSchedule } from "@/REST/POST";
+import {
+  ErrorMessageProps,
+  ClientInfoProps,
+  AddClientInfoProps,
+  MeetingDetailsProps,
+} from "@/types/interfaces";
+import { SubmitClientSchedule, SubmitMeetingDetails } from "@/REST/POST";
 import { SubmitAddParticipant } from "@/REST/POST";
 import EnterLocation from "../molecule/enterLocation";
 import useErrors from "@/hooks/useErrors";
@@ -127,7 +132,14 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     [form.setFormData]
   );
   // const CalendarBoxMemo = useMemo(() => <CalendarBox />, [dateArray.array]);
-
+  const meetingForm = useClientForm<MeetingDetailsProps>({
+    meeting_date: "",
+    meeting_link: "",
+    meeting_time: "",
+    meeting_duration: "1 hour",
+    meeting_desc: "",
+    meeting_title: "",
+  });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -177,7 +189,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       <form id="client-form" onSubmit={handleSubmit}>
         <div className="scheduler-layout">
           <div className="left-column">
-            <div className="calendar-box">
+            <div>
               <BoxDesign
                 centeredY="leftY"
                 centeredX="leftX"
@@ -189,14 +201,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                   title="Meeting Details"
                   icon={<NotesIcon className="title-icon" size="24" />}
                 />
-                <MeetingDetails />
-                {/* <DateAndTimeContext.Provider value={dateAndTime}>
-                  <div className="elements-row">
-                    {CalendarBoxMemo}
-                    <ChooseTime />
-                  </div>
-                  <DateAndTimeDisplay />
-                </DateAndTimeContext.Provider> */}
+                <MeetingDetails meetingForm={meetingForm} />
               </BoxDesign>
             </div>
 
@@ -364,6 +369,12 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
         <Button type="submit" form="client-form" variant="secondary-btn">
           Submit All Clients
         </Button>
+        <p>{meetingForm.formData.meeting_title}</p>
+        <p>{meetingForm.formData.meeting_desc}</p>
+        <p>{meetingForm.formData.meeting_time}</p>
+        <p>{meetingForm.formData.meeting_date}</p>
+        <p>{meetingForm.formData.meeting_link}</p>
+        <p>{meetingForm.formData.meeting_duration}</p>
         {errorsHook.getErrorBoolean("noClient") ? (
           <p className="error-msg">{errorsHook.getErrorMsg("noClient")}</p>
         ) : (

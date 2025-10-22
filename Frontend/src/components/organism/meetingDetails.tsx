@@ -1,20 +1,20 @@
 import useClientForm from "@/hooks/useClientForm";
 import { InputField } from "../atoms/inputField";
 import "../../app/globals.css";
-import { MeetingDetails } from "@/types/interfaces";
+import { MeetingDetailsProps } from "@/types/interfaces";
 import TextAreaInput from "../atoms/textAreaInput";
 import SelectField from "../atoms/selectField";
 import SelectDate from "../molecule/selectDate";
+import TimePicker from "../atoms/timePicker";
+import useErrors from "@/hooks/useErrors";
 
-const MeetingDetails = () => {
-  const meetingForm = useClientForm<MeetingDetails>({
-    meeting_date: "",
-    meeting_link: "",
-    meeting_time: "",
-    meeting_duration: "1 hour",
-    meeting_desc: "",
-    meeting_title: "",
-  });
+interface MeetingDetailsComponentProps {
+  meetingForm: ReturnType<typeof useClientForm<MeetingDetailsProps>>;
+}
+
+const MeetingDetails = ({ meetingForm }: MeetingDetailsComponentProps) => {
+  const errorsHook = useErrors();
+
   const meeting_durations = [
     "15 minutes",
     "30 minutes",
@@ -41,8 +41,8 @@ const MeetingDetails = () => {
           placeholder="Weekly Team Sync"
           borderRound="5px"
           width={"20vw"}
-          //   error={errorsHook.getErrorBoolean("name")}
-          //   errorMsg={errorsHook.getErrorMsg("name")}
+          error={errorsHook.getErrorBoolean("meeting_title")}
+          errorMsg={errorsHook.getErrorMsg("meeting_title")}
         />
         <InputField
           autocomplete="off"
@@ -55,16 +55,22 @@ const MeetingDetails = () => {
           placeholder="https://zoom..."
           width={"20vw"}
           borderRound="5px"
-          //   error={errorsHook.getErrorBoolean("surname")}
-          //   errorMsg={errorsHook.getErrorMsg("surname")}
+          error={errorsHook.getErrorBoolean("surname")}
+          errorMsg={errorsHook.getErrorMsg("surname")}
         />
       </div>
       <div>
         <TextAreaInput
           label="Meeting Description (Optional)"
           placeholder="Meeting agenda and objectives..."
+          id="meeting_desc"
+          name="meeting_desc"
           borderRound="5px"
           width={"100%"}
+          value={meetingForm.formData.meeting_desc}
+          onChange={meetingForm.handleChange}
+          error={errorsHook.getErrorBoolean("meeting_desc")}
+          errorMsg={errorsHook.getErrorMsg("meeting_desc")}
         />
       </div>
       <div className="row-input-elem">
@@ -93,11 +99,21 @@ const MeetingDetails = () => {
             }))
           }
         />
-        <p>{meetingForm.formData.meeting_date}</p>
+
+        <TimePicker
+          label="Time"
+          selectedTime={meetingForm.formData.meeting_time}
+          setSelectedTime={(value) =>
+            meetingForm.setFormData((prev) => ({
+              ...prev,
+              meeting_time: value.toString(),
+            }))
+          }
+        />
         <SelectField
           label="Duration"
           options={meeting_durations}
-          default_value="2 hours"
+          default_value="1 hour"
           setSelectedValue={(value) =>
             meetingForm.setFormData((prev) => ({
               ...prev,

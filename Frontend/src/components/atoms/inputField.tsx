@@ -50,6 +50,12 @@ export const InputField = ({
           disabled={disabled}
           className={`${error ? "input-error" : ""}`}
           style={{ width: width ?? undefined, borderRadius: borderRound ?? undefined }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          }}
         />
       </div>
       {error && <p className={`${"error"}`}>{errorMsg}</p>}

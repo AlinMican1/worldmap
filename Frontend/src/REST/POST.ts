@@ -1,6 +1,11 @@
 import axios from "axios";
-import { GetFormErrors } from "../../helper/GetErrors";
-import { ClientInfoProps, ErrorMessageProps } from "@/types/interfaces";
+import { GetFormErrors, GetMeetingDetailsErrors } from "../../helper/GetErrors";
+import {
+  ClientInfoProps,
+  ErrorMessagePro,
+  ErrorMessageProps,
+  MeetingDetailsProps,
+} from "@/types/interfaces";
 
 // export const SubmitLocationForm = async (
 //   emailRequired: boolean,
@@ -91,4 +96,25 @@ export const SubmitAddParticipant = async (client: ClientInfoProps) => {
     return { success: false, message: "Server Error", error: error, errors: [] };
   }
   //Check for errors first when submit
+};
+
+export const SubmitMeetingDetails = async (meetingDetails: MeetingDetailsProps) => {
+  const {
+    meeting_date,
+    meeting_desc,
+    meeting_duration,
+    meeting_link,
+    meeting_time,
+    meeting_title,
+  } = meetingDetails;
+  const getAllErrors = await GetMeetingDetailsErrors({
+    meeting_title,
+    meeting_date,
+    meeting_desc,
+    meeting_duration,
+    meeting_link,
+    meeting_time,
+  });
+  const filteredErrors = getAllErrors.forEach((err: ErrorMessagePro) => console.log(err));
+  return { success: false, errors: filteredErrors };
 };

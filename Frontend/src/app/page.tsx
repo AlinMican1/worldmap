@@ -44,13 +44,6 @@ export default function Home() {
       <button onClick={test}>BANG BNAG</button>
       <h1>{msg}</h1>
       <InputLocation></InputLocation>
-      <DateAndTimeContext.Provider value={dateAndTime}>
-        <div className="elements-row">
-          {CalendarBoxMemo}
-          <ChooseTime />
-        </div>
-        <DateAndTimeDisplay />
-      </DateAndTimeContext.Provider>
     </div>
   );
 }

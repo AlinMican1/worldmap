@@ -24,9 +24,8 @@ const CurrentTime = () => {
   }, []);
   return (
     <BoxDesign variant="showTime-DesignBox" padding="small">
-      <p className="showTime-Title">
-        <ClockIcon className="clock-Design" /> Active Now
-      </p>
+      {/* <ClockIcon className="clock-Design" />  */}
+      <p className="showTime-Title">Active Now</p>
 
       <h1 className="showTime-time">{time}</h1>
       {/* <p className="showTime-date">{todayDate}</p> */}

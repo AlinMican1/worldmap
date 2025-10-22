@@ -1,11 +1,12 @@
 import { useDropdown } from "@/hooks/useDropdown";
 import CalendarBox from "./calendarBox";
 import "./selectDate.css";
-import { useMemo, useState } from "react";
-import { DateAndTimeContext } from "@/contexts";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { DateAndTimeContext, MeetingDateContext } from "@/contexts";
 import ChooseTime from "./chooseTime";
 import DateAndTimeDisplay from "./dateAndTimeDisplay";
 import useArray from "@/hooks/useArray";
+import { getTodayDate } from "../../../helper/Formatter";
 
 interface SelectDateProps {
   label?: string;
@@ -16,25 +17,26 @@ interface SelectDateProps {
 
 const SelectDate = ({ label, selectedDate, setSelectedDate, width = "25vw" }: SelectDateProps) => {
   const { open, toggle, ref } = useDropdown();
-  const dateArray = useArray<string>([]);
-  const [time, setTime] = useState<string>("");
-  const [dateAndTimeMap, setDateAndTimeMap] = useState<Map<string, string[]>>(new Map());
-  const [selectedTimezone, setSelectedTimezone] = useState("");
-  // Use for context
-  const dateAndTime = useMemo(
-    () => ({
-      dateArray,
-      time,
-      setTime,
-      dateAndTimeMap,
-      setDateAndTimeMap,
-    }),
-    [dateArray, time, dateAndTimeMap]
+  // const dateArray = useArray<string>([]);
+  // setSelectedDate(getTodayDate(false))
+
+  useEffect(() => {
+    if (!selectedDate) {
+      setSelectedDate(getTodayDate(false));
+    }
+  }, [selectedDate, setSelectedDate]);
+
+  const CalendarBoxMemo = useMemo(
+    () => (
+      <CalendarBox
+        onDateSelect={(date: string) => {
+          setSelectedDate(date); // update form
+          toggle(); // close dropdown
+        }}
+      />
+    ),
+    [setSelectedDate, toggle]
   );
-
-  //Memoization
-
-  const CalendarBoxMemo = useMemo(() => <CalendarBox />, [dateArray.array]);
 
   return (
     <div className="selectDate-wrapper">
@@ -49,16 +51,19 @@ const SelectDate = ({ label, selectedDate, setSelectedDate, width = "25vw" }: Se
           }}
           type="button"
           onClick={toggle}
-        ></button>
+        >
+          {selectedDate}
+        </button>
         {open && (
           <div className="selectDate-dropDown-wrapper">
-            <DateAndTimeContext.Provider value={dateAndTime}>
-              <div className="elements-row">
-                {CalendarBoxMemo}
-                <ChooseTime />
-              </div>
-              <DateAndTimeDisplay />
-            </DateAndTimeContext.Provider>
+            <MeetingDateContext.Provider
+              value={{
+                meetingDate: selectedDate,
+                setMeetingDate: setSelectedDate,
+              }}
+            >
+              {CalendarBoxMemo}
+            </MeetingDateContext.Provider>
           </div>
         )}
       </div>
