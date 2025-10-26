@@ -29,8 +29,9 @@ const ClientList = ({ clients, setClients }: AddClientInfoProps) => {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search Participants..."
           width={"100%"}
-          borderRound="10px"
+          borderRound="6px"
           icon={<SearchIcon size="18" className="search-icon" />}
+          errorSpace={false}
         />
       </div>
       <div className="clientList-wrapper">

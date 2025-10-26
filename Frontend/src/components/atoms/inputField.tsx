@@ -16,6 +16,7 @@ interface inputFieldParams {
   icon?: React.ReactNode;
   width?: string | number;
   borderRound?: string;
+  errorSpace?: boolean;
 }
 
 export const InputField = ({
@@ -32,7 +33,8 @@ export const InputField = ({
   onChange,
   icon,
   width = "25vw",
-  borderRound = "0px",
+  borderRound = "4px",
+  errorSpace = true,
 }: inputFieldParams) => {
   return (
     <div className="input-wrapper">
@@ -58,7 +60,7 @@ export const InputField = ({
           }}
         />
       </div>
-      {error && <p className={`${"error"}`}>{errorMsg}</p>}
+      {errorSpace && <p className="error">{error ? errorMsg : "\u00A0"}</p>}
     </div>
   );
 };

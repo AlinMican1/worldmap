@@ -10,11 +10,10 @@ import useErrors from "@/hooks/useErrors";
 
 interface MeetingDetailsComponentProps {
   meetingForm: ReturnType<typeof useClientForm<MeetingDetailsProps>>;
+  errorsHook: ReturnType<typeof useErrors>;
 }
 
-const MeetingDetails = ({ meetingForm }: MeetingDetailsComponentProps) => {
-  const errorsHook = useErrors();
-
+const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProps) => {
   const meeting_durations = [
     "15 minutes",
     "30 minutes",
@@ -35,14 +34,14 @@ const MeetingDetails = ({ meetingForm }: MeetingDetailsComponentProps) => {
           type="text"
           name="meeting_title"
           label="Meeting Title"
-          //   value={meetingForm.formData.}
+          value={meetingForm.formData.meeting_title}
           id="meeting_title"
           onChange={meetingForm.handleChange}
           placeholder="Weekly Team Sync"
           borderRound="5px"
           width={"20vw"}
-          error={errorsHook.getErrorBoolean("meeting_title")}
-          errorMsg={errorsHook.getErrorMsg("meeting_title")}
+          error={errorsHook.getErrorBoolean("meetingTitle")}
+          errorMsg={errorsHook.getErrorMsg("meetingTitle")}
         />
         <InputField
           autocomplete="off"

@@ -33,6 +33,7 @@ input {
   box-sizing: border-box;
   padding-left: var(--space-xl);
   font-weight: var(--font-thin);
+  border-radius: var(--border-xs);
 }
 
 input.input-error {
@@ -61,7 +62,8 @@ input:focus {
 
 .error {
   color: #db4437;
-  font-size: var(--font-size-p);
-  font-weight: 100;
-  margin-top: var(--margin-Xsmall);
+  font-size: var(--text-base);
+  font-weight: var(--font-thin);
+  margin-top: var(--space-xxs);
+  
 }

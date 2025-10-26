@@ -115,6 +115,14 @@ export const SubmitMeetingDetails = async (meetingDetails: MeetingDetailsProps) 
     meeting_link,
     meeting_time,
   });
-  const filteredErrors = getAllErrors.forEach((err: ErrorMessagePro) => console.log(err));
-  return { success: false, errors: filteredErrors };
+  const filteredErrors: ErrorMessagePro[] = [];
+  const mapErrors = getAllErrors.forEach((err: ErrorMessagePro) => {
+    if (err.error === true) {
+      filteredErrors.push(err);
+    }
+  });
+
+  if (filteredErrors.length > 0) {
+    return { success: false, errors: filteredErrors };
+  }
 };

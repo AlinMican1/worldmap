@@ -1,9 +1,4 @@
-import {
-  ErrorMessageProps,
-  ClientInfoProps,
-  MeetingDetailsProps,
-  ErrorMessagePro,
-} from "@/types/interfaces";
+import { ErrorMessageProps, ClientInfoProps, MeetingDetailsProps } from "@/types/interfaces";
 import { COUNTRIES } from "./SuggestLocation";
 
 export const GetFormErrors = (
@@ -48,8 +43,8 @@ export const GetMeetingDetailsErrors = ({
   meeting_desc,
   meeting_duration,
   meeting_title,
-}: MeetingDetailsProps): Map<string, ErrorMessagePro> => {
-  const meetingDetailsMap = new Map<string, ErrorMessagePro>([
+}: MeetingDetailsProps): Map<string, ErrorMessageProps> => {
+  const meetingDetailsMap = new Map<string, ErrorMessageProps>([
     ["meetingTitle", { id: "meetingTitle", errorMsg: "Required", error: false }],
   ]);
 

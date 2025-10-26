@@ -9,28 +9,83 @@ import "../../app/globals.css";
 import ErrorIcon from "../icons/errorIcon";
 import ClockIcon from "../icons/clock";
 
+//SOME THINGS TO CONSIDER IF DATE IS SAME E.G 26/10./25 and time is 20:47 then time should be 20:47
+// Changing te time or date should change teh timepreview
 interface ParticipantPreviewProps extends ClientInfoProps {
   localTime: string;
   actualTime: string;
   canMeet: boolean;
 }
 
-const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInfoProps) => {
+interface ParticipantMeetingTimeProps extends AddClientInfoProps {
+  meetingTime: string;
+  meetingDate: string;
+}
+
+const PariticipantsPreview = ({
+  clients,
+  setClients,
+  parentWidth,
+  meetingTime,
+  meetingDate,
+}: ParticipantMeetingTimeProps) => {
   const participants = useArray<ParticipantPreviewProps>();
+  //Get timeDifference from user location to client location
+  const timeDiff = (startTime: string, endTime: string): string => {
+    const [startH, startM] = startTime.split(":").map(Number);
+    const [endH, endM] = endTime.split(":").map(Number);
+
+    // Convert both to total minutes
+    const startTotalMin = startH * 60 + startM;
+    const endTotalMin = endH * 60 + endM;
+
+    const diffMinutes = (endTotalMin - startTotalMin + 1440) % 1440;
+
+    // Convert back to hours and minutes
+    const hours = Math.floor(diffMinutes / 60);
+    const minutes = diffMinutes % 60;
+
+    return `${hours}h ${minutes}m`;
+  };
+
+  const addTimeDiffToDate = (
+    meetingDateStr: string,
+    meetingTimeStr: string,
+    timeDiff: string
+  ): Date => {
+    const [day, month, year] = meetingDateStr.split("-").map(Number); // assuming format "DD-MM-YYYY"
+    const [meetingH, meetingM] = meetingTimeStr.split(":").map(Number);
+
+    const date = new Date(year, month - 1, day, meetingH, meetingM);
+
+    // Parse timeDiff "Xh Ym"
+    const match = timeDiff.match(/(\d+)h (\d+)m/);
+    if (!match) throw new Error("Invalid timeDiff format");
+
+    const diffH = Number(match[1]);
+    const diffM = Number(match[2]);
+
+    date.setHours(date.getHours() + diffH);
+    date.setMinutes(date.getMinutes() + diffM);
+
+    return date;
+  };
+
   const checkTimeZone = async (client: ClientInfoProps) => {
     const now = new Date(); // user’s current local time
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+
+    const userTime = `${hours}:${minutes}`;
     const clientTime = await GetTimeFromDifferentCountry(client.timezone, client.location);
+    // console.log(clientHr + ":" + clientMin);
+    const timeDifference = timeDiff(userTime, clientTime.time);
+    const meetingDateObj = addTimeDiffToDate(meetingDate, meetingTime, timeDifference);
+    console.log("HEYYYYY", meetingTime, timeDifference);
+    console.log(meetingDateObj);
+    // meetingDate.setHours(clientHr, clientMin, 0, 0);
 
-    const [clientHr, clientMin] = clientTime.time.split(":").map(Number);
-
-    const meetingDate = new Date(now);
-    meetingDate.setHours(clientHr, clientMin, 0, 0);
-
-    if (meetingDate < now) {
-      meetingDate.setDate(meetingDate.getDate() + 1);
-    }
-
-    const actualTime = meetingDate.toLocaleString("en-GB", {
+    const actualTime = meetingDateObj.toLocaleString("en-GB", {
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
@@ -38,8 +93,9 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
       month: "2-digit",
       year: "numeric",
     });
+    const actualHour = meetingDateObj.getHours();
 
-    const canMeet = clientHr >= 8 && clientHr <= 17;
+    const canMeet = actualHour >= 8 && actualHour <= 17;
 
     return {
       actualTime,
@@ -72,7 +128,7 @@ const PariticipantsPreview = ({ clients, setClients, parentWidth }: AddClientInf
     };
 
     fetchUserData();
-  }, [clients]);
+  }, [clients, meetingDate, meetingTime]);
 
   return (
     <div>

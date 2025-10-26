@@ -4,12 +4,6 @@ export interface ErrorMessageProps {
   error: boolean;
 }
 
-export interface ErrorMessagePro {
-  id: string;
-  errorMsg: string;
-  error: boolean;
-}
-
 // export interface SubmitLocationFormProps {
 //   email: string;
 //   location: string;

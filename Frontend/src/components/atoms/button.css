@@ -94,6 +94,7 @@
 }
 .nav-btn:hover{
     transform: scale(1.05);
+    background-color: var(--bg-dark);
    
 }
 .nav-btn.active{

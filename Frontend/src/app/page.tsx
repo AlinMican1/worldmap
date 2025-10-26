@@ -7,6 +7,7 @@ import useArray from "@/hooks/useArray";
 import { DateAndTimeContext } from "@/contexts";
 import ChooseTime from "@/components/molecule/chooseTime";
 import DateAndTimeDisplay from "@/components/molecule/dateAndTimeDisplay";
+import HomePage from "@/components/templates/homePage";
 export default function Home() {
   let apiURL = process.env.NEXT_PUBLIC_DEV_URL + "api/hello";
   if (process.env.NODE_ENV === "production") {
@@ -39,6 +40,7 @@ export default function Home() {
 
   return (
     <div>
+      <HomePage />
       <div>Hello World</div>
       <h1>BANG BANG</h1>
       <button onClick={test}>BANG BNAG</button>

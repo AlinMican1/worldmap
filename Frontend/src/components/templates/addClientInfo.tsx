@@ -156,6 +156,15 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       form.resetFormData();
       dateAndTimeMap.clear();
     }
+
+    const getMeetingErrors = await SubmitMeetingDetails(meetingForm.formData);
+
+    if (getMeetingErrors?.errors && getMeetingErrors?.success === false) {
+      const filteredMeetingErrors = getMeetingErrors.errors.filter(
+        (err: ErrorMessageProps) => err.error === true
+      );
+      errorsHook.setErrors(filteredMeetingErrors);
+    }
   };
 
   const handleAddClients = async (e: React.MouseEvent<HTMLButtonElement>, close: () => void) => {
@@ -201,7 +210,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                   title="Meeting Details"
                   icon={<NotesIcon className="title-icon" size="24" />}
                 />
-                <MeetingDetails meetingForm={meetingForm} />
+                <MeetingDetails meetingForm={meetingForm} errorsHook={errorsHook} />
               </BoxDesign>
             </div>
 
@@ -359,6 +368,8 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                 clients={clients}
                 setClients={setClients}
                 parentWidth={parentWidth}
+                meetingTime={meetingForm.formData.meeting_time}
+                meetingDate={meetingForm.formData.meeting_date}
               />
             </BoxDesign>
           </div>

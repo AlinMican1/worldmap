@@ -54,7 +54,7 @@
     align-items: center;
     padding-left: var(--space-sm);
     font-weight: var(--font-thin);
-    border-radius: var(--border-sm);
+    border-radius: var(--border-xs);
 
     /* transition: border 0.2s ease, background-color 0.2s ease; */
 }
