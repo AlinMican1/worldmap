@@ -81,8 +81,7 @@ const PariticipantsPreview = ({
     // console.log(clientHr + ":" + clientMin);
     const timeDifference = timeDiff(userTime, clientTime.time);
     const meetingDateObj = addTimeDiffToDate(meetingDate, meetingTime, timeDifference);
-    console.log("HEYYYYY", meetingTime, timeDifference);
-    console.log(meetingDateObj);
+
     // meetingDate.setHours(clientHr, clientMin, 0, 0);
 
     const actualTime = meetingDateObj.toLocaleString("en-GB", {

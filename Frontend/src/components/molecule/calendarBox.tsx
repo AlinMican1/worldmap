@@ -68,13 +68,21 @@ const CalendarBox = ({ onDateSelect }: CalendarBoxProps) => {
     <div className="calendar-container">
       {/* Header with navigation */}
       <div className="calendar-header-wrapper">
-        <button className="calendar-button calendar-button-left" onClick={goToPreviousMonth}>
+        <button
+          className="calendar-button calendar-button-left"
+          onClick={goToPreviousMonth}
+          type="button"
+        >
           {"<"}
         </button>
         <span className="calendar-heading">
           {MONTHMAP.get((currentMonth + 1).toString().padStart(2, "0"))} - {currentYear}
         </span>
-        <button className="calendar-button calendar-button-right" onClick={goToNextMonth}>
+        <button
+          className="calendar-button calendar-button-right"
+          onClick={goToNextMonth}
+          type="button"
+        >
           {">"}
         </button>
       </div>

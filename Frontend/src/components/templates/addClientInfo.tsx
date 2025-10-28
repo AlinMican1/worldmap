@@ -143,19 +143,20 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const getErrors = await SubmitClientSchedule(clients);
+    const getErrors = await SubmitClientSchedule(meetingForm.formData, clients);
 
     if (getErrors.errors && getErrors.success === false) {
       const filteredErrors = getErrors.errors.filter(
         (err: ErrorMessageProps) => err.error === true
       );
       errorsHook.setErrors(filteredErrors);
-    } else if (clients.length !== 0) {
-      errorsHook.clearErrors();
-      setClients([]);
-      form.resetFormData();
-      dateAndTimeMap.clear();
     }
+    // else if (clients.filter((p) => p.selected === true)) {
+    //   errorsHook.clearErrors();
+    //   setClients([]);
+    //   form.resetFormData();
+    //   dateAndTimeMap.clear();
+    // }
 
     const getMeetingErrors = await SubmitMeetingDetails(meetingForm.formData);
 
@@ -163,7 +164,10 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       const filteredMeetingErrors = getMeetingErrors.errors.filter(
         (err: ErrorMessageProps) => err.error === true
       );
-      errorsHook.setErrors(filteredMeetingErrors);
+      errorsHook.setErrors((prevErrors: ErrorMessageProps[]) => [
+        ...prevErrors,
+        ...filteredMeetingErrors,
+      ]);
     }
   };
 
@@ -388,6 +392,11 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
         <p>{meetingForm.formData.meeting_duration}</p>
         {errorsHook.getErrorBoolean("noClient") ? (
           <p className="error-msg">{errorsHook.getErrorMsg("noClient")}</p>
+        ) : (
+          ""
+        )}
+        {errorsHook.getErrorBoolean("noMeetingDetails") ? (
+          <p className="error-msg">{errorsHook.getErrorMsg("noMeetingDetails")}</p>
         ) : (
           ""
         )}
