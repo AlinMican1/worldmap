@@ -1,6 +1,6 @@
 import axios from "axios";
-import { GetFormErrors } from "../../helper/GetErrors";
-import { ClientInfoProps, ErrorMessageProps } from "@/types/interfaces";
+import { GetFormErrors, GetMeetingDetailsErrors } from "../../helper/GetErrors";
+import { ClientInfoProps, ErrorMessageProps, MeetingDetailsProps } from "@/types/interfaces";
 
 // export const SubmitLocationForm = async (
 //   emailRequired: boolean,
@@ -25,14 +25,43 @@ import { ClientInfoProps, ErrorMessageProps } from "@/types/interfaces";
 //   }
 // };
 
-export const SubmitClientSchedule = async (clients?: ClientInfoProps[]) => {
-  if (!clients || clients.length === 0) {
+export const SubmitClientSchedule = async (
+  meetingDetails: MeetingDetailsProps,
+  clients?: ClientInfoProps[]
+) => {
+  console.log(
+    "BBB",
+    clients?.filter((p) => p.selected === true)
+  );
+  if (clients?.filter((p) => p.selected === true).length === 0) {
     return {
       success: false,
       errors: [
         {
           id: "noClient",
-          errorMsg: "No clients have been added. Please complete the form above to add a client.",
+          errorMsg: "No clients have been added. Please add a client.",
+          error: true,
+        },
+      ],
+    };
+  } else if (meetingDetails.meeting_title.trim() === "") {
+    return {
+      success: false,
+      errors: [
+        {
+          id: "noMeetingDetails",
+          errorMsg: "Please complete the meeting details form",
+          error: true,
+        },
+      ],
+    };
+  } else if (meetingDetails.meeting_title.trim() === "" && (!clients || clients.length === 0)) {
+    return {
+      success: false,
+      errors: [
+        {
+          id: "test",
+          errorMsg: "test",
           error: true,
         },
       ],
@@ -44,10 +73,10 @@ export const SubmitClientSchedule = async (clients?: ClientInfoProps[]) => {
     await Promise.all(
       clients.map(async (client) => {
         const res = await axios.post(apiURL, {
-          name: client.name,
+          name: client.first_name,
           email: client.email,
           location: client.location,
-          dates: Object.fromEntries(client.dates),
+          // dates: Object.fromEntries(client.d),
           userId: "ef329fd2-3043-43ce-ae2f-d6d4ae865077",
         });
 
@@ -91,4 +120,33 @@ export const SubmitAddParticipant = async (client: ClientInfoProps) => {
     return { success: false, message: "Server Error", error: error, errors: [] };
   }
   //Check for errors first when submit
+};
+
+export const SubmitMeetingDetails = async (meetingDetails: MeetingDetailsProps) => {
+  const {
+    meeting_date,
+    meeting_desc,
+    meeting_duration,
+    meeting_link,
+    meeting_time,
+    meeting_title,
+  } = meetingDetails;
+  const getAllErrors = await GetMeetingDetailsErrors({
+    meeting_title,
+    meeting_date,
+    meeting_desc,
+    meeting_duration,
+    meeting_link,
+    meeting_time,
+  });
+  const filteredErrors: ErrorMessageProps[] = [];
+  const mapErrors = getAllErrors.forEach((err: ErrorMessageProps) => {
+    if (err.error === true) {
+      filteredErrors.push(err);
+    }
+  });
+
+  if (filteredErrors.length > 0) {
+    return { success: false, errors: filteredErrors };
+  }
 };

@@ -1,0 +1,36 @@
+.selectDate-wrapper{
+    position: relative;
+}
+
+.selectDate-dropDown-wrapper{
+    margin-top: var(--space-sm);
+    background: var(--bg-light);
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border-radius: var(--border-xs);
+    height: auto;
+    /* min-height: auto; */
+    padding: var(--space-xs);
+    /* max-height: 400px; */
+    overflow-y: scroll;
+    gap: var(--space-xxs);
+    z-index: 1000;
+    box-shadow: var(--shadow);
+    transform-origin: top center;
+    animation: dropdownFade 0.18s ease-out forwards;
+    opacity: 0;
+    padding: var(--space-md);
+}
+
+@keyframes dropdownFade {
+    0% {
+      opacity: 0;
+      transform: scaleY(0.9) translateY(-4px);
+    }
+    100% {
+      opacity: 1;
+      transform: scaleY(1) translateY(0);
+    }
+  }

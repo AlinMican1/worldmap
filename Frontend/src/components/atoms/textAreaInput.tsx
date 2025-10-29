@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
-import "./inputField.css";
+import "./textAreaInput.css";
 
-interface inputFieldParams {
+interface textAreaFieldParams {
   type?: "text" | "number" | "email" | "password";
   label?: string;
   id?: string;
@@ -12,14 +12,12 @@ interface inputFieldParams {
   errorMsg?: string;
   disabled?: boolean;
   autocomplete?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   icon?: React.ReactNode;
   width?: string | number;
   borderRound?: string;
-  errorSpace?: boolean;
 }
-
-export const InputField = ({
+const TextAreaInput = ({
   type,
   label,
   id,
@@ -33,16 +31,14 @@ export const InputField = ({
   onChange,
   icon,
   width = "25vw",
-  borderRound = "4px",
-  errorSpace = true,
-}: inputFieldParams) => {
+  borderRound = "0px",
+}: textAreaFieldParams) => {
   return (
-    <div className="input-wrapper">
+    <div className="textarea-wrapper">
       <label htmlFor={label}>{label}</label>
-      <div className="input-with-icon">
-        {icon && <span className="input-icon">{icon}</span>} {/* Render the icon if provided */}
-        <input
-          type={type}
+      <div>
+        <textarea
+          // type={type}
           id={id}
           value={value}
           name={name}
@@ -52,15 +48,10 @@ export const InputField = ({
           disabled={disabled}
           className={`${error ? "input-error" : ""}`}
           style={{ width: width ?? undefined, borderRadius: borderRound ?? undefined }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              e.stopPropagation();
-            }
-          }}
         />
       </div>
-      {errorSpace && <p className="error">{error ? errorMsg : "\u00A0"}</p>}
+      {error && <p className={`${"error"}`}>{errorMsg}</p>}
     </div>
   );
 };
+export default TextAreaInput;

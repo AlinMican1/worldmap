@@ -1,5 +1,5 @@
 "use client";
-import AddClientInfo from "../organism/addClientInfo";
+import AddClientInfo from "./addClientInfo";
 import ClientList from "../molecule/clientList";
 import "../../app/globals.css";
 import { ClientInfoProps } from "@/types/interfaces";

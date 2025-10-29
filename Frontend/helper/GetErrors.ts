@@ -1,9 +1,9 @@
-import { ErrorMessageProps, ClientInfoProps } from "@/types/interfaces";
+import { ErrorMessageProps, ClientInfoProps, MeetingDetailsProps } from "@/types/interfaces";
 import { COUNTRIES } from "./SuggestLocation";
 
 export const GetFormErrors = (
   emailRequired: boolean,
-  { location, email, first_name, surname /*dates*/ }: ClientInfoProps
+  { location, email, first_name, surname, meeting_title /*dates*/ }: ClientInfoProps
 ): ErrorMessageProps[] => {
   const formErrors: ErrorMessageProps[] = [
     { id: "name", errorMsg: "No name", error: false },
@@ -20,6 +20,7 @@ export const GetFormErrors = (
       errorMsg: "Your time schedule is currently empty. Please add at least one time slot.",
       error: false,
     },
+    { id: "meetingTitle", errorMsg: "Required", error: false },
   ];
 
   if (first_name.trim() === "") formErrors[0].error = true;
@@ -29,11 +30,31 @@ export const GetFormErrors = (
   if (email.trim() === "" && emailRequired) formErrors[4].error = true;
   if (location.trim() === "") formErrors[6].error = true;
   if (!Object.keys(COUNTRIES).includes(location)) formErrors[7].error = true;
+  if (meeting_title?.trim() === "") formErrors[8].error = true;
   // if (dates.size === 0) formErrors[7].error = true;
   // if (dates.array.length === 0) formErrors[7].error = true;
 
   //formErrors.map((err: ErrorMessageProps) => err.error === true);
   return formErrors;
+};
+
+export const GetMeetingDetailsErrors = ({
+  meeting_date,
+  meeting_desc,
+  meeting_duration,
+  meeting_title,
+}: MeetingDetailsProps): Map<string, ErrorMessageProps> => {
+  const meetingDetailsMap = new Map<string, ErrorMessageProps>([
+    ["meetingTitle", { id: "meetingTitle", errorMsg: "Required", error: false }],
+  ]);
+
+  const titleError = meetingDetailsMap.get("meetingTitle");
+  if (titleError && meeting_title.trim() === "") {
+    meetingDetailsMap.set("meetingTitle", { ...titleError, error: true });
+  }
+
+  //MAKE SURE TO SET PROPER NAME FOR PROPS
+  return meetingDetailsMap;
 };
 
 export const NoClientsError = (clients?: ClientInfoProps[]): ErrorMessageProps[] => {

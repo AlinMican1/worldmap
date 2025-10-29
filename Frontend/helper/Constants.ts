@@ -13,7 +13,7 @@ export const MONTHMAP = new Map<string, string>([
   ["12", "December"],
 ]);
 
-export const WEEKDAYS: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+export const WEEKDAYS: string[] = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 export const CLOCKMAP = new Map<string, string>([
   ["8:00 AM - 4:00 PM", "08:00 - 16:00"],

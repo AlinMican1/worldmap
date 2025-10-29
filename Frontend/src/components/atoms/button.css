@@ -51,8 +51,15 @@
 }
 
 .fourth-btn{
-    border-radius: 5px;
-    border: 0.5px solid var(--color-primary-lighter);
+    border-radius: 10px;
+    border: 1px solid var(--color-primary-lighter);
+    box-shadow: var(--shadow);
+    
+}
+
+.fourth-btn:hover{
+    background-color: var(--color-primary-lighter);
+    color: white;
 }
 
 .fifth-btn{
@@ -61,10 +68,7 @@
     
 }
 
-.fourth-btn:hover{
-    background-color: var(--color-primary-lighter);
-    color: white;
-}
+
 .outline-btn{
     border: 1px solid var(--color-primary-lighter);
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -82,7 +86,7 @@
     min-width: 200px;
     transition: transform 0.1s ease;
     font-size: var(--text-sm);
-    color: black;
+    color: var(--text-muted);
     align-items: center;
     gap: var(--space-sm);
     display: flex;
@@ -90,12 +94,14 @@
 }
 .nav-btn:hover{
     transform: scale(1.05);
+    background-color: var(--bg-dark);
    
 }
 .nav-btn.active{
-    background-color: rgb(255, 245, 245);
-    border: 1px solid var(--color-border);
+    background: var(--bg-light);
+    border: 1px solid var(--border);
     border-radius: 5px;
+    color: var(--text);
 }
 
 .log-out-btn{

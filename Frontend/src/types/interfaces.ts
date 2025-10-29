@@ -16,6 +16,7 @@ export interface IconProps {
 
 export interface ClientInfoProps {
   first_name: string;
+  meeting_title?: string;
   location: string;
   email: string;
   surname: string;
@@ -23,6 +24,15 @@ export interface ClientInfoProps {
   selected?: boolean;
 
   // dates: Map<string, string[]>;
+}
+
+export interface MeetingDetailsProps {
+  meeting_link?: string;
+  meeting_date: string;
+  meeting_time: string;
+  meeting_desc?: string;
+  meeting_duration: string;
+  meeting_title: string;
 }
 
 export interface ClientListProps {
@@ -58,4 +68,10 @@ export interface ChooseDateAndTimeProps {
   setTime: (time: string) => void;
   dateAndTimeMap: Map<string, string[]>;
   setDateAndTimeMap: (updater: (prevMap: Map<string, string[]>) => Map<string, string[]>) => void;
+  // meetingDate: string;
+}
+
+export interface MeetingDateProps {
+  meetingDate: string;
+  setMeetingDate: React.Dispatch<React.SetStateAction<string>>;
 }

@@ -1,6 +1,6 @@
 import { IconProps } from "@/types/interfaces";
 
-const ClockIcon = ({ className, size }: IconProps) => {
+const SearchIcon = ({ className, size }: IconProps) => {
   return (
     <svg
       className={className}
@@ -11,7 +11,7 @@ const ClockIcon = ({ className, size }: IconProps) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M12 7V12H15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+        d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
@@ -20,4 +20,4 @@ const ClockIcon = ({ className, size }: IconProps) => {
     </svg>
   );
 };
-export default ClockIcon;
+export default SearchIcon;
