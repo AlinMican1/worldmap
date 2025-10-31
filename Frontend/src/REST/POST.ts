@@ -29,10 +29,6 @@ export const SubmitClientSchedule = async (
   meetingDetails: MeetingDetailsProps,
   clients?: ClientInfoProps[]
 ) => {
-  console.log(
-    "BBB",
-    clients?.filter((p) => p.selected === true)
-  );
   if (clients?.filter((p) => p.selected === true).length === 0) {
     return {
       success: false,
