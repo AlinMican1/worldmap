@@ -94,7 +94,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await GetParticipants("6efe07f7-cbf5-4481-8045-347ec1cf26b4");
+        const response = await GetParticipants();
         if (!response) {
           return;
         }

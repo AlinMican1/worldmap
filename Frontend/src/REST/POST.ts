@@ -2,6 +2,32 @@ import axios from "axios";
 import { GetFormErrors, GetMeetingDetailsErrors } from "../../helper/GetErrors";
 import { ClientInfoProps, ErrorMessageProps, MeetingDetailsProps } from "@/types/interfaces";
 
+//AUTH SYSTEM
+export const SubmitLoginCredentials = async (email: string, password: string) => {
+  const API = process.env.NEXT_PUBLIC_DEV_URL + "auth/login";
+  console.log(API);
+  try {
+    const response = await axios.post(
+      API,
+      { email, password },
+      { withCredentials: true } // Include cookies if your backend uses them
+    );
+    return { success: true, message: response.data };
+  } catch (error) {
+    return { success: false, message: "Server Error", error: error };
+  }
+};
+
+export const SubmitLogout = async () => {
+  const API = process.env.NEXT_PUBLIC_DEV_URL + "auth/logout";
+  try {
+    const response = await axios.post(API, {}, { withCredentials: true });
+    return { success: true, message: "Logged out successfully" };
+  } catch (error) {
+    return { success: false, message: "Logout failed", error: error };
+  }
+};
+
 // export const SubmitLocationForm = async (
 //   emailRequired: boolean,
 //   { location, email, name, dates }: ClientInfoProps
@@ -64,7 +90,7 @@ export const SubmitClientSchedule = async (
     };
   }
   const apiURL = process.env.NEXT_PUBLIC_DEV_URL + "schedule";
-  console.log("SS");
+
   try {
     await Promise.all(
       clients.map(async (client) => {
@@ -103,14 +129,19 @@ export const SubmitAddParticipant = async (client: ClientInfoProps) => {
   const apiURL = process.env.NEXT_PUBLIC_DEV_URL + "participant";
 
   try {
-    const res = await axios.post(apiURL, {
-      location,
-      email,
-      first_name,
-      surname,
-      timezone,
-      userId: "6efe07f7-cbf5-4481-8045-347ec1cf26b4",
-    });
+    const res = await axios.post(
+      apiURL,
+      {
+        location,
+        email,
+        first_name,
+        surname,
+        timezone,
+      },
+      {
+        withCredentials: true, // ensures cookies/session are sent for auth
+      }
+    );
     return { success: true, message: res.data.message, errors: [] };
   } catch (error) {
     return { success: false, message: "Server Error", error: error, errors: [] };

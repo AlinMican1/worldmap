@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import "./navbar.css";
 import BoxDesign from "../atoms/boxDesign";
 import Button from "../atoms/button";
@@ -10,10 +10,24 @@ import Link from "next/link";
 import LogoutIcon from "../icons/logout";
 import SettingsIcon from "../icons/settings";
 import CurrentTime from "../atoms/currentTime";
+import { SubmitLogout } from "@/REST/POST";
 const Navbar = () => {
   const pathname = usePathname();
 
   const [activePage, setActivePage] = useState<string>("");
+  const router = useRouter();
+  const handleLogout = async () => {
+    try {
+      const response = await SubmitLogout();
+      if (response.success) {
+        router.push("/login");
+      } else {
+        console.error("Logout failed:", response.message);
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
 
   return (
     <>
@@ -60,7 +74,11 @@ const Navbar = () => {
             <CurrentTime />
             <div className="bottom-buttons">
               <Link href="/" passHref>
-                <Button variant="log-out-btn" className={pathname === "/" ? "active" : ""}>
+                <Button
+                  onClick={handleLogout}
+                  variant="log-out-btn"
+                  className={pathname === "/" ? "active" : ""}
+                >
                   <div className="btn-items">
                     <LogoutIcon className="logout-symbol" />
                     Sign Out

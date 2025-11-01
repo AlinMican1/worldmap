@@ -1,8 +1,11 @@
 import axios from "axios";
 
-export const GetParticipants = async (id: string) => {
+export const GetParticipants = async () => {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}getParticipants/${id}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}getParticipants`, {
+      withCredentials: true,
+    });
+
     return response.data.participants;
   } catch (error) {
     return {

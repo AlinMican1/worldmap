@@ -12,9 +12,12 @@ import Title from "../atoms/title";
 import CurrentTime from "../atoms/currentTime";
 import { GetGeoInfo } from "../../../helper/GetLocation";
 import TickIcon from "../icons/tick";
+import { SubmitLoginCredentials } from "@/REST/POST";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   console.log(GetGeoInfo(true));
+  const router = useRouter();
   const [geoData, setGeoData] = useState({
     country_name: "",
     timezone: "",
@@ -42,15 +45,37 @@ const LoginForm = () => {
       setSize({ width, height });
     }
   }, []);
+  //   e.preventDefault();
 
-  function handleLoginSubmit() {}
+  //   const getErrors = await SubmitClientSchedule(meetingForm.formData, clients);
+
+  //   if (getErrors.errors && getErrors.success === false) {
+  //     const filteredErrors = getErrors.errors.filter(
+  //       (err: ErrorMessageProps) => err.error === true
+  //     );
+  //     errorsHook.setErrors(filteredErrors);
+  //   }
+
+  // };
+  async function handleLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const response = await SubmitLoginCredentials(
+      loginCredentials.formData.email,
+      loginCredentials.formData.password
+    );
+    if (response.success === true) {
+      console.log(response.message);
+      router.push("/");
+    } else {
+    }
+  }
   return (
     <div className="login-wrapper">
       <BoxDesign centeredX="leftX" variant="fifth-DesignBox" padding="medium">
         <h1 className="signIn-Title">Sign in </h1>
         <p className="signIn-subTitle">Enter your credentials to continue</p>
 
-        <form onSubmit={handleLoginSubmit}>
+        <form id="login-credentials" onSubmit={handleLoginSubmit}>
           <InputField
             autocomplete="off"
             type="text"
@@ -87,7 +112,7 @@ const LoginForm = () => {
             Forgot Password?
           </Link>
         </BoxDesign>
-        <Button type="submit" variant="sign-in-btn">
+        <Button type="submit" variant="sign-in-btn" form="login-credentials">
           Sign In
         </Button>
         <div className="line-with-text">
