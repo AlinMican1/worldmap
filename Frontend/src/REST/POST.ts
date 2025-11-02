@@ -1,20 +1,87 @@
 import axios from "axios";
-import { GetFormErrors, GetMeetingDetailsErrors } from "../../helper/GetErrors";
+import {
+  GetFormErrors,
+  GetLoginDetailsErrors,
+  GetMeetingDetailsErrors,
+} from "../../helper/GetErrors";
 import { ClientInfoProps, ErrorMessageProps, MeetingDetailsProps } from "@/types/interfaces";
 
 //AUTH SYSTEM
+// export const SubmitLoginCredentials = async (email: string, password: string) => {
+//   //First get All Errors
+//   let credentialsIncorrect = false;
+//   const getAllErrors = await GetLoginDetailsErrors({
+//     email,
+//     password,
+//     credentialsIncorrect,
+//   });
+
+//   const filteredErrors: ErrorMessageProps[] = [];
+//   const mapErrors = getAllErrors.forEach((err: ErrorMessageProps) => {
+//     if (err.error === true) {
+//       filteredErrors.push(err);
+//     }
+//   });
+//   if (filteredErrors.length > 0) {
+//     return { success: false, errors: filteredErrors };
+//   }
+
+//   const API = process.env.NEXT_PUBLIC_DEV_URL + "auth/login";
+
+//   try {
+//     const response = await axios.post(
+//       API,
+//       { email, password },
+//       { withCredentials: true } // Include cookies for backend
+//     );
+//     return { success: true, message: response.data };
+//   } catch (error) {
+//     credentialsIncorrect = true;
+//     return { success: false, message: "Log in credentials are incorrect.", error: error };
+//   }
+// };
+
 export const SubmitLoginCredentials = async (email: string, password: string) => {
+  // Initial validation errors
+  let credentialsIncorrect = false;
+  const getAllErrors = GetLoginDetailsErrors({
+    email,
+    password,
+    credentialsIncorrect,
+  });
+
+  const filteredErrors: ErrorMessageProps[] = [];
+  getAllErrors.forEach((err: ErrorMessageProps) => {
+    if (err.error === true) filteredErrors.push(err);
+  });
+
+  if (filteredErrors.length > 0) {
+    return { success: false, errors: filteredErrors };
+  }
+
   const API = process.env.NEXT_PUBLIC_DEV_URL + "auth/login";
-  console.log(API);
+
   try {
-    const response = await axios.post(
-      API,
-      { email, password },
-      { withCredentials: true } // Include cookies if your backend uses them
-    );
+    const response = await axios.post(API, { email, password }, { withCredentials: true });
     return { success: true, message: response.data };
   } catch (error) {
-    return { success: false, message: "Server Error", error: error };
+    // Set credentialsIncorrect to true
+    credentialsIncorrect = true;
+
+    // Get updated error map
+    const updatedErrors = GetLoginDetailsErrors({
+      email,
+      password,
+      credentialsIncorrect,
+    });
+
+    // Filter for errors
+    const filteredErrors: ErrorMessageProps[] = [];
+    updatedErrors.forEach((err: ErrorMessageProps) => {
+      if (err.error === true) filteredErrors.push(err);
+    });
+
+    return { success: false, errors: filteredErrors };
   }
 };
 

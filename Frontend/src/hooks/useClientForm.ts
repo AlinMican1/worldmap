@@ -1,3 +1,4 @@
+"use client";
 import { ChangeEvent, useState } from "react";
 
 const useClientForm = <T extends Record<string, any>>(initialValues: T) => {

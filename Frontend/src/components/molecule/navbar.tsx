@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <>
-      {pathname !== "/login" && (
+      {pathname !== "/login" && pathname !== "/register" && (
         <div className="navbar-container">
           <h1>GLOBAL MEET</h1>
           <BoxDesign

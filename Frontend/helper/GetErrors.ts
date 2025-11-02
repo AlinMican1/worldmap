@@ -1,4 +1,9 @@
-import { ErrorMessageProps, ClientInfoProps, MeetingDetailsProps } from "@/types/interfaces";
+import {
+  ErrorMessageProps,
+  ClientInfoProps,
+  MeetingDetailsProps,
+  LoginDetailsProps,
+} from "@/types/interfaces";
 import { COUNTRIES } from "./SuggestLocation";
 
 export const GetFormErrors = (
@@ -55,6 +60,35 @@ export const GetMeetingDetailsErrors = ({
 
   //MAKE SURE TO SET PROPER NAME FOR PROPS
   return meetingDetailsMap;
+};
+
+export const GetLoginDetailsErrors = ({
+  email,
+  password,
+  credentialsIncorrect,
+}: LoginDetailsProps): Map<string, ErrorMessageProps> => {
+  const LogInDetailsMap = new Map<string, ErrorMessageProps>([
+    ["email", { id: "email", errorMsg: "Email Required", error: false }],
+    ["password", { id: "password", errorMsg: "Password Required", error: false }],
+    [
+      "incorrectCredentials",
+      { id: "incorrectCredentials", errorMsg: "Log In credentials are incorrect.", error: false },
+    ],
+  ]);
+  const emailError = LogInDetailsMap.get("email");
+  if (emailError && email.trim() === "") {
+    LogInDetailsMap.set("email", { ...emailError, error: true });
+  }
+  const passwordError = LogInDetailsMap.get("password");
+  if (passwordError && password.trim() === "") {
+    LogInDetailsMap.set("password", { ...passwordError, error: true });
+  }
+  const credentialsError = LogInDetailsMap.get("incorrectCredentials");
+  if (credentialsError && credentialsIncorrect === true) {
+    LogInDetailsMap.set("incorrectCredentials", { ...credentialsError!, error: true });
+  }
+
+  return LogInDetailsMap;
 };
 
 export const NoClientsError = (clients?: ClientInfoProps[]): ErrorMessageProps[] => {

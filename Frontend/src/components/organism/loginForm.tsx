@@ -14,10 +14,12 @@ import { GetGeoInfo } from "../../../helper/GetLocation";
 import TickIcon from "../icons/tick";
 import { SubmitLoginCredentials } from "@/REST/POST";
 import { useRouter } from "next/navigation";
+import { ErrorMessageProps } from "@/types/interfaces";
 
 const LoginForm = () => {
   console.log(GetGeoInfo(true));
   const router = useRouter();
+  const [mainError, setMainError] = useState<string>("");
   const [geoData, setGeoData] = useState({
     country_name: "",
     timezone: "",
@@ -59,6 +61,8 @@ const LoginForm = () => {
   // };
   async function handleLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    errorsHook.clearErrors();
+    setMainError("");
     const response = await SubmitLoginCredentials(
       loginCredentials.formData.email,
       loginCredentials.formData.password
@@ -67,16 +71,28 @@ const LoginForm = () => {
       console.log(response.message);
       router.push("/");
     } else {
+      if (response?.errors && response?.success === false) {
+        const filteredLogInErrors = response.errors.filter(
+          (err: ErrorMessageProps) => err.error === true
+        );
+        errorsHook.setErrors((prevErrors: ErrorMessageProps[]) => [
+          ...prevErrors,
+          ...filteredLogInErrors,
+        ]);
+      } else {
+        setMainError(response.message);
+      }
     }
   }
   return (
     <div className="login-wrapper">
-      <BoxDesign centeredX="leftX" variant="fifth-DesignBox" padding="medium">
+      <BoxDesign centeredX="leftX" variant="transparent-DesignBox" padding="medium">
         <h1 className="signIn-Title">Sign in </h1>
         <p className="signIn-subTitle">Enter your credentials to continue</p>
 
         <form id="login-credentials" onSubmit={handleLoginSubmit}>
           <InputField
+            color="var(--bg-light)"
             autocomplete="off"
             type="text"
             name="email"
@@ -85,10 +101,11 @@ const LoginForm = () => {
             id="email"
             onChange={loginCredentials.handleChange}
             placeholder="example@gmail.com"
-            error={errorsHook.getErrorBoolean("name")}
-            errorMsg={errorsHook.getErrorMsg("name")}
+            error={errorsHook.getErrorBoolean("email")}
+            errorMsg={errorsHook.getErrorMsg("email")}
           />
           <InputField
+            color="var(--bg-light)"
             autocomplete="off"
             type="password"
             name="password"
@@ -97,9 +114,10 @@ const LoginForm = () => {
             id="password"
             onChange={loginCredentials.handleChange}
             placeholder="password"
-            error={errorsHook.getErrorBoolean("name")}
-            errorMsg={errorsHook.getErrorMsg("name")}
+            error={errorsHook.getErrorBoolean("password")}
+            errorMsg={errorsHook.getErrorMsg("password")}
           />
+          <p>{errorsHook.getErrorMsg("incorrectCredentials")}</p>
         </form>
         <BoxDesign className="remember-forgot-wrapper">
           <div className="remember-me-wrapper">

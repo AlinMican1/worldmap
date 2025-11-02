@@ -109,8 +109,10 @@
 }
 
 .fifth-DesignBox{
-    background-color: transparent;
+    background-color: var(--bg-light);
+    
 }
+
 
 .sixth-DesignBox{
     box-shadow: var(--shadow);
@@ -172,4 +174,8 @@
     background-color: #fed4e1;
     border: 0.5px solid var(--color-error);
     border-radius: 10px;
+}
+
+.transparent-DesignBox{
+    background-color: transparent;
 }

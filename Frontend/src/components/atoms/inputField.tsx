@@ -17,6 +17,7 @@ interface inputFieldParams {
   width?: string | number;
   borderRound?: string;
   errorSpace?: boolean;
+  color?: string;
 }
 
 export const InputField = ({
@@ -35,6 +36,7 @@ export const InputField = ({
   width = "25vw",
   borderRound = "4px",
   errorSpace = true,
+  color,
 }: inputFieldParams) => {
   return (
     <div className="input-wrapper">
@@ -51,7 +53,11 @@ export const InputField = ({
           onChange={onChange}
           disabled={disabled}
           className={`${error ? "input-error" : ""}`}
-          style={{ width: width ?? undefined, borderRadius: borderRound ?? undefined }}
+          style={{
+            width: width ?? undefined,
+            borderRadius: borderRound ?? undefined,
+            background: color ?? undefined,
+          }}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();

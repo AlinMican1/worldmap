@@ -193,7 +193,8 @@ async def login(login: LoginRequest):
         value=access_token,
         httponly=True,
         secure=False,  # for localhost
-        samesite="lax" # for local
+        samesite="lax" # for local  samesite="strict", # stricter CSRF protection
+       # max_age=3600       # token lifetime
     )
     return res
 
@@ -203,7 +204,9 @@ async def logout():
         response = supabase.auth.sign_out()
         if response is None:
             # Supabase returns None if sign out succeeds
-            return JSONResponse({"message": "Logout successful"}, status_code=status.HTTP_200_OK)
+            res = JSONResponse({"message": "Logout successful"}, status_code=status.HTTP_200_OK)
+            res.delete_cookie("access_token")
+            return res
         
         # If response contains error info, raise exception
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Logout failed")
