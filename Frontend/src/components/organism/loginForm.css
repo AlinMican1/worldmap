@@ -87,14 +87,15 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding-top: var(--space-md);
+    /* padding-top: var(--space-md); */
     padding-bottom: var(--space-xs);
     
 }
-.mm{
-    align-content: flex-start;
-}
 
+.login-main-error{
+    color: var(--color-error);
+
+}
 .globe-wrapper{
     display: flex;
     flex-direction: row;

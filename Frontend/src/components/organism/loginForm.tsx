@@ -9,12 +9,12 @@ import "./loginForm.css";
 import Link from "next/link";
 import GlobeUI from "../atoms/globe";
 import Title from "../atoms/title";
-import CurrentTime from "../atoms/currentTime";
 import { GetGeoInfo } from "../../../helper/GetLocation";
 import TickIcon from "../icons/tick";
 import { SubmitLoginCredentials } from "@/REST/POST";
 import { useRouter } from "next/navigation";
 import { ErrorMessageProps } from "@/types/interfaces";
+import "../../app/globals.css";
 
 const LoginForm = () => {
   console.log(GetGeoInfo(true));
@@ -117,7 +117,12 @@ const LoginForm = () => {
             error={errorsHook.getErrorBoolean("password")}
             errorMsg={errorsHook.getErrorMsg("password")}
           />
-          <p>{errorsHook.getErrorMsg("incorrectCredentials")}</p>
+
+          <p className="login-main-error">
+            {errorsHook.getErrorBoolean("incorrectCredentials")
+              ? errorsHook.getErrorMsg("incorrectCredentials")
+              : "\u00A0"}
+          </p>
         </form>
         <BoxDesign className="remember-forgot-wrapper">
           <div className="remember-me-wrapper">
