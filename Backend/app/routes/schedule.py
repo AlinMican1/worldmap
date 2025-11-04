@@ -21,7 +21,6 @@ class ScheduleStructure(BaseModel):
 @router.post("/schedule")
 async def PostSchedule(schedule: ScheduleStructure, db: Session = Depends(get_db),current_user=Depends(get_current_user)):
     try:
-        logger.info("Before DB insert")
         response = Form(
             name=schedule.name,
             email=schedule.email,
