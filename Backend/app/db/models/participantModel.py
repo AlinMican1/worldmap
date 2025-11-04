@@ -16,4 +16,6 @@ class Participant(Base):
     timezone = Column(String, nullable=False)
 
     userId = Column(ForeignKey("users.id"))
+    meetingId = Column(ForeignKey("meeting.id"))
     user = relationship("User", back_populates="participants")
+    meeting = relationship("Meeting", back_populates="participants")
