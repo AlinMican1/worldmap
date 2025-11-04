@@ -5,10 +5,10 @@ from app.db.database import get_db
 from sqlalchemy.orm import Session
 from app.db.models.formModel import Form
 from typing import Dict, List
+from app.core.supabase_client import get_current_user
 import logging
 
 logger = logging.getLogger(__name__)
-
 router = APIRouter()
 
 class ScheduleStructure(BaseModel):
@@ -19,7 +19,7 @@ class ScheduleStructure(BaseModel):
     userId: str
 
 @router.post("/schedule")
-async def PostSchedule(schedule: ScheduleStructure, db: Session = Depends(get_db)):
+async def PostSchedule(schedule: ScheduleStructure, db: Session = Depends(get_db),current_user=Depends(get_current_user)):
     try:
         logger.info("Before DB insert")
         response = Form(
@@ -27,7 +27,7 @@ async def PostSchedule(schedule: ScheduleStructure, db: Session = Depends(get_db
             email=schedule.email,
             location=schedule.location,
             dates=schedule.dates,
-            userId=schedule.userId,
+            userId=current_user.id,
         )
         db.add(response)
         db.commit()

@@ -9,12 +9,17 @@ import "./loginForm.css";
 import Link from "next/link";
 import GlobeUI from "../atoms/globe";
 import Title from "../atoms/title";
-import CurrentTime from "../atoms/currentTime";
 import { GetGeoInfo } from "../../../helper/GetLocation";
 import TickIcon from "../icons/tick";
+import { SubmitLoginCredentials } from "@/REST/POST";
+import { useRouter } from "next/navigation";
+import { ErrorMessageProps } from "@/types/interfaces";
+import "../../app/globals.css";
 
 const LoginForm = () => {
   console.log(GetGeoInfo(true));
+  const router = useRouter();
+  const [mainError, setMainError] = useState<string>("");
   const [geoData, setGeoData] = useState({
     country_name: "",
     timezone: "",
@@ -42,16 +47,52 @@ const LoginForm = () => {
       setSize({ width, height });
     }
   }, []);
+  //   e.preventDefault();
 
-  function handleLoginSubmit() {}
+  //   const getErrors = await SubmitClientSchedule(meetingForm.formData, clients);
+
+  //   if (getErrors.errors && getErrors.success === false) {
+  //     const filteredErrors = getErrors.errors.filter(
+  //       (err: ErrorMessageProps) => err.error === true
+  //     );
+  //     errorsHook.setErrors(filteredErrors);
+  //   }
+
+  // };
+  async function handleLoginSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    errorsHook.clearErrors();
+    setMainError("");
+    const response = await SubmitLoginCredentials(
+      loginCredentials.formData.email,
+      loginCredentials.formData.password
+    );
+    if (response.success === true) {
+      console.log(response.message);
+      router.push("/");
+    } else {
+      if (response?.errors && response?.success === false) {
+        const filteredLogInErrors = response.errors.filter(
+          (err: ErrorMessageProps) => err.error === true
+        );
+        errorsHook.setErrors((prevErrors: ErrorMessageProps[]) => [
+          ...prevErrors,
+          ...filteredLogInErrors,
+        ]);
+      } else {
+        setMainError(response.message);
+      }
+    }
+  }
   return (
     <div className="login-wrapper">
-      <BoxDesign centeredX="leftX" variant="fifth-DesignBox" padding="medium">
+      <BoxDesign centeredX="leftX" variant="transparent-DesignBox" padding="medium">
         <h1 className="signIn-Title">Sign in </h1>
         <p className="signIn-subTitle">Enter your credentials to continue</p>
 
-        <form onSubmit={handleLoginSubmit}>
+        <form id="login-credentials" onSubmit={handleLoginSubmit}>
           <InputField
+            color="var(--bg-light)"
             autocomplete="off"
             type="text"
             name="email"
@@ -60,10 +101,11 @@ const LoginForm = () => {
             id="email"
             onChange={loginCredentials.handleChange}
             placeholder="example@gmail.com"
-            error={errorsHook.getErrorBoolean("name")}
-            errorMsg={errorsHook.getErrorMsg("name")}
+            error={errorsHook.getErrorBoolean("email")}
+            errorMsg={errorsHook.getErrorMsg("email")}
           />
           <InputField
+            color="var(--bg-light)"
             autocomplete="off"
             type="password"
             name="password"
@@ -72,9 +114,15 @@ const LoginForm = () => {
             id="password"
             onChange={loginCredentials.handleChange}
             placeholder="password"
-            error={errorsHook.getErrorBoolean("name")}
-            errorMsg={errorsHook.getErrorMsg("name")}
+            error={errorsHook.getErrorBoolean("password")}
+            errorMsg={errorsHook.getErrorMsg("password")}
           />
+
+          <p className="login-main-error">
+            {errorsHook.getErrorBoolean("incorrectCredentials")
+              ? errorsHook.getErrorMsg("incorrectCredentials")
+              : "\u00A0"}
+          </p>
         </form>
         <BoxDesign className="remember-forgot-wrapper">
           <div className="remember-me-wrapper">
@@ -87,7 +135,7 @@ const LoginForm = () => {
             Forgot Password?
           </Link>
         </BoxDesign>
-        <Button type="submit" variant="sign-in-btn">
+        <Button type="submit" variant="sign-in-btn" form="login-credentials">
           Sign In
         </Button>
         <div className="line-with-text">

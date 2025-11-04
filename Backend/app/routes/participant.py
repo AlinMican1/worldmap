@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from app.db.database import get_db
 from sqlalchemy.orm import Session
+from app.core.supabase_client import get_current_user
 from app.db.models.participantModel import Participant
 
 router = APIRouter()
@@ -12,11 +13,10 @@ class ParticipantStructure(BaseModel):
     email: str
     location: str
     timezone: str
-    userId: str
 
 @router.post("/participant")
-async def PostParticipant(participant: ParticipantStructure, db: Session = Depends(get_db)):
-    
+async def PostParticipant(participant: ParticipantStructure, db: Session = Depends(get_db),current_user=Depends(get_current_user)):
+    print(current_user.id)
     try:
         response = Participant(
             first_name=participant.first_name,
@@ -24,7 +24,7 @@ async def PostParticipant(participant: ParticipantStructure, db: Session = Depen
             email=participant.email,
             location=participant.location,
             timezone=participant.timezone,
-            userId= participant.userId)
+            userId= current_user.id)
         print(response)
         db.add(response)
         db.commit()
@@ -41,11 +41,13 @@ async def PostParticipant(participant: ParticipantStructure, db: Session = Depen
         }
 
     
-@router.get("/getParticipants/{id}")
-async def GetParticipants(id:str, db: Session = Depends(get_db)):
+@router.get("/getParticipants")
+async def GetParticipants(current_user=Depends(get_current_user), db: Session = Depends(get_db)):
 
     try:
-        participants = db.query(Participant).filter(Participant.userId == id).all()
+        participants = db.query(Participant).filter(
+            Participant.userId == current_user.id
+        ).all()
 
         if participants:
             return{

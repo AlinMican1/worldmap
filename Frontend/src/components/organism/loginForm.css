@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: row;
 }
+
 .forgot-Password{
     color: var(--color-primary-lighter);
     font-size: var(--text-sm);
@@ -86,21 +87,22 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding-top: var(--space-md);
+    /* padding-top: var(--space-md); */
     padding-bottom: var(--space-xs);
     
 }
-.mm{
-    align-content: flex-start;
-}
 
+.login-main-error{
+    color: var(--color-error);
+
+}
 .globe-wrapper{
     display: flex;
     flex-direction: row;
     width: 100%;
    overflow-y: hidden;
    margin: var(--space-md);
-   background-color: aliceblue;
+   background-color: var(--bg-light);
    border-radius: 5px;
    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }

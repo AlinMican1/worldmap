@@ -26,6 +26,12 @@ export interface ClientInfoProps {
   // dates: Map<string, string[]>;
 }
 
+export interface LoginDetailsProps {
+  email: string;
+  password: string;
+  credentialsIncorrect: boolean;
+}
+
 export interface MeetingDetailsProps {
   meeting_link?: string;
   meeting_date: string;
