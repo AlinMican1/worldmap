@@ -33,7 +33,7 @@ export interface LoginDetailsProps {
 }
 
 export interface MeetingDetailsProps {
-  meeting_link?: string;
+  meeting_link: string;
   meeting_date: string;
   meeting_time: string;
   meeting_desc?: string;

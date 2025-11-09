@@ -117,9 +117,8 @@ from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db.models.userModel import User
 from pydantic import BaseModel
-from app.core.supabase_client import supabase
 from fastapi.responses import JSONResponse
-
+from app.core.supabase_client import supabase_public as supabase
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])

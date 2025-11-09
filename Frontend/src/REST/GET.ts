@@ -10,11 +10,12 @@ import axios from "axios";
 // }
 
 export const GetParticipants = async () => {
+  console.log("gET");
   try {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}getParticipants`, {
       withCredentials: true,
     });
-
+    console.log(response.data);
     return response.data.participants;
   } catch (error) {
     return {

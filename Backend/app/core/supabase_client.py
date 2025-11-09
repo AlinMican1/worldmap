@@ -5,8 +5,11 @@ from app.core.config import settings
 from fastapi import Request
 
 # Initialize Supabase client once
-supabase = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
-
+supabase_admin = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
+supabase_public = create_client(
+    settings.SUPABASE_URL,
+    settings.SUPABASE_ANON_KEY
+)
 
 
 # async def get_current_user(request: Request):
@@ -34,13 +37,13 @@ async def get_current_user(request: Request):
     token = request.cookies.get("access_token")
     if not token:
         raise HTTPException(status_code=401, detail="Missing token")
-    
+
     try:
-        user_response = supabase.auth.get_user(token)
+        user_response = supabase_admin.auth.get_user(token)
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid token")
-    
+
     if not user_response or user_response.user is None:
         raise HTTPException(status_code=401, detail="Invalid token")
-    
+
     return user_response.user

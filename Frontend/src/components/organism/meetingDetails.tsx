@@ -54,8 +54,8 @@ const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProp
           placeholder="https://zoom..."
           width={"20vw"}
           borderRound="5px"
-          error={errorsHook.getErrorBoolean("surname")}
-          errorMsg={errorsHook.getErrorMsg("surname")}
+          error={errorsHook.getErrorBoolean("meetingLink")}
+          errorMsg={errorsHook.getErrorMsg("meetingLink")}
         />
       </div>
       <div>

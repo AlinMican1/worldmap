@@ -9,7 +9,7 @@ import {
   AddClientInfoProps,
   MeetingDetailsProps,
 } from "@/types/interfaces";
-import { SubmitClientSchedule, SubmitMeetingDetails } from "@/REST/POST";
+import { SubmitMeetingDetails, SubmitClientsSchedule } from "@/REST/POST";
 import { SubmitAddParticipant } from "@/REST/POST";
 import EnterLocation from "../molecule/enterLocation";
 import useErrors from "@/hooks/useErrors";
@@ -143,9 +143,9 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const getErrors = await SubmitClientSchedule(meetingForm.formData, clients);
+    const getErrors = await SubmitClientsSchedule(meetingForm.formData, clients);
 
-    if (getErrors.errors && getErrors.success === false) {
+    if (getErrors && getErrors.errors && getErrors.success === false) {
       const filteredErrors = getErrors.errors.filter(
         (err: ErrorMessageProps) => err.error === true
       );
@@ -235,7 +235,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
 
                 <Modal
                   trigger={(open) => (
-                    <Button onClick={open}>
+                    <Button onClick={open} type="button">
                       {" "}
                       Add A New Participant <ArrowRightIcon className="" />{" "}
                     </Button>

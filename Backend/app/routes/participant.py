@@ -16,7 +16,6 @@ class ParticipantStructure(BaseModel):
 
 @router.post("/participant")
 async def PostParticipant(participant: ParticipantStructure, db: Session = Depends(get_db),current_user=Depends(get_current_user)):
-    print(current_user.id)
     try:
         response = Participant(
             first_name=participant.first_name,
@@ -25,7 +24,7 @@ async def PostParticipant(participant: ParticipantStructure, db: Session = Depen
             location=participant.location,
             timezone=participant.timezone,
             userId= current_user.id)
-        print(response)
+        
         db.add(response)
         db.commit()
         db.refresh(response)

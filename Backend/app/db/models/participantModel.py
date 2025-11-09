@@ -3,7 +3,6 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from app.db.database import Base 
 from sqlalchemy.dialects.postgresql import UUID
-import uuid
 
 class Participant(Base):
     __tablename__ = 'participants'
@@ -16,6 +15,7 @@ class Participant(Base):
     timezone = Column(String, nullable=False)
 
     userId = Column(ForeignKey("users.id"))
-    meetingId = Column(ForeignKey("meeting.id"))
     user = relationship("User", back_populates="participants")
+   
+    meetingId = Column(ForeignKey("meetings.id"), nullable=True)
     meeting = relationship("Meeting", back_populates="participants")
