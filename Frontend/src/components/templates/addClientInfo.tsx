@@ -36,6 +36,7 @@ import { getTimezones } from "../../../helper/SuggestLocation";
 import { COUNTRIES } from "../../../helper/SuggestLocation";
 import MeetingDetails from "../organism/meetingDetails";
 import SelectField from "../atoms/selectField";
+import SwitchUI from "../atoms/switchUI";
 
 const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   //Custom hooks
@@ -216,6 +217,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                 />
                 <MeetingDetails meetingForm={meetingForm} errorsHook={errorsHook} />
               </BoxDesign>
+              {/* <SwitchUI value={true} /> */}
             </div>
 
             <div className="participants-section">
