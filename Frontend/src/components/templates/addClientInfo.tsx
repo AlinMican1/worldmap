@@ -48,11 +48,12 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     timezone: "",
     // dates: new Map<string, string[]>(),
   });
+  const [selectedValue, setSelectedValue] = useState<boolean>(false);
   const errorsHook = useErrors();
-  const dateArray = useArray<string>([]);
-  const [time, setTime] = useState<string>("");
-  const [dateAndTimeMap, setDateAndTimeMap] = useState<Map<string, string[]>>(new Map());
-  const [selectedTimezone, setSelectedTimezone] = useState("");
+  // const dateArray = useArray<string>([]);
+  // const [time, setTime] = useState<string>("");
+  // const [dateAndTimeMap, setDateAndTimeMap] = useState<Map<string, string[]>>(new Map());
+  // const [selectedTimezone, setSelectedTimezone] = useState("");
   const boxRef = useRef<HTMLDivElement>(null);
   const [parentWidth, setParentWidth] = useState(0);
   //Get current width box for SelectedParticipants box.

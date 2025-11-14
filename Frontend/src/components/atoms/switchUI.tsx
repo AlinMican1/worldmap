@@ -10,6 +10,7 @@ const SwitchUI = ({ selectedValue, setSelectedValue }: SwitchProps) => {
   return (
     <div>
       <button
+        type="button"
         className={`switch-wrapper ${selectedValue ? "active" : ""}`}
         onClick={() => setSelectedValue(!selectedValue)}
       >

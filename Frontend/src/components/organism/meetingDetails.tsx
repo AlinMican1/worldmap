@@ -1,3 +1,4 @@
+"use client";
 import useClientForm from "@/hooks/useClientForm";
 import { InputField } from "../atoms/inputField";
 import "../../app/globals.css";
@@ -7,6 +8,13 @@ import SelectField from "../atoms/selectField";
 import SelectDate from "../molecule/selectDate";
 import TimePicker from "../atoms/timePicker";
 import useErrors from "@/hooks/useErrors";
+import { useState } from "react";
+import SwitchUI from "../atoms/switchUI";
+import Modal from "../atoms/modal";
+import Button from "../atoms/button";
+import BoxDesign from "../atoms/boxDesign";
+import ExitIcon from "../icons/exit";
+import ErrorIcon from "../icons/errorIcon";
 
 interface MeetingDetailsComponentProps {
   meetingForm: ReturnType<typeof useClientForm<MeetingDetailsProps>>;
@@ -14,6 +22,7 @@ interface MeetingDetailsComponentProps {
 }
 
 const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProps) => {
+  const [selectedValue, setSelectedValue] = useState<boolean>(false);
   const meeting_durations = [
     "15 minutes",
     "30 minutes",
@@ -122,6 +131,40 @@ const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProp
           selectedValue={meetingForm.formData.meeting_duration}
           width="150px"
         />
+      </div>
+      <div className="row-input-elem">
+        <p>Enable Rotational Meeting</p>
+        <Modal
+          trigger={(open) => (
+            <Button onClick={open} type="button">
+              <ErrorIcon className="" />
+            </Button>
+          )}
+        >
+          {(close) => (
+            <BoxDesign
+              variant="third-DesignBox"
+              centeredX="leftX"
+              centeredY="leftY"
+              padding="large"
+            >
+              <h1> What is this?</h1>
+              <p> It's simple its a way to arrange meetings on a set interval selected by you!</p>
+              <p> Then we will simple rotate these participants based on your selection. </p>
+              <p>
+                {" "}
+                If today we have a participant starting at 9 am and another at 20pm, then we will
+                rotate it
+              </p>
+              <div className="close-btn-pos">
+                <button className="close-btn" onClick={() => close()}>
+                  <ExitIcon className={"exit-icon"} />
+                </button>
+              </div>
+            </BoxDesign>
+          )}
+        </Modal>
+        <SwitchUI selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
       </div>
     </div>
   );
