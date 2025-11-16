@@ -10,12 +10,11 @@ import axios from "axios";
 // }
 
 export const GetParticipants = async () => {
-  console.log("gET");
   try {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}getParticipants`, {
       withCredentials: true,
     });
-    console.log(response.data);
+
     return response.data.participants;
   } catch (error) {
     return {
@@ -35,6 +34,20 @@ export const GetTimeFromDifferentCountry = async (timezone: string, country: str
       date: response.data.date,
       time: response.data.time,
     };
+  } catch (error) {
+    return {
+      message: "Server error",
+    };
+  }
+};
+
+export const GetAllUserMeetings = async () => {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}getMeetingDetails`, {
+      withCredentials: true,
+    });
+    console.log(response.data.meetings);
+    return response.data.meetings;
   } catch (error) {
     return {
       message: "Server error",

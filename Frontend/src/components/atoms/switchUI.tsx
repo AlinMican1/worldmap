@@ -16,7 +16,6 @@ const SwitchUI = ({ selectedValue, setSelectedValue }: SwitchProps) => {
       >
         <div className={`move-circle ${selectedValue ? "active" : ""}`}></div>
       </button>
-      <p>{selectedValue.toString()}</p>
     </div>
   );
 };

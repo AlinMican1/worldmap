@@ -14,3 +14,4 @@ class User(Base):
     # hashed_password = Column(String, nullable=False)
     # forms = relationship("Form", back_populates="user")
     participants = relationship("Participant", back_populates="user")
+    meetings = relationship("Meeting", back_populates="user")

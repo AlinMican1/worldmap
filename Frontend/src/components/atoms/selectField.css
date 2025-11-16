@@ -81,6 +81,7 @@
     transform-origin: top center;
     animation: dropdownFade 0.18s ease-out forwards;
     opacity: 0;
+    /* overflow-x: hidden; */
 }
 
 @keyframes dropdownFade {

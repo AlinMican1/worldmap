@@ -1,8 +1,9 @@
-button{
+/* button{
     all: unset;
-}
+} */
 .switch-wrapper{
     /* width: 10vw; */
+    all: unset;
     min-width: 50px;
     /* height: 5vh; */
     min-height: 15px;

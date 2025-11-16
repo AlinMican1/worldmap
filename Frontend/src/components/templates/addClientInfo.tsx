@@ -141,6 +141,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     meeting_duration: "1 hour",
     meeting_desc: "",
     meeting_title: "",
+    meeting_interval: "",
   });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -218,7 +219,6 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                 />
                 <MeetingDetails meetingForm={meetingForm} errorsHook={errorsHook} />
               </BoxDesign>
-              {/* <SwitchUI value={true} /> */}
             </div>
 
             <div className="participants-section">

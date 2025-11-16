@@ -33,6 +33,7 @@ const PariticipantsPreview = ({
   //Get timeDifference from user location to client location
   const timeDiff = (startTime: string, endTime: string): string => {
     const [startH, startM] = startTime.split(":").map(Number);
+    console.log(endTime);
     const [endH, endM] = endTime.split(":").map(Number);
 
     // Convert both to total minutes

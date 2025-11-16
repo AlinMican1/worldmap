@@ -39,6 +39,8 @@ export interface MeetingDetailsProps {
   meeting_desc?: string;
   meeting_duration: string;
   meeting_title: string;
+  meeting_interval?: string;
+  meeting_frequency?: string;
 }
 
 export interface ClientListProps {

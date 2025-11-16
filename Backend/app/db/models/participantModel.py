@@ -14,8 +14,8 @@ class Participant(Base):
     location = Column(String, nullable=False)   
     timezone = Column(String, nullable=False)
 
-    userId = Column(ForeignKey("users.id"))
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
     user = relationship("User", back_populates="participants")
    
-    meetingId = Column(ForeignKey("meetings.id"), nullable=True)
+    meeting_id = Column(UUID(as_uuid=True), ForeignKey("meetings.id"), nullable=True)
     meeting = relationship("Meeting", back_populates="participants")

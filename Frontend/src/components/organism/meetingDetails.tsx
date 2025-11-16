@@ -2,6 +2,7 @@
 import useClientForm from "@/hooks/useClientForm";
 import { InputField } from "../atoms/inputField";
 import "../../app/globals.css";
+import "./meetingDetails.css";
 import { MeetingDetailsProps } from "@/types/interfaces";
 import TextAreaInput from "../atoms/textAreaInput";
 import SelectField from "../atoms/selectField";
@@ -33,6 +34,23 @@ const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProp
     "3 hours",
     "4 hours",
     "5 hours",
+  ];
+  const meeting_rotation_intervals = [
+    "weekly",
+    "biweekly",
+    "monthly",
+    "every 6 weeks",
+    "every 2 months",
+  ];
+
+  const meeting_frequency = [
+    "Once",
+    "Daily",
+    "Every 2 days",
+    "Every 3 days",
+    "Weekly",
+    "Every 2 weeks",
+    "Monthly",
   ];
 
   return (
@@ -82,23 +100,9 @@ const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProp
         />
       </div>
       <div className="row-input-elem">
-        {/* <InputField
-          autocomplete="off"
-          type="text"
-          name="meeting_date"
-          label="Meeting Date"
-          //   value={form.formData.surname}
-          id="meeting_date"
-          onChange={meetingForm.handleChange}
-          placeholder="https://zoom..."
-          width={"20vw"}
-          borderRound="5px"
-          //   error={errorsHook.getErrorBoolean("surname")}
-          //   errorMsg={errorsHook.getErrorMsg("surname")}
-        /> */}
         <SelectDate
           label="Meeting Date"
-          width="20vw"
+          width="150px"
           selectedDate={meetingForm.formData.meeting_date}
           setSelectedDate={(value) =>
             meetingForm.setFormData((prev) => ({
@@ -107,17 +111,20 @@ const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProp
             }))
           }
         />
-
-        <TimePicker
-          label="Time"
-          selectedTime={meetingForm.formData.meeting_time}
-          setSelectedTime={(value) =>
+        <SelectField
+          label="Meeting Frequency"
+          options={meeting_frequency}
+          default_value="Once"
+          setSelectedValue={(value) =>
             meetingForm.setFormData((prev) => ({
               ...prev,
-              meeting_time: value.toString(),
+              meeting_frequency: value.toString(),
             }))
           }
+          selectedValue={meetingForm.formData.meeting_frequency}
+          width="150px"
         />
+
         <SelectField
           label="Duration"
           options={meeting_durations}
@@ -131,13 +138,25 @@ const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProp
           selectedValue={meetingForm.formData.meeting_duration}
           width="150px"
         />
+        <TimePicker
+          label="Time"
+          selectedTime={meetingForm.formData.meeting_time}
+          setSelectedTime={(value) =>
+            meetingForm.setFormData((prev) => ({
+              ...prev,
+              meeting_time: value.toString(),
+            }))
+          }
+        />
       </div>
+      <div className="row-input-elem"></div>
       <div className="row-input-elem">
         <p>Enable Rotational Meeting</p>
         <Modal
           trigger={(open) => (
-            <Button onClick={open} type="button">
-              <ErrorIcon className="" />
+            <Button onClick={open} type="button" variant="more-info-btn">
+              More info
+              {/* <ErrorIcon className="err-icon" size="24px" /> */}
             </Button>
           )}
         >
@@ -148,14 +167,16 @@ const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProp
               centeredY="leftY"
               padding="large"
             >
-              <h1> What is this?</h1>
-              <p> It's simple its a way to arrange meetings on a set interval selected by you!</p>
-              <p> Then we will simple rotate these participants based on your selection. </p>
-              <p>
-                {" "}
-                If today we have a participant starting at 9 am and another at 20pm, then we will
-                rotate it
-              </p>
+              <BoxDesign variant="transparent-DesignBox" centeredX="leftX">
+                <h1> What is this?</h1>
+                <p> It's simple its a way to arrange meetings on a set interval selected by you!</p>
+                <p> Then we will simple rotate these participants based on your selection. </p>
+                <p>
+                  {" "}
+                  If today we have a participant starting at 9 am and another at 20pm, then we will
+                  rotate it
+                </p>
+              </BoxDesign>
               <div className="close-btn-pos">
                 <button className="close-btn" onClick={() => close()}>
                   <ExitIcon className={"exit-icon"} />
@@ -166,6 +187,23 @@ const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProp
         </Modal>
         <SwitchUI selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
       </div>
+      {selectedValue && (
+        <div className="row-input-elem">
+          <SelectField
+            label="Rotational Interval"
+            options={meeting_rotation_intervals}
+            default_value="monthly"
+            setSelectedValue={(value) =>
+              meetingForm.setFormData((prev) => ({
+                ...prev,
+                meeting_interval: value.toString(),
+              }))
+            }
+            selectedValue={meetingForm.formData.meeting_interval}
+            width="150px"
+          />
+        </div>
+      )}
     </div>
   );
 };

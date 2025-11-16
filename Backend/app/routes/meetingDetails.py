@@ -23,6 +23,7 @@ class MeetingDetailsStructure(BaseModel):
     rotational_freq: Optional[str] = None 
     meeting_duration: str
     participant_emails: Optional[List[str]] = []  # optional now
+    
 
 @router.post("/createMeeting")
 async def PostMeetingDetails(
@@ -30,6 +31,7 @@ async def PostMeetingDetails(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
+    print(current_user.id)
     try:
         # Create the meeting first
         meeting = Meeting(
@@ -40,6 +42,7 @@ async def PostMeetingDetails(
             date=meetingDetails.meeting_date,
             time=meetingDetails.meeting_time,
             rotational_freq=meetingDetails.rotational_freq,
+            user_id = current_user.id
         )
         db.add(meeting)
         db.flush()  # assign meeting.id
@@ -48,7 +51,7 @@ async def PostMeetingDetails(
         if meetingDetails.participant_emails:
             for email in meetingDetails.participant_emails:
                 participant = db.query(Participant).filter_by(
-                    email=email, userId=current_user.id
+                    email=email, user_id=current_user.id
                 ).first()
                 if participant:
                     participant.meetingId = meeting.id
@@ -71,31 +74,33 @@ async def PostMeetingDetails(
         }
 
     
-# @router.get("/getParticipants")
-# async def GetParticipants(current_user=Depends(get_current_user), db: Session = Depends(get_db)):
+@router.get("/getMeetingDetails")
+async def GetMeetingDetails(
+   
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
+):
+    try:
+        meetings = db.query(Meeting).filter(
+            Meeting.user_id == current_user.id
+        ).all()
 
-#     try:
-#         participants = db.query(Participant).filter(
-#             Participant.userId == current_user.id
-#         ).all()
-
-#         if participants:
-#             return{
-#                 "status": 200,
-#                 "message": "Successfully retrieved all participants.",
-#                 "participants": participants
-#                 }
-#         else:
-#             return{
-#                 "status": 404,
-#                 "message": "No participants found",
-#                 "participants": []
-#             }
-#     except Exception as e:
+        if meetings:
+            return{
+                "status": 200,
+                "message": "Successfully retrieved all meetings.",
+                "meetings": meetings
+                }
+        else:
+            return{
+                "status": 404,
+                "message": "No meeting found",
+                "meetings": []
+            }
+    except Exception as e:
        
-#         return {
-#             "status": 500,
-#             "message": f"Server Error: {str(e)}"
-#         }
-    
+        return {
+            "status": 500,
+            "message": f"Server Error: {str(e)}"
+        }
     

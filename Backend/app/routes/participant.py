@@ -23,7 +23,7 @@ async def PostParticipant(participant: ParticipantStructure, db: Session = Depen
             email=participant.email,
             location=participant.location,
             timezone=participant.timezone,
-            userId= current_user.id)
+            user_id= current_user.id)
         
         db.add(response)
         db.commit()
@@ -45,7 +45,7 @@ async def GetParticipants(current_user=Depends(get_current_user), db: Session = 
 
     try:
         participants = db.query(Participant).filter(
-            Participant.userId == current_user.id
+            Participant.user_id == current_user.id
         ).all()
 
         if participants:

@@ -6,6 +6,7 @@
     max-width: 7vw; */
     border-radius: var(--border-xs);
     margin: 0px;
+    font-size: var(--text-sm);
     
 }
 
@@ -59,8 +60,6 @@
     padding: var(--space-sm);
     margin: var(--space-xxs);
     border: 1px solid var(--color-primary-lighter);
-    
-    
     
 }
 .choose-time-slot:hover{
