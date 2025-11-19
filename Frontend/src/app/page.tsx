@@ -45,6 +45,7 @@ export default function Home() {
     return response;
   }
   console.log(teest());
+  // console.log(getCurrentUserTimezone());
   return (
     <div>
       <HomePage />

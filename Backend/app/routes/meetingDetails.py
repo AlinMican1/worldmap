@@ -31,7 +31,7 @@ async def PostMeetingDetails(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-    print(current_user.id)
+
     try:
         # Create the meeting first
         meeting = Meeting(

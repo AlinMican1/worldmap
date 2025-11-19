@@ -1,4 +1,5 @@
 import axios from "axios";
+import { UpdateUserTimezone } from "./PUT";
 
 // export async function GetAuthenticatedUser() {
 //   try {
@@ -46,8 +47,21 @@ export const GetAllUserMeetings = async () => {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}getMeetingDetails`, {
       withCredentials: true,
     });
-    console.log(response.data.meetings);
+
     return response.data.meetings;
+  } catch (error) {
+    return {
+      message: "Server error",
+    };
+  }
+};
+
+export const getUserCurrentTimezone = async () => {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}getUserTimezone`, {
+      withCredentials: true,
+    });
+    return response.data.timezone;
   } catch (error) {
     return {
       message: "Server error",

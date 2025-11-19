@@ -11,7 +11,9 @@ class User(Base):
     id = Column(String, primary_key=True)
     name = Column(String, nullable=False)
     email= Column(String, unique=True, nullable=False)
+    timezone = Column(String, nullable=True)
     # hashed_password = Column(String, nullable=False)
     # forms = relationship("Form", back_populates="user")
     participants = relationship("Participant", back_populates="user")
+   
     meetings = relationship("Meeting", back_populates="user")

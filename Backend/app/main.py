@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.routes import hello, time, form, schedule, participant, auth, profile, meetingDetails
+from app.routes import hello, time, form, schedule, participant, auth, profile, meetingDetails, user
 from app.db.models.userModel import User
 from app.db.models.meetingModel import Meeting
 from app.db.models.participantModel import Participant
@@ -35,4 +35,5 @@ app.include_router(time.router)
 app.include_router(auth.router)
 app.include_router(profile.router)
 app.include_router(meetingDetails.router)
+app.include_router(user.router)
 

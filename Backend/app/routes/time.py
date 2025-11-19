@@ -1,7 +1,12 @@
 from datetime import datetime
 import json
-from fastapi import APIRouter
+from pydantic import BaseModel
+from fastapi import APIRouter,  Depends
 from zoneinfo import ZoneInfo
+from sqlalchemy.orm import Session
+from app.db.database import get_db
+from app.core.supabase_client import get_current_user
+from app.db.models.userModel import User
 
 router = APIRouter()
 
@@ -40,4 +45,30 @@ async def GetTimeZoneDetails(country:str,timezone:str):
             "message": f"Server Error: {str(e)}"
         }
 
+class UserTimezoneDetails(BaseModel):
+    timezone: str
+
     
+@router.put("/updateUserTimezone")
+async def UpdateUserTimezone(userDetails: UserTimezoneDetails,db: Session = Depends(get_db),current_user=Depends(get_current_user) ):
+    user = db.query(User).filter(User.id == current_user.id).first()
+    if not user:
+        return{
+            "status" : 404,
+            "message": "User not found."
+        }
+    try:
+        user.timezone = userDetails.timezone
+        db.commit()
+        return {
+            "status": 200,
+            "message": "Successfully added timezone"
+        }
+    except Exception as e:
+        return{
+            "status": 500,
+            "message": f"Server error {e}."
+        }
+    
+
+         

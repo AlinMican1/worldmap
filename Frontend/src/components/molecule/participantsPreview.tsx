@@ -8,6 +8,7 @@ import { getDayMonthYear, getMonthName } from "../../../helper/Formatter";
 import "../../app/globals.css";
 import ErrorIcon from "../icons/errorIcon";
 import ClockIcon from "../icons/clock";
+import { WeightedPainScoreData } from "../../../helper/SchedulingSystem";
 
 //SOME THINGS TO CONSIDER IF DATE IS SAME E.G 26/10./25 and time is 20:47 then time should be 20:47
 // Changing te time or date should change teh timepreview
@@ -33,7 +34,6 @@ const PariticipantsPreview = ({
   //Get timeDifference from user location to client location
   const timeDiff = (startTime: string, endTime: string): string => {
     const [startH, startM] = startTime.split(":").map(Number);
-    console.log(endTime);
     const [endH, endM] = endTime.split(":").map(Number);
 
     // Convert both to total minutes
@@ -119,6 +119,16 @@ const PariticipantsPreview = ({
               ...client,
               localTime: response.time,
               ...canMeet,
+            },
+          ]);
+
+          const weightedData = WeightedPainScoreData([
+            {
+              first_name: client.first_name,
+              surname: client.surname,
+              email: client.email,
+              timezone: client.timezone,
+              time: response.time,
             },
           ]);
         } catch (error) {

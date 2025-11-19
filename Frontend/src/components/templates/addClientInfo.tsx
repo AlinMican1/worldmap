@@ -36,7 +36,7 @@ import { getTimezones } from "../../../helper/SuggestLocation";
 import { COUNTRIES } from "../../../helper/SuggestLocation";
 import MeetingDetails from "../organism/meetingDetails";
 import SelectField from "../atoms/selectField";
-import SwitchUI from "../atoms/switchUI";
+import { UserTimezoneUpdateLogic } from "../../../helper/Timezone";
 
 const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   //Custom hooks
@@ -92,6 +92,10 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       }));
     }
   }, [form.formData.location, form.setFormData]);
+
+  useEffect(() => {
+    UserTimezoneUpdateLogic(); // syncs once on app load
+  }, []);
 
   useEffect(() => {
     const loadData = async () => {
