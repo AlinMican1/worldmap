@@ -20,6 +20,7 @@ class MeetingDetailsStructure(BaseModel):
     meeting_description: Optional[str] = None
     meeting_time: str
     meeting_date: str
+    meeting_frequency:str
     rotational_freq: Optional[str] = None 
     meeting_duration: str
     participant_emails: Optional[List[str]] = []  # optional now
@@ -31,7 +32,7 @@ async def PostMeetingDetails(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-
+    print("JJJ",meetingDetails.meeting_frequency)
     try:
         # Create the meeting first
         meeting = Meeting(
@@ -41,6 +42,7 @@ async def PostMeetingDetails(
             duration=meetingDetails.meeting_duration,
             date=meetingDetails.meeting_date,
             time=meetingDetails.meeting_time,
+            frequency = meetingDetails.meeting_frequency,
             rotational_freq=meetingDetails.rotational_freq,
             user_id = current_user.id
         )
@@ -104,3 +106,19 @@ async def GetMeetingDetails(
             "message": f"Server Error: {str(e)}"
         }
     
+
+@router.get("/getMeetingParticipants")
+async def GetMeetingParticipants(current_user=Depends(get_current_user), db: Session = Depends(get_db)):
+    try:
+        MeetingParticipants = db.query(Participant).join(Meeting).filter(
+        Meeting.user_id == current_user.id
+        ).all()
+
+        return MeetingParticipants
+
+    except Exception as e:
+       
+        return {
+            "status": 500,
+            "message": f"Server Error: {str(e)}"
+        }

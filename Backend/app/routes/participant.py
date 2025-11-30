@@ -67,4 +67,4 @@ async def GetParticipants(current_user=Depends(get_current_user), db: Session = 
             "message": f"Server Error: {str(e)}"
         }
     
-    
+

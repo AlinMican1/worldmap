@@ -40,7 +40,16 @@ export interface MeetingDetailsProps {
   meeting_duration: string;
   meeting_title: string;
   meeting_interval?: string;
-  meeting_frequency?: string;
+  meeting_frequency: string;
+}
+
+export interface AIrotationalClients {
+  first_name: string;
+  surname: string;
+  email: string;
+  timezone: string;
+  utc_offset: string;
+  time: string;
 }
 
 export interface ClientListProps {

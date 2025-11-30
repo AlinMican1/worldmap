@@ -34,6 +34,7 @@ export const GetTimeFromDifferentCountry = async (timezone: string, country: str
       timezones: response.data.timezones,
       date: response.data.date,
       time: response.data.time,
+      utc_offset: response.data.utc_offset,
     };
   } catch (error) {
     return {
@@ -62,6 +63,19 @@ export const getUserCurrentTimezone = async () => {
       withCredentials: true,
     });
     return response.data.timezone;
+  } catch (error) {
+    return {
+      message: "Server error",
+    };
+  }
+};
+
+export const GetMeetingParticipants = async () => {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}getMeetingParticipants`, {
+      withCredentials: true,
+    });
+    return response.data.MeetingParticipants;
   } catch (error) {
     return {
       message: "Server error",

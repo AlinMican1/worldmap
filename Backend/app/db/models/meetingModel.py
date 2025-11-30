@@ -1,10 +1,10 @@
 import uuid
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from app.db.database import Base
 
-class Meeting(Base):
+class  Meeting(Base):
     __tablename__ = "meetings"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -16,6 +16,8 @@ class Meeting(Base):
     time = Column(String, nullable=False)
     frequency = Column(String, nullable=False, default="Once")
     rotational_freq = Column(String, nullable=True)
+    rotation_index = Column(Integer, default=0)
+    rotation_update_at = Column(String, nullable=True)
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
     
     # Relationship

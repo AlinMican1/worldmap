@@ -146,6 +146,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     meeting_desc: "",
     meeting_title: "",
     meeting_interval: "",
+    meeting_frequency: "Once",
   });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -397,6 +398,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
         <p>{meetingForm.formData.meeting_date}</p>
         <p>{meetingForm.formData.meeting_link}</p>
         <p>{meetingForm.formData.meeting_duration}</p>
+        <p>{meetingForm.formData.meeting_frequency}</p>
         {errorsHook.getErrorBoolean("noClient") ? (
           <p className="error-msg">{errorsHook.getErrorMsg("noClient")}</p>
         ) : (

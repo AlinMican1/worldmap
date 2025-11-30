@@ -271,6 +271,7 @@ export const SubmitMeetingDetails = async (meetingDetails: MeetingDetailsProps) 
     meeting_link,
     meeting_time,
     meeting_title,
+    meeting_frequency,
   } = meetingDetails;
   const getAllErrors = await GetMeetingDetailsErrors({
     meeting_title,
@@ -279,6 +280,7 @@ export const SubmitMeetingDetails = async (meetingDetails: MeetingDetailsProps) 
     meeting_duration,
     meeting_link,
     meeting_time,
+    meeting_frequency,
   });
   const filteredErrors: ErrorMessageProps[] = [];
   const mapErrors = getAllErrors.forEach((err: ErrorMessageProps) => {

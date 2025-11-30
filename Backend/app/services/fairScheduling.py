@@ -1,14 +1,13 @@
+from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime
+from app.db.database import Session
+from app.db.models.meetingModel import Meeting
 
 
-
-
-
-def getMeetingUsers():
-    pass
- #For this we need to get the client name/their hour to meet/ pain score
-# we can do this by getting the timezone of the user, and the meeting time, and i need to add timezone
-
-
-
-def fairSchedulingSystem():
-    pass
+def rotatePerticipants():
+    db = Session()
+    meeting = db.query(Meeting).filter(Meeting.frequency != "Once").all()
+    print(meeting)
+    return meeting
+    # print(meeting)
+    # print("HIHIHIH")

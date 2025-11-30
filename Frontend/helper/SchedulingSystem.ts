@@ -1,3 +1,5 @@
+"use client";
+import useArray from "@/hooks/useArray";
 import { ClientInfoProps } from "@/types/interfaces";
 
 interface PainScoreDataProps {
@@ -9,20 +11,25 @@ interface PainScoreDataProps {
   pain_score: number;
 }
 
-interface ClientProp {
-  first_name: string;
-  surname: string;
-  email: string;
-  timezone: string;
-  time: string;
-}
+let GG: ClientProp[] = [];
 
 export const WeightedPainScoreData = (clients: ClientProp[]) => {
+  const Cli = useArray<ClientProp>([]);
   const clientData: PainScoreDataProps[] = [];
   for (let client of clients) {
-    console.log(client);
+    Cli.setArray((oldArray) => [
+      ...oldArray,
+      {
+        email: client.email,
+        first_name: client.first_name,
+        surname: client.surname,
+        timezone: client.timezone,
+        utc_offset: client.utc_offset,
+        time: client.time,
+      },
+    ]);
   }
-  console.log(clientData);
+  console.log(Cli.array);
 };
 
 export const ScheduleSystem = () => {};

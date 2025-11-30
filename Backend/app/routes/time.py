@@ -8,6 +8,7 @@ from app.db.database import get_db
 from app.core.supabase_client import get_current_user
 from app.db.models.userModel import User
 
+
 router = APIRouter()
 
 with open("app/utils/countryDetails.json", "r") as f:
@@ -36,7 +37,8 @@ async def GetTimeZoneDetails(country:str,timezone:str):
         "country": country,
         "timezones": tz.key,
         "date": now.strftime("%Y-%m-%d"),
-        "time": now.strftime("%H:%M:%S")
+        "time": now.strftime("%H:%M:%S"),
+        "utc_offset": now.strftime("%z") 
     }
     except Exception as e:
        
@@ -71,4 +73,4 @@ async def UpdateUserTimezone(userDetails: UserTimezoneDetails,db: Session = Depe
         }
     
 
-         
+
