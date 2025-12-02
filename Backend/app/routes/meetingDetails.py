@@ -1,3 +1,4 @@
+import datetime
 from uuid import UUID
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
@@ -22,6 +23,7 @@ class MeetingDetailsStructure(BaseModel):
     meeting_date: str
     meeting_frequency:str
     rotational_freq: Optional[str] = None 
+    rotational_updated_at: Optional[str] = None
     meeting_duration: str
     participant_emails: Optional[List[str]] = []  # optional now
     
@@ -32,8 +34,16 @@ async def PostMeetingDetails(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-    print("JJJ",meetingDetails.meeting_frequency)
+    # print("JJJ",meetingDetails.meeting_frequency)
     try:
+        update_time = None
+        #if meetingDetails.rotational_freq and meetingDetails.rotational_freq.strip() != "" and meetingDetails.meeting_frequency != "Once":
+        
+        if meetingDetails.meeting_frequency != "Once":
+            # now = datetime.now(datetime.UTC)
+            
+            update_time = meetingDetails.meeting_date
+       
         # Create the meeting first
         meeting = Meeting(
             title=meetingDetails.meeting_title,
@@ -44,6 +54,7 @@ async def PostMeetingDetails(
             time=meetingDetails.meeting_time,
             frequency = meetingDetails.meeting_frequency,
             rotational_freq=meetingDetails.rotational_freq,
+            rotation_update_at = update_time,
             user_id = current_user.id
         )
         db.add(meeting)
