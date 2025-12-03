@@ -6,6 +6,7 @@ from app.db.database import get_db
 from sqlalchemy.orm import Session
 from app.core.supabase_client import get_current_user
 from app.db.models.meetingModel import Meeting
+from datetime import date
 
 from typing import List, Optional
 
@@ -23,7 +24,7 @@ class MeetingDetailsStructure(BaseModel):
     meeting_date: str
     meeting_frequency:str
     rotational_freq: Optional[str] = None 
-    rotational_updated_at: Optional[str] = None
+    rotational_updated_at: Optional[date] = None
     meeting_duration: str
     participant_emails: Optional[List[str]] = []  # optional now
     
@@ -41,7 +42,6 @@ async def PostMeetingDetails(
         
         if meetingDetails.meeting_frequency != "Once":
             # now = datetime.now(datetime.UTC)
-            
             update_time = meetingDetails.meeting_date
        
         # Create the meeting first

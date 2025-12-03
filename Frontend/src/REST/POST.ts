@@ -156,6 +156,7 @@ export const SubmitClientsSchedule = async (
         API,
         {
           ...meetingDetails,
+
           participant_emails: selectedClientEmails,
         },
         {

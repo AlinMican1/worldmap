@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, String, ForeignKey, Integer
+from sqlalchemy import Column, String, ForeignKey, Integer, Date
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from app.db.database import Base
@@ -12,12 +12,12 @@ class  Meeting(Base):
     description = Column(String, nullable=True)
     link = Column(String, nullable=False, unique=True)
     duration = Column(String, nullable=False, default="1 hour")
-    date = Column(String, nullable=False)
+    date = Column(Date, nullable=False)
     time = Column(String, nullable=False)
     frequency = Column(String, nullable=False, default="Once")
     rotational_freq = Column(String, nullable=True)
     rotation_index = Column(Integer, default=0)
-    rotation_update_at = Column(String, nullable=True)
+    rotation_update_at = Column(Date, nullable=True)
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
     
     # Relationship
