@@ -7,6 +7,8 @@ from sqlalchemy.orm import Session
 from app.core.supabase_client import get_current_user
 from app.db.models.meetingModel import Meeting
 from datetime import date
+from datetime import datetime
+
 
 from typing import List, Optional
 
@@ -27,7 +29,15 @@ class MeetingDetailsStructure(BaseModel):
     rotational_updated_at: Optional[date] = None
     meeting_duration: str
     participant_emails: Optional[List[str]] = []  # optional now
-    
+
+#Parse date from type of dd-mm-yyyy to yyyy-mm-dd
+def parse_date(value: str):
+    for fmt in ("%Y-%m-%d", "%d-%m-%Y"):
+        try:
+            return datetime.strptime(value, fmt).date()
+        except ValueError:
+            pass
+    raise ValueError("Invalid date format. Use YYYY-MM-DD or DD-MM-YYYY")
 
 @router.post("/createMeeting")
 async def PostMeetingDetails(
@@ -42,7 +52,7 @@ async def PostMeetingDetails(
         
         if meetingDetails.meeting_frequency != "Once":
             # now = datetime.now(datetime.UTC)
-            update_time = meetingDetails.meeting_date
+            update_time = parse_date(meetingDetails.meeting_date)
        
         # Create the meeting first
         meeting = Meeting(
@@ -50,7 +60,8 @@ async def PostMeetingDetails(
             link=meetingDetails.meeting_link,
             description=meetingDetails.meeting_description,
             duration=meetingDetails.meeting_duration,
-            date=meetingDetails.meeting_date,
+            date=parse_date(meetingDetails.meeting_date),
+
             time=meetingDetails.meeting_time,
             frequency = meetingDetails.meeting_frequency,
             rotational_freq=meetingDetails.rotational_freq,
@@ -62,13 +73,10 @@ async def PostMeetingDetails(
 
         # Assign participants if any
         if meetingDetails.participant_emails:
-            for email in meetingDetails.participant_emails:
-                participant = db.query(Participant).filter_by(
-                    email=email, user_id=current_user.id
-                ).first()
+           for email in meetingDetails.participant_emails:
+                participant = db.query(Participant).filter_by(email=email, user_id=current_user.id).first()
                 if participant:
-                    participant.meetingId = meeting.id
-                    db.add(participant)
+                    meeting.participants.append(participant)
 
         db.commit()
         db.refresh(meeting)

@@ -3,6 +3,7 @@ from sqlalchemy import Column, String, ForeignKey, Integer, Date
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from app.db.database import Base
+from app.db.models.meetingParticipantsModel import meeting_participant
 
 class  Meeting(Base):
     __tablename__ = "meetings"
@@ -21,5 +22,10 @@ class  Meeting(Base):
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
     
     # Relationship
-    participants = relationship("Participant", back_populates="meeting", cascade="all, delete-orphan")
+    participants = relationship(
+        "Participant",
+        secondary=meeting_participant,
+        back_populates="meetings"
+    )
     user = relationship("User", back_populates="meetings")
+   

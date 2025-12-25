@@ -7,7 +7,7 @@ from app.db.models.meetingModel import Meeting
 from app.db.models.participantModel import Participant
 from app.db.models.formModel import Form
 from app.db.database import Base, engine
-# from app.services.fairScheduling import rotatePerticipants
+from app.services.fairScheduling import rotateParticipants
 
 
 app = FastAPI()
@@ -23,7 +23,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# rotatePerticipants()
+rotateParticipants()
 
 
 # Routers
