@@ -1,5 +1,6 @@
 import "./selectBox.css";
 import { memo } from "react";
+
 interface SelectBoxProps {
   name: string;
   className?: string;
@@ -8,6 +9,7 @@ interface SelectBoxProps {
   dimmed?: boolean;
   selected?: boolean;
 }
+
 const SelectBox = ({
   name,
   className,

@@ -21,7 +21,7 @@ router = APIRouter()
 class MeetingDetailsStructure(BaseModel):
     meeting_title: str
     meeting_link: str
-    meeting_description: Optional[str] = None
+    meeting_desc: Optional[str] = None
     meeting_time: str
     meeting_date: str
     meeting_frequency:str
@@ -58,7 +58,7 @@ async def PostMeetingDetails(
         meeting = Meeting(
             title=meetingDetails.meeting_title,
             link=meetingDetails.meeting_link,
-            description=meetingDetails.meeting_description,
+            description=meetingDetails.meeting_desc,
             duration=meetingDetails.meeting_duration,
             date=parse_date(meetingDetails.meeting_date),
 

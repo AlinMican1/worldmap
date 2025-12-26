@@ -9,6 +9,10 @@ from app.db.models.formModel import Form
 from app.db.database import Base, engine
 from app.services.fairScheduling import rotateParticipants
 
+from apscheduler.schedulers.background import BackgroundScheduler
+from app.services.fairScheduling import rotateParticipants
+
+
 
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
@@ -23,8 +27,22 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-rotateParticipants()
 
+#Rotate participants -------
+scheduler = BackgroundScheduler(timezone="UTC")
+scheduler.add_job(
+    rotateParticipants,
+    trigger="cron",
+    hour=0,
+    minute=0,
+)
+# scheduler.add_job(
+#     rotateParticipants,
+#     trigger="interval",
+#     seconds=5,
+# )
+scheduler.start()
+#--------
 
 # Routers
 app.include_router(hello.router)

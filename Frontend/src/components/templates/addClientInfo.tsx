@@ -145,8 +145,8 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     meeting_duration: "1 hour",
     meeting_desc: "",
     meeting_title: "",
-    meeting_interval: "",
     meeting_frequency: "Once",
+    rotational_freq: "Monthly",
   });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -369,22 +369,34 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
               </BoxDesign>
             </div>
           </div>
-          <div className="timezone-preview">
-            <BoxDesign variant="sixth-DesignBox" style={{ alignItems: "stretch" }}>
-              <Title
-                title="TimeZone Preview"
-                variant="secondary"
-                icon={<EarthIcon className="title-icon" size="28" />}
-              />
-              <PariticipantsPreview
-                clients={clients}
-                setClients={setClients}
-                parentWidth={parentWidth}
-                meetingTime={meetingForm.formData.meeting_time}
-                meetingDate={meetingForm.formData.meeting_date}
-              />
-            </BoxDesign>
-          </div>
+          {!meetingForm.formData.rotational_freq ? (
+            <div className="timezone-preview">
+              <BoxDesign variant="sixth-DesignBox" style={{ alignItems: "stretch" }}>
+                <Title
+                  title="TimeZone Preview"
+                  variant="secondary"
+                  icon={<EarthIcon className="title-icon" size="28" />}
+                />
+                <PariticipantsPreview
+                  clients={clients}
+                  setClients={setClients}
+                  parentWidth={parentWidth}
+                  meetingTime={meetingForm.formData.meeting_time}
+                  meetingDate={meetingForm.formData.meeting_date}
+                />
+              </BoxDesign>
+            </div>
+          ) : (
+            <div className="timezone-preview">
+              <BoxDesign variant="sixth-DesignBox" style={{ alignItems: "stretch" }}>
+                <Title
+                  title="Order of Rotation"
+                  variant="secondary"
+                  icon={<EarthIcon className="title-icon" size="28" />}
+                />
+              </BoxDesign>
+            </div>
+          )}
         </div>
       </form>
 
@@ -399,6 +411,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
         <p>{meetingForm.formData.meeting_link}</p>
         <p>{meetingForm.formData.meeting_duration}</p>
         <p>{meetingForm.formData.meeting_frequency}</p>
+        <p>{meetingForm.formData.rotational_freq}</p>
         {errorsHook.getErrorBoolean("noClient") ? (
           <p className="error-msg">{errorsHook.getErrorMsg("noClient")}</p>
         ) : (

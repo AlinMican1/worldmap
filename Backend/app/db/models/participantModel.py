@@ -22,6 +22,6 @@ class Participant(Base):
    
     meetings = relationship(
         "Meeting",
-        secondary=meeting_participant,  # ✅ same Table object
+        secondary=meeting_participant, 
         back_populates="participants"
     )
