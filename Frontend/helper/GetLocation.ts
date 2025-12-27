@@ -1,4 +1,5 @@
 import axios from "axios";
+
 export const GetLocationTime = (locations: Array<string>): String => {
   locations.map(async (location) => {
     const getUrl = `${process.env.NEXT_PUBLIC_TIME_API}${location}`;

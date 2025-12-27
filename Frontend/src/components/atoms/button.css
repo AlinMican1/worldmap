@@ -127,3 +127,11 @@
     background-color: var(--color-primary);
    
 }
+
+/* .more-info-btn{
+    all: unset;
+}
+.more-info-btn:hover{
+    text-decoration: underline;
+    color: blue;
+} */

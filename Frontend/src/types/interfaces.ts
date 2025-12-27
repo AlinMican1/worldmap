@@ -33,12 +33,23 @@ export interface LoginDetailsProps {
 }
 
 export interface MeetingDetailsProps {
-  meeting_link?: string;
+  meeting_link: string;
   meeting_date: string;
   meeting_time: string;
   meeting_desc?: string;
   meeting_duration: string;
   meeting_title: string;
+  meeting_frequency: string;
+  rotational_freq?: string | null;
+}
+
+export interface AIrotationalClients {
+  first_name: string;
+  surname: string;
+  email: string;
+  timezone: string;
+  utc_offset: string;
+  time: string;
 }
 
 export interface ClientListProps {

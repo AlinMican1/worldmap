@@ -79,12 +79,12 @@ const GlobeUI = ({ width, height }: GlobeUIProps) => {
     heightY: height,
   });
 
-  useEffect(() => {
-    setDimension({
-      widthX: width,
-      heightY: height,
-    });
-  }, [width, height]);
+  // useEffect(() => {
+  //   setDimension({
+  //     widthX: width,
+  //     heightY: height,
+  //   });
+  // }, [width, height]);
   useEffect(() => {
     setDimension({
       widthX: width,

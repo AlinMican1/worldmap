@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     #Auth with Supabase
     SUPABASE_URL: str
     SUPABASE_KEY: str
-
+    SUPABASE_ANON_KEY:str
     # Assembled full database URL
     @property
     def DATABASE_URL(self) -> str:

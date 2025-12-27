@@ -48,14 +48,20 @@ export const GetMeetingDetailsErrors = ({
   meeting_desc,
   meeting_duration,
   meeting_title,
+  meeting_link,
 }: MeetingDetailsProps): Map<string, ErrorMessageProps> => {
   const meetingDetailsMap = new Map<string, ErrorMessageProps>([
     ["meetingTitle", { id: "meetingTitle", errorMsg: "Required", error: false }],
+    ["meetingLink", { id: "meetingLink", errorMsg: "Required", error: false }],
   ]);
 
   const titleError = meetingDetailsMap.get("meetingTitle");
   if (titleError && meeting_title.trim() === "") {
     meetingDetailsMap.set("meetingTitle", { ...titleError, error: true });
+  }
+  const linkError = meetingDetailsMap.get("meetingLink");
+  if (linkError && meeting_link.trim() === "") {
+    meetingDetailsMap.set("meetingLink", { ...linkError, error: true });
   }
 
   //MAKE SURE TO SET PROPER NAME FOR PROPS

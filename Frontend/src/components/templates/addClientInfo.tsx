@@ -9,7 +9,7 @@ import {
   AddClientInfoProps,
   MeetingDetailsProps,
 } from "@/types/interfaces";
-import { SubmitClientSchedule, SubmitMeetingDetails } from "@/REST/POST";
+import { SubmitMeetingDetails, SubmitClientsSchedule } from "@/REST/POST";
 import { SubmitAddParticipant } from "@/REST/POST";
 import EnterLocation from "../molecule/enterLocation";
 import useErrors from "@/hooks/useErrors";
@@ -36,6 +36,7 @@ import { getTimezones } from "../../../helper/SuggestLocation";
 import { COUNTRIES } from "../../../helper/SuggestLocation";
 import MeetingDetails from "../organism/meetingDetails";
 import SelectField from "../atoms/selectField";
+import { UserTimezoneUpdateLogic } from "../../../helper/Timezone";
 
 const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   //Custom hooks
@@ -47,11 +48,12 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     timezone: "",
     // dates: new Map<string, string[]>(),
   });
+  const [selectedValue, setSelectedValue] = useState<boolean>(false);
   const errorsHook = useErrors();
-  const dateArray = useArray<string>([]);
-  const [time, setTime] = useState<string>("");
-  const [dateAndTimeMap, setDateAndTimeMap] = useState<Map<string, string[]>>(new Map());
-  const [selectedTimezone, setSelectedTimezone] = useState("");
+  // const dateArray = useArray<string>([]);
+  // const [time, setTime] = useState<string>("");
+  // const [dateAndTimeMap, setDateAndTimeMap] = useState<Map<string, string[]>>(new Map());
+  // const [selectedTimezone, setSelectedTimezone] = useState("");
   const boxRef = useRef<HTMLDivElement>(null);
   const [parentWidth, setParentWidth] = useState(0);
   //Get current width box for SelectedParticipants box.
@@ -90,6 +92,10 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       }));
     }
   }, [form.formData.location, form.setFormData]);
+
+  useEffect(() => {
+    UserTimezoneUpdateLogic(); // syncs once on app load
+  }, []);
 
   useEffect(() => {
     const loadData = async () => {
@@ -139,13 +145,15 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     meeting_duration: "1 hour",
     meeting_desc: "",
     meeting_title: "",
+    meeting_frequency: "Once",
+    rotational_freq: "Monthly",
   });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const getErrors = await SubmitClientSchedule(meetingForm.formData, clients);
+    const getErrors = await SubmitClientsSchedule(meetingForm.formData, clients);
 
-    if (getErrors.errors && getErrors.success === false) {
+    if (getErrors && getErrors.errors && getErrors.success === false) {
       const filteredErrors = getErrors.errors.filter(
         (err: ErrorMessageProps) => err.error === true
       );
@@ -235,7 +243,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
 
                 <Modal
                   trigger={(open) => (
-                    <Button onClick={open}>
+                    <Button onClick={open} type="button">
                       {" "}
                       Add A New Participant <ArrowRightIcon className="" />{" "}
                     </Button>
@@ -361,22 +369,34 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
               </BoxDesign>
             </div>
           </div>
-          <div className="timezone-preview">
-            <BoxDesign variant="sixth-DesignBox" style={{ alignItems: "stretch" }}>
-              <Title
-                title="TimeZone Preview"
-                variant="secondary"
-                icon={<EarthIcon className="title-icon" size="28" />}
-              />
-              <PariticipantsPreview
-                clients={clients}
-                setClients={setClients}
-                parentWidth={parentWidth}
-                meetingTime={meetingForm.formData.meeting_time}
-                meetingDate={meetingForm.formData.meeting_date}
-              />
-            </BoxDesign>
-          </div>
+          {!meetingForm.formData.rotational_freq ? (
+            <div className="timezone-preview">
+              <BoxDesign variant="sixth-DesignBox" style={{ alignItems: "stretch" }}>
+                <Title
+                  title="TimeZone Preview"
+                  variant="secondary"
+                  icon={<EarthIcon className="title-icon" size="28" />}
+                />
+                <PariticipantsPreview
+                  clients={clients}
+                  setClients={setClients}
+                  parentWidth={parentWidth}
+                  meetingTime={meetingForm.formData.meeting_time}
+                  meetingDate={meetingForm.formData.meeting_date}
+                />
+              </BoxDesign>
+            </div>
+          ) : (
+            <div className="timezone-preview">
+              <BoxDesign variant="sixth-DesignBox" style={{ alignItems: "stretch" }}>
+                <Title
+                  title="Order of Rotation"
+                  variant="secondary"
+                  icon={<EarthIcon className="title-icon" size="28" />}
+                />
+              </BoxDesign>
+            </div>
+          )}
         </div>
       </form>
 
@@ -390,6 +410,8 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
         <p>{meetingForm.formData.meeting_date}</p>
         <p>{meetingForm.formData.meeting_link}</p>
         <p>{meetingForm.formData.meeting_duration}</p>
+        <p>{meetingForm.formData.meeting_frequency}</p>
+        <p>{meetingForm.formData.rotational_freq}</p>
         {errorsHook.getErrorBoolean("noClient") ? (
           <p className="error-msg">{errorsHook.getErrorMsg("noClient")}</p>
         ) : (

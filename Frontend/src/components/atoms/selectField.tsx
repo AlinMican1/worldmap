@@ -9,7 +9,7 @@ interface SelectFieldParams {
   default_value?: string;
   multiple?: boolean;
   setSelectedValue: React.Dispatch<React.SetStateAction<string | number>>;
-  selectedValue: string | number;
+  selectedValue: string | number | undefined;
   width?: string;
 }
 

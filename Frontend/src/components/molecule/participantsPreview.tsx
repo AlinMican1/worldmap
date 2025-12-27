@@ -1,6 +1,6 @@
-import { AddClientInfoProps, ClientInfoProps } from "@/types/interfaces";
+import { AddClientInfoProps, ClientInfoProps, AIrotationalClients } from "@/types/interfaces";
 import BoxDesign from "../atoms/boxDesign";
-import { GetTimeFromDifferentCountry } from "@/REST/GET";
+import { GetMeetingParticipants, GetTimeFromDifferentCountry } from "@/REST/GET";
 import { useEffect, useState } from "react";
 import useArray from "@/hooks/useArray";
 import "./participantsPreview.css";
@@ -8,6 +8,7 @@ import { getDayMonthYear, getMonthName } from "../../../helper/Formatter";
 import "../../app/globals.css";
 import ErrorIcon from "../icons/errorIcon";
 import ClockIcon from "../icons/clock";
+import { WeightedPainScoreData } from "../../../helper/SchedulingSystem";
 
 //SOME THINGS TO CONSIDER IF DATE IS SAME E.G 26/10./25 and time is 20:47 then time should be 20:47
 // Changing te time or date should change teh timepreview
@@ -102,16 +103,58 @@ const PariticipantsPreview = ({
     };
   };
 
+  const rotationalClients = useArray<AIrotationalClients>([]);
+  // export const WeightedPainScoreData = (clients: ClientProp[]) => {
+
+  //   const clientData: PainScoreDataProps[] = [];
+  //   for (let client of clients) {
+  //     Cli.setArray((oldArray) => [
+  //       ...oldArray,
+  //       {
+  //         email: client.email,
+  //         first_name: client.first_name,
+  //         surname: client.surname,
+  //         timezone: client.timezone,
+  //         utc_offset: client.utc_offset,
+  //         time: client.time,
+  //       },
+  //     ]);
+  //   }
+  //   console.log(Cli.array);
+  // };
+
   useEffect(() => {
     const fetchUserData = async () => {
       participants.clear();
+      rotationalClients.clear();
       const selectedClients = clients.filter((p) => p.selected);
 
       for (const client of selectedClients) {
         try {
-          const response = await GetTimeFromDifferentCountry(client.location, client.timezone);
+          const response = await GetTimeFromDifferentCountry(client.timezone, client.location);
           const canMeet = await checkTimeZone(client);
 
+          // const weightedData = WeightedPainScoreData([
+          //   {
+          //     first_name: client.first_name,
+          //     surname: client.surname,
+          //     email: client.email,
+          //     timezone: client.timezone,
+          //     utc_offset: response.utc_offset,
+          //     time: meetingTime,
+          //   },
+          // ]);
+          rotationalClients.setArray((oldArray) => [
+            ...oldArray,
+            {
+              first_name: client.first_name,
+              surname: client.surname,
+              email: client.email,
+              timezone: client.timezone,
+              utc_offset: response.utc_offset,
+              time: meetingTime,
+            },
+          ]);
           participants.setArray((oldArray) => [
             ...oldArray,
             {
@@ -128,7 +171,7 @@ const PariticipantsPreview = ({
 
     fetchUserData();
   }, [clients, meetingDate, meetingTime]);
-
+  console.log(rotationalClients.array);
   return (
     <div>
       {participants.array.length === 0 && (
