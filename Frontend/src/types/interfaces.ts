@@ -33,14 +33,15 @@ export interface LoginDetailsProps {
 }
 
 export interface MeetingDetailsProps {
-  meeting_link: string;
   meeting_date: string;
+  meeting_link: string;
   meeting_time: string;
-  meeting_desc?: string;
   meeting_duration: string;
+  meeting_desc: string;
   meeting_title: string;
   meeting_frequency: string;
-  rotational_freq?: string | null;
+  rotational_freq: string | null;
+  timezone_rotation_order?: string[]; // ADD THIS LINE - Optional array of timezone strings
 }
 
 export interface AIrotationalClients {

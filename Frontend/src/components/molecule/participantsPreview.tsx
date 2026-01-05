@@ -171,7 +171,7 @@ const PariticipantsPreview = ({
 
     fetchUserData();
   }, [clients, meetingDate, meetingTime]);
-  console.log(rotationalClients.array);
+
   return (
     <div>
       {participants.array.length === 0 && (
@@ -182,20 +182,6 @@ const PariticipantsPreview = ({
         </div>
       )}
       {participants.array.some((participant) => participant.canMeet === false) && (
-        // <BoxDesign
-        //   variant="errorPreview-DesignBox"
-        //   centeredX="leftX"
-        //   centeredY="leftY"
-
-        //   // style={{ width: `${500}px` }}
-        // >
-        //   <h3 className="preview-TitleError">
-        //     {" "}
-        //     <ErrorIcon size="24" className="error-icon" />
-        //     Consider adjusting time
-        //   </h3>
-        //   <p className="preview-subTitleError">Some participants will join very late or early.</p>
-        // </BoxDesign>
         <div className="preview-error-wrapper">
           <h3 className="preview-TitleError">
             {" "}

@@ -12,7 +12,6 @@ ON MAC
 source ./venv/bin/activate
 
 run backend
-uvicorn app:app --reload
 uvicorn app.main:app --reload
 to run backend dev python app.py
 
