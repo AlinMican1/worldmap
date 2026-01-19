@@ -1,0 +1,202 @@
+/* RotationItem.css */
+
+.rotation-item {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: grab;
+}
+
+.rotation-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #d1d5db;
+}
+
+.rotation-item:active {
+  cursor: grabbing;
+}
+.vik {
+gap: var(--space-xxs);
+background-color: none;
+flex-direction: column;
+min-height: auto;
+max-height: 500px;
+display: flex;
+overflow: scroll;
+background-color: red;
+
+
+}
+/* Header Section */
+.rotation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f3f4f6;
+  gap: 12px;
+  flex-wrap: wrap;
+  
+}
+
+.rotation-timezone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0; /* Allows text truncation */
+}
+
+.timezone-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.timezone-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.participant-badge {
+  background: #3b82f6;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Participants Section */
+.rotation-participants {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rotation-participant {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: all 0.2s ease;
+}
+
+.rotation-participant:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.participant-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.participant-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #374151;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.participant-location {
+  font-size: 13px;
+  color: #6b7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .rotation-item {
+    padding: 16px;
+  }
+
+  .rotation-header {
+    margin-bottom: 12px;
+  }
+
+  .timezone-text {
+    font-size: 16px;
+  }
+
+  .participant-badge {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .participant-name {
+    font-size: 14px;
+  }
+
+  .participant-location {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rotation-item {
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+
+  .rotation-header {
+    gap: 8px;
+  }
+
+  .timezone-text {
+    font-size: 15px;
+  }
+
+  .rotation-participant {
+    padding: 10px 12px;
+  }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+  .rotation-item {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .rotation-item:hover {
+    border-color: #4b5563;
+  }
+
+  .rotation-header {
+    border-bottom-color: #374151;
+  }
+
+  .timezone-text {
+    color: #f9fafb;
+  }
+
+  .rotation-participant {
+    background: #374151;
+    border-color: #4b5563;
+  }
+
+  .rotation-participant:hover {
+    background: #4b5563;
+    border-color: #6b7280;
+  }
+
+  
+}

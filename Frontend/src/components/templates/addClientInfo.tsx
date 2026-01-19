@@ -36,7 +36,9 @@ import { getTimezones } from "../../../helper/SuggestLocation";
 import { COUNTRIES } from "../../../helper/SuggestLocation";
 import MeetingDetails from "../organism/meetingDetails";
 import SelectField from "../atoms/selectField";
-import { UserTimezoneUpdateLogic } from "../../../helper/Timezone";
+import RotationTimezone from "../molecule/rotationTimezone";
+
+// Add this state near your other state declarations
 
 const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   //Custom hooks
@@ -49,6 +51,9 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     // dates: new Map<string, string[]>(),
   });
   const [selectedValue, setSelectedValue] = useState<boolean>(false);
+
+  const [timezoneRotationOrder, setTimezoneRotationOrder] = useState<string[]>([]);
+
   const errorsHook = useErrors();
   // const dateArray = useArray<string>([]);
   // const [time, setTime] = useState<string>("");
@@ -92,10 +97,6 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
       }));
     }
   }, [form.formData.location, form.setFormData]);
-
-  useEffect(() => {
-    UserTimezoneUpdateLogic(); // syncs once on app load
-  }, []);
 
   useEffect(() => {
     const loadData = async () => {
@@ -148,6 +149,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     meeting_frequency: "Once",
     rotational_freq: "Monthly",
   });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -369,8 +371,17 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
               </BoxDesign>
             </div>
           </div>
-          {!meetingForm.formData.rotational_freq ? (
-            <div className="timezone-preview">
+          <div className="timezone-preview">
+            {meetingForm.formData.meeting_frequency !== "Once" &&
+            meetingForm.formData.rotational_freq ? (
+              <RotationTimezone
+                clients={clients}
+                rotationOrder={timezoneRotationOrder}
+                setRotationOrder={setTimezoneRotationOrder}
+                meetingTime={meetingForm.formData.meeting_time}
+                rotationalFreq={meetingForm.formData.rotational_freq}
+              />
+            ) : (
               <BoxDesign variant="sixth-DesignBox" style={{ alignItems: "stretch" }}>
                 <Title
                   title="TimeZone Preview"
@@ -385,18 +396,8 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
                   meetingDate={meetingForm.formData.meeting_date}
                 />
               </BoxDesign>
-            </div>
-          ) : (
-            <div className="timezone-preview">
-              <BoxDesign variant="sixth-DesignBox" style={{ alignItems: "stretch" }}>
-                <Title
-                  title="Order of Rotation"
-                  variant="secondary"
-                  icon={<EarthIcon className="title-icon" size="28" />}
-                />
-              </BoxDesign>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </form>
 

@@ -82,6 +82,7 @@
     font-weight: var(--font-normal);
     font-size: var(--text-sm);
 }
+
 .remember-forgot-wrapper{
     
     display: flex;

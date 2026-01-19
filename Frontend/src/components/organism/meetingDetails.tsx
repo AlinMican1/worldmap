@@ -53,19 +53,10 @@ const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProp
     "Monthly",
   ];
 
-  /**
-   * Rotation is enabled ONLY if:
-   * - meeting is NOT "Once"
-   * - rotational_freq is not null
-   */
   const rotationEnabled =
     meetingForm.formData.meeting_frequency !== "Once" &&
     meetingForm.formData.rotational_freq !== null;
 
-  /**
-   * If frequency switches to "Once",
-   * force rotation OFF
-   */
   useEffect(() => {
     if (meetingForm.formData.meeting_frequency === "Once") {
       meetingForm.setFormData((prev) => ({
