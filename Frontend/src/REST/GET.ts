@@ -82,3 +82,11 @@ export const GetMeetingParticipants = async () => {
     };
   }
 };
+
+export async function GetCurrentUser() {
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}auth/getCurrentUser`, {
+    withCredentials: true,
+  });
+
+  return response.data;
+}

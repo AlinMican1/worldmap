@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, String, ForeignKey, Integer, Date
+from sqlalchemy import ARRAY, Column, String, ForeignKey, Integer, Date
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from app.db.database import Base
@@ -20,6 +20,7 @@ class  Meeting(Base):
     rotation_index = Column(Integer, default=0)
     rotation_update_at = Column(Date, nullable=True)
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
+    timezone_order = Column(ARRAY(String), nullable=True)
     
     # Relationship
     participants = relationship(

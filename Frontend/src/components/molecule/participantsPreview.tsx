@@ -25,8 +25,6 @@ interface ParticipantMeetingTimeProps extends AddClientInfoProps {
 
 const PariticipantsPreview = ({
   clients,
-  setClients,
-  parentWidth,
   meetingTime,
   meetingDate,
 }: ParticipantMeetingTimeProps) => {

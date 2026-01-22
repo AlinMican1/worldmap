@@ -4,11 +4,21 @@ export interface ErrorMessageProps {
   error: boolean;
 }
 
-// export interface SubmitLocationFormProps {
-//   email: string;
-//   location: string;
-//   name: string;
-// }
+export interface TimezoneGroup {
+  timezone: string;
+  location: string;
+  participants: ClientInfoProps[];
+  participantCount: number;
+}
+
+export interface RotationTimezoneProps {
+  clients: ClientInfoProps[];
+  rotationOrder: string[];
+  setRotationOrder: React.Dispatch<React.SetStateAction<string[]>>;
+  meetingTime: string;
+  rotationalFreq: string;
+}
+
 export interface IconProps {
   className?: string;
   size?: string;

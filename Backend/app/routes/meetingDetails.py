@@ -1,14 +1,14 @@
 import datetime
 from uuid import UUID
-from fastapi import APIRouter, Depends
+from fastapi import HTTPException, APIRouter, Depends
 from pydantic import BaseModel
 from app.db.database import get_db
 from sqlalchemy.orm import Session
 from app.core.supabase_client import get_current_user
 from app.db.models.meetingModel import Meeting
-from datetime import date
+from datetime import date, timedelta, timezone
 from datetime import datetime
-
+from app.services.fairScheduling import rotateParticipants, update_timezone_order
 
 from typing import List, Optional
 
@@ -17,7 +17,8 @@ from app.db.models.participantModel import Participant
 router = APIRouter()
 
 
-
+class TimezoneOrderPayload(BaseModel):
+    timezone_order: List[str]
 class MeetingDetailsStructure(BaseModel):
     meeting_title: str
     meeting_link: str
@@ -29,6 +30,8 @@ class MeetingDetailsStructure(BaseModel):
     rotational_updated_at: Optional[date] = None
     meeting_duration: str
     participant_emails: Optional[List[str]] = []  # optional now
+    timezone_order: Optional[List[str]] = []
+
 
 #Parse date from type of dd-mm-yyyy to yyyy-mm-dd
 def parse_date(value: str):
@@ -45,7 +48,7 @@ async def PostMeetingDetails(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-    # print("JJJ",meetingDetails.meeting_frequency)
+    
     try:
         update_time = None
         #if meetingDetails.rotational_freq and meetingDetails.rotational_freq.strip() != "" and meetingDetails.meeting_frequency != "Once":
@@ -61,13 +64,15 @@ async def PostMeetingDetails(
             description=meetingDetails.meeting_desc,
             duration=meetingDetails.meeting_duration,
             date=parse_date(meetingDetails.meeting_date),
-
+            timezone_order=meetingDetails.timezone_order or [],
             time=meetingDetails.meeting_time,
             frequency = meetingDetails.meeting_frequency,
             rotational_freq=meetingDetails.rotational_freq,
             rotation_update_at = update_time,
             user_id = current_user.id
+            
         )
+        
         db.add(meeting)
         db.flush()  # assign meeting.id
 
@@ -77,10 +82,10 @@ async def PostMeetingDetails(
                 participant = db.query(Participant).filter_by(email=email, user_id=current_user.id).first()
                 if participant:
                     meeting.participants.append(participant)
-
+        
         db.commit()
         db.refresh(meeting)
-
+        
         return {
             "status": 200,
             "message": "Meeting successfully created.",
@@ -141,3 +146,73 @@ async def GetMeetingParticipants(current_user=Depends(get_current_user), db: Ses
             "status": 500,
             "message": f"Server Error: {str(e)}"
         }
+    
+
+@router.patch("/meetings/{meeting_id}/timezone-order")
+def set_timezone_order(
+    meeting_id: UUID,
+    payload: TimezoneOrderPayload,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    try:
+        meeting = update_timezone_order(
+            db=db,
+            meeting_id=meeting_id,
+            order=payload.timezone_order,
+        )
+
+        return {
+            "status": 200,
+            "message": "Timezone order updated",
+            "timezone_order": meeting.timezone_order,
+        }
+
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    
+
+@router.get("/test/{meeting_id}/rotation")
+def get_rotation_state(
+    meeting_id: UUID,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    meeting = (
+        db.query(Meeting)
+        .filter(Meeting.id == meeting_id, Meeting.user_id == current_user.id)
+        .first()
+    )
+
+    if not meeting:
+        raise HTTPException(status_code=404, detail="Meeting not found")
+
+    if not meeting.timezone_order:
+        return {"message": "No timezone rotation configured"}
+
+    active_index = meeting.rotation_index
+    active_tz = meeting.timezone_order[active_index]
+
+    next_index = (active_index + 1) % len(meeting.timezone_order)
+    next_tz = meeting.timezone_order[next_index]
+
+    return {
+        "meeting_id": meeting.id,
+        "timezone_order": meeting.timezone_order,
+        "rotation_index": active_index,
+        "active_timezone": active_tz,
+        "next_timezone": next_tz,
+        "rotation_update_at": meeting.rotation_update_at,
+        "rotational_freq": meeting.rotational_freq,
+    }
+
+@router.post("/test/{meeting_id}/rotate-now")
+def rotate_now(meeting_id: UUID, db: Session = Depends(get_db)):
+    rotateParticipants(force=True)
+    meeting = db.query(Meeting).filter(Meeting.id == meeting_id).first()
+    return {
+        "rotation_index": meeting.rotation_index,
+        "active_timezone": meeting.timezone_order[meeting.rotation_index],
+        "rotation_update_at": meeting.rotation_update_at,
+    }
+

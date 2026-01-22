@@ -118,19 +118,22 @@ export const SubmitLogout = async () => {
 //   }
 // };
 
-export const SubmitClientsSchedule = async (
+export const CreateMeetingSchedule = async (
   meetingDetails: MeetingDetailsProps,
-  clients?: ClientInfoProps[]
+  clients?: ClientInfoProps[],
+  timezoneRotationOrder?: string[]
 ) => {
-  //Get meeting Detail Errors.
+  // Get meeting Detail Errors
   const getAllMeetingErrors = GetMeetingDetailsErrors({
     ...meetingDetails,
   });
+
   const filteredErrors: ErrorMessageProps[] = [];
   getAllMeetingErrors.forEach((err: ErrorMessageProps) => {
     if (err.error === true) filteredErrors.push(err);
   });
 
+  // Check for no clients
   if (filteredErrors.length > 0 && clients?.filter((p) => p.selected === true).length === 0) {
     return {
       success: false,
@@ -156,17 +159,21 @@ export const SubmitClientsSchedule = async (
         API,
         {
           ...meetingDetails,
-
           participant_emails: selectedClientEmails,
+          timezone_order: timezoneRotationOrder || [],
         },
         {
           withCredentials: true, // ensures cookies/session are sent for auth
         }
       );
-      console.log(res);
-      return { success: true, message: "Meeting Created Successfully" };
-    } catch (error) {
-      return { success: false, errors: filteredErrors };
+
+      return { success: true, message: "Meeting Created Successfully", data: res.data };
+    } catch (error: any) {
+      return {
+        success: false,
+        errors: filteredErrors,
+        error: error.response?.data || error.message,
+      };
     }
   }
 };

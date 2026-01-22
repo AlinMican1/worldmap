@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { CLOCKMAP } from "../../../helper/Constants";
 import "../../app/globals.css";
 import SelectBox from "../atoms/selectBox";

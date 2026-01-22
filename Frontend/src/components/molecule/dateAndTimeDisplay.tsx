@@ -63,7 +63,7 @@ const DateAndTimeDisplay = () => {
     });
   };
   return (
-    <BoxDesign variant="fourth-DesignBox" padding="none" centered="left">
+    <BoxDesign variant="fourth-DesignBox" padding="none" centeredX="leftX">
       <div>
         <h3 className="timeAndDate-header">Time Schedule</h3>
       </div>
@@ -91,7 +91,7 @@ const DateAndTimeDisplay = () => {
                   {dates.map((date, index) => {
                     const month = getISODate(date).toLocaleString("default", { month: "short" });
                     const dayName = getISODate(date).toLocaleString("default", { weekday: "long" });
-                    const { day, year } = getDayMonthYear(date);
+                    const { day } = getDayMonthYear(date);
 
                     return (
                       <div key={index} className="dateUI-container">

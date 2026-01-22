@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import InputLocation from "@/components/atoms/inputLocation";
 import CalendarBox from "@/components/molecule/calendarBox";
 import useArray from "@/hooks/useArray";
@@ -10,6 +10,9 @@ import DateAndTimeDisplay from "@/components/molecule/dateAndTimeDisplay";
 import HomePage from "@/components/templates/homePage";
 import SwitchUI from "@/components/atoms/switchUI";
 import { GetAllUserMeetings } from "@/REST/GET";
+import { isAuthenticated } from "../../helper/Authenticated";
+import { GetCurrentUser } from "@/REST/GET";
+
 export default function Home() {
   let apiURL = process.env.NEXT_PUBLIC_DEV_URL + "api/hello";
   if (process.env.NODE_ENV === "production") {
@@ -44,8 +47,15 @@ export default function Home() {
     const response = await GetAllUserMeetings();
     return response;
   }
-  console.log(teest());
-  // console.log(getCurrentUserTimezone());
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await GetCurrentUser();
+      console.log("Logged-in user:", user);
+    };
+
+    fetchUser();
+  }, []);
   return (
     <div>
       <HomePage />

@@ -9,7 +9,7 @@ import {
   AddClientInfoProps,
   MeetingDetailsProps,
 } from "@/types/interfaces";
-import { SubmitMeetingDetails, SubmitClientsSchedule } from "@/REST/POST";
+import { SubmitMeetingDetails, CreateMeetingSchedule } from "@/REST/POST";
 import { SubmitAddParticipant } from "@/REST/POST";
 import EnterLocation from "../molecule/enterLocation";
 import useErrors from "@/hooks/useErrors";
@@ -36,7 +36,7 @@ import { getTimezones } from "../../../helper/SuggestLocation";
 import { COUNTRIES } from "../../../helper/SuggestLocation";
 import MeetingDetails from "../organism/meetingDetails";
 import SelectField from "../atoms/selectField";
-import RotationTimezone from "../molecule/rotationTimezone";
+import RotationTimezone from "../organism/rotationTimezone";
 
 // Add this state near your other state declarations
 
@@ -153,7 +153,11 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const getErrors = await SubmitClientsSchedule(meetingForm.formData, clients);
+    const getErrors = await CreateMeetingSchedule(
+      meetingForm.formData,
+      clients,
+      timezoneRotationOrder
+    );
 
     if (getErrors && getErrors.errors && getErrors.success === false) {
       const filteredErrors = getErrors.errors.filter(
@@ -168,7 +172,12 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
     //   dateAndTimeMap.clear();
     // }
 
-    const getMeetingErrors = await SubmitMeetingDetails(meetingForm.formData);
+    const meetingPayload = {
+      ...meetingForm.formData,
+      timezone_order: timezoneRotationOrder,
+    };
+
+    const getMeetingErrors = await SubmitMeetingDetails(meetingPayload);
 
     if (getMeetingErrors?.errors && getMeetingErrors?.success === false) {
       const filteredMeetingErrors = getMeetingErrors.errors.filter(
@@ -405,6 +414,7 @@ const AddClientInfo = ({ clients, setClients }: AddClientInfoProps) => {
         <Button type="submit" form="client-form" variant="secondary-btn">
           Submit All Clients
         </Button>
+        <p>{timezoneRotationOrder}</p>
         <p>{meetingForm.formData.meeting_title}</p>
         <p>{meetingForm.formData.meeting_desc}</p>
         <p>{meetingForm.formData.meeting_time}</p>

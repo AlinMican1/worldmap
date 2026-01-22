@@ -21,3 +21,6 @@ git fetch origin
 
 merge random branch with main
 git merge origin/main
+
+THIS COMMAND IS USED FOR CHANGING DEV FROM 127.0 ... to localhost
+uvicorn app.main:app --reload --host localhost --port 8000

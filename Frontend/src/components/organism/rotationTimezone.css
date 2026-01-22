@@ -1,0 +1,13 @@
+.rotation-participants-wrapper {
+  gap: var(--space-sm);
+  width: 100%;
+  height: 90vh;
+  min-height: 100px;
+  padding: var(--space-xs);
+  flex-direction: column;
+  display: flex;
+  overflow: auto;
+}
+.rotation-list {
+  background-color: red;
+}

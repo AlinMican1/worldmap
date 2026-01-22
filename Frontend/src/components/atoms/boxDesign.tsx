@@ -50,4 +50,6 @@ const BoxDesign = forwardRef<HTMLDivElement, BoxDesignProps>(
   }
 );
 
+BoxDesign.displayName = "BoxDesign";
+
 export default BoxDesign;

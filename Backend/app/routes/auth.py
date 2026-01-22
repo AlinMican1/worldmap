@@ -112,7 +112,7 @@
 
 from supabase import create_client
 from app.core.config import settings
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db.models.userModel import User
@@ -192,7 +192,10 @@ async def login(login: LoginRequest):
         value=access_token,
         httponly=True,
         secure=False,  # for localhost
-        samesite="lax" # for local  samesite="strict", # stricter CSRF protection
+        samesite="lax", # for local  samesite="strict", # stricter CSRF protection
+        max_age=3600,
+        path="/",        # ADD THIS - very important!
+        
        # max_age=3600       # token lifetime
     )
     return res
@@ -212,6 +215,28 @@ async def logout():
     
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    
+@router.get("/getCurrentUser")
+async def get_current_user(request: Request):
+    # Read the cookie set during login
+    token = request.cookies.get("access_token")
+    if not token:
+        raise HTTPException(status_code=401, detail="No token found")
+
+    # Use your Supabase client to get the user
+    user_response = supabase.auth.get_user(token)
+
+    if user_response.user is None:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    # Return the user info
+    return {"user": {
+        "id": user_response.user.id,
+        "email": user_response.user.email,
+        "aud": user_response.user.aud,
+        "role": user_response.user.role,
+        "created_at": str(user_response.user.created_at)
+    }}
 
 # async def get_current_user(request: Request):
 #     token = request.headers.get("Authorization")

@@ -41,6 +41,7 @@ const MeetingDetails = ({ meetingForm, errorsHook }: MeetingDetailsComponentProp
     "monthly",
     "every 6 weeks",
     "every 2 months",
+    "Daily",
   ];
 
   const meeting_frequency = [

@@ -1,70 +1,66 @@
-.clientList-wrapper{
-    height: 30vh;
-    min-height: 100px;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    padding: var(--space-xs);
-}
-.clientList-wrapper:hover{
-    overflow-y: scroll;
+.clientList-wrapper {
+  height: 30vh;
+  min-height: 100px;
+  width: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-xs);
 }
 
-
-.client-name{
-    max-width: 12rem; 
-    font-family: var(--font-heading);
-    color: var(--foreground);
-    font-weight: var(--font-medium);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-}
-.button-position{
-    position: absolute;
-    right: 10px;
-    display: flex; 
-    height: 43px;
-    justify-content: center;
-    align-items: center;
+.clientList-wrapper:hover {
+  overflow-y: auto;
 }
 
+.client-name {
+  max-width: 12rem;
+  font-family: var(--font-heading);
+  color: var(--foreground);
+  font-weight: var(--font-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.button-position {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  height: 43px;
+  justify-content: center;
+  align-items: center;
+}
 
-.location-title{
-    color: rgb(74, 74, 74);
-    font-size: var(--text-sm);
-    font-weight: var(--font-light);
+.location-title {
+  color: rgb(74, 74, 74);
+  font-size: var(--text-sm);
+  font-weight: var(--font-light);
 }
 .email-title {
-    max-width: 15rem;
-    display: inline-block;
-    color: rgb(0, 0, 0);
-    font-size: var(--text-sm);
-    font-weight: var(--font-normal);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  
-    position: relative;
-    top:3.5px
-    
-  }
-.error-Icon{
-    color: var(--text-muted);
-    opacity: 50%;
+  max-width: 15rem;
+  display: inline-block;
+  color: rgb(0, 0, 0);
+  font-size: var(--text-sm);
+  font-weight: var(--font-normal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  position: relative;
+  top: 3.5px;
+}
+.error-Icon {
+  color: var(--text-muted);
+  opacity: 50%;
 }
 
-.search-client-wrapper{
-    padding: var(--space-xs);
-    width: 100%;
-    margin-bottom: var(--space-sm);
+.search-client-wrapper {
+  padding: var(--space-xs);
+  width: 100%;
+  margin-bottom: var(--space-sm);
 }
-.search-icon{
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    
+.search-icon {
+  color: var(--text);
+  display: flex;
+  align-items: center;
 }

@@ -36,7 +36,7 @@ class Settings(BaseSettings):
             return [self.NEXT_PUBLIC_DEV_URL]
         return [
             "http://localhost:3000",  # Next.js default
-            # "http://127.0.0.1:3000",  # Next.js alternative
+            "http://127.0.0.1:3000",  # Next.js alternative
             "http://localhost:8000",   # FastAPI (for API-to-API calls)
             
             self.NEXT_PUBLIC_DEV_URL,  # Your configured URL
