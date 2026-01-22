@@ -14,12 +14,10 @@ import { SubmitAddParticipant } from "@/REST/POST";
 import EnterLocation from "../molecule/enterLocation";
 import useErrors from "@/hooks/useErrors";
 import useClientForm from "@/hooks/useClientForm";
-import CalendarBox from "../molecule/calendarBox";
+
 import useArray from "@/hooks/useArray";
-import ChooseTime from "../molecule/chooseTime";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { DateAndTimeContext } from "@/contexts";
-import DateAndTimeDisplay from "../molecule/dateAndTimeDisplay";
+import { useCallback, useEffect, useRef, useState } from "react";
+
 import Button from "../atoms/button";
 import Title from "../atoms/title";
 import UsersIcon from "../icons/users";
