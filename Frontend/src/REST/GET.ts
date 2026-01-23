@@ -91,9 +91,14 @@ export async function GetCurrentUser() {
   return response.data;
 }
 
-export async function GetLoggedInUserDetails() {
+export async function GetLoggedInUserDetails(token: string) {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}getUserDetails`, {
-    withCredentials: true,
+    headers: {
+      // Pass the token here so the backend can see it
+      Authorization: `Bearer ${token}`,
+      // If your backend specifically looks for a Cookie header:
+      Cookie: `access_token=${token}`,
+    },
   });
   return response.data;
 }

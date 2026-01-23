@@ -1,0 +1,30 @@
+/* UserWelcome.css */
+.welcome-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  background: var(--bg-light);
+  border: 1px solid var(--color-third);
+  border-radius: var(--border-md);
+  box-shadow: var(--shadow);
+}
+
+.welcome-header {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--text);
+  font-weight: var(--font-semibold);
+  margin: 0;
+}
+
+.welcome-message {
+  font-size: var(--text-base);
+  color: var(--text-muted);
+  font-weight: var(--font-normal);
+}
+
+.user-name-highlight {
+  color: var(--color-primary);
+  font-weight: var(--font-bold);
+}

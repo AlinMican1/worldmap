@@ -110,9 +110,10 @@
 #     except:
 #         raise HTTPException(status_code= status.HTTP_401_UNAUTHORIZED, detail="Could not validate user")
 
+from typing import Optional
 from supabase import create_client
 from app.core.config import settings
-from fastapi import APIRouter, Depends, HTTPException, status, Request
+from fastapi import APIRouter, Depends, HTTPException, Header, status, Request
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db.models.userModel import User
@@ -218,17 +219,20 @@ async def logout():
 
 #This gets the supabase user details, it does not have db things that i saved, thats in user.py
 @router.get("/getCurrentUser")
-async def get_current_user(request: Request):
-    # Read the cookie set during login
-    token = request.cookies.get("access_token")
+async def get_current_user(request: Request, authorization: Optional[str] = Header(None)):
+    # 1. Try to get token from Header (Bearer token)
+    token = None
+    if authorization and authorization.startswith("Bearer "):
+        token = authorization.split(" ")[1]
+    
+    # 2. Fallback to Cookie
+    if not token:
+        token = request.cookies.get("access_token")
+
     if not token:
         raise HTTPException(status_code=401, detail="No token found")
 
-    # Use your Supabase client to get the user
     user_response = supabase.auth.get_user(token)
-
-    if user_response.user is None:
-        raise HTTPException(status_code=401, detail="Unauthorized")
 
     # Return the user info
     return {"user": {
@@ -238,15 +242,3 @@ async def get_current_user(request: Request):
         "role": user_response.user.role,
         "created_at": str(user_response.user.created_at)
     }}
-
-# async def get_current_user(request: Request):
-#     token = request.headers.get("Authorization")
-#     if not token:
-#         raise HTTPException(status_code=401, detail="Missing token")
-    
-#     token = token.replace("Bearer ", "")
-#     user = supabase.auth.api.get_user(token)
-#     if not user:
-#         raise HTTPException(status_code=401, detail="Invalid token")
-#     return user
-
