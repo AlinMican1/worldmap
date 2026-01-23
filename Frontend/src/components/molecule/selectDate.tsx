@@ -2,7 +2,7 @@ import { useDropdown } from "@/hooks/useDropdown";
 import CalendarBox from "./calendarBox";
 import "./selectDate.css";
 import { useEffect, useMemo } from "react";
-import { MeetingDateContext } from "@/contexts";
+import { MeetingDateContext } from "@/contexts/contexts";
 import { getTodayDate } from "../../../helper/Formatter";
 
 interface SelectDateProps {

@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import { CLOCKMAP } from "../../../helper/Constants";
 import "../../app/globals.css";
 import SelectBox from "../atoms/selectBox";
-import { useDateAndTimeContext } from "@/contexts";
+import { useDateAndTimeContext } from "@/contexts/contexts";
 import "./chooseTime.css";
 import Modal from "../atoms/modal";
 import { getDayMonthYear, getISODate } from "../../../helper/Formatter";

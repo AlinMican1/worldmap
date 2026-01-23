@@ -4,7 +4,7 @@ import { MONTHMAP } from "../../../helper/Constants";
 import { getDayMonthYear } from "../../../helper/Formatter";
 import "../../app/globals.css";
 import { useContext } from "react";
-import { useDateAndTimeContext } from "@/contexts";
+import { useDateAndTimeContext } from "@/contexts/contexts";
 
 const ChooseDate = () => {
   const { dateArray } = useDateAndTimeContext();

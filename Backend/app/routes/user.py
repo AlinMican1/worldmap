@@ -23,3 +23,21 @@ async def GetUserTimezone(current_user=Depends(get_current_user), db: Session = 
             "status": 500,
             "message": f"Server error {e}."
         }
+
+@router.get("/getUserDetails")
+async def GetUserDetailsDB(current_user=Depends(get_current_user), db: Session = Depends(get_db)):
+    try: 
+        user = db.query(User).filter(User.id == current_user.id).first()
+        if not user:
+            return {"status": 404, "message": "User not found"}
+
+        return {
+            "status": 200,
+            "name": user.name,  
+        }
+
+    except Exception as e:
+        return {
+            "status": 500,
+            "message": f"Server error {e}."
+        }

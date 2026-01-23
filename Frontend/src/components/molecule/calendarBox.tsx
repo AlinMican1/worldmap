@@ -7,7 +7,7 @@ import "../../app/globals.css";
 import { GenerateCalendar, isWeekend } from "../../../helper/GenerateCalendar";
 import { MONTHMAP, WEEKDAYS } from "../../../helper/Constants";
 import { formatDate, getISODate, getTodayDate } from "../../../helper/Formatter";
-import { useDateAndTimeContext, useMeetingDateContext } from "@/contexts";
+import { useDateAndTimeContext, useMeetingDateContext } from "@/contexts/contexts";
 
 interface CalendarBoxProps {
   onDateSelect?: (date: string) => void;

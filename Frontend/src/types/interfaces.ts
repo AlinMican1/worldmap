@@ -4,6 +4,13 @@ export interface ErrorMessageProps {
   error: boolean;
 }
 
+export interface UserDetails {
+  email: string;
+  role: string;
+  created_at: string;
+  name: string;
+}
+
 export interface TimezoneGroup {
   timezone: string;
   location: string;

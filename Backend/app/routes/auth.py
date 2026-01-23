@@ -215,7 +215,8 @@ async def logout():
     
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
-    
+
+#This gets the supabase user details, it does not have db things that i saved, thats in user.py
 @router.get("/getCurrentUser")
 async def get_current_user(request: Request):
     # Read the cookie set during login

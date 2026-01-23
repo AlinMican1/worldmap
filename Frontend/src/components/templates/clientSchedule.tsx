@@ -1,6 +1,5 @@
 "use client";
 import AddClientInfo from "./addClientInfo";
-import ClientList from "../molecule/clientList";
 import "../../app/globals.css";
 import { ClientInfoProps } from "@/types/interfaces";
 import { useState } from "react";

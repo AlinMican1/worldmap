@@ -90,3 +90,10 @@ export async function GetCurrentUser() {
 
   return response.data;
 }
+
+export async function GetLoggedInUserDetails() {
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_DEV_URL}getUserDetails`, {
+    withCredentials: true,
+  });
+  return response.data;
+}

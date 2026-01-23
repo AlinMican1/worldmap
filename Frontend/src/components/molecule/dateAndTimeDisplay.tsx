@@ -1,4 +1,4 @@
-import { useDateAndTimeContext } from "@/contexts";
+import { useDateAndTimeContext } from "@/contexts/contexts";
 import "./dateAndTime.css";
 import { useEffect, useRef, useState } from "react";
 import { getDayMonthYear, getISODate } from "../../../helper/Formatter";
